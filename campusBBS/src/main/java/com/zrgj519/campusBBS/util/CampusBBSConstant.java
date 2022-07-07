@@ -1,6 +1,6 @@
 package com.zrgj519.campusBBS.util;
 
-public class CommunityConstant {
+public class CampusBBSConstant {
     /**
      * 激活成功
      */
@@ -24,6 +24,11 @@ public class CommunityConstant {
      * 记住状态的登录凭证超时时间,100天
      */
     public static final long REMEMBER_EXPIRED_SECONDS = 3600 * 24 * 100;
+
+    /**
+     * 热门标签数量
+     */
+    public static final int HOT_TAG_COUNT = 8;
 
     /**
      * 实体类型: 帖子

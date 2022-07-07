@@ -2,7 +2,7 @@ package com.zrgj519.campusBBS.controller;
 
 import com.zrgj519.campusBBS.entity.User;
 import com.zrgj519.campusBBS.service.UserService;
-import com.zrgj519.campusBBS.util.CommunityConstant;
+import com.zrgj519.campusBBS.util.CampusBBSConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,10 +42,10 @@ public class RegisterController {
     public String activation(Model model, @PathVariable("userId") int userId,@PathVariable("code")String code){
         int result = userService.activation(userId,code);
         System.out.println("result:"+result);
-        if(result == CommunityConstant.ACTIVATION_SUCCESS){
+        if(result == CampusBBSConstant.ACTIVATION_SUCCESS){
             model.addAttribute("msg","激活成功,您的账号已经可以正常使用了!");
             model.addAttribute("target","/login");
-        }else if (result == CommunityConstant.ACTIVATION_REPEAT) {
+        }else if (result == CampusBBSConstant.ACTIVATION_REPEAT) {
             model.addAttribute("msg", "无效操作,该账号已经激活过了!");
            // model.addAttribute("target", "/index");
         } else {

@@ -48,27 +48,17 @@
 
             <!--widget-content-->
         </div>
-        <div id="categories-2" class="widget widget_categories block" style="visibility: visible;">
-            <h2 class="widget-title">板块总结</h2>
-            <ul>
-                <li><a th:href="@{category.html}">唱</a> <span class="count">2</span></li>
-                <li><a th:href="@{category.html}">跳</a> <span class="count">8</span></li>
-                <li><a th:href="@{category.html}">rap</a> <span class="count">3</span></li>
-                <li><a th:href="@{category.html}">篮球</a> <span class="count">7</span></li>
-                <li><a th:href="@{category.html}">交友</a> <span class="count">4</span></li>
-                <li><a th:href="@{category.html}">音乐</a> <span class="count">9</span></li>
-                <li><a th:href="@{category.html}">健身</a> <span class="count">1</span></li>
-                <li><a th:href="@{category.html}">文学</a> <span class="count">8</span></li>
+        <div id="categories-2" class="widget widget_categories block" style="visibility: visible;" th:if="${hotTags!=null}">
+            <h2 class="widget-title">热门话题</h2>
+            <ul th:each="tag:${hotTags}">
+                <li><a th:text="${tag.tagName}" th:href="@{/post/getPostsByTag(tagName=${tag.tagName})}">唱</a> <span class="count" th:text="${tag.postCount}">2</span></li>
             </ul>
         </div>
         <!-- Banner Ad Block -->
         <div class="custom-slider">
             <div>
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li class="active" data-target="#carousel-example-generic" data-slide-to="0"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                    </ol>
+
                 </div>
             </div>
         </div>
