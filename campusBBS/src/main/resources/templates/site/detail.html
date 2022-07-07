@@ -42,7 +42,12 @@
             <h1 th:text="${post.title}">Icon internet world in the hands of a businessman network technology and communication</h1>
             <ul class="post-meta">
                         <li><img th:src="${user.headerUrl}"  alt="auther"> <a href="#" th:text="${user.username}"> Karla Anderson  </a> </li>
-                        <li><i class="fa fa-comments"></i><a href="#" th:text="${post.commentCount}">42 comments</a> </li>
+                <!--点赞图标-->
+                <li >
+                    <i class="fa fa-heart-o" id="like" onclick="changecolor()"></i>
+                    <a href="#"  th:text="${post.commentCount}">13 comments</a>
+                </li>
+                <li><i class="fa fa-comments"></i><a href="#" th:text="${post.commentCount}">42 comments</a> </li>
                         <li th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}"><i class="fa fa-clock-o"></i>Feb 07, 2021</li>
                       </ul>
         </div>
@@ -172,5 +177,20 @@
             )
         }
     );
+</script>
+<script>
+    var like = document.getElementById("like")
+    function changecolor(){
+        <!--改变样式-->
+        like.className = 'fa fa-heart' ;
+        <!--改变颜色-->
+        like.style.color = 'red' ;
+        //   if(color == 'red' && style == 'fa fa-heart'){
+        //     style = 'fa fa-heart-o';
+        //   }else {
+        //     style = 'fa fa-heart';
+        //     color = 'red';
+        //   }
+    }
 </script>
 </html>
