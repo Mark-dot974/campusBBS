@@ -1,0 +1,86 @@
+<header>
+  <div class="container">
+    <div class="row">
+      <div id="header">
+        <div class="header-container">
+          <div class="header-logo"> <a th:href="@{index.html}" class="logo">
+            <div><img th:src="@{/images/logo3.png}" alt="news and magzine"></div>
+            </a> </div>
+          <div class="header__nav">
+            <div class="header-banner">
+              <div class="col-lg-6 col-xs-12 col-sm-7 col-md-8">
+                <div class="assetBlock">
+                  <div style="height: 20px; overflow: hidden;" id="slideshow">
+                    <p style="display: block;"><a th:href="@{post.html}"><span>CampusBBS</span> 青年大学生的聚集地...</a> </p>
+                    <p style="display: none;"><a th:href="@{post.html}"><span>CampusBBS</span> 校内大学生的信息交流平台...</a> </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-lg-6 col-xs-12 col-sm-5 col-md-4 social">
+              </div>
+            </div>
+            <div class="fl-header-right">
+              <div class="fl-links">
+<!--			    这里是登录后显示的div-->
+               <div class="no-js"> <a title="" class="" th:if="${loginUser!=null}">
+               <img class="clicker" id="usertouxiang" th:src="${loginUser.headerUrl}" style="border-radius:50%;"></a>
+                 <div class="fl-nav-links">
+                    <ul class="links">
+                      <li><a href="login.html" title="My Account">个人中心</a></li>
+                                <li> <a th:href="@{/post/publish}">发布</a></li>
+                                      <li><a th:href="@{/logout}" title="Wishlist">退出账号</a></li>
+                                    </ul>
+                                  </div>
+                                </div>
+<!--                这里是未登录按钮div-->
+                <div class='tp-caption sfb tp-resizeme' th:if="${loginUser == null}"><a th:href='@{/login}' class="buy-btn">登陆/注册</a> </div>
+              </div>
+              <!--mini-cart-->
+              <div class="collapse navbar-collapse">
+                <form class="navbar-form" role="search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <span class="input-group-btn">
+                    <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span> </button>
+                    </span> </div>
+                </form>
+              </div>
+              <!--links-->
+            </div>
+            <div class="fl-nav-menu">
+              <nav>
+                <div class="mm-toggle-wrap">
+                  <div class="mm-toggle"><i class="fa fa-bars"></i><span class="mm-label">Menu</span> </div>
+                </div>
+                <div class="nav-inner">
+                  <!-- BEGIN NAV -->
+                  <ul id="nav" class="hidden-xs">
+                    <li> <a class="level-top" th:href="@{/index}"><span>主页</span></a></li>
+                    <li> <a class="level-top" th:href="@{/post/getPostsByCid(cid=1)}"><span>失物招领</span></a> </li>
+                    <li> <a class="level-top" th:href="@{/post/getPostsByCid(cid=2)}"><span>社交</span></a></li>
+                    <li> <a class="level-top" th:href="@{/post/getPostsByCid(cid=3)}"><span>情感</span></a></li>
+                    <li> <a class="level-top" th:href="@{/post/getPostsByCid(cid=4)}"><span>学习</span></a></li>
+                    <li> <a class="level-top" th:href="@{/post/getPostsByCid(cid=5)}"><span>互帮互助</span></a></li>
+                    <li> <a class="level-top" th:href="@{/post/getPostsByCid(cid=6)}"><span>其他</span></a></li>
+<!--                    <li> <a class="level-top" th:href="@{category.html}"><span>Technology</span></a> </li>-->
+<!--                    <li class="level0 parent drop-menu"><a href="#"><span>Pages</span> </a> -->
+<!--                      &lt;!&ndash;sub sub category&ndash;&gt;-->
+<!--                    </li>-->
+<!--                    <li class="level0"><a th:href="@{category.html}"><span>Politics</span></a></li>-->
+<!--                    <li class="level0 parent drop-menu"><a href="#"><span>Shop</span></a>-->
+<!--                    </li>-->
+<!--                    <li> <a th:href="@{category.html}" class="level-top"> <span>Travel</span> </a></li>-->
+                  </ul>
+                  <!--nav-->
+                </div>
+              </nav>
+            </div>
+          </div>
+          
+          <!--row--> 
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

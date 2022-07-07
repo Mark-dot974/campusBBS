@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>campusBBS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Default Description">
+<meta name="keywords" content="fashion, store, E-commerce">
+<meta name="robots" content="*">
+<link rel="icon" href="#" type="image/x-icon">
+<link rel="shortcut icon" href="#" type="image/x-icon">
+
+<!-- CSS Style -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link media="all" rel="stylesheet" th:href="@{/css/font-awesome.css}" type="text/css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.bxslider.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+</head>
+<body>
+<div id="page">
+  <div id="header"></div>
+  <div class="page-heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+     <div class="page-title">
+       <h2>登录账号</h2>
+     </div>
+        </div>
+        <!--col-xs-12-->
+      </div>
+      <!--row-->
+    </div>
+    <!--container-->
+  </div>
+    
+       
+<!-- BEGIN Main Container -->  
+          
+       <div class="main-container col1-layout">     
+              
+	       <div class="main">                     
+                            <div class="account-login container">
+  <!--page-title-->
+        <input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">
+        <fieldset class="col2">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="content">
+                    
+<!--                    <h1>已经有账号，请在此登录</h1>-->
+<!--                    <br>-->
+                    <form th:action="@{/login}" method="post">
+                    <ul class="form-list">
+                        <li>
+                             <label for="email">用户名</label>
+                            <div style="color: red" th:text="${usernameMsg}"></div>
+                            <div class="input-box">
+                                <input type="text" name="username" value="" id="email" class="input-text required-entry validate-email" title="Email Address"  placeholder="请输入用户名">
+                            </div>
+                        </li>
+                        <li>
+                            <label for="pass">密码</label>
+                            <div style="color: red" th:text="${passwordMsg}"></div>
+                            <div class="input-box">
+                                <input type="password" name="password" class="input-text required-entry validate-password" id="pass" title="Password"  placeholder="请输入密码">
+                            </div>
+                        </li>
+						<li>
+						<label for="">验证码:</label>
+                            <div style="color: red" th:text="${codeMsg}"></div>
+						<div class="input-box">
+							<input class="input-vercode required-entry validate-email" type="text" id="" name="code" placeholder="请输入验证码!">
+							<div class="vercode"><img th:src="@{/code}" id="code" style="width:100px;height:40px;" class="mr-2"/>
+							<a href="javascript:refresh_code();" class="font-size-12 align-bottom">刷新验证码</a>
+							</div>
+						</div>
+						<div class="">
+							
+						</div>
+							</li>
+					</div>
+                                                                    </ul>
+
+
+
+                <br>
+                                <div class="buttons-set">
+
+                                    <button type="submit" class="button login" title="Login" name="send" id="send2"><span>登录</span></button>
+
+                                    <a th:href="@{/register}" class="forgot-word">立即注册</a>
+                                </div> <!--buttons-set-->
+        </form>
+                  </div> <!--content-->
+            </div> <!--col-2 registered-users-->
+                   </fieldset> <!--col2-set-->
+    </form>
+   
+</div> <!--account-login-->
+         
+	       </div><!--main-container-->
+          
+          </div> <!--col1-layout-->
+          
+<!-- JavaScript -->
+    <script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/revslider.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+    <script th:src="@{/js/countdown.js}"></script>
+    <script th:src="@{/js/include.js}"></script>
+    <script>
+        function refresh_code(){
+            // 后面加上随机数是为了防止服务器认为是同一个请求从而直接返回缓存数据
+            var path = CONTEXT_PATH + "/code?p=" + Math.random();
+            $("#code").attr("src", path);
+        }
+    </script>
+<div id="footer"></div>
+
+</body></html>

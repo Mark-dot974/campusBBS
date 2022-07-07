@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Cruiser Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Default Description">
+    <meta name="keywords" content="fashion, store, E-commerce">
+    <meta name="robots" content="*">
+    <link rel="icon" href="#" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+
+    <!-- CSS Style -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link media="all" rel="stylesheet" th:href="@{/css/font-awesome.css}" type="text/css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.bxslider.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/yellow.css}">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+</head>
+<body>
+    <div id="page">
+        <div id="header"></div>
+        <div class="page-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="page-title">
+                            <h2>创建一个账号</h2>
+                        </div>
+                    </div>
+                    <!--col-xs-12-->
+                </div>
+                <!--row-->
+            </div>
+            <!--container-->
+        </div>
+
+
+        <!-- BEGIN Main Container -->
+
+        <div class="main-container col1-layout">
+
+            <div class="main">
+                <div class="account-login container">
+                    <!--page-title-->
+
+                    <form th:action="@{/register}" method="post" id="login-form">
+                        <input name="form_key" type="hidden" value="EPYwQxF6xoWcjLUr">
+                        <fieldset class="col2">
+                            <div class="col-md-6 col-md-offset-3">
+                                <h1>新用户</h1>
+                                <br>
+                                <div class="content">
+                                    <ul class="form-list">
+                                        <li>
+                                            <label for="email">用户名</label>
+                                            <div style="color: red" th:text="${usernameMsg}"></div>
+                                            <div class="input-box">
+                                                <input type="text" name="username" value="" id="email" class="input-text required-entry validate-username" title="Email Address" placeholder="请输入用户名（长度不多于十位）">
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <label for="email">电子邮箱</label>
+                                            <div style="color: red" th:text="${emailMsg}"></div>
+                                            <div class="input-box">
+                                                <input type="text" name="email" value="" id="email" class="input-text required-entry validate-email" title="Email Address" placeholder="请输入您的邮箱以便激活">
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <label for="pass">密码</label>
+                                            <div style="color: red" th:text="${passwordMsg}"></div>
+                                            <div class="input-box">
+                                                <input type="password" name="password" class="input-text required-entry validate-password" id="pass" title="Password" placeholder="请输入密码（长度不少于8位不多于18位）">
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <label for="pass">确认密码</label>
+                                            <div class="input-box">
+                                                <input type="password" name="" class="input-text required-entry validate-password" id="pass" title="Password" placeholder="再次确认密码">
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <label for="pass">学号</label>
+<!--                                            <div style="color: red" th:text="${passwordMsg}"></div>-->
+                                            <div class="input-box">
+                                                <input type="text" name="sid" class="input-text required-entry validate-password" id="pass" title="Password" placeholder="请输入15位学号">
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <label for="pass">兴趣</label>
+                                            <div class="input-box">
+                                                <input type="checkbox" id="choose" name="interest" value="唱" >
+                                                <label>唱</label>
+                                                <input type="checkbox" id="choose" name="interest" value="跳">
+                                                <label>跳</label>
+                                                <input type="checkbox" id="choose" name="interest" value="Rap">
+                                                <label>Rap</label>
+                                                <input type="checkbox" id="choose" name="interest" value="篮球">
+                                                <label>篮球</label>
+                                                <input type="checkbox" id="choose" name="interest" value="音乐">
+                                                <label>音乐</label>
+                                                <input type="checkbox" id="choose" name="interest" value="电影">
+                                                <label>电影</label>
+                                                <input type="checkbox" id="choose" name="interest" value="羽毛球">
+                                                <label>羽毛球</label>
+                                                <input type="checkbox" id="choose" name="interest" value="人文艺术">
+                                                <label>人文艺术</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="buttons-set">
+                                        <button type="submit" title="Create an Account" class="button create-account" onClick=""><span><span>创建账号</span></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                </fieldset> <!--col2-set-->
+                </form>
+
+            </div> <!--account-login-->
+
+        </div><!--main-container-->
+
+    </div> <!--col1-layout-->
+
+    <!-- JavaScript -->
+        <script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+        <script th:src="@{/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/revslider.js}"></script>
+        <script th:src="@{/js/common.js}"></script>
+        <script th:src="@{/js/owl.carousel.min.js}"></script>
+        <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+        <script th:src="@{/js/countdown.js}"></script>
+        <script th:src="@{/js/jquery.icheck.js}"></script>
+        <script th:src="@{/js/include.js}"></script>
+        <script>
+            $(document).ready(function(){
+                $.each($("input:checkbox"),function(){
+                    var self = $(this),
+                        label = self.next(),
+                        label_text = label.text();
+
+                    label.remove();
+                    self.iCheck({
+                        checkboxClass: 'icheckbox_line-yellow',
+                        insert: '<div class="icheck_line-icon"></div>' + label_text
+                    });
+                });
+            });
+        </script>
+    <div id="footer"></div>
+
+</body></html>

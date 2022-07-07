@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>campusBBS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Default Description">
+<meta name="keywords" content="fashion, store, E-commerce">
+<meta name="robots" content="*">
+<link rel="icon" href="#" type="image/x-icon">
+<link rel="shortcut icon" href="#" type="image/x-icon">
+
+<!-- CSS Style -->
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}" media="all">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}" >
+<link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/jquery.bxslider.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
+<link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
+<link rel="stylesheet" type="text/css" th:href="@{/css/yellow.css}">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+	<script>
+		$(function(){
+			$("#submitbtn").click(publish);
+			function publish(){
+				// 发送异步请求（）POST
+				$.post(
+						CONTEXT_PATH + "/discuss/publish",
+						$('#publish').serialize(),
+						function (data){
+							// 因为后端传递过来的是String类型，所以此处需要进行类型转换
+							data = $.parseJSON(data);
+							// 在提示框中显示返回消息
+							$("#hintBody").text(data.msg);
+							// 显示提示框
+							$("#hintModal").modal("show");
+							// 2s后自动隐藏提示框
+							setTimeout(function(){
+								$("#hintModal").modal("hide");
+							}, 2000);
+							// 刷新页面
+							if(data.code == 0) {
+								window.location.reload();
+							}
+						}
+				)
+			}
+		});
+	</script>
+</head>
+<body>
+<div id="page">
+  <div id="header"></div>
+    <div class="page-heading">
+    <div class="breadcrumbs">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <ul>
+              <li class="home"> <a th:href="@{index.html}" title="Go to Home Page">首页</a> <span>› </span> </li>
+              <li class="category1601"> <strong>发布信息</strong> </li>
+            </ul>
+          </div>
+          <!--col-xs-12--> 
+        </div>
+        <!--row--> 
+      </div>
+      <!--container--> 
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+        <div class="page-title">
+<h2>发布信息</h2>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- BEGIN Main Container col2-right -->
+  <div class="main-container col2-right-layout">
+    <div class="main container">
+      <div class="row">
+		  <div class="col-sm-3"></div>
+        <div class="col-main col-sm-9 wow bounceInUp animated animated" style="visibility: visible;">
+          <div id="messages_product_view"></div>
+          <form th:action="@{/post/publish}" id="contactForm" method="post">
+            <div class="static-contain">
+              <fieldset class="group-select">
+                <ul>
+                  <li id="billing-new-address-form">
+                    <fieldset class="">
+                      <ul>
+                        <li>
+                          <div class="customer-name">
+                            <div class="input-box name-firstname">
+                              <label for="posttitle"><em class="required">*</em>标题</label>
+                              <br>
+                              <input name="title" id="posttitle" title="Posttitle" value="" class="input-text required-entry" type="text">
+                            </div>
+                            <!--<div class="input-box name-firstname">
+                              <label for="email"><em class="required">*</em>Email</label>
+                              <br>
+                              <input name="email" id="email" title="Email" value="john.doe@gmail.com" class="input-text required-entry validate-email" type="text">
+                            </div>-->
+                          </div>
+                        </li>
+                        <li>
+                        </li>
+						
+                        <li>
+                          <label for="comment"><em class="required">*</em>详细内容</label>
+<div class="toolBar">
+							<div class="mainArea">
+								<div class="toolbar-section">
+									  <div class="Popover">
+										  <button aria-label="标题" type="button" class="Button ToolbarButton css-k5tfim Button--plain">
+											  <div class="css-dvxtzn">
+												  <span style="display:inline-flex;align-items:center">
+													  ​<svg width="24" height="24" viewBox="0 0 24 24" data-new-api="Heading24" data-old-api="Header24" class="ZDI ZDI--Header24" fill="currentColor">
+													  <path d="M7.25 4a.75.75 0 10-1.5 0v17a.75.75 0 001.5 0v-8.25h9.5V21a.75.75 0 001.5 0V4a.75.75 0 00-1.5 0v7.25h-9.5V4z" fill-rule="evenodd" clip-rule="evenodd">
+													  </path></svg></span>
+													  <span class="css-8atqhb">标题</span>
+												  
+													  </div>
+													  </button></div>
+														  <button aria-label="加粗" type="button" class="Button ToolbarButton css-1js8um3 Button--plain">
+															  <div class="css-dvxtzn">
+																  <span style="display:inline-flex;align-items:center">
+																	  ​<svg width="24" height="24" viewBox="0 0 24 24" data-new-api="Bold24" data-old-api="Bold24" class="ZDI ZDI--Bold24" fill="currentColor">
+																	  <path d="M5.324 3.987a.75.75 0 01.75-.75h5.28c3.393 0 5.489 2.296 5.489 4.754 0 1.087-.236 2.386-1.024 3.431-.195.26-.42.496-.675.707.67.262 1.235.638 1.691 1.104.927.945 1.339 2.194 1.339 3.421a4.626 4.626 0 01-1.499 3.442c-1.016.933-2.504 1.493-4.423 1.493H6.074a.75.75 0 01-.75-.75V3.987zm9.298 6.532c-.492.652-1.343 1.186-2.885 1.186H6.824V4.737h4.53c2.665 0 3.989 1.722 3.989 3.254 0 .906-.202 1.84-.721 2.528zm-7.798 9.57v-6.884h5.877c1.486 0 2.46.462 3.063 1.078.61.622.91 1.473.91 2.371 0 .868-.33 1.709-1.014 2.337-.683.628-1.781 1.098-3.408 1.098H6.824z" fill-rule="evenodd" clip-rule="evenodd">
+																	  </path></svg></span>
+																	  <span class="css-8atqhb">加粗</span></div></button>
+																	  <button aria-label="斜体" type="button" class="Button ToolbarButton css-1js8um3 Button--plain">
+																		  <div class="css-dvxtzn"><span style="display:inline-flex;align-items:center">
+																		  ​<svg width="24" height="24" viewBox="0 0 24 24" data-new-api="Italic24" data-old-api="Ltalic24" class="ZDI ZDI--Ltalic24" fill="currentColor">
+																		  <path d="M17.75 4a.75.75 0 01-.75.75h-3.283l-2.818 15.5H14a.75.75 0 010 1.5H6a.75.75 0 010-1.5h3.374l2.818-15.5H9a.75.75 0 110-1.5h8a.75.75 0 01.75.75z" fill-rule="evenodd" clip-rule="evenodd">
+																		  </path></svg></span>
+																		  <span class="css-8atqhb">斜体</span></div></button>
+																		  <span class="ToolbarDivider css-h0xbi6"></span>
+																										  <button aria-label="图片" type="button" class="Button ToolbarButton css-1js8um3 Button--plain">
+																											  <div class="css-dvxtzn">
+																												  <span style="display:inline-flex;align-items:center">
+																													  ​<svg width="24" height="24" viewBox="0 0 24 24" data-new-api="Image24" data-old-api="Image24" class="ZDI ZDI--Image24" fill="currentColor">
+																													  <path d="M5.415 3.004A2.415 2.415 0 003 5.42v7.421a.75.75 0 001.5 0V5.419c0-.505.41-.915.915-.915h13.17c.505 0 .914.41.914.915v13.162c0 .505-.41.915-.915.915H5.415a.915.915 0 01-.915-.915v-1.16h.463a8.52 8.52 0 004.882-1.539l1.679-1.173a7.02 7.02 0 014.022-1.267h1.534a.75.75 0 100-1.5h-1.534a8.52 8.52 0 00-4.882 1.538l-1.678 1.173a7.02 7.02 0 01-4.023 1.267h-.658c-.72 0-1.305.584-1.305 1.305v1.356a2.415 2.415 0 002.415 2.415h13.17a2.415 2.415 0 002.414-2.415V5.419a2.415 2.415 0 00-2.415-2.415H5.415zm2.586 5.933a.917.917 0 111.833 0 .917.917 0 01-1.833 0zm.917-2.417a2.417 2.417 0 100 4.834 2.417 2.417 0 000-4.834z" fill-rule="evenodd" clip-rule="evenodd">
+																													  </path></svg></span>
+																													  <span class="css-8atqhb">图片</span></div></button>
+																																  <span class="ToolbarDivider css-h0xbi6"></span>
+																																  </div>
+								<br>
+							</div>
+						</div>
+                          <textarea name="content" id="postText" title="postText" class="required-entry input-text" cols="5" rows="15"></textarea>
+                        </li>
+                      </ul>
+                    </fieldset>
+                  </li>
+				  <div>
+					  <p>请选择您要发布的板块</p>
+					  <select class="chooseSection" name="cid">
+						  <option value="1">失物招领</option>
+						  <option value="2">社交</option>
+						  <option value="3">情感</option>
+						  <option value="4">学习</option>
+						  <option value="5">互帮互助</option>
+						  <option value="6">其他</option>
+					  </select>
+					  <p>请选择您感兴趣的话题</p>
+					  <input type="checkbox"  name="tag" value="唱" >
+					  <label>唱</label>
+					  <input type="checkbox"  name="tag" value="跳">
+					  <label>跳</label>
+					  <input type="checkbox"  name="tag" value="Rap">
+					  <label>Rap</label>
+					  <input type="checkbox"  name="tag" value="篮球">
+					  <label>篮球</label>
+					  <input type="checkbox"  name="tag" value="求职">
+					  <label>求职</label>
+					  <input type="checkbox"  name="tag" value="电影">
+					  <label>电影</label>
+					  <input type="checkbox"  name="tag" value="羽毛球">
+					  <label>羽毛球</label>
+					  <input type="checkbox"  name="tag" value="人文艺术">
+					  <label>人文艺术</label>
+					  <input type="checkbox"  name="tag" value="影视">
+					  <label>影视</label>
+					  <input type="checkbox"  name="tag" value="舞蹈">
+					  <label>舞蹈</label>
+					  <input type="checkbox"  name="tag" value="游戏">
+					  <label>游戏</label>
+					  <input type="checkbox"  name="tag" value="文学">
+					  <label>文学</label>
+					  <input type="checkbox"  name="tag" value="足球">
+					  <label>足球</label>
+					  <input type="checkbox"  name="tag" value="K-pop">
+					  <label>K-pop</label>
+					  <input type="checkbox"  name="tag" value="欧美">
+					  <label>欧美</label>
+					  <input type="checkbox"  name="tag" value="健身">
+					  <label>健身</label>
+					  <input type="checkbox"  name="tag" value="美术">
+					  <label>美术</label>
+
+					  <br>
+					  <p>其他</p>
+					  
+					  <textarea name="tag" id="tag" title="tag" class="required-entry input-text" cols="5" rows="1"></textarea>
+					  
+				  </div>
+                  <p class="require"><em class="required">* </em>必填信息</p>
+                  <input type="text" name="hideit" id="hideit" value="" style="display:none !important;">
+					<br>
+                  <div class="buttons-set">
+                    <button type="submit" id="submitbtn" title="Submit" class="button submit"><span><span>发布</span></span></button>
+                  </div>
+                </ul>
+              </fieldset>
+            </div>
+          </form>
+          
+        </div>
+		  <div class="col-sm-3"></div>
+        <!--col-right sidebar--> 
+      </div>
+      <!--row--> 
+    </div>
+    <!--main-container-inner--> 
+  </div>
+  <!--main-container col2-left-layout--> 
+ 
+  </div>
+
+  <div id="footer"></div>
+  <!-- End For version 1,2,3,4,6 -->
+  
+</div>
+<!--page-->
+<!-- JavaScript --> 
+<script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/parallax.js}"></script>
+<script th:src="@{/js/revslider.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/jquery.bxslider.min.js}"></script>
+<script th:src="@{/js/jquery.flexslider.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/include.js}"></script>
+<script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+<script th:src="@{/js/jquery.icheck.js}"></script>
+<script>
+
+// markdown的js值
+document.getElementById('submitbtn').addEventListener('click', function() {
+      // 获取到的值
+      var postText = document.getElementById('postText').value;
+      // document.getElementById('').innerHTML = marked.parse(postText);
+    });
+
+
+$(document).ready(function(){
+  $('input').each(function(){
+    var self = $(this),
+      label = self.next(),
+      label_text = label.text();
+
+    label.remove();
+    self.iCheck({
+      checkboxClass: 'icheckbox_line-yellow',
+      radioClass: 'iradio_line-yellow',
+      insert: '<div class="icheck_line-icon"></div>' + label_text
+    });
+  });
+});
+</script>
+  <script th:src="@{/js/include.js}"></script>
+
+
+</body>
+</html>

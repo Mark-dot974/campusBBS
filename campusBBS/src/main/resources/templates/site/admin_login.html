@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员登陆</title>
+    <style>
+        .login-page {
+            background: url("images/patternbg.png");
+
+        }
+        .login-box {
+            width: 320px;
+            padding: 5px;
+            background: #ffffff;
+            margin: 7% auto 0 auto;
+        }
+        .login-box-inner {
+            padding: 20px;
+            background-color: rgb(52,58,64);
+            border-radius: 0 0 2px 2px;
+            border: 2px solid #ffffff;
+        }
+        .foo {
+            color: rgb(40,167,69);
+        }
+        .bar {
+            color: #ffffff;
+        }
+        .login-box-inner .logo {
+            text-align: center;
+        }
+        .login-box-inner h1 {
+            margin: 10px 0 5px 0;
+            border-bottom: 1px solid #888888;
+        }
+        .description {
+            color: rgb(136,145,140);
+            font-size: 12px;
+        }
+        .login-box-inner form {
+            display: block;
+            margin-top: 20px;
+        }
+        .username {
+            background-image: url("images/username.png");
+            background-repeat: no-repeat;
+            background-position: 2% 50%;
+            margin: 10px 0 10px 0;
+            height: 30px;
+        }
+        .username input {
+            margin-left: 30px;
+            height: 24px;
+            width: 74%;
+        }
+        .password {
+            background-image: url("images/password.png");
+            background-repeat: no-repeat;
+            background-position: 2% 50%;
+            margin: 10px 0 10px 0;
+            height: 30px;
+        }
+        .password input {
+            margin-left: 30px;
+            height: 24px;
+            width: 74%;
+        }
+        .submit {
+            display: block;
+            width: 80%;
+            margin-left: 10%;
+        }
+        form span {
+            color: red;
+            font-size: 12px;
+            float: right;
+
+        }
+    </style>
+</head>
+<body class="login-page">
+
+<div class="login-box">
+    <div class="login-box-inner">
+        <div class="logo">
+            <h1 class="logo"><span class="foo">Campus</span><span class="bar">.BBS</span></h1>
+            <span class="description">后台管理系统</span>
+        </div>
+
+        <form id="login" action="#" method="post">
+            <div class="username">
+                <input type="text" name="username" id="username" placeholder="Username">
+            </div>
+            <div class="password">
+                <input type="password" name="password" id="password" placeholder="Password">
+            </div>
+
+            <input class="submit" type="submit" value="登陆">
+            <span class="info">密码错误</span>
+
+
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

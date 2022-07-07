@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zrgj519.campusBBS.dao.PostMapper">
+
+    <sql id="ref">
+        id, user_id, title, content, type, status, create_time, comment_count, score , tag , cid
+    </sql>
+
+    <select id="selectByCid" resultType="Post">
+        select <include refid="ref"/>
+        from post
+        where  status!=2
+        and cid = #{cid}
+        limit #{offset} , #{limit}
+    </select>
+
+    <select id="selectAllPostsCount" resultType="int">
+        select count(*)
+        from post
+        where status != 2
+    </select>
+
+    <select id="selectAllPosts" resultType="Post">
+        select <include refid="ref"/>
+        from post
+        where  status!=2
+    </select>
+    
+    <insert id="insertPost" parameterType="Post">
+        insert into post (user_id, title, content, type, status, create_time, comment_count, score , tag , cid)
+        values(#{userId},#{title},#{content},#{type},#{status},#{createTime},#{commentCount},#{score},#{tag},#{cid})
+    </insert>
+
+    <select id="selectPostsCount" resultType="Integer">
+        select count(*)
+        from post
+        where status!=2
+        and cid = #{cid}
+    </select>
+
+    <select id="selectPostById" resultType="Post">
+        select * from post
+        where id=#{id}
+    </select>
+</mapper>

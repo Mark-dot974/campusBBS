@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>campusBBS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Default Description">
+<meta name="keywords" content="blog, magazine, shop">
+<meta name="robots" content="*">
+<link rel="icon" href="" type="image/x-icon">
+<link rel="shortcut icon" href="" type="image/x-icon">
+
+<!-- CSS Style -->
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}" media="all">
+<link rel="stylesheet" type="text/css" th:href="@{/css/line-awesome.min.cssl}" media="all">
+<link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}" >
+<link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
+<link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Saira+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="page">
+<div id="header"></div>
+<!--container-->
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Slider -->
+      <div class="home-slider5">
+        <div id="thmg-slideshow" class="thmg-slideshow">
+          <div id='rev_slider_4_wrapper' class='rev_slider_wrapper fullwidthbanner-container' >
+            <div id='rev_slider_4' class='rev_slider fullwidthabanner'>
+              <ul>
+                <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='/images/banner3.jpg'><img th:src='@{/images/banner1.jpg}' style="width: 100%;height: 100%" data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner"/>
+                  <div>
+                    <div class="content_slideshow">
+                      <div class="row">
+                        <div class="info">
+                          <div class="post-details">
+                            <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'><span>失物招领</span> </div>
+                            <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' >You can find what you want here</div>
+                            <div class='tp-caption Title sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1450' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'>CampusBBS——The gathering place of young college students ...</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='/images/slide-img1.jpg'><img th:src='@{/images/banner2.jpg}'  data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner"/>
+                  <div>
+                    <div class="content_slideshow">
+                      <div class="row">
+                        <div class="info">
+                          <div class="post-details">
+                            <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'><span>社交</span> </div>
+                            <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' >You can make more friends here</div>
+                            <div class='tp-caption Title sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1450' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'>CampusBBS——A website for information exchange within the school...</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <div class="tp-bannertimer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Category slider Start-->
+  <div class="top-cate">
+    <div class="featured-pro container-fluid">
+      <div>
+        <div class="slider-items-products">
+          <div id="top-categories" class="product-flexslider hidden-buttons">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Category silder End-->
+
+  <section class="top-grid">
+    <div class="container">
+      <div class="row">
+      </div>
+    </div>
+  </section>
+  <div class="advertise-block">
+    <div class="container">
+      <div class="row">
+      </div>
+    </div>
+  </div>
+  <section class="grid-sidebar-block">
+    <div class="container">
+      <div class="col-sm-9 col-main">
+        <div class="main-block-1">
+          <div class="cate-heading">
+            <h2>推荐</h2>
+            <a th:href="@{category.html}" class="view-all-link">view all</a> </div>
+          <div class="grid-2">
+            <div class="grid-block">
+              <ul class="posts-list unstyled clearfix">
+                         <li th:each="map:${postsInfo}">
+						  <figure class="featured-thumb"> 
+							  <a th:href="@{category.html}"></a>
+							 </figure>
+                               <div class="content-info">
+                                <h4><a th:href="@{/post/detail(id=${map.post.id})}" th:text="${map.post.title}" title="Lorem ipsum dolor sit amet">Professional investor working new start up project, digital tablet laptop computer design smart phone</a></h4>
+                                <div class="post_meta"><span class="post_date" th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}"><i class="fa fa-clock-o"></i>12 May 2020</span></div>
+                                <p th:text="${map.post.content}">Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec, condimentum sed sapien. Nullam lobortis nunc semper ipsum luctus ut viverra ante eleifend. Nunc pretium velit sed augue luctus accumsan.</p>
+                               </div>
+						  </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+		  <div class="pager">
+              <div class="pages">
+                <!--<strong></strong>-->
+<!--                <ol class="pagination">-->
+<!--                  <li class="page-item">-->
+<!--                    <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>-->
+<!--                  </li>-->
+<!--                  <li th:class="|page-item ${page.current==1?'disabled':''}|">-->
+<!--                    <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>-->
+<!--                  &lt;!&ndash;						page对象中的from和to决定了导航条的页面数量&ndash;&gt;-->
+<!--                  <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">-->
+<!--                    <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>-->
+<!--                  </li>-->
+<!--                  <li th:class="|page-item ${page.current==page.total?'disabled':''}|">-->
+<!--                    <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>-->
+<!--                  </li>-->
+<!--                  <li class="page-item">-->
+<!--                    <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>-->
+<!--                  </li>-->
+<!--                </ol>-->
+              </div>
+            </div>
+		  
+      </div>
+      <div id="aside"></div>
+    </div>
+  </section>
+  <section class="article-slider">
+  </section>
+  
+  <!-- End For version 1,2,3,4,6 --> 
+  
+</div>
+</div>
+<!--page-->
+
+<!-- JavaScript --> 
+<script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/revslider.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+<script th:src="@{/js/countdown.js}"></script>
+<script th:src="@{/js/include.js}"></script>
+
+<script>
+        jQuery(document).ready(function(){
+            jQuery('#rev_slider_4').show().revolution({
+                dottedOverlay: 'none',
+                delay: 5000,
+                startwidth: 1170,
+	            startheight:500,
+
+                hideThumbs: 200,
+                thumbWidth: 200,
+                thumbHeight: 50,
+                thumbAmount: 2,
+
+                navigationType: 'thumb',
+                navigationArrows: 'solo',
+                navigationStyle: 'round',
+
+                touchenabled: 'on',
+                onHoverStop: 'on',
+                
+                swipe_velocity: 0.7,
+                swipe_min_touches: 1,
+                swipe_max_touches: 1,
+                drag_block_vertical: false,
+            
+                spinner: 'spinner0',
+                keyboardNavigation: 'off',
+
+                navigationHAlign: 'center',
+                navigationVAlign: 'bottom',
+                navigationHOffset: 0,
+                navigationVOffset: 20,
+
+                soloArrowLeftHalign: 'left',
+                soloArrowLeftValign: 'center',
+                soloArrowLeftHOffset: 20,
+                soloArrowLeftVOffset: 0,
+
+                soloArrowRightHalign: 'right',
+                soloArrowRightValign: 'center',
+                soloArrowRightHOffset: 20,
+                soloArrowRightVOffset: 0,
+
+                shadow: 0,
+                fullWidth: 'on',
+                fullScreen: 'off',
+
+                stopLoop: 'off',
+                stopAfterLoops: -1,
+                stopAtSlide: -1,
+
+                shuffle: 'off',
+
+                autoHeight: 'off',
+                forceFullWidth: 'on',
+                fullScreenAlignForce: 'off',
+                minFullScreenHeight: 0,
+                hideNavDelayOnMobile: 1500,
+            
+                hideThumbsOnMobile: 'off',
+                hideBulletsOnMobile: 'off',
+                hideArrowsOnMobile: 'off',
+                hideThumbsUnderResolution: 0,
+
+                hideSliderAtLimit: 0,
+                hideCaptionAtLimit: 0,
+                hideAllCaptionAtLilmit: 0,
+                startWithSlide: 0,
+                fullScreenOffsetContainer: ''
+            });
+        });
+        </script> 
+<div id="footer"></div>
+</body>
+</html>

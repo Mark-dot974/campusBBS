@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>帖子管理页面</title>
+    <link rel="stylesheet" th:href="@{/css/style.default.css}" type="text/css" />
+    <script type="text/javascript" th:src="@{js/plugins/jquery-1.7.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/plugins/jquery-ui-1.8.16.custom.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/plugins/jquery.cookie.js}"></script>
+    <script type="text/javascript" th:src="@{js/plugins/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/plugins/jquery.uniform.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/custom/general.js}"></script>
+    <script type="text/javascript" th:src="@{js/custom/tables.js}"></script>
+
+</head>
+
+<body class="withvernav">
+<div class="bodywrapper">
+    <div class="topheader">
+        <div class="left">
+            <h1 class="logo">Campus<span>.BBS</span></h1>
+            <span class="slogan">后台管理系统</span>
+
+            <div class="search">
+                <form action="" method="post">
+                    <input type="text" name="keyword" id="keyword" value="Enter keyword(s)" />
+                    <button class="submitbutton"></button>
+                </form>
+            </div><!--search-->
+
+            <br clear="all" />
+
+        </div><!--left-->
+
+        <div class="right">
+            <!--<div class="notification">
+                <a class="count" href="notifications.html"><span>9</span></a>
+            </div>
+            -->
+            <div class="userinfo">
+                <img src="images/thumbs/avatar.png" alt="" />
+                <span>Juan Dela Cruz</span>
+            </div><!--userinfo-->
+
+            <div class="userinfodrop">            	<div class="avatar">
+                <a href=""><img src="images/thumbs/avatarbig.png" alt="" /></a>
+                <div class="changetheme">
+                    Change theme: <br />
+                    <a class="default"></a>
+                    <a class="blueline"></a>
+                    <a class="greenline"></a>
+                    <a class="contrast"></a>
+                    <a class="custombg"></a>
+                </div>
+            </div><!--avatar-->
+                <div class="userdata">
+                    <h4>Juan Dela Cruz</h4>
+                    <span class="email">youremail@yourdomain.com</span>
+                    <ul>
+                        <li><a href="editprofile.html">Edit Profile</a></li>
+                        <li><a href="accountsettings.html">Account Settings</a></li>
+                        <li><a href="help.html">Help</a></li>
+                        <li><a href="index.html">Sign Out</a></li>
+                    </ul>
+                </div><!--userdata-->
+            </div><!--userinfodrop-->
+        </div><!--right-->
+    </div><!--topheader-->
+
+
+    <div class="header">
+        <ul class="headermenu">
+            <li><a href="user_account_management.html"><span class="icon icon-flatscreen"></span>表管理</a></li>
+            <!-- <li><a href="manageblog.html"><span class="icon icon-pencil"></span>Manage Blog</a></li>
+            <li><a href="messages.html"><span class="icon icon-message"></span>Messages</a></li>
+            <li><a href="reports.html"><span class="icon icon-chart"></span>Reports</a></li> -->
+        </ul>
+
+
+
+    </div><!--header-->
+
+    <div class="vernav2 iconmenu">
+        <ul>
+            <li class="current"><a th:href="@{/admin/users}" class="tables">用户账号管理</a></li>
+            <li><a th:href="@{/admin/posts}" class="buttons">帖子管理</a></li>
+
+        </ul>
+        <br /><br />
+    </div><!--leftmenu-->
+
+    <div class="centercontent tables">
+
+        <div class="pageheader notab">
+            <h1 class="pagetitle">帖子管理</h1>
+            <span class="pagedesc">post Management</span>
+
+        </div><!--pageheader-->
+
+        <div id="contentwrapper" class="contentwrapper">
+
+            <div class="contenttitle2">
+                <h3>帖子表</h3>
+            </div><!--contenttitle-->
+            <div class="tableoptions">
+                <button class="deletebutton radius3" title="table2">按钮</button> &nbsp;
+                <select class="radius3">
+                    <option value="">筛选条件</option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                </select> &nbsp;
+                <input type="text" placeholder="字段匹配">
+                <button class="radius3">搜索</button>
+            </div><!--tableoptions-->
+            <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
+                <colgroup>
+                    <col class="con0" style="width: 4%" />
+                    <col class="con1" />
+                    <col class="con0" />
+                    <col class="con1" />
+                    <col class="con0" />
+                    <col class="con1" />
+                    <col class="con0" />
+                </colgroup>
+                <thead>
+                <tr>
+                    <th class="head0"><input type="checkbox" class="checkall" /></th>
+                    <th class="head1">id</th>
+                    <th class="head0">user_id</th>
+                    <th class="head1">title</th>
+                    <th class="head0">content</th>
+                    <th class="head1">tag</th>
+                    <th class="head0">&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="post:${posts}">
+                    <td align="center"><input type="checkbox" /></td>
+                    <td th:text="${post.id}"></td>
+                    <td th:text="${post.userId}"></td>
+                    <td th:text="${post.title}"></td>
+                    <td class="center" th:text="${post.content}"></td>
+                    <td class="center" th:text="${post.tag}">A</td>
+                    <td class="center"><a href="" class="edit">Edit</a> &nbsp; <a href="" class="delete">Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+            <br /><br />
+
+        </div><!--contentwrapper-->
+
+    </div><!-- centercontent -->
+
+
+</div><!--bodywrapper-->
+
+</body>
+</html>
