@@ -70,14 +70,24 @@
                         <!--blog_entry-header-inner-->
                       </header>
                       <ul class="post-meta">
-                        <li><img th:src="${map.user.headerUrl}" alt="auther"> <a href="#" th:utext="${map.user.username}">Smith John </a> </li>
+                        <!--发布用户头像-->
+                        <li>
+                          <img th:src="${map.user.headerUrl}" alt="auther"> <a href="#" th:utext="${map.user.username}">Smith John </a>
+                        </li>
                         <!--点赞图标-->
                         <li >
                           <i class="fa fa-heart-o" id="like" onclick="changecolor()"></i>
                           <a href="#"  th:text="${map.post.commentCount}">13 comments</a>
                         </li>
-                        <li><i class="fa fa-comments"></i><a href="#"  th:text="${map.post.commentCount}">13 comments</a> </li>
-                        <li th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}"><i class="fa fa-clock-o"></i>Jan 12, 2021</li>
+                        <!--评论图标-->
+                        <li>
+                          <i class="fa fa-comments"></i>
+                          <a href="#"  th:text="${map.post.commentCount}">13 comments</a>
+                        </li>
+                        <!--发布日期-->
+                        <li th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}">
+                          <i class="fa fa-clock-o"></i>Jan 12, 2021
+                        </li>
                       </ul>
                       <p th:utext="${map.post.content}">Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec, condimentum sed sapien. </p>
                     </div>

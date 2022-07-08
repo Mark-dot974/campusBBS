@@ -26,7 +26,7 @@
                <img class="clicker" id="usertouxiang" th:src="${loginUser.headerUrl}" style="border-radius:50%;"></a>
                  <div class="fl-nav-links">
                     <ul class="links">
-                      <li><a th:href="@{/user/set}" title="My Account">个人中心</a></li>
+                      <li><a th:href="@{/center}" title="My Account">个人中心</a></li>
                                 <li> <a th:href="@{/post/publish}">发布</a></li>
                                       <li><a th:href="@{/logout}" title="Wishlist">退出账号</a></li>
                                     </ul>
@@ -37,16 +37,12 @@
               </div>
               <!--mini-cart-->
               <div class="collapse navbar-collapse">
-                <form class="navbar-form" role="search" th:action="@{/post/search}" method="post">
+                <form class="navbar-form" role="search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="keyword">
-                      <input type="submit" style="width: 100px" value="搜索">
-                      <span class="input-group-btn">
-                    <button type="submit" class="search-btn">
-                        <span class="glyphicon glyphicon-search"></span>
-                    </button>
-                    </span>
-                  </div>
+                    <input type="text" class="form-control" placeholder="Search">
+                    <span class="input-group-btn">
+                    <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span> </button>
+                    </span> </div>
                 </form>
               </div>
               <!--links-->
