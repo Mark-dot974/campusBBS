@@ -50,8 +50,11 @@
         </div>
         <div id="categories-2" class="widget widget_categories block" style="visibility: visible;" th:if="${hotTags!=null}">
             <h2 class="widget-title">热门话题</h2>
-            <ul th:each="tag:${hotTags}">
-                <li><a th:text="${tag.tagName}" th:href="@{/post/getPostsByTag(tagName=${tag.tagName})}">唱</a> <span class="count" th:text="${tag.postCount}">2</span></li>
+            <ul>
+                <li th:each="tag:${hotTags}">
+                    <a th:text="${'#'+tag.tagName}" th:href="@{/post/getPostsByTag(tagName=${tag.tagName})}">唱</a>
+                    <span class="count" th:text="${tag.postCount}">2</span>
+                </li>
             </ul>
         </div>
         <!-- Banner Ad Block -->

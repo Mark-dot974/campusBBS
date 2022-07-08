@@ -111,13 +111,26 @@
             <div class="grid-block">
               <ul class="posts-list unstyled clearfix">
                          <li th:each="map:${postsInfo}">
-						  <figure class="featured-thumb"> 
+						  <figure class="featured-thumb">
 							  <a th:href="@{category.html}"></a>
 							 </figure>
                                <div class="content-info">
-                                <h4><a th:href="@{/post/detail(id=${map.post.id})}" th:text="${map.post.title}" title="Lorem ipsum dolor sit amet">Professional investor working new start up project, digital tablet laptop computer design smart phone</a></h4>
-                                <div class="post_meta"><span class="post_date" th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}"><i class="fa fa-clock-o"></i>12 May 2020</span></div>
-                                <p th:text="${map.post.content}">Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec, condimentum sed sapien. Nullam lobortis nunc semper ipsum luctus ut viverra ante eleifend. Nunc pretium velit sed augue luctus accumsan.</p>
+                                <h4>
+                                  <a th:href="@{/post/detail(id=${map.post.id})}" th:text="${map.post.title}" title="Lorem ipsum dolor sit amet">
+                                  </a>
+                                </h4>
+                                <div class="post_meta">
+                                  <i class="fa fa-heart-o"></i>
+                                  <span class="chart_margin" th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}">
+                                    12 May 2020</span>
+                                  <i class="fa fa-comment"></i>
+                                  <span class="chart_margin" th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}">
+                                    12 May 2020</span>
+                                  <i class="fa fa-clock-o"></i>
+                                  <span class="chart_margin" th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}">
+                                    12 May 2020</span>
+                                </div>
+                                <p th:text="${map.post.content}"></p>
                                </div>
 						  </li>
               </ul>
