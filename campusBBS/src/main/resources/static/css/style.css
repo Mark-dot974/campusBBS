@@ -13966,3 +13966,6 @@ select#shipping-address-select {
 	-ms-flex-negative: 1;
 	flex-shrink: 1;
 }
+.chart_margin{
+	padding-right: 10px;
+}

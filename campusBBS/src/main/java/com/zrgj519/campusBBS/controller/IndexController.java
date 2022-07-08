@@ -38,6 +38,16 @@ public class IndexController {
         return "/site/footer";
     }
 
+    @RequestMapping(path="/aside_left")
+    public String getAside_left(){
+        return "/site/aside_left";
+    }
+
+    @RequestMapping("/center")
+    public String getCenter(){
+        return "/site/center";
+    }
+
     @RequestMapping(path="/aside")
     public String getAside(Model model){
         // 获取侧边栏内容（tag）
