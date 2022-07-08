@@ -31,26 +31,21 @@ public class IndexController {
     @Autowired
     private UserContainer userContainer;
 
-    @RequestMapping(path="/header")
-    public String getHeader(){
+    @RequestMapping(path = "/header")
+    public String getHeader() {
         return "/site/header";
     }
 
-    @RequestMapping(path="/footer")
-    public String getFooter(){
+    @RequestMapping(path = "/footer")
+    public String getFooter() {
         return "/site/footer";
     }
 
-    @RequestMapping(path="/aside_left")
-    public String getAside_left(){
-        return "/site/profile_aside_left";
-    }
-
-    @RequestMapping(path="/aside")
-    public String getAside(Model model){
+    @RequestMapping(path = "/aside")
+    public String getAside(Model model) {
         // 获取侧边栏内容（tag）
         List<Tag> hotTags = tagService.getHotTags(CampusBBSConstant.HOT_TAG_COUNT);
-        model.addAttribute("hotTags",hotTags);
+        model.addAttribute("hotTags", hotTags);
         return "/site/aside";
     }
 
@@ -59,37 +54,26 @@ public class IndexController {
         return "/site/404error";
     }
 
-    @RequestMapping("/collaborate-detail")
-    public String getCollaborateDetail() {
-        return "/site/collaborate-detail";
-    }
-
-    @RequestMapping("/collaborate")
-    public String getCollaborate() {
-        return "/site/collaborate";
-    }
-
     @RequestMapping(path = "/index", method = RequestMethod.GET)
     public String getPosts(Model model, Page page) {
-        // 获取推荐内容
         page.setRows(postService.getAllPostsCount());
         page.setPath("/index");
 
         // 根据用户是否登录，来获取到不同的内容
         User user = userContainer.getUser();
+        List<Map<String, Object>> postsInfo = new ArrayList<>();
 
         List<Post> allPosts = postService.getAllPosts();
-        List<Map<String,Object>> postsInfo = new ArrayList<>();
         // 封装用户信息
         for (Post post : allPosts) {
-            Map<String,Object> postInfo = new HashMap<>();
+            Map<String, Object> postInfo = new HashMap<>();
             User userById = userService.findUserById(post.getUserId());
-            postInfo.put("publisher",userById);
-            postInfo.put("post",post);
+            postInfo.put("publisher", userById);
+            postInfo.put("post", post);
             String tag = post.getTag();
-            if(tag!=null){
+            if (tag != null) {
                 String[] split = tag.split(",");
-                postInfo.put("tags",tag);
+                postInfo.put("tags", tag);
             }
             postsInfo.add(postInfo);
         }
@@ -104,5 +88,9 @@ public class IndexController {
         return "/site/index";
     }
 
+    @RequestMapping("/collaborate")
+    public String getCollaborate() {
+        return "/site/collaborate";
+    }
 
 }
