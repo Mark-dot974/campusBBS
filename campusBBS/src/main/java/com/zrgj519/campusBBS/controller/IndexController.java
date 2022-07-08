@@ -8,6 +8,7 @@ import com.zrgj519.campusBBS.service.PostService;
 import com.zrgj519.campusBBS.service.TagService;
 import com.zrgj519.campusBBS.service.UserService;
 import com.zrgj519.campusBBS.util.CampusBBSConstant;
+import com.zrgj519.campusBBS.util.UserContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,50 +28,69 @@ public class IndexController {
     private UserService userService;
     @Autowired
     private TagService tagService;
+    @Autowired
+    private UserContainer userContainer;
 
-    @RequestMapping(path="/header")
-    public String getHeader(){
+    @RequestMapping(path = "/header")
+    public String getHeader() {
         return "/site/header";
     }
 
-    @RequestMapping(path="/footer")
-    public String getFooter(){
+    @RequestMapping(path = "/footer")
+    public String getFooter() {
         return "/site/footer";
     }
 
-    @RequestMapping(path="/aside")
-    public String getAside(Model model){
+    @RequestMapping(path = "/aside")
+    public String getAside(Model model) {
         // 获取侧边栏内容（tag）
         List<Tag> hotTags = tagService.getHotTags(CampusBBSConstant.HOT_TAG_COUNT);
-        model.addAttribute("hotTags",hotTags);
+        model.addAttribute("hotTags", hotTags);
         return "/site/aside";
     }
 
-    @RequestMapping(path="/index",method = RequestMethod.GET)
-    public String getPosts(Model model, Page page){
-        // 获取推荐内容
+    @RequestMapping(path = "/denied", method = RequestMethod.GET)
+    public String getDeniedPage() {
+        return "/site/404error";
+    }
+
+    @RequestMapping(path = "/index", method = RequestMethod.GET)
+    public String getPosts(Model model, Page page) {
         page.setRows(postService.getAllPostsCount());
         page.setPath("/index");
 
+        // 根据用户是否登录，来获取到不同的内容
+        User user = userContainer.getUser();
+        List<Map<String, Object>> postsInfo = new ArrayList<>();
+
         List<Post> allPosts = postService.getAllPosts();
-        List<Map<String,Object>> postsInfo = new ArrayList<>();
         // 封装用户信息
         for (Post post : allPosts) {
-            Map<String,Object> postInfo = new HashMap<>();
+            Map<String, Object> postInfo = new HashMap<>();
             User userById = userService.findUserById(post.getUserId());
-            postInfo.put("publisher",userById);
-            postInfo.put("post",post);
+            postInfo.put("publisher", userById);
+            postInfo.put("post", post);
             String tag = post.getTag();
-            if(tag!=null){
+            if (tag != null) {
                 String[] split = tag.split(",");
-                postInfo.put("tags",tag);
+                postInfo.put("tags", tag);
             }
             postsInfo.add(postInfo);
         }
-        model.addAttribute("postsInfo",postsInfo);
+//        // 未登录
+//        if(user == null){
+//       }
+//        // 登录
+//        else{
+//            // 使用后面的搜索功能查询到对应的帖子
+//        }
+        model.addAttribute("postsInfo", postsInfo);
         return "/site/index";
     }
 
-
+    @RequestMapping("/collaborate")
+    public String getCollaborate() {
+        return "/site/collaborate";
+    }
 
 }

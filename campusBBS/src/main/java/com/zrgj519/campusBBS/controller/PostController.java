@@ -28,21 +28,18 @@ public class PostController {
     private TagService tagService;
 
     @RequestMapping(path="/publish",method = RequestMethod.GET)
-    public String getPostPage() throws IllegalAccessException {
-        User user = userContainer.getUser();
-        if(user == null) throw new IllegalAccessException("未登录用户！");
+    public String getPostPage(){
         return "/site/post";
     }
 
     // 权限拦截
     // 发布帖子时，除了将帖子添加到数据库，还要将帖子添加到对应的tag表中
     @RequestMapping(path = "/publish" , method = RequestMethod.POST)
-    public String publish(Post post) throws IllegalAccessException {
+    public String publish(Post post) {
         User user = userContainer.getUser();
-        if(user == null) throw new IllegalAccessException("未登录用户！");
         post.setUserId(user.getId());
         post.setCreateTime(new Date());
-        int i = postService.addPost(post);
+        postService.addPost(post);
         return "redirect:/index";
     }
 
