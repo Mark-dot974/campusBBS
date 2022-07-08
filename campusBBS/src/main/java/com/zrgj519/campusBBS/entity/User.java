@@ -1,11 +1,8 @@
 package com.zrgj519.campusBBS.entity;
 
-import lombok.Data;
-
 import java.util.Date;
 import java.util.Objects;
 
-@Data
 public class User {
     // 因为设置，id由springboot和mybaits自动生成
     private int id;
@@ -28,7 +25,7 @@ public class User {
     private String headerUrl;
     private Date createTime;
     private String interest;
-    private String signature;
+    private String sig
 
     public int getId() {
         return id;
