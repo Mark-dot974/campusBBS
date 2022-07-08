@@ -4,11 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zrgj519.campusBBS.dao.UserMapper">
     <sql id="insertFields">
-        username, password, salt, email, type, status, activation_code, header_url, create_time , interest,sid
+        username, password, salt, email, type, status, activation_code, header_url, create_time , interest,sid,signature
     </sql>
 
     <sql id="selectFields">
-        id, username, password, salt, email, type, status, activation_code, header_url, create_time, interest,sid
+        id, username, password, salt, email, type, status, activation_code, header_url, create_time, interest,sid,signature
     </sql>
 
     <select id="selectById" resultType="User">
@@ -31,7 +31,7 @@
 
     <insert id="insertUser" parameterType="User" keyProperty="id">
         insert into user (<include refid="insertFields"></include>)
-        values(#{username}, #{password}, #{salt}, #{email}, #{type}, #{status}, #{activationCode}, #{headerUrl}, #{createTime},#{interest},#{sid})
+        values(#{username}, #{password}, #{salt}, #{email}, #{type}, #{status}, #{activationCode}, #{headerUrl}, #{createTime},#{interest},#{sid},#{signature})
     </insert>
 
     <update id="updateStatus" parameterType="User">

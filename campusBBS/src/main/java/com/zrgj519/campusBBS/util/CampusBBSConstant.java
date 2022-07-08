@@ -84,6 +84,6 @@ public class CampusBBSConstant {
     /**
      * 权限：版主
      */
-    public static final String AUTHORITY_MODERATOR = "moderator";
+    public static final String TEAM_LEADER = "teamLeader";
 
 }

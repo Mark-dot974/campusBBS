@@ -25,6 +25,7 @@ public class User {
     private String headerUrl;
     private Date createTime;
     private String interest;
+    private String sig
 
     public int getId() {
         return id;
