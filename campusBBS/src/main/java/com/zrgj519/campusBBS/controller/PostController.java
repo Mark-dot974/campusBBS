@@ -3,6 +3,7 @@ package com.zrgj519.campusBBS.controller;
 import com.zrgj519.campusBBS.entity.Page;
 import com.zrgj519.campusBBS.entity.Post;
 import com.zrgj519.campusBBS.entity.User;
+import com.zrgj519.campusBBS.service.ElasticsearchService;
 import com.zrgj519.campusBBS.service.PostService;
 import com.zrgj519.campusBBS.service.TagService;
 import com.zrgj519.campusBBS.service.UserService;
@@ -26,6 +27,8 @@ public class PostController {
     private UserContainer userContainer;
     @Autowired
     private TagService tagService;
+    @Autowired
+    private ElasticsearchService elasticsearchService;
 
     @RequestMapping(path="/publish",method = RequestMethod.GET)
     public String getPostPage(){
@@ -40,6 +43,8 @@ public class PostController {
         post.setUserId(user.getId());
         post.setCreateTime(new Date());
         postService.addPost(post);
+        // 同时同步数据到es服务器
+        elasticsearchService.savePost(post);
         return "redirect:/index";
     }
 
@@ -111,5 +116,33 @@ public class PostController {
         User user = userService.findUserById(post.getUserId());
         model.addAttribute("user",user);
         return "/site/detail";
+    }
+
+    @RequestMapping("/search")
+    public String search(Model model,String keyword,Page page){
+        System.out.println("keyword = " + keyword);
+        // es的分页是从0开始的
+        org.springframework.data.domain.Page<Post> result
+                = elasticsearchService.searchDiscussPost("高数", page.getCurrent() - 1, page.getLimit());
+        // 聚合数据
+        System.out.println("result = " + result);
+        List<Map<String,Object>> posts = new ArrayList<>();
+        if(result!=null){
+            for (Post post : result) {
+                Map<String,Object> p = new HashMap<>();
+                User userById = userService.findUserById(post.getUserId());
+                p.put("user",userById);
+                p.put("post",post);
+                String tag = post.getTag();
+                if(tag!=null){
+                    String[] tags = tag.split(",");
+                    p.put("tags",tags);
+                }
+                posts.add(p);
+            }
+        }
+        model.addAttribute("postsInfo",posts);
+        model.addAttribute("searchName","搜索结果");
+        return "/site/category";
     }
 }
