@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>campusBBS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Default Description">
+<meta name="keywords" content="fashion, store, E-commerce">
+<meta name="robots" content="*">
+<link rel="icon" href="#" type="image/x-icon">
+<link rel="shortcut icon" href="#" type="image/x-icon">
+
+<!-- CSS Style -->
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}" media="all">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}" >
+<link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/jquery.bxslider.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
+<link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+</head>
+<div id="page">
+  <div id="header"></div>
+  <div class="page-heading">
+    <div class="breadcrumbs">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12" th:if="${cname!=null}">
+            <ul>
+              <li class="home"> <a th:href="@{/index}" title="Go to Home Page">主页</a> <span>› </span> </li>
+              <li class="category1601"> <strong th:text="${cname}">#失物招领</strong> </li>
+            </ul>
+          </div>
+          <div class="col-xs-12" th:if="${tagName!=null}">
+            <ul>
+              <li class="category1601"> <strong th:text="${tagName}">#失物招领</strong> </li>
+            </ul>
+          </div>
+          <!--col-xs-12-->
+        </div>
+        <!--row-->
+      </div>
+      <!--container-->
+    </div>
+    <div class="page-title">
+      <h2 th:text="${cname}">失物招领</h2>
+    </div>
+  </div>
+  <!-- BEGIN Main Container -->
+  <div class="main-container col2-right-layout">
+    <div class="main container">
+      <div class="row">
+        <div class="col-main col-sm-9 main-blog">
+          <div id="main" class="blog-wrapper">
+            <div id="primary" class="site-content">
+              <div id="content" role="main">
+                <article class="blog_entry clearfix" th:each="map:${postsInfo}">
+                  <div class="entry-content">
+                    <div class="post-content">
+                      <header class="blog_entry-header clearfix">
+                        <div class="blog_entry-header-inner"> <a class="tag " href="#" title="Fashion">Technology</a>
+                          <h2 class="blog_entry-title"> <a th:href="@{/post/detail(id=${map.post.id})}" th:utext="${map.post.title}" rel="bookmark">Cheerful model sitting on the floor, wearing modern oversize black dresss</a> </h2>
+                        </div>
+                        <!--blog_entry-header-inner-->
+                      </header>
+                      <ul class="post-meta">
+                        <li><img th:src="${map.user.headerUrl}" alt="auther"> <a href="#" th:utext="${map.user.username}">Smith John </a> </li>
+                        <li><i class="fa fa-comments"></i><a href="#"  th:text="${map.post.commentCount}">13 comments</a> </li>
+                        <li th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}"><i class="fa fa-clock-o"></i>Jan 12, 2021</li>
+                      </ul>
+                      <p th:utext="${map.post.content}">Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec, condimentum sed sapien. </p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="pager">
+              <div class="pages">
+                <!--<strong></strong>-->
+                <ol class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+                  </li>
+                  <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                    <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+                  <!--						page对象中的from和to决定了导航条的页面数量-->
+                  <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
+                    <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
+                  </li>
+                  <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                    <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <!--#main wrapper grid_8-->
+
+        </div>
+        <!--col-main col-sm-9-->
+        <div id="aside"></div>
+      </div>
+    </div>
+    <!--main-container-->
+
+  </div>
+  <!--col2-layout-->
+
+  <!-- JavaScript -->
+  <script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+  <script th:src="@{/js/revslider.js}"></script>
+  <script th:src="@{/js/common.js}"></script>
+  <script th:src="@{/js/owl.carousel.min.js}"></script>
+  <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+  <script th:src="@{/js/countdown.js}"></script>
+  <script th:src="@{/js/include.js}"></script>
+  <div id="footer"></div>
+</div>
+</html>

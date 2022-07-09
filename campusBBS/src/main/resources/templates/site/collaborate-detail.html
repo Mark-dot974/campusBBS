@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>campusBBS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Default Description">
+    <meta name="keywords" content="fashion, store, E-commerce">
+    <meta name="robots" content="*">
+    <link rel="icon" href="#" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+
+    <!-- CSS Style -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.bxslider.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800'
+          rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+    <style>
+        .profile-pic {
+            width: 70px;
+            cursor: pointer;
+        }
+
+        .collaborators {
+            margin: 20px 0 20px 0;
+        }
+        .collaborate-title {
+        }
+    </style>
+
+</head>
+
+<body>
+<div id="header"></div>
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="col-md-8">
+
+<!--       圈子title -->
+            <div class="collaborate-title col-md-offset-2">
+                <img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic " style="margin: 10px 20px 30px 0">
+                <h1 style="display: inline-block;">全民制作人</h1>
+                <button class="col-md-offset-2 btn btn-primary" type="button" id="btn-update" data-target="#publishModal">修改协作圈信息</button>
+<!--    弹出框        -->
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <h4 class="modal-title" id="myModalLabel">修改协作圈信息</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic" id="upload-circle-img">
+                                    <input type="file" accept="image/*" style="display: none" id="input-upload-circle-img">
+                                </div>
+                                <div class="form-group">
+                                    <label for="txt_departmentname">协作圈名称</label>
+                                    <input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" value="部门名称">
+                                </div>
+                                <div class="form-group">
+                                    <label for="txt_parentdepartment">简介</label>
+                                    <input type="text" name="txt_parentdepartment" class="form-control" id="txt_parentdepartment" value="上级部门">
+                                </div>
+                                <div class="form-group">
+                                    <label for="txt_departmentlevel"></label>
+                                    <input type="text" name="txt_departmentlevel" class="form-control" id="txt_departmentlevel" value="部门级别">
+                                </div>
+                                <div class="form-group">
+                                    <label for="txt_statu">描述</label>
+                                    <input type="text" name="txt_statu" class="form-control" id="txt_statu" value="状态">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                                <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr style="border-width: 2px; margin: 0 0 20px 0">
+
+
+
+            <div class="group-chat-box group-chat-box">
+                <h2 class="text-center">小组聊天框</h2>
+
+            </div>
+
+
+        </div>
+
+        <div class="col-md-4">
+            <div class="row-fluid">
+                <div class="col-md-12">
+                    <div class="collaborators">
+                        <a href="#"><img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic"></a>
+                        <a href="#"><img th:src="@{/images/newProfile.png}" alt="..."
+                                         class="img-circle profile-pic"></a>
+                        <input id="newProfilePic" type="file" style="display: none">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- 表格 -->
+            <div class="row-fluid">
+                <div class="col-md-12">
+
+                    <table class="table table-striped">
+                        <caption><h3>协作文档</h3></caption>
+
+                        <thead>
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                文件名
+                            </th>
+                            <th>
+                                更新时间
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="success">
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                hello.word
+                            </td>
+                            <td>
+                                01/04/2012
+                            </td>
+                            <td>
+                                <form class="form-group">
+                                    <input class="uploadFile" type="file"
+                                           style="display: inline; width: 180px;">
+                                    <button class="upload" type="submit">上传</button>
+                                    <button class="update" type="submit" disabled="disabled">更新</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr class="success">
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                hello.word
+                            </td>
+                            <td>
+                                01/04/2012
+                            </td>
+                            <td>
+                                <form class="form-group">
+                                    <input class="uploadFile" type="file"
+                                           style="display: inline; width: 180px;">
+                                    <button class="upload" type="submit">上传</button>
+                                    <button class="update" type="submit" disabled="disabled">更新</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr class="success">
+                            <td>
+                                1
+                            </td>
+                            <td>
+                                hello.txt
+                            </td>
+                            <td>
+                                01/04/2012
+                            </td>
+                            <td>
+                                <form class="form-group">
+                                    <input class="uploadFile" type="file"
+                                           style="display: inline; width: 180px;">
+                                    <button class="upload" type="submit">上传</button>
+                                    <button class="update" type="submit" disabled="disabled">更新</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr class="warning">
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                TB - Monthly
+                            </td>
+                            <td>
+                                02/04/2012
+                            </td>
+                            <td>
+                                <form class="form-group">
+                                    <input class="uploadFile" type="file" style="display: inline; width: 180px;"
+                                           disabled="disabled">
+                                    <button class="upload" type="submit" disabled="disabled">上传</button>
+                                    <button class="update" type="submit">更新</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr class="warning">
+                            <td>
+                                2
+                            </td>
+                            <td>
+                                TB - Monthly
+                            </td>
+                            <td>
+                                02/04/2012
+                            </td>
+                            <td>
+                                <form class="form-group">
+                                    <input class="uploadFile" type="file" style="display: inline; width: 180px;"
+                                           disabled="disabled">
+                                    <button class="upload" type="submit" disabled="disabled">上传</button>
+                                    <button class="update" type="submit">更新</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr class="error">
+                            <td>
+                                3
+                            </td>
+                            <td>
+                                TB - Monthly
+                            </td>
+                            <td>
+                                03/04/2012
+                            </td>
+                            <td>
+                                <form class="form-group">
+                                    <input class="uploadFile" type="file"
+                                           style="display: inline; width: 180px;">
+                                    <button class="upload" type="submit">上传</button>
+                                    <button class="update" type="submit">更新</button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr class="info">
+                            <td>
+                                4
+                            </td>
+                            <td>
+                                TB - Monthly
+                            </td>
+                            <td>
+                                04/04/2012
+                            </td>
+                            <td>
+                                <form class="form-group">
+                                    <input class="uploadFile" type="file"
+                                           style="display: inline; width: 180px;">
+                                    <button class="upload" type="submit">上传</button>
+                                    <button class="update" type="submit">更新</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- 翻页 -->
+                    <nav aria-label="Page navigation" class="text-center">
+                        <ul class="pagination">
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li>
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- JavaScript -->
+<script th:src="@{js/jquery-3.5.0.min.js}"></script>
+<script th:src="@{js/bootstrap.min.js}"></script>
+<script th:src="@{js/revslider.js}"></script>
+<script th:src="@{js/common.js}"></script>
+<script th:src="@{js/owl.carousel.min.js}"></script>
+<script th:src="@{js/include.js}"></script>
+<script th:src="@{js/jquery.mobile-menu.min.js}"></script>
+<script th:src="@{js/countdown.js}"></script>
+<script>
+
+    $("#upload-circle-img").click(function () {
+        document.getElementById("input-upload-circle-img").click();
+    });
+    $("#btn-update").click(function () {
+        $("#myModalLabel").text("更新");
+        $('#myModal').modal();
+    });
+</script>
+<div id="footer"></div>
+</body>
+
+</html>
