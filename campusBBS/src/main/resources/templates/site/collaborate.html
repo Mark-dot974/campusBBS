@@ -1,129 +1,221 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>campusBBS</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Default Description">
-<meta name="keywords" content="fashion, store, E-commerce">
-<meta name="robots" content="*">
-<link rel="icon" href="#" type="image/x-icon">
-<link rel="shortcut icon" href="#" type="image/x-icon">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>campusBBS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Default Description">
+    <meta name="keywords" content="fashion, store, E-commerce">
+    <meta name="robots" content="*">
+    <link rel="icon" href="#" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
 
-<!-- CSS Style -->
-<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}" media="all">
-<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}" >
-<link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/css/jquery.bxslider.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
-<link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
-<link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+    <!-- CSS Style -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.bxslider.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800'
+          rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+    <style>
+        .profile-pic {
+            width: 70px;
+            cursor: pointer;
+        }
+
+        #btn-update {
+            margin: 60px 0 40px 40px;
+        }
+
+    </style>
 </head>
 <div id="page">
-  <div id="header"></div>
-  <div class="page-heading">
-    <div class="breadcrumbs">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12" th:if="${cname!=null}">
-            <ul>
-              <li class="home"> <a th:href="@{/index}" title="Go to Home Page">主页</a> <span>› </span> </li>
-              <li class="category1601"> <strong th:text="${cname}">#失物招领</strong> </li>
-            </ul>
-          </div>
-          <div class="col-xs-12" th:if="${tagName!=null}">
-            <ul>
-              <li class="category1601"> <strong th:text="${tagName}">#失物招领</strong> </li>
-            </ul>
-          </div>
-          <!--col-xs-12-->
-        </div>
-        <!--row-->
-      </div>
-      <!--container-->
-    </div>
-    <div class="page-title">
-      <h2 th:text="${cname}">失物招领</h2>
-    </div>
-  </div>
-  <!-- BEGIN Main Container -->
-  <div class="main-container col2-right-layout">
-    <div class="main container">
-      <div class="row">
-        <div class="col-main col-sm-9 main-blog">
-          <div id="main" class="blog-wrapper">
-            <div id="primary" class="site-content">
-              <div id="content" role="main">
-                <article class="blog_entry clearfix" th:each="map:${postsInfo}">
-                  <div class="entry-content">
-                    <div class="post-content">
-                      <header class="blog_entry-header clearfix">
-                        <div class="blog_entry-header-inner"> <a class="tag " href="#" title="Fashion">Technology</a>
-                          <h2 class="blog_entry-title"> <a th:href="@{/post/detail(id=${map.post.id})}" th:utext="${map.post.title}" rel="bookmark">Cheerful model sitting on the floor, wearing modern oversize black dresss</a> </h2>
-                        </div>
-                        <!--blog_entry-header-inner-->
-                      </header>
-                      <ul class="post-meta">
-                        <li><img th:src="${map.user.headerUrl}" alt="auther"> <a href="#" th:utext="${map.user.username}">Smith John </a> </li>
-                        <li><i class="fa fa-comments"></i><a href="#"  th:text="${map.post.commentCount}">13 comments</a> </li>
-                        <li th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}"><i class="fa fa-clock-o"></i>Jan 12, 2021</li>
-                      </ul>
-                      <p th:utext="${map.post.content}">Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec, condimentum sed sapien. </p>
+    <div id="header"></div>
+    <div class="page-heading">
+        <div class="breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <ul>
+                            <li class="home"><a title="Go to Home Page">主页</a> <span>› </span></li>
+                            <li class="category1601"><strong>#协作圈</strong></li>
+                        </ul>
                     </div>
-                  </div>
-                </article>
-              </div>
+                    <!--col-xs-12-->
+                </div>
+                <!--row-->
             </div>
-            <div class="pager">
-              <div class="pages">
-                <!--<strong></strong>-->
-                <ol class="pagination">
-                  <li class="page-item">
-                    <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
-                  </li>
-                  <li th:class="|page-item ${page.current==1?'disabled':''}|">
-                    <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
-                  <!--						page对象中的from和to决定了导航条的页面数量-->
-                  <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
-                    <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
-                  </li>
-                  <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
-                    <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
-                  </li>
-                </ol>
-              </div>
+            <!--container-->
+        </div>
+        <div class="page-title">
+            <h2>协作圈</h2>
+        </div>
+    </div>
+    <!-- BEGIN Main Container -->
+    <div class="main-container col2-right-layout">
+        <div class="main container">
+            <div class="row">
+                <div class="col-main col-sm-10 main-blog">
+                    <div id="main" class="blog-wrapper">
+                        <div id="primary" class="site-content">
+                            <div id="content" role="main">
+                                <article class="blog_entry clearfix">
+                                    <div class="entry-content">
+                                        <div class="post-content">
+                                            <header class="blog_entry-header clearfix">
+                                                <div class="blog_entry-header-inner"><a class="tag " href="#"
+                                                                                        title="Fashion">Technology</a>
+                                                    <h2 class="blog_entry-title"><a rel="bookmark">全民制作人</a></h2>
+                                                </div>
+                                                <!--blog_entry-header-inner-->
+                                            </header>
+                                            <ul class="post-meta">
+                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"
+                                                                             alt="auther"></li>
+                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"
+                                                                             alt="auther"></li>
+                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"
+                                                                             alt="auther"></li>
+                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"
+                                                                             alt="auther"></li>
+                                                <li>...</li>
+                                                <li><i class="fa fa-comments"></i><a href="#">13个成员</a></li>
+                                                <li><i class="fa fa-clock-o"></i>创建时间：2022/7/9</li>
+                                            </ul>
+                                            <p>
+                                                全民制作人们大家好,我是练习时长两年半的个人练习生蔡徐坤,喜欢唱,跳,rap,篮球,music……在今后的节目中，我还准备了很多我自己作词、作曲、编舞的原创作品，期待的话，请多多为我投票吧。</p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                        <div class="pager">
+                            <div class="pages">
+                                <!--<strong></strong>-->
+                                <ol class="pagination">
+                                    <li class="page-item">
+                                        <a class="page-link">首页</a>
+                                    </li>
+                                    <li>
+                                        <a class="page-link">上一页</a></li>
+                                    <!--						page对象中的from和to决定了导航条的页面数量-->
+                                    <li>
+                                        <a class="page-link">1</a>
+                                    </li>
+                                    <li>
+                                        <a class="page-link">下一页</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link">末页</a>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-main col-sm-2 main-blog">
+                    <div class="blog-side">
+                        <button class="col-md-offset-2 btn btn-primary" type="button" id="btn-update"
+                                data-target="#publishModal">创建协作圈
+                        </button>
+                        <div class="widget widget_categories block">
+                            <h2 class="widget-title" style="margin: 20px 0 10px 20px">我的协作圈</h2>
+                            <ul>
+                                <li style="list-style: none"><a href="#">唱</a></li>
+                                <li style="list-style: none"><a href="#">跳</a></li>
+                                <li style="list-style: none"><a href="#">唱</a></li>
+                                <li style="list-style: none"><a href="#">唱</a></li>
+                            </ul>
+                        </div>
+
+                        <!--          弹出框-->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">新建协作圈</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <img th:src="@{/images/cutewy.webp}" alt="..."
+                                                 class="img-circle profile-pic" id="upload-circle-img">
+                                            <input type="file" accept="image/*" style="display: none"
+                                                   id="input-upload-circle-img">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txt_departmentname">协作圈名称</label>
+                                            <input type="text" name="txt_departmentname" class="form-control"
+                                                   id="txt_departmentname" value="部门名称">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txt_parentdepartment">简介</label>
+                                            <input type="text" name="txt_parentdepartment" class="form-control"
+                                                   id="txt_parentdepartment" value="上级部门">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txt_departmentlevel"></label>
+                                            <input type="text" name="txt_departmentlevel" class="form-control"
+                                                   id="txt_departmentlevel" value="部门级别">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="txt_statu">描述</label>
+                                            <input type="text" name="txt_statu" class="form-control" id="txt_statu"
+                                                   value="状态">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                                class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
+                                        </button>
+                                        <button type="button" id="btn_submit" class="btn btn-primary"
+                                                data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk"
+                                                                           aria-hidden="true"></span>保存
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--                <div id="aside"></div>-->
             </div>
-          </div>
-          <!--#main wrapper grid_8-->
+
 
         </div>
-        <!--col-main col-sm-9-->
-        <div id="aside"></div>
-      </div>
+        <!--main-container-->
+
     </div>
-    <!--main-container-->
 
-  </div>
-  <!--col2-layout-->
+    <!-- JavaScript -->
+    <script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/revslider.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+    <script th:src="@{/js/countdown.js}"></script>
+    <script th:src="@{/js/include.js}"></script>
 
-  <!-- JavaScript -->
-  <script th:src="@{/js/jquery-3.5.0.min.js}"></script>
-  <script th:src="@{/js/bootstrap.min.js}"></script>
-  <script th:src="@{/js/revslider.js}"></script>
-  <script th:src="@{/js/common.js}"></script>
-  <script th:src="@{/js/owl.carousel.min.js}"></script>
-  <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
-  <script th:src="@{/js/countdown.js}"></script>
-  <script th:src="@{/js/include.js}"></script>
-  <div id="footer"></div>
+    <script>
+
+
+        $("#btn-update").click(function () {
+            $('#myModal').modal();
+        });
+    </script>
+    <div id="footer"></div>
 </div>
 </html>
