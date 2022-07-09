@@ -13739,6 +13739,7 @@ select#shipping-address-select {
 	padding: 12.5px;
 	line-height: 67px;
 	height: 67px;
+	width: 67px;
 	display: block;
 	-webkit-transition: all 0.3s cubic-bezier(0.8, 0, 0, 1);
 	-o-transition: all 0.3s cubic-bezier(0.8, 0, 0, 1);

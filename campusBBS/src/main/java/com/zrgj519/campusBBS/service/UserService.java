@@ -190,4 +190,8 @@ public class UserService {
         SecurityContextHolder.clearContext();
         loginTicketMapper.updateStatus(ticket,1);
     }
+
+    public void updateHeader(int id, String url) {
+        userMapper.updateHeader(id,url);
+    }
 }
