@@ -40,12 +40,7 @@ public class IndexController {
 
     @RequestMapping(path="/aside_left")
     public String getAside_left(){
-        return "/site/aside_left";
-    }
-
-    @RequestMapping("/center")
-    public String getCenter(){
-        return "/site/center";
+        return "/site/profile_aside_left";
     }
 
     @RequestMapping(path="/aside")
