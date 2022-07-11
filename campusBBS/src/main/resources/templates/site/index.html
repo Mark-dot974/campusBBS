@@ -115,22 +115,56 @@
 							  <a th:href="@{category.html}"></a>
 							 </figure>
                                <div class="content-info">
+                                 <!--标签样式-->
+                                 <div class="index_tag_style">
+                                   <div style="display: flex">
+                                     <div style="margin-right: 10px">
+                                       <a class="tag " href="#" title="Fashion">Technology</a>
+                                     </div>
+                                     <div style="margin-right: 10px">
+                                       <a class="tag " href="#" title="Fashion">Technology</a>
+                                     </div>
+                                     <div style="margin-right: 10px">
+                                       <a class="tag " href="#" title="Fashion">Technology</a>
+                                     </div>
+                                   </div>
+                                 </div>
                                 <h4>
                                   <a th:href="@{/post/detail(id=${map.post.id})}" th:text="${map.post.title}" title="Lorem ipsum dolor sit amet">
                                   </a>
                                 </h4>
-                                <div class="post_meta">
-                                  <i class="fa fa-heart-o"></i>
-                                  <span class="chart_margin" th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}">
-                                    12 May 2020</span>
-                                  <i class="fa fa-comment"></i>
-                                  <span class="chart_margin" th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}">
-                                    12 May 2020</span>
-                                  <i class="fa fa-clock-o"></i>
-                                  <span class="chart_margin" th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}">
-                                    12 May 2020</span>
+                                <div class="post_meta" style="display: flex">
+                                  <!--头像-->
+                                  <div style="width: 120px">
+                                    <img th:src="@{/images/gdl.jpg}" alt="auther" style="width: 35px;height: 35px; border-radius: 50%"> <a href="#" style="color: #898989">Smith John </a>
+                                  </div>
+                                  <div style="width: 120px; height: 35px;">
+                                    <div style="margin-top: 4px">
+                                      <i class="fa fa-heart-o"></i>
+                                      <!--点赞数量-->
+                                      <span class="chart_margin">qdiqubqiuqdq</span>
+                                    </div>
+                                  </div>
+                                  <div style="width: 120px;height: 35px;">
+                                    <div style="margin-top: 4px">
+                                      <i class="fa fa-comment"></i>
+                                      <!--评论数量-->
+                                      <span class="chart_margin">12 May 2020</span>
+                                    </div>
+                                  </div>
+                                  <div style="height: 35px;">
+                                    <div style="margin-top: 4px;">
+                                      <i class="fa fa-clock-o"></i>
+                                      <!--发表时间-->
+                                      <span class="chart_margin" th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}">12 May 2020</span>
+                                    </div>
+                                  </div>
                                 </div>
-                                <p th:text="${map.post.content}"></p>
+                                 <!--文章部分，超出两行多余使用省略号隐藏-->
+                                 <div class="index_text_style">
+                                   <p th:text="${map.post.content}"></p>
+                                 </div>
+
                                </div>
 						  </li>
               </ul>
@@ -254,7 +288,7 @@
                 fullScreenOffsetContainer: ''
             });
         });
-        </script> 
+        </script>
 <div id="footer"></div>
 </body>
 </html>

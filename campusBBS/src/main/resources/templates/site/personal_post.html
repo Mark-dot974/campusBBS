@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Category Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Default Description">
+    <meta name="keywords" content="fashion, store, E-commerce">
+    <meta name="robots" content="*">
+    <link rel="icon" href="#" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+
+    <!-- CSS Style -->
+    <link rel="stylesheet" type="text/css"  th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.bxslider.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/yellow.css}">
+
+
+
+
+</head>
+<body>
+    <div id="page">
+        <div id="header"></div>
+        <!--breadcrumbs-->
+        <!-- BEGIN Main Container col2-left -->
+        <section class="main-container col2-left-layout bounceInUp animated">
+            <!-- For version 1, 2, 3, 8 -->
+            <!-- For version 1, 2, 3 -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+                        <!--这里是个人中心发布内容的信息(点赞信息)展示begin-->
+                        <div class="pro-coloumn box-content box-category grid-sidebar-block" style="text-align: center">
+                            <div class="main-block-1">
+                                <div class="cate-heading">
+                                    <h2 style="background-color: #ed6663">发布内容</h2>
+                                </div>
+                                <div class="grid-2">
+                                    <div class="grid-block">
+                                        <ul class="posts-list unstyled clearfix">
+                                            <li>
+                                                <figure class="featured-thumb">
+                                                    <a th:href="@{category.html}"></a>
+                                                </figure>
+                                                <div class="content-info">
+                                                    <!--标签样式-->
+                                                    <div class="index_tag_style">
+                                                        <div style="display: flex">
+                                                            <div style="margin-right: 10px">
+                                                                <a class="tag " href="#" title="Fashion">Technology</a>
+                                                            </div>
+                                                            <div style="margin-right: 10px">
+                                                                <a class="tag " href="#" title="Fashion">Technology</a>
+                                                            </div>
+                                                            <div style="margin-right: 10px">
+                                                                <a class="tag " href="#" title="Fashion">Technology</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h4>
+                                                        <a th:href="@{/post/detail(id=${map.post.id})}" th:text="${map.post.title}" title="Lorem ipsum dolor sit amet">
+                                                        </a>
+                                                    </h4>
+                                                    <div class="post_meta" style="display: flex">
+                                                        <!--头像-->
+                                                        <div style="width: 120px">
+                                                            <img th:src="@{/images/gdl.jpg}" alt="auther" style="width: 35px;height: 35px; border-radius: 50%"> <a href="#" style="color: #898989">Smith John </a>
+                                                        </div>
+                                                        <div style="width: 120px; height: 35px;">
+                                                            <div style="margin-top: 4px">
+                                                                <i class="fa fa-heart-o"></i>
+                                                                <!--点赞数量-->
+                                                                <span class="chart_margin">qdiqubqiuqdq</span>
+                                                            </div>
+                                                        </div>
+                                                        <div style="width: 120px;height: 35px;">
+                                                            <div style="margin-top: 4px">
+                                                                <i class="fa fa-comment"></i>
+                                                                <!--评论数量-->
+                                                                <span class="chart_margin">12 May 2020</span>
+                                                            </div>
+                                                        </div>
+                                                        <div style="height: 35px;">
+                                                            <div style="margin-top: 4px;">
+                                                                <i class="fa fa-clock-o"></i>
+                                                                <!--发表时间-->
+                                                                <span class="chart_margin" th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}">12 May 2020</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--文章部分，超出两行多余使用省略号隐藏-->
+                                                    <div class="index_text_style">
+                                                        <p th:text="${map.post.content}"></p>
+                                                    </div>
+
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="pager">
+                                <div class="pages">
+                                    <!--<strong></strong>-->
+                                    <ol class="pagination">
+                                        <li class="active"><a href="">1</a></li>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">3</a></li>
+                                        <li><a href="">4</a></li>
+                                        <li><a href="">5</a></li>
+                                        <li><a href="">6</a></li>
+                                        <li> <a class="next i-next" href="" title="Next"> » </a> </li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--这里是个人中心发布内容的信息展示end-->
+
+                        <!--	///*///======    End article  ========= //*/// -->
+                    </div>
+                    <div id="aside_left"></div>
+                    <!--col-right sidebar-->
+                </div>
+                <!--row-->
+            </div>
+            <!--container-->
+        </section>
+    </div>
+    </div>
+    <div id="footer"></div>
+    <script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/revslider.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+    <script th:src="@{/js/countdown.js}"></script>
+    <script th:src="@{/js/include.js}"></script>
+    <script th:src="@{/js/setting.js}"></script>
+    <script th:src="@{/js/jquery.icheck.js}"></script>
+</body>
+</html>
