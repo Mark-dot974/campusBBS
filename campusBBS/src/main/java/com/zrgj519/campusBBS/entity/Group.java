@@ -14,7 +14,7 @@ public class Group {
 
     private String members;
 
-    private int membersCount;
+    private int memberCount;
 
     private Date createTime;
 
@@ -23,8 +23,4 @@ public class Group {
     private String files;
 
     private String groupLeader;
-
-    private String groupIntro;
-
-    private String groupHeader;
 }
