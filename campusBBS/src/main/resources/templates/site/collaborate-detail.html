@@ -35,6 +35,7 @@
         .collaborators {
             margin: 20px 0 20px 0;
         }
+
         .collaborate-title {
         }
     </style>
@@ -49,53 +50,102 @@
     <div class="row-fluid">
         <div class="col-md-8">
 
-<!--       圈子title -->
+            <!--       圈子title -->
             <div class="collaborate-title col-md-offset-2">
-                <img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic " style="margin: 10px 20px 30px 0">
+                <img src="http://repbhxlop.hb-bkt.clouddn.com/%E9%BB%98%E8%AE%A4%E7%BB%84%E5%A4%B4%E5%83%8F.jpg"
+                     alt="..." class="img-circle profile-pic " style="margin: 10px 20px 30px 0">
                 <h1 style="display: inline-block;">全民制作人</h1>
-                <button class="col-md-offset-2 btn btn-primary" type="button" id="btn-update" data-target="#publishModal">修改协作圈信息</button>
-<!--    弹出框        -->
+                <button class="col-md-offset-2 btn btn-primary" type="button" id="btn-update"
+                        data-target="#publishModal">修改协作圈信息
+                </button>
+                <button class="col-md-offset-2 btn btn-primary" type="button" id="btn-join" data-target="#publishModal">
+                    申请加入
+                </button>
+                <!--                加入-->
+                <div class="modal fade" id="join" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form>
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">×</span></button>
+                                    <h4 class="modal-title">加入协作圈</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="txt_departmentlevel">验证信息</label>
+                                        <input type="text" name="txt_departmentlevel" class="form-control"
+                                               placeholder="我是...我想...">
+                                    </div>
 
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                            class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal"><span
+                                            class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>发送
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!--    修改协作圈        -->
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                <h4 class="modal-title" id="myModalLabel">修改协作圈信息</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">×</span></button>
+                                <h4 class="modal-title">修改协作圈信息</h4>
                             </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic" id="upload-circle-img">
-                                    <input type="file" accept="image/*" style="display: none" id="input-upload-circle-img">
+                            <form>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <img src="http://repbhxlop.hb-bkt.clouddn.com/%E9%BB%98%E8%AE%A4%E7%BB%84%E5%A4%B4%E5%83%8F.jpg"
+                                             alt="..." class="img-circle profile-pic" id="upload-circle-img">
+                                        <label for="input-upload-circle-img">点击修改默认头像</label>
+                                        <input type="file" accept="image/*" style="display: none"
+                                               id="input-upload-circle-img">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txt_departmentname">协作圈名称</label><span class="col-md-offset-1"
+                                                                                           style="color: red">该协作圈已存在</span>
+                                        <input type="text" name="txt_departmentname" class="form-control"
+                                               id="txt_departmentname" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txt_parentdepartment">简介</label>
+                                        <input type="text" name="txt_parentdepartment" class="form-control"
+                                               id="txt_parentdepartment" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txt_departmentlevel">tags</label>
+                                        <input type="text" name="txt_departmentlevel" class="form-control"
+                                               id="txt_departmentlevel" value="">
+                                    </div>
+
                                 </div>
-                                <div class="form-group">
-                                    <label for="txt_departmentname">协作圈名称</label>
-                                    <input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" value="部门名称">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                            class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
+                                    </button>
+                                    <button type="button" id="btn_submit" class="btn btn-primary"
+                                            data-dismiss="modal"><span
+                                            class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存
+                                    </button>
                                 </div>
-                                <div class="form-group">
-                                    <label for="txt_parentdepartment">简介</label>
-                                    <input type="text" name="txt_parentdepartment" class="form-control" id="txt_parentdepartment" value="上级部门">
-                                </div>
-                                <div class="form-group">
-                                    <label for="txt_departmentlevel"></label>
-                                    <input type="text" name="txt_departmentlevel" class="form-control" id="txt_departmentlevel" value="部门级别">
-                                </div>
-                                <div class="form-group">
-                                    <label for="txt_statu">描述</label>
-                                    <input type="text" name="txt_statu" class="form-control" id="txt_statu" value="状态">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
-                                <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
 
             </div>
             <hr style="border-width: 2px; margin: 0 0 20px 0">
-
 
 
             <div class="group-chat-box group-chat-box">
@@ -111,9 +161,44 @@
                 <div class="col-md-12">
                     <div class="collaborators">
                         <a href="#"><img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic"></a>
-                        <a href="#"><img th:src="@{/images/newProfile.png}" alt="..."
-                                         class="img-circle profile-pic"></a>
-                        <input id="newProfilePic" type="file" style="display: none">
+                        <a href="#"><img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic"></a>
+
+                        <a href="#" id="btn-invite"><img th:src="@{/images/newProfile.png}" alt="..."
+                                                         class="img-circle profile-pic"></a>
+
+                        <!--                        邀请                      -->
+                        <div class="modal fade" id="invite" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span
+                                                aria-hidden="true">×</span></button>
+                                        <h4 class="modal-title">邀请其他用户</h4>
+                                    </div>
+                                    <form>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="txt_departmentlevel">邀请</label>
+                                                <input type="text" name="txt_departmentlevel" class="form-control"
+                                                       placeholder="用户名">
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                                    class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
+                                            </button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal"><span
+                                                    class="glyphicon glyphicon-plane" aria-hidden="true"></span>邀请
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
@@ -123,7 +208,10 @@
                 <div class="col-md-12">
 
                     <table class="table table-striped">
-                        <caption><h3>协作文档</h3></caption>
+                        <caption><h3 style="display: inline-block">协作文档</h3><input class="upload col-lg-offset-4"
+                                                                                   type="file" value="上传新文档"
+                                                                                   style="color: #0a0a0a; display: inline-block">
+                        </caption>
 
                         <thead>
                         <tr>
@@ -156,7 +244,6 @@
                                 <form class="form-group">
                                     <input class="uploadFile" type="file"
                                            style="display: inline; width: 180px;">
-                                    <button class="upload" type="submit">上传</button>
                                     <button class="update" type="submit" disabled="disabled">更新</button>
                                 </form>
                             </td>
@@ -175,7 +262,7 @@
                                 <form class="form-group">
                                     <input class="uploadFile" type="file"
                                            style="display: inline; width: 180px;">
-                                    <button class="upload" type="submit">上传</button>
+
                                     <button class="update" type="submit" disabled="disabled">更新</button>
                                 </form>
                             </td>
@@ -194,7 +281,7 @@
                                 <form class="form-group">
                                     <input class="uploadFile" type="file"
                                            style="display: inline; width: 180px;">
-                                    <button class="upload" type="submit">上传</button>
+
                                     <button class="update" type="submit" disabled="disabled">更新</button>
                                 </form>
                             </td>
@@ -213,7 +300,6 @@
                                 <form class="form-group">
                                     <input class="uploadFile" type="file" style="display: inline; width: 180px;"
                                            disabled="disabled">
-                                    <button class="upload" type="submit" disabled="disabled">上传</button>
                                     <button class="update" type="submit">更新</button>
                                 </form>
                             </td>
@@ -232,7 +318,6 @@
                                 <form class="form-group">
                                     <input class="uploadFile" type="file" style="display: inline; width: 180px;"
                                            disabled="disabled">
-                                    <button class="upload" type="submit" disabled="disabled">上传</button>
                                     <button class="update" type="submit">更新</button>
                                 </form>
                             </td>
@@ -251,7 +336,7 @@
                                 <form class="form-group">
                                     <input class="uploadFile" type="file"
                                            style="display: inline; width: 180px;">
-                                    <button class="upload" type="submit">上传</button>
+
                                     <button class="update" type="submit">更新</button>
                                 </form>
                             </td>
@@ -270,7 +355,7 @@
                                 <form class="form-group">
                                     <input class="uploadFile" type="file"
                                            style="display: inline; width: 180px;">
-                                    <button class="upload" type="submit">上传</button>
+
                                     <button class="update" type="submit">更新</button>
                                 </form>
                             </td>
@@ -307,22 +392,27 @@
 
 
 <!-- JavaScript -->
-<script th:src="@{js/jquery-3.5.0.min.js}"></script>
-<script th:src="@{js/bootstrap.min.js}"></script>
-<script th:src="@{js/revslider.js}"></script>
-<script th:src="@{js/common.js}"></script>
-<script th:src="@{js/owl.carousel.min.js}"></script>
-<script th:src="@{js/include.js}"></script>
-<script th:src="@{js/jquery.mobile-menu.min.js}"></script>
-<script th:src="@{js/countdown.js}"></script>
+<script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/revslider.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/include.js}"></script>
+<script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+<script th:src="@{/js/countdown.js}"></script>
 <script>
 
     $("#upload-circle-img").click(function () {
         document.getElementById("input-upload-circle-img").click();
     });
     $("#btn-update").click(function () {
-        $("#myModalLabel").text("更新");
         $('#myModal').modal();
+    });
+    $("#btn-invite").click(function () {
+        $('#invite').modal();
+    });
+    $("#btn-join").click(function () {
+        $('#join').modal();
     });
 </script>
 <div id="footer"></div>

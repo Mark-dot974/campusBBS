@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zrgj519.campusBBS.dao.GroupMapper">
+
+    <sql id="ref">
+        gid,group_name,members,members_count,create_time,tag,group_leader,group_intro,group_header
+    </sql>
+
+    <select id="selectAll" resultType="Group">
+        select <include refid="ref"/>
+        from collaboration_group
+    </select>
+
+    <select id="selectGroupById" resultType="Group">
+        select <include refid="ref"/>
+        from collaboration_group
+        where gid = #{gid}
+    </select>
+
+    
+    <insert id="insertGroup" parameterType="Group" useGeneratedKeys="true" keyProperty="id">
+        insert into collaboration_group (<include refid="ref"/>)
+        values(#{gid},#{groupName},#{members},#{membersCount},#{createTime},#{tag},#{groupLeader},#{groupIntro},#{groupHeader})
+    </insert>
+
+    <select id="selectGroupByName" resultType="Group">
+        select <include refid="ref"/>
+        from collaboration_group
+        where group_name = #{groupName}
+    </select>
+
+    <select id="selectGroupCount" resultType="Integer">
+        select count(*)
+        from collaboration_group
+    </select>
+
+</mapper>

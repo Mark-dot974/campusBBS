@@ -17,7 +17,6 @@ public class User {
     public void setSid(String sid) {
         this.sid = sid;
     }
-
     private String username;
     private String password;
     private String salt;

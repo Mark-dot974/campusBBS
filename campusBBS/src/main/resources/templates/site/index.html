@@ -118,14 +118,8 @@
                                  <!--标签样式-->
                                  <div class="index_tag_style">
                                    <div style="display: flex">
-                                     <div style="margin-right: 10px">
-                                       <a class="tag " href="#" title="Fashion">Technology</a>
-                                     </div>
-                                     <div style="margin-right: 10px">
-                                       <a class="tag " href="#" title="Fashion">Technology</a>
-                                     </div>
-                                     <div style="margin-right: 10px">
-                                       <a class="tag " href="#" title="Fashion">Technology</a>
+                                     <div style="margin-right: 10px" th:each="tag:${map.tags}">
+                                       <a class="tag " href="#" title="Fashion" th:text="tag">Technology</a>
                                      </div>
                                    </div>
                                  </div>
