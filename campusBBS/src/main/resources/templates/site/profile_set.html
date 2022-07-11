@@ -24,12 +24,13 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-table.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/yellow.css}">
 
 
 
 
 </head>
+<body>
 <div id="page">
     <div id="header"></div>
     <!--breadcrumbs-->
@@ -49,34 +50,36 @@
                                     <!--用户的头像信息可以进行修改-->
                                     <div class="col-md-8">
                                         <form class="" method="post">
-                                            <table class="table table-hover table-striped ">
+                                            <table class="table table-hover">
                                                 <caption><h2>编辑修改信息</h2></caption>
                                                 <li>
+                                                    <form id="uploadForm">
                                                     <tr>
                                                         <td colspan="2">
                                                             <div style="height: 20px">
                                                             </div>
-                                                            <img class="clicker" id="usertouxiang" th:src="@{/images/gdl.jpg}" style="border-radius: 50%; height: 120px;width: 120px">
+                                                            <img class="clicker" id="usertouxiang" th:src="${loginUser.headerUrl}" style="border-radius: 50%; height: 120px;width: 120px">
                                                             <div style=" display:flex; justify-content:center; align-items:center;">
                                                                 <div style="width: 100px">
                                                                     <a style="text-decoration: underline; color:#898989;cursor: pointer" onclick="addImage()">点击此处修改
                                                                         <span class="glyphicon glyphicon-pencil" style="color: #b2b2b2"></span>
                                                                     </a>
-                                                                    <input type="file" id="image" style="display: none">
+                                                                    <input type="hidden" name="token" th:value="${uploadToken}">
+                                                                    <input type="hidden" name="key" th:value="${fileName}">
+                                                                    <input type="file" id="image" style="display: none" name="file" onchange="upload()">
+<!--                                                                    <input type="submit" onclick="upload()">立即上传</input>-->
                                                                 </div>
                                                             </div>
                                                         </td>
                                                     </tr>
                                                 </li>
 
-
-                                                <li>
-
+                                                <form th:action="@{/user/updateInfo}">
                                                     <tr>
                                                         <p>
                                                         <th style="text-align: right; vertical-align: middle;width: 40%"><label>用户名：</label></th>
 
-                                                        <td style="text-align: left; width: 60%"><span class="field"><input  style="width: 200px; border-radius: 5px" type="text" name="carid"  class="input-text"  /></span></td>
+                                                        <td style="text-align: left; width: 60%"><span class="field"><input  style="width: 200px; border-radius: 5px" type="text" name="username"  class="input-text"  th:value="${loginUser.username}"/></span></td>
                                                         </p>
                                                     </tr>
 
@@ -84,20 +87,49 @@
                                                         <p>
                                                         <th style="text-align: right; vertical-align: middle;width: 40%"><label>密码：</label></th>
 
-                                                        <td style="text-align: left; width: 60%"><span class="field"><input  style="width: 200px; border-radius: 5px" type="password" name="carid"  class="input-text"  /></span></td>
+                                                        <td style="text-align: left; width: 60%"><span class="field"><input  style="width: 200px; border-radius: 5px" type="password" name="password"  class="input-text"  th:value="${loginUser.password}"/></span></td>
                                                         </p>
                                                     </tr>
                                                     <tr>
                                                         <p>
                                                         <th style="text-align: right; vertical-align: middle;width: 40%"><label>邮箱：</label></th>
 
-                                                        <td style="text-align: left; width: 60%"><span class="field"><input  style="width: 200px; border-radius: 5px" type="email" name="carid"  class="input-text" /></span></td>
+                                                        <td style="text-align: left; width: 60%"><span class="field"><input  style="width: 200px; border-radius: 5px" type="email" name="email"  class="input-text" th:value="${loginUser.email}"/></span></td>
                                                         </p>
                                                     </tr>
                                                     <tr>
                                                         <p>
                                                         <th style="text-align: right; vertical-align: middle;width: 40%"><label>个性签名：</label></th>
-                                                        <td style="text-align: left; width: 60%"><span class="field"><input  style="width: 200px; border-radius: 5px" type="email" name="carid"  class="input-text"  /></span></td>
+                                                        <td style="text-align: left; width: 60%"><span class="field"><input  style="width: 200px; border-radius: 5px" type="text" name="signature"  class="input-text"  th:value="${loginUser.signature}"/></span></td>
+                                                        </p>
+                                                    </tr>
+                                                    <tr>
+                                                        <p>
+                                                        <th style="text-align: right; vertical-align: middle;width: 40%"><label>标签：</label></th>
+                                                        <td style="text-align: left; width: 60%">
+                                                            <span class="field">
+                                                            <div class="input-box">
+                                                                <input type="checkbox" name="interest" value="唱" >
+                                                                <label>唱</label>
+                                                                <input type="checkbox" name="interest" value="跳">
+                                                                <label>跳</label>
+                                                                <input type="checkbox" name="interest" value="Rap">
+                                                                <label>Rap</label>
+                                                                <input type="checkbox" name="interest" value="篮球">
+                                                                <label>篮球</label>
+                                                                <input type="checkbox" name="interest" value="音乐">
+                                                                <label>音乐</label>
+                                                                <input type="checkbox" name="interest" value="电影">
+                                                                <label>电影</label>
+                                                                <input type="checkbox" name="interest" value="羽毛球">
+                                                                <label>羽毛球</label>
+                                                                <input type="checkbox" name="interest" value="人文艺术">
+                                                                <label>人文艺术</label>
+                                                                <br>
+                                                                <input  style="width: 200px; border-radius: 5px" type="" name=""  class="input-text" placeholder="输入您想要的标签" />
+                                                            </div>
+                                                            </span>
+                                                        </td>
                                                         </p>
                                                     </tr>
                                                     <tr>
@@ -106,6 +138,7 @@
                                                     </tr>
 
                                             </table>
+                                        <li>
 
                                             <div class="buttons-set">
                                                 <button type="submit" title="Create an Account" class="button create-account" onClick=""><span><span>保存并修改</span></span></button>
@@ -124,12 +157,8 @@
                                         <div style="height: 10px"></div>
 
                                         </li>
-                                        
                                     </div>
                                     <div class="col-md-2">
-                                        <div class="buttons-set">
-                                            <button type="submit" title="Create an Account" class="button" onClick=""><i class="fa fa-envelope"></i><span>&nbsp;<span>私信</span></span></button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -168,31 +197,14 @@
 
 <!--</style>-->
 <script>
-    // new Vue( {
-    //     el:'#vue_element',
-    //     data(){
-    //         return{
-    //
-    //         }
-    //     },
-    //     methods: {
-    //         handleOpen(key, keyPath) {
-    //             console.log(key, keyPath);
-    //         },
-    //         handleClose(key, keyPath) {
-    //             console.log(key, keyPath);
-    //         }
-    //     }
-    // })
-
 </script>
 
 <script>
     function addImage(){
         document.getElementById("image").click();
-    }
-    function editName(){
-        document.getElementById("editName").style.display = 'block'
+
+        return false;
+
     }
 </script>
 
@@ -204,6 +216,22 @@
 <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
 <script th:src="@{/js/countdown.js}"></script>
 <script th:src="@{/js/include.js}"></script>
-<script th:src="@{/js/bootstrap-table.js}"></script>
-<script th:src="@{/js/bootstrap-table-zh-CN.js}"></script>
+<script th:src="@{/js/setting.js}"></script>
+<script th:src="@{/js/jquery.icheck.js}"></script>
+    <script>
+        $(document).ready(function(){
+            $.each($("input:checkbox"),function(){
+                var self = $(this),
+                    label = self.next(),
+                    label_text = label.text();
+
+                label.remove();
+                self.iCheck({
+                    checkboxClass: 'icheckbox_line-yellow',
+                    insert: '<div class="icheck_line-icon"></div>' + label_text
+                });
+            });
+        });
+    </script>
+</body>
 </html>
