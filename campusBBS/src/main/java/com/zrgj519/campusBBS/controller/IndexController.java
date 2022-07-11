@@ -104,5 +104,14 @@ public class IndexController {
         return "/site/index";
     }
 
+    @RequestMapping("/personal_page")
+    public String getPage(){
+        return "/site/personal_page";
+    }
+
+    @RequestMapping("/personal_post")
+    public String getPosts(){
+        return "/site/personal_post";
+    }
 
 }
