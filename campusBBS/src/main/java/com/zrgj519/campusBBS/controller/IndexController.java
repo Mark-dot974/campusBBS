@@ -8,6 +8,7 @@ import com.zrgj519.campusBBS.service.PostService;
 import com.zrgj519.campusBBS.service.TagService;
 import com.zrgj519.campusBBS.service.UserService;
 import com.zrgj519.campusBBS.util.CampusBBSConstant;
+import com.zrgj519.campusBBS.util.UserContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,8 @@ public class IndexController {
     private UserService userService;
     @Autowired
     private TagService tagService;
+    @Autowired
+    private UserContainer userContainer;
 
     @RequestMapping(path="/header")
     public String getHeader(){
@@ -51,16 +54,64 @@ public class IndexController {
         return "/site/aside";
     }
 
-    @RequestMapping(path="/index",method = RequestMethod.GET)
-    public String getPosts(Model model, Page page){
+    @RequestMapping(path = "/denied", method = RequestMethod.GET)
+    public String getDeniedPage() {
+        return "/site/404error";
+    }
+
+    // 首页不分页
+    @RequestMapping(path = "/index", method = RequestMethod.GET)
+    public String getPosts(Model model, Page page) {
         // 获取推荐内容
         page.setRows(postService.getAllPostsCount());
         page.setPath("/index");
 
-        List<Post> allPosts = postService.getAllPosts();
-        List<Map<String,Object>> postsInfo = new ArrayList<>();
+        // 根据用户是否登录，来获取到不同的内容
+        User user = userContainer.getUser();
+        List<Post> posts = new ArrayList<>();
+        // 用户未登录
+        if(user == null)
+        {
+            posts = postService.getAllPosts();
+        }
+        // 登录
+        else{
+            String userInterest = user.getInterest();
+            // 用户没有选标签
+            if(userInterest == null || userInterest.equals("")){
+                posts = postService.getAllPosts();
+            }
+            // 根据用户兴趣查找出来的内容
+            else{
+                // 使用es根据用户兴趣查找内容
+                org.springframework.data.domain.Page<Post> postsByUserInterest
+                        = postService.findPostsByUserInterest(userInterest, page.getOffset(), page.getLimit());
+                List<Post> allPost = postService.getAllPosts();
+                // 根据用户兴趣查找不到帖子
+                if(postsByUserInterest == null){
+                    posts = allPost;
+                }
+                // 有帖子
+                else{
+                    int i = 0;
+                    int allPostsIndex = 0;
+                    // 把es中查到的内容取出来放到list中,3条感兴趣的，1条allPosts中的。
+                    for (Post post : postsByUserInterest) {
+                        i++;
+                        posts.add(post);
+                        // 避免重复
+                        allPost.remove(post);
+                        if(i%3==0){
+                            posts.add(allPost.remove(allPostsIndex++));
+                        }
+                    }
+                    posts.addAll(allPost);
+                }
+            }
+        }
         // 封装用户信息
-        for (Post post : allPosts) {
+        List<Map<String,Object>> postsInfo = new ArrayList<>();
+        for (Post post : posts) {
             Map<String,Object> postInfo = new HashMap<>();
             User userById = userService.findUserById(post.getUserId());
             postInfo.put("publisher",userById);
@@ -72,10 +123,7 @@ public class IndexController {
             }
             postsInfo.add(postInfo);
         }
-        model.addAttribute("postsInfo",postsInfo);
+        model.addAttribute("postsInfo", postsInfo);
         return "/site/index";
     }
-
-
-
 }

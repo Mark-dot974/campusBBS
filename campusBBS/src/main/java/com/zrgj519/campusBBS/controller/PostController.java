@@ -54,7 +54,10 @@ public class PostController {
         if(page.getCurrent()> page.getTotal()) page.setCurrent(page.getTotal());
         page.setPath("/post/getPostsByCid?cid="+cid);
         String cname="";
-        if(cid == 1) cname = "失物招领";
+        // 因为协作板块与其他版块内容不同， 故单独使用controller方法处理
+        if(cid == 1) {
+            return "redirect:/group/getAll";
+        }
         if(cid == 2) cname = "社交";
         if(cid == 3) cname = "情感";
         if(cid == 4) cname = "学习";

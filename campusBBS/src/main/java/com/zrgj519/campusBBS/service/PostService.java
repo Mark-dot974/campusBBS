@@ -4,6 +4,7 @@ import com.zrgj519.campusBBS.dao.PostMapper;
 import com.zrgj519.campusBBS.dao.TagMapper;
 import com.zrgj519.campusBBS.entity.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 
@@ -19,6 +20,9 @@ public class PostService {
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private ElasticsearchService elasticsearchService;
 
     public List<Post> getAllPosts(){
         return postMapper.selectAllPosts();
@@ -58,5 +62,9 @@ public class PostService {
 
     public Post getPostById(int id){
         return postMapper.selectPostById(id);
+    }
+
+    public Page<Post> findPostsByUserInterest(String userInterest, int offset, int limit) {
+        return elasticsearchService.searchDiscussPost(userInterest,offset,limit);
     }
 }
