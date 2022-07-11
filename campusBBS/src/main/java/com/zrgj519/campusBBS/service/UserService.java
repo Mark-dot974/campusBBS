@@ -10,6 +10,8 @@ import com.zrgj519.campusBBS.util.MailClient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -163,7 +165,33 @@ public class UserService {
         return users;
     }
 
+    // 获取用户的权限
+    public Collection<? extends GrantedAuthority> getAuthorities(int userId){
+        User user = this.findUserById(userId);
+
+        List<GrantedAuthority> list = new ArrayList<>();
+        list.add(new GrantedAuthority() {
+            @Override
+            public String getAuthority() {
+                switch (user.getType()){
+                    case 1:
+                        return CampusBBSConstant.AUTHORITY_ADMIN;
+                    case 2:
+                        return CampusBBSConstant.TEAM_LEADER;
+                    default:
+                        return CampusBBSConstant.AUTHORITY_USER;
+                }
+            }
+        });
+        return list;
+    }
+
     public void logout(String ticket) {
+        SecurityContextHolder.clearContext();
         loginTicketMapper.updateStatus(ticket,1);
+    }
+
+    public void updateHeader(int id, String url) {
+        userMapper.updateHeader(id,url);
     }
 }
