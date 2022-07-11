@@ -32,7 +32,7 @@
         }
 
         #btn-update {
-            margin: 60px 0 40px 40px;
+            margin: 30px 30px 30px 30px;
         }
 
     </style>
@@ -47,6 +47,8 @@
                         <ul>
                             <li class="home"><a title="Go to Home Page">主页</a> <span>› </span></li>
                             <li class="category1601"><strong>#协作圈</strong></li>
+                            <li>
+                            </li>
                         </ul>
                     </div>
                     <!--col-xs-12-->
@@ -58,12 +60,21 @@
         <div class="page-title">
             <h2>协作圈</h2>
         </div>
+        <button class=" btn btn-primary" type="button"
+                id="btn-update"
+                data-target="#publishModal">创建协作圈
+        </button>
     </div>
     <!-- BEGIN Main Container -->
     <div class="main-container col2-right-layout">
         <div class="main container">
             <div class="row">
-                <div class="col-main col-sm-10 main-blog">
+                <div class="col-main col-sm-8 main-blog">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" class="active"><a href="#main">推荐</a></li>
+                        <li role="presentation"><a href="#own">已加入</a></li>
+                        <li role="presentation"><a href="#">Messages</a></li>
+                    </ul>
                     <div id="main" class="blog-wrapper">
                         <div id="primary" class="site-content">
                             <div id="content" role="main">
@@ -121,68 +132,79 @@
                         </div>
                     </div>
 
+
                 </div>
 
-
-                <div class="col-main col-sm-2 main-blog">
-                    <div class="blog-side">
-                        <button class="col-md-offset-2 btn btn-primary" type="button" id="btn-update"
-                                data-target="#publishModal">创建协作圈
-                        </button>
-                        <div class="widget widget_categories block">
-                            <h2 class="widget-title" style="margin: 20px 0 10px 20px">我的协作圈</h2>
-                            <ul>
-                                <li style="list-style: none"><a href="#">唱</a></li>
-                                <li style="list-style: none"><a href="#">跳</a></li>
-                                <li style="list-style: none"><a href="#">唱</a></li>
-                            </ul>
-                        </div>
-
-                        <!--          弹出框-->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                        <h4 class="modal-title">修改协作圈信息</h4>
-                                    </div>
-                                    <form>
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <img src="http://repbhxlop.hb-bkt.clouddn.com/%E9%BB%98%E8%AE%A4%E7%BB%84%E5%A4%B4%E5%83%8F.jpg" alt="..." class="img-circle profile-pic" id="upload-circle-img">
-                                                <label for="input-upload-circle-img">点击修改默认头像</label>
-                                                <input type="file" accept="image/*" style="display: none" id="input-upload-circle-img">
-
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="txt_departmentname">协作圈名称</label><span class="col-md-offset-1" style="color: red">该协作圈已存在</span>
-                                                <input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" value="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="txt_parentdepartment">简介</label>
-                                                <input type="text" name="txt_parentdepartment" class="form-control" id="txt_parentdepartment" value="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="txt_departmentlevel">tags</label>
-                                                <input type="text" name="txt_departmentlevel" class="form-control" id="txt_departmentlevel" value="">
-                                            </div>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal"><span
-                                                    class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
-                                            </button>
-                                            <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span
-                                                    class="glyphicon glyphicon-plus" aria-hidden="true"></span>创建
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
+                <!--          弹出框-->
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">×</span></button>
+                                <h4 class="modal-title">创建协作圈</h4>
                             </div>
+                            <form>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <img src="http://repbhxlop.hb-bkt.clouddn.com/%E9%BB%98%E8%AE%A4%E7%BB%84%E5%A4%B4%E5%83%8F.jpg"
+                                             alt="..." class="img-circle profile-pic" id="upload-circle-img">
+                                        <label for="input-upload-circle-img">点击修改默认头像</label>
+                                        <input type="file" accept="image/*" style="display: none"
+                                               id="input-upload-circle-img">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txt_departmentname">协作圈名称</label><span class="col-md-offset-1"
+                                                                                           style="color: red">该协作圈已存在</span>
+                                        <input type="text" name="txt_departmentname" class="form-control"
+                                               id="txt_departmentname" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txt_parentdepartment">简介</label>
+                                        <input type="text" name="txt_parentdepartment" class="form-control"
+                                               id="txt_parentdepartment" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txt_departmentlevel">tags</label>
+                                        <input type="text" name="txt_departmentlevel" class="form-control"
+                                               id="txt_departmentlevel" value="">
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                            class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
+                                    </button>
+                                    <button type="button" id="btn_submit" class="btn btn-primary"
+                                            data-dismiss="modal"><span
+                                            class="glyphicon glyphicon-plus" aria-hidden="true"></span>创建
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <!--                <div id="aside"></div>-->
+
+
+                <!--                <div class="col-main col-sm-2 main-blog">-->
+                <!--                    <div class="blog-side">-->
+                <!--                        <button class="col-md-offset-2 btn btn-primary" type="button" id="btn-update"-->
+                <!--                                data-target="#publishModal">创建协作圈-->
+                <!--                        </button>-->
+                <!--                        <div class="widget widget_categories block">-->
+                <!--                            <h2 class="widget-title" style="margin: 20px 0 10px 20px">我的协作圈</h2>-->
+                <!--                            <ul>-->
+                <!--                                <li style="list-style: none"><a href="#">唱</a></li>-->
+                <!--                                <li style="list-style: none"><a href="#">跳</a></li>-->
+                <!--                                <li style="list-style: none"><a href="#">唱</a></li>-->
+                <!--                            </ul>-->
+                <!--                        </div>-->
+
+
+                <!--                    </div>-->
+                <!--                </div>-->
+                <div id="aside"></div>
             </div>
 
 
