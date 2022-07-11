@@ -23,4 +23,6 @@ public class Group {
     private String files;
 
     private String groupLeader;
+
+    private String groupIntro;
 }

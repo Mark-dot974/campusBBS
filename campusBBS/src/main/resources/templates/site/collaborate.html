@@ -78,30 +78,43 @@
                     <div id="main" class="blog-wrapper">
                         <div id="primary" class="site-content">
                             <div id="content" role="main">
-                                <article class="blog_entry clearfix">
+                                <article class="blog_entry clearfix" th:each="group:${groups}">
                                     <div class="entry-content">
                                         <div class="post-content">
                                             <header class="blog_entry-header clearfix">
-                                                <div class="blog_entry-header-inner"><a class="tag " href="#"
-                                                                                        title="Fashion">Technology</a>
-                                                    <h2 class="blog_entry-title"><a rel="bookmark">全民制作人</a></h2>
+                                                <div class="blog_entry-header-inner">
+                                                    <!--标签样式-->
+                                                    <div class="index_tag_style">
+                                                        <div style="display: flex" >
+                                                            <div style="margin-right: 10px" th:each="tag:${group.tags}">
+                                                                <a class="tag " href="#" title="Fashion" th:text="${tag}">Technology</a>
+                                                            </div>
+<!--                                                            <div style="margin-right: 10px">-->
+<!--                                                                <a class="tag " href="#" title="Fashion">Technology</a>-->
+<!--                                                            </div>-->
+<!--                                                            <div style="margin-right: 10px">-->
+<!--                                                                <a class="tag " href="#" title="Fashion">Technology</a>-->
+<!--                                                            </div>-->
+                                                        </div>
+                                                    </div>
+                                                    <h2 class="blog_entry-title"><a rel="bookmark" th:text="${group.groupName}">全民制作人</a></h2>
                                                 </div>
                                                 <!--blog_entry-header-inner-->
                                             </header>
-                                            <ul class="post-meta">
-                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"
+                                            <ul class="post-meta" th:each="user,userStat:${group.members}" th:if="${userStat<=4}">
+                                                <li style="margin: 0px"><img th:src="${user.headerUrl}"
                                                                              alt="auther"></li>
-                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"
-                                                                             alt="auther"></li>
-                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"
-                                                                             alt="auther"></li>
-                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"
-                                                                             alt="auther"></li>
+<!--                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"-->
+<!--                                                                             alt="auther"></li>-->
+<!--                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"-->
+<!--                                                                             alt="auther"></li>-->
+<!--                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"-->
+<!--                                                                             alt="auther"></li>-->
                                                 <li>...</li>
-                                                <li><i class="glyphicon glyphicon-user"></i><a href="#">13个成员</a></li>
-                                                <li><i class="fa fa-clock-o"></i>创建时间：2022/7/9</li>
+                                                <li><i class="glyphicon glyphicon-user"></i><a href="#" th:text="${group.memberCount}">13个成员</a></li>
+                                                <li><i class="fa fa-clock-o"></i>创建时间：<i th:text="${#dates.format(group.createTime,'yyyy-MM-dd HH:mm:ss')}">2022/7/9</i></li>
                                             </ul>
-                                            <p>
+                                            <p th:text="${group.groupIntro}">
                                                 全民制作人们大家好,我是练习时长两年半的个人练习生蔡徐坤,喜欢唱,跳,rap,篮球,music……在今后的节目中，我还准备了很多我自己作词、作曲、编舞的原创作品，期待的话，请多多为我投票吧。</p>
                                         </div>
                                     </div>
@@ -113,24 +126,26 @@
                                 <!--<strong></strong>-->
                                 <ol class="pagination">
                                     <li class="page-item">
-                                        <a class="page-link">首页</a>
+                                        <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
                                     </li>
-                                    <li>
-                                        <a class="page-link">上一页</a></li>
+                                    <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                                        <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
                                     <!--						page对象中的from和to决定了导航条的页面数量-->
-                                    <li>
-                                        <a class="page-link">1</a>
+                                    <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
+                                        <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
                                     </li>
-                                    <li>
-                                        <a class="page-link">下一页</a>
+                                    <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                                        <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
                                     </li>
                                     <li class="page-item">
-                                        <a class="page-link">末页</a>
+                                        <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
                                     </li>
                                 </ol>
                             </div>
                         </div>
                     </div>
+
+                </div>
 
 
                 </div>
