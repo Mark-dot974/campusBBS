@@ -14012,3 +14012,50 @@ select#shipping-address-select {
 .chart_margin{
 	padding-right: 10px;
 }
+
+.index_tag_style a.tag{
+	background: #fbe122;
+	font-family: 'Saira Condensed', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	padding: 0px 6px 0px 8px;
+	position: relative;
+	font-size: 13px;
+}
+.index_tag_style a.tag:after{
+	content: '';
+	position: absolute;
+	width: 10px;
+	height: 100%;
+	transform: skew(-15deg);
+	right: -4px;
+	top: 0;
+	background-color: inherit;
+	z-index: 0;
+}
+.index_text_style{
+	width: 900px;
+	word-break: break-all;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp:2;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+}
+
+ .personal_page_span_style span{
+	 font-size: 7px;
+	 font-weight: 500;
+	 margin-bottom: 0px;
+	 padding: 2px 5px 2px 5px;
+	 position: relative;
+	 display: inline-block;
+	 font-family: 'Saira Condensed', sans-serif;
+	 letter-spacing: 1px;
+	 text-transform: uppercase;
+	 background:#cecece;
+	 margin-top: 0px;
+	 min-width: 20px;
+	 border-radius: 5px;
+ }
