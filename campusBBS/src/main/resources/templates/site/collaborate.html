@@ -87,7 +87,7 @@
                                                 <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"
                                                                              alt="auther"></li>
                                                 <li>...</li>
-                                                <li><i class="fa fa-comments"></i><a href="#">13个成员</a></li>
+                                                <li><i class="glyphicon glyphicon-user"></i><a href="#">13个成员</a></li>
                                                 <li><i class="fa fa-clock-o"></i>创建时间：2022/7/9</li>
                                             </ul>
                                             <p>
@@ -139,51 +139,44 @@
                         </div>
 
                         <!--          弹出框-->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">×</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">新建协作圈</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                        <h4 class="modal-title">修改协作圈信息</h4>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <img th:src="@{/images/cutewy.webp}" alt="..."
-                                                 class="img-circle profile-pic" id="upload-circle-img">
-                                            <input type="file" accept="image/*" style="display: none"
-                                                   id="input-upload-circle-img">
+                                    <form>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <img src="http://repbhxlop.hb-bkt.clouddn.com/%E9%BB%98%E8%AE%A4%E7%BB%84%E5%A4%B4%E5%83%8F.jpg" alt="..." class="img-circle profile-pic" id="upload-circle-img">
+                                                <label for="input-upload-circle-img">点击修改默认头像</label>
+                                                <input type="file" accept="image/*" style="display: none" id="input-upload-circle-img">
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txt_departmentname">协作圈名称</label><span class="col-md-offset-1" style="color: red">该协作圈已存在</span>
+                                                <input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txt_parentdepartment">简介</label>
+                                                <input type="text" name="txt_parentdepartment" class="form-control" id="txt_parentdepartment" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="txt_departmentlevel">tags</label>
+                                                <input type="text" name="txt_departmentlevel" class="form-control" id="txt_departmentlevel" value="">
+                                            </div>
+
                                         </div>
-                                        <div class="form-group">
-                                            <label for="txt_departmentname">协作圈名称</label>
-                                            <input type="text" name="txt_departmentname" class="form-control"
-                                                   id="txt_departmentname" value="部门名称">
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                                    class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
+                                            </button>
+                                            <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span
+                                                    class="glyphicon glyphicon-plus" aria-hidden="true"></span>创建
+                                            </button>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="txt_parentdepartment">简介</label>
-                                            <input type="text" name="txt_parentdepartment" class="form-control"
-                                                   id="txt_parentdepartment" value="上级部门">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="txt_departmentlevel"></label>
-                                            <input type="text" name="txt_departmentlevel" class="form-control"
-                                                   id="txt_departmentlevel" value="部门级别">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="txt_statu">描述</label>
-                                            <input type="text" name="txt_statu" class="form-control" id="txt_statu"
-                                                   value="状态">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal"><span
-                                                class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
-                                        </button>
-                                        <button type="button" id="btn_submit" class="btn btn-primary"
-                                                data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk"
-                                                                           aria-hidden="true"></span>保存
-                                        </button>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -209,7 +202,9 @@
     <script th:src="@{/js/include.js}"></script>
 
     <script>
-
+        $("#upload-circle-img").click(function () {
+            document.getElementById("input-upload-circle-img").click();
+        });
 
         $("#btn-update").click(function () {
             $('#myModal').modal();
