@@ -6,6 +6,7 @@
 // });
 
 function upload() {
+    alert("ajax")
     $.ajax({
         url: "http://upload-z1.qiniup.com",
         method: "post",
@@ -13,6 +14,7 @@ function upload() {
         contentType: false,
         data: new FormData($("#uploadForm")[0]),
         success: function(data) {
+            alert("success")
             if(data && data.code == 0) {
                 // 更新头像访问路径
                 $.post(

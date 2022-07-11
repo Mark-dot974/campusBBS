@@ -30,12 +30,13 @@ public class GroupController {
     @RequestMapping("/create")
     @ResponseBody
     public String createGroup(Group group){
+        System.out.println("create a group");
         Group groupByName = groupService.getGroupByName(group.getGroupName());
         if(groupByName!=null){
             return CampusBBSUtil.getJSONString(1,"协作圈名已存在~");
         }
         group.setMembers(userContainer.getUser().getUsername());
-        group.setMemberCount(1);
+        group.setMembersCount(1);
         group.setGroupLeader(userContainer.getUser().getUsername());
         group.setCreateTime(new Date());
         groupService.addGroup(group);
@@ -54,16 +55,18 @@ public class GroupController {
             List<User> members = new ArrayList<>();
             String m = group.getMembers();
             String[] users = m.split(",");
-            int length = users.length;
+//            int length = users.length;
             for (String userName : users) {
                 User user = userService.findUserByName(userName);
                 members.add(user);
             }
             String tag = group.getTag();
             String[] tags = tag.split(",");
-            map.put("memberCount",length);
+//            map.put("memberCount",length);
             map.put("tags",tags);
             map.put("members",members);
+            map.put("group",group);
+            groupsInfo.add(map);
         }
         model.addAttribute("groups",groupsInfo);
         return "/site/collaborate";

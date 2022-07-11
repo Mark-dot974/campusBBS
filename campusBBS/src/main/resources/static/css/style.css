@@ -791,7 +791,7 @@ nav {
 	color: #333
 }
 .nav {
-	width: 1000px;
+	width: 850px;
 	margin: 0px auto 0
 }
 #nav > li:hover > a, .vertnav-top li > a:hover {
@@ -14058,4 +14058,8 @@ select#shipping-address-select {
 	 margin-top: 0px;
 	 min-width: 20px;
 	 border-radius: 5px;
+ }
+
+ em{
+	 color: red;
  }

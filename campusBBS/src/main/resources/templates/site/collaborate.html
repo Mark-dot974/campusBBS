@@ -78,7 +78,7 @@
                     <div id="main" class="blog-wrapper">
                         <div id="primary" class="site-content">
                             <div id="content" role="main">
-                                <article class="blog_entry clearfix" th:each="group:${groups}">
+                                <article class="blog_entry clearfix" th:each="map:${groups}">
                                     <div class="entry-content">
                                         <div class="post-content">
                                             <header class="blog_entry-header clearfix">
@@ -86,7 +86,7 @@
                                                     <!--标签样式-->
                                                     <div class="index_tag_style">
                                                         <div style="display: flex" >
-                                                            <div style="margin-right: 10px" th:each="tag:${group.tags}">
+                                                            <div style="margin-right: 10px" th:each="tag:${map.tags}">
                                                                 <a class="tag " href="#" title="Fashion" th:text="${tag}">Technology</a>
                                                             </div>
 <!--                                                            <div style="margin-right: 10px">-->
@@ -97,11 +97,11 @@
 <!--                                                            </div>-->
                                                         </div>
                                                     </div>
-                                                    <h2 class="blog_entry-title"><a rel="bookmark" th:text="${group.groupName}">全民制作人</a></h2>
+                                                    <h2 class="blog_entry-title"><a rel="bookmark" th:text="${map.group.groupName}">全民制作人</a></h2>
                                                 </div>
                                                 <!--blog_entry-header-inner-->
                                             </header>
-                                            <ul class="post-meta" th:each="user,userStat:${group.members}" th:if="${userStat<=4}">
+                                            <ul class="post-meta" th:each="user:${map.members}">
                                                 <li style="margin: 0px"><img th:src="${user.headerUrl}"
                                                                              alt="auther"></li>
 <!--                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"-->
@@ -111,10 +111,10 @@
 <!--                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"-->
 <!--                                                                             alt="auther"></li>-->
                                                 <li>...</li>
-                                                <li><i class="glyphicon glyphicon-user"></i><a href="#" th:text="${group.memberCount}">13个成员</a></li>
-                                                <li><i class="fa fa-clock-o"></i>创建时间：<i th:text="${#dates.format(group.createTime,'yyyy-MM-dd HH:mm:ss')}">2022/7/9</i></li>
+                                                <li><i class="glyphicon glyphicon-user"></i><a href="#" th:text="${map.group.membersCount}">13</a>个成员</li>
+                                                <li><i class="fa fa-clock-o"></i>创建时间：<i th:text="${#dates.format(map.group.createTime,'yyyy-MM-dd HH:mm:ss')}">2022/7/9</i></li>
                                             </ul>
-                                            <p th:text="${group.groupIntro}">
+                                            <p th:text="${map.group.groupIntro}">
                                                 全民制作人们大家好,我是练习时长两年半的个人练习生蔡徐坤,喜欢唱,跳,rap,篮球,music……在今后的节目中，我还准备了很多我自己作词、作曲、编舞的原创作品，期待的话，请多多为我投票吧。</p>
                                         </div>
                                     </div>
@@ -146,9 +146,12 @@
                     </div>
 
                 </div>
+                <div id="aside" style="margin-top: 40px"></div>
+
 
 
                 </div>
+
 
                 <!--          弹出框-->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
@@ -159,41 +162,42 @@
                                         aria-hidden="true">×</span></button>
                                 <h4 class="modal-title">创建协作圈</h4>
                             </div>
-                            <form>
+                            <form th:action="@{/group/create}" id="createGroup">
                                 <div class="modal-body">
+                                    <form>
                                     <div class="form-group">
                                         <img src="http://repbhxlop.hb-bkt.clouddn.com/%E9%BB%98%E8%AE%A4%E7%BB%84%E5%A4%B4%E5%83%8F.jpg"
                                              alt="..." class="img-circle profile-pic" id="upload-circle-img">
                                         <label for="input-upload-circle-img">点击修改默认头像</label>
                                         <input type="file" accept="image/*" style="display: none"
-                                               id="input-upload-circle-img">
+                                               id="input-upload-circle-img" name=>
 
                                     </div>
+                                    </form>
                                     <div class="form-group">
-                                        <label for="txt_departmentname">协作圈名称</label><span class="col-md-offset-1"
-                                                                                           style="color: red">该协作圈已存在</span>
-                                        <input type="text" name="txt_departmentname" class="form-control"
+                                        <label for="txt_departmentname">协作圈名称</label>
+                                        <span class="col-md-offset-1" style="color: red" id="msg">该协作圈已存在</span>
+                                        <input type="text" name="groupName" class="form-control"
                                                id="txt_departmentname" value="">
                                     </div>
                                     <div class="form-group">
                                         <label for="txt_parentdepartment">简介</label>
-                                        <input type="text" name="txt_parentdepartment" class="form-control"
+                                        <input type="text" name="groupIntro" class="form-control"
                                                id="txt_parentdepartment" value="">
                                     </div>
                                     <div class="form-group">
                                         <label for="txt_departmentlevel">tags</label>
-                                        <input type="text" name="txt_departmentlevel" class="form-control"
+                                        <input type="text" name="tag" class="form-control"
                                                id="txt_departmentlevel" value="">
                                     </div>
-
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal"><span
                                             class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
                                     </button>
-                                    <button type="button" id="btn_submit" class="btn btn-primary"
-                                            data-dismiss="modal"><span
-                                            class="glyphicon glyphicon-plus" aria-hidden="true"></span>创建
+                                    <button type="submit" id="btn_submit" class="btn btn-primary"
+                                            data-dismiss="modal" onclick="createGroup()">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>创建
                                     </button>
                                 </div>
                             </form>
@@ -219,9 +223,7 @@
 
                 <!--                    </div>-->
                 <!--                </div>-->
-                <div id="aside"></div>
             </div>
-
 
         </div>
         <!--main-container-->
@@ -237,6 +239,24 @@
     <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
     <script th:src="@{/js/countdown.js}"></script>
     <script th:src="@{/js/include.js}"></script>
+
+    <script>
+
+       function createGroup(){
+           alert("create")
+           $.post(
+               CONTEXT_PATH + "/group/create",
+               $('#createGroup').serialize(),
+               function (data){
+                   if(data.code == 0){
+                       window.location.reload();
+                   }else{
+                       $("#createGroup").text(data.msg);
+                   }
+               }
+           )
+       }
+    </script>
 
     <script>
         $("#upload-circle-img").click(function () {
