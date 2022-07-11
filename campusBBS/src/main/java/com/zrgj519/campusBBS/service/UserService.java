@@ -194,4 +194,8 @@ public class UserService {
     public void updateHeader(int id, String url) {
         userMapper.updateHeader(id,url);
     }
+
+    public User findUserByName(String userName) {
+        return userMapper.selectByName(userName);
+    }
 }
