@@ -5,7 +5,7 @@
 <mapper namespace="com.zrgj519.campusBBS.dao.GroupMapper">
 
     <sql id="ref">
-        gid,group_name,members,members_count,create_time,tag,group_leader,group_intro
+        gid,group_name,members,members_count,create_time,tag,group_leader,group_intro,group_header
     </sql>
 
     <select id="selectAll" resultType="Group">
@@ -22,7 +22,7 @@
     
     <insert id="insertGroup" parameterType="Group" useGeneratedKeys="true" keyProperty="id">
         insert into collaboration_group (<include refid="ref"/>)
-        values(#{gid},#{groupName},#{members},#{memberCount},#{createTime},#{tag},#{groupLeader},#{groupIntro})
+        values(#{gid},#{groupName},#{members},#{membersCount},#{createTime},#{tag},#{groupLeader},#{groupIntro},#{groupHeader})
     </insert>
 
     <select id="selectGroupByName" resultType="Group">
