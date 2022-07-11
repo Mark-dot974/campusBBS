@@ -8,6 +8,7 @@ import com.zrgj519.campusBBS.service.PostService;
 import com.zrgj519.campusBBS.service.TagService;
 import com.zrgj519.campusBBS.service.UserService;
 import com.zrgj519.campusBBS.util.CampusBBSConstant;
+import com.zrgj519.campusBBS.util.UserContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,8 @@ public class IndexController {
     private UserService userService;
     @Autowired
     private TagService tagService;
+    @Autowired
+    private UserContainer userContainer;
 
     @RequestMapping(path="/header")
     public String getHeader(){
@@ -56,8 +59,6 @@ public class IndexController {
         return "/site/404error";
     }
 
-    @RequestMapping(path = "/index", method = RequestMethod.GET)
-    public String getPosts(Model model, Page page) {
     @RequestMapping("/collaborate-detail")
     public String getCollaborateDetail() {
         return "/site/collaborate-detail";
@@ -76,7 +77,6 @@ public class IndexController {
 
         // 根据用户是否登录，来获取到不同的内容
         User user = userContainer.getUser();
-        List<Map<String, Object>> postsInfo = new ArrayList<>();
 
         List<Post> allPosts = postService.getAllPosts();
         List<Map<String,Object>> postsInfo = new ArrayList<>();
@@ -104,9 +104,5 @@ public class IndexController {
         return "/site/index";
     }
 
-    @RequestMapping("/collaborate")
-    public String getCollaborate() {
-        return "/site/collaborate";
-    }
 
 }
