@@ -35,6 +35,7 @@ public class GroupController {
             return CampusBBSUtil.getJSONString(1,"协作圈名已存在~");
         }
         group.setMembers(userContainer.getUser().getUsername());
+        group.setMemberCount(1);
         group.setGroupLeader(userContainer.getUser().getUsername());
         group.setCreateTime(new Date());
         groupService.addGroup(group);
@@ -46,16 +47,22 @@ public class GroupController {
         page.setRows(groupService.getGroupTotalCount());
         page.setPath("/group/getAll");
         List<Group> allGroups = groupService.getAll();
+        System.out.println("allGroups = " + allGroups);
         List<Map<String,Object>> groupsInfo = new ArrayList<>();
         for (Group group : allGroups) {
             Map<String,Object> map = new HashMap<>();
             List<User> members = new ArrayList<>();
             String m = group.getMembers();
             String[] users = m.split(",");
+            int length = users.length;
             for (String userName : users) {
                 User user = userService.findUserByName(userName);
                 members.add(user);
             }
+            String tag = group.getTag();
+            String[] tags = tag.split(",");
+            map.put("memberCount",length);
+            map.put("tags",tags);
             map.put("members",members);
         }
         model.addAttribute("groups",groupsInfo);
