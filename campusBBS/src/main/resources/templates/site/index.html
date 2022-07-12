@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>campusBBS</title>
+<title>Cruiser Home Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Default Description">
 <meta name="keywords" content="blog, magazine, shop">
@@ -170,23 +170,23 @@
 		  <div class="pager">
               <div class="pages">
                 <!--<strong></strong>-->
-<!--                <ol class="pagination">-->
-<!--                  <li class="page-item">-->
-<!--                    <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>-->
-<!--                  </li>-->
-<!--                  <li th:class="|page-item ${page.current==1?'disabled':''}|">-->
-<!--                    <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>-->
-<!--                  &lt;!&ndash;						page对象中的from和to决定了导航条的页面数量&ndash;&gt;-->
-<!--                  <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">-->
-<!--                    <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>-->
-<!--                  </li>-->
-<!--                  <li th:class="|page-item ${page.current==page.total?'disabled':''}|">-->
-<!--                    <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>-->
-<!--                  </li>-->
-<!--                  <li class="page-item">-->
-<!--                    <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>-->
-<!--                  </li>-->
-<!--                </ol>-->
+                <ol class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+                  </li>
+                  <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                    <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+                  <!--						page对象中的from和to决定了导航条的页面数量-->
+                  <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
+                    <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
+                  </li>
+                  <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                    <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+                  </li>
+                </ol>
               </div>
             </div>
 		  
