@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>圈子管理页面</title>
+    <link rel="stylesheet" th:href="@{/css/style.default.css}" type="text/css" />
+    <script type="text/javascript" th:src="@{js/plugins/jquery-1.7.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/plugins/jquery-ui-1.8.16.custom.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/plugins/jquery.cookie.js}"></script>
+    <script type="text/javascript" th:src="@{js/plugins/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/plugins/jquery.uniform.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/custom/general.js}"></script>
+    <script type="text/javascript" th:src="@{js/custom/tables.js}"></script>
+
+</head>
+<body class="withvernav">
+<div class="bodywrapper">
+    <div class="topheader">
+        <div class="left">
+            <h1 class="logo">Campus<span>.BBS</span></h1>
+            <span class="slogan">后台管理系统</span>
+            
+
+            
+            <br clear="all" />
+            
+        </div><!--left-->
+        
+        <div class="right">
+        	<!--<div class="notification">
+                <a class="count" href="notifications.html"><span>9</span></a>
+        	</div>
+			-->
+            <div class="userinfo">
+            	<img src="images/thumbs/avatar.png" alt="" />
+                <span>Juan Dela Cruz</span>
+            </div><!--userinfo-->
+            
+            <div class="userinfodrop">            	<div class="avatar">
+                	<a href=""><img src="images/thumbs/avatarbig.png" alt="" /></a>
+                    <div class="changetheme">
+                    	Change theme: <br />
+                    	<a class="default"></a>
+                        <a class="blueline"></a>
+                        <a class="greenline"></a>
+                        <a class="contrast"></a>
+                        <a class="custombg"></a>
+                    </div>
+                </div><!--avatar-->
+<div class="userdata">
+                	<h4>Juan Dela Cruz</h4>
+                    <span class="email">youremail@yourdomain.com</span>
+                    <ul>
+                    	<li><a href="editprofile.html">Edit Profile</a></li>
+                        <li><a href="accountsettings.html">Account Settings</a></li>
+                        <li><a href="help.html">Help</a></li>
+                        <li><a href="index.html">Sign Out</a></li>
+                    </ul>
+                </div><!--userdata-->
+            </div><!--userinfodrop-->
+        </div><!--right-->
+    </div><!--topheader-->
+    
+    
+    <div class="header">
+    	<ul class="headermenu">
+        	<li><a th:href="@{/admin/groups}"><span class="icon icon-flatscreen"></span>表管理</a></li>
+
+        </ul>
+        
+
+        
+    </div><!--header-->
+    
+    <div class="vernav2 iconmenu">
+    	<ul>
+            <li ><a th:href="@{/admin/users}" class="tables">用户账号管理</a></li>
+            <li><a th:href="@{/admin/posts}" class="buttons">帖子管理</a></li>
+            <li class="current"><a th:href="@{/admin/groups}" class="tables">圈子管理</a></li>
+        </ul>
+        <br /><br />
+    </div><!--leftmenu-->
+        
+    <div class="centercontent tables">
+    
+        <div class="pageheader notab">
+            <h1 class="pagetitle">圈子管理</h1>
+            <span class="pagedesc">Group Management</span>
+            
+        </div><!--pageheader-->
+        
+        <div id="contentwrapper" class="contentwrapper">
+                        
+          <div class="contenttitle2">
+            <h3 >圈子表</h3>
+          </div><!--contenttitle-->
+
+          <div class="tableoptions">
+              <form th:action="@{/admin/groups}" method="post" style="position: center">
+              <input type="text" placeholder="请输入圈子ID" name="gid" id="gid" style="width: 150px">
+              <input type="text" placeholder="请输入圈子名称" name="groupName" id="groupName" style="width: 150px; margin-left: 20px">
+              <input type="text" placeholder="请输入圈子成员" name="members" id="members" style="width: 150px; margin-left: 20px">
+              <button type="submit" value="查询" style="margin-left: 10px; height: 30px; width: 70px;" onclick="searchgroup()">查询</button>
+                  <a th:href="@{/admin/groups}">   <button id="showgroups" type="submit" style="margin-left: 10px; height: 30px; width: 70px;">刷新</button></a>
+<!--              <span  style="margin-left: 80px; font-size: 10px;">共有数据：条</span>-->
+              </form>
+          </div><!--tableoptions-->
+
+          <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
+              <colgroup>
+                  <col class="con0" style="width: 4%" />
+                  <col class="con1" />
+                  <col class="con0" />
+                  <col class="con1" />
+                  <col class="con0" />
+                  <col class="con1" />
+                  <col class="con0" />
+              </colgroup>
+              <thead>
+                  <tr>
+                      <!--<input type="checkbox" class="checkall" />-->  <th class="head0"></th>
+                      <th class="head0">GID</th>
+                      <th class="head0">Group Name</th>
+                      <th class="head1">Members</th>
+                      <th class="head0">Tag</th>
+                      <th class="head1">Group Leader</th>
+                      <th class="head0">操作</th>
+                  </tr>
+              </thead>
+
+              <tbody>
+                  <tr th:each="group:${groups}">
+                    <td align="center"><input type="checkbox" /></td>
+                      <td th:text="${group.gid}"></td>
+                      <td th:text="${group.groupName}"></td>
+                      <td th:text="${group.members}"></td>
+                      <td class="center" th:text="${group.tag}"></td>
+                      <td class="center" th:text="${group.groupLeader}">A</td>
+                      <td class="center">
+                          <a th:href="@{/findGroups(gid=${group.gid})}" class="edit">编辑</a>&nbsp;|&nbsp;
+                          <a th:href="@{/delGroups(gid=${group.gid})}" class="delete" onclick="return delpost()">删除</a></td>
+                  </tr>
+              </tbody>
+          </table>
+            <div class="pager" style="margin-top: 20px; margin-left: 800px;">
+                <div class="pages" >
+                    <!--<strong></strong>-->
+                    <ol class="pagination" style="background-color: #ffffff">
+                    <li class="page-item" >
+                        <a class="page-link">首页</a>
+                    </li>
+                    <li class="page-item" >
+                        <a class="page-link" >上一页</a></li>
+                    <!--						page对象中的from和to决定了导航条的页面数量-->
+                    <li class="page-item" >
+                        <a class="page-link" style="margin-left: 5px;">1</a>
+                    </li>
+                    <li class="page-item" >
+                        <a class="page-link" >2</a>
+                    </li><li class="page-item active">
+                    <a class="page-link" >3</a>
+                </li><li class="page-item" >
+                    <a class="page-link" >4</a>
+                </li><li class="page-item" >
+                    <a class="page-link" >5</a>
+                </li>
+                    <li class="page-item" >
+                        <a class="page-link">下一页</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link">末页</a>
+                    </li>
+                </ol>
+                </div>
+            </div>
+          <br /><br />
+                
+                
+                
+                
+        
+        </div><!--contentwrapper-->
+        
+	</div><!-- centercontent -->
+    
+    
+</div><!--bodywrapper-->
+<script>
+
+function delpost(){
+    if(confirm("确实要删除该帖吗?")){
+            alert("删除成功！");
+            }else{
+        event.preventDefault(); //取消默认应答
+                 alert("取消了删除操作");
+             }
+         }
+function searchgroup(){
+    alert("查询成功！");
+}
+</script>
+
+</body>
+
+</html>
