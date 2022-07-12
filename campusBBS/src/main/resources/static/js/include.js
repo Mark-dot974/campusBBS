@@ -1,4 +1,4 @@
-var CONTEXT_PATH = "/campusBBS";
+var CONTEXT_PATH = "";
 $(function () {
     $.get(CONTEXT_PATH+"/header",function (data) {
         $("#header").html(data);
