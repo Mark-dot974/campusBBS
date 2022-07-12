@@ -46,8 +46,6 @@ public interface PostMapper {
 
     void updatePost(Post post);
 
-    List<Post> findPost(Integer id,String title,String tag,Integer offset,Integer limit);
-
-    int selectCountOfPost(Integer id,String title,String tag);
+    List<Post> findPost(Integer id,String title,String tag);
 
 }

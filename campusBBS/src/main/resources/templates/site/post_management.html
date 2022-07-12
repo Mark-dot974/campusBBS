@@ -79,7 +79,6 @@
             <li ><a th:href="@{/admin/users}" class="tables">用户账号管理</a></li>
             <li class="current"><a th:href="@{/admin/posts}" class="buttons">帖子管理</a></li>
             <li ><a th:href="@{/admin/groups}" class="tables">圈子管理</a></li>
-            <li><a th:href="@{/admin/tags}" class="tables">标签管理</a></li>
         </ul>
         <br /><br />
     </div><!--leftmenu-->
@@ -105,8 +104,7 @@
               <input type="text" placeholder="请输入帖子Tag" name="tag" id="tag" style="width: 150px; margin-left: 20px">
               <button type="submit" value="查询" style="margin-left: 10px; height: 30px; width: 70px;" onclick="searchpost()">查询</button>
                   <a th:href="@{/admin/posts}">   <button id="showusers" type="submit" style="margin-left: 10px; height: 30px; width: 70px;">刷新</button></a>
-                  <a style="font-size: 15px;margin-left: 300px;margin-top: 40px;font-family: SimHei">当前位于第&nbsp;<span th:text="${page.current}" style="color: rgb(251,225,34);font-weight: bold"/>&nbsp;页,共
-                      <span th:text="${page.total}" style="color: rgb(251,225,34);font-weight: bold"/>&nbsp;页</a>
+<!--              <span  style="margin-left: 80px; font-size: 10px;">共有数据：条</span>-->
               </form>
           </div><!--tableoptions-->
 
@@ -123,11 +121,11 @@
               <thead>
                   <tr>
                       <!--<input type="checkbox" class="checkall" />-->  <th class="head0"></th>
-                      <th class="head0">帖子ID</th>
-                      <th class="head0">发帖用户ID</th>
-                      <th class="head1">标题</th>
-                      <th class="head0">标签</th>
-                      <th class="head1">内容</th>
+                      <th class="head0">ID</th>
+                      <th class="head0">UserID</th>
+                      <th class="head1">Title</th>
+                      <th class="head0">Tag</th>
+                      <th class="head1">Content</th>
                       <th class="head0">操作</th>
                   </tr>
               </thead>
@@ -147,26 +145,34 @@
               </tbody>
           </table>
             <div class="pager" style="margin-top: 20px; margin-left: 800px;">
-                <div class="pages" style="position:absolute;left: 40%">
-
-                    <ol class="pagination" >
-                        <li class="page-item" style="background-color: white;width: 50px;">
-                            <a class="page-link" th:href="@{${page.path}(current=1)}" style="background-color: rgb(251,225,34);border-radius: 10px;border-color: rgb(251,225,34);">首页</a>
-                        </li>
-                        <li th:class="|page-item ${page.current==1?'disabled':''}|" style="background-color: white;width: 60px">
-                            <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}" style="background-color: rgb(251,225,34);border-radius: 10px;border-color: rgb(251,225,34);">上一页</a></li>
-                        <!--						page对象中的from和to决定了导航条的页面数量-->
-                        <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}" style="background-color: white;width: 30px;margin-left: 5px;margin-right: 5px">
-                            <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}" style="background-color: white;border-radius: 10px;border-color: white">1</a>
-                        </li>
-                        <li th:class="|page-item ${page.current==page.total?'disabled':''}|" style="background-color: white;width: 60px;margin-left: 5px">
-                            <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}" style="background-color: rgb(251,225,34);border-radius: 10px;border-color: rgb(251,225,34);">下一页</a>
-                        </li>
-                        <li class="page-item" style="width: 50px;margin-left: 5px;">
-                            <a class="page-link" th:href="@{${page.path}(current=${page.total})}" style="background-color: rgb(251,225,34);border-radius: 10px;border-color: rgb(251,225,34);">末页</a>
-                        </li>
-                    </ol>
-
+                <div class="pages" >
+                    <!--<strong></strong>-->
+                    <ol class="pagination" style="background-color: #ffffff">
+                    <li class="page-item" >
+                        <a class="page-link">首页</a>
+                    </li>
+                    <li class="page-item" >
+                        <a class="page-link" >上一页</a></li>
+                    <!--						page对象中的from和to决定了导航条的页面数量-->
+                    <li class="page-item" >
+                        <a class="page-link" style="margin-left: 5px;">1</a>
+                    </li>
+                    <li class="page-item" >
+                        <a class="page-link" >2</a>
+                    </li><li class="page-item active">
+                    <a class="page-link" >3</a>
+                </li><li class="page-item" >
+                    <a class="page-link" >4</a>
+                </li><li class="page-item" >
+                    <a class="page-link" >5</a>
+                </li>
+                    <li class="page-item" >
+                        <a class="page-link">下一页</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link">末页</a>
+                    </li>
+                </ol>
                 </div>
             </div>
           <br /><br />
