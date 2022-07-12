@@ -58,7 +58,7 @@
                 <button class="col-md-offset-1 btn btn-primary" type="button" id="btn-update"
                         data-target="#publishModal">修改协作圈信息
                 </button>
-                <button class=" btn btn-primary" type="button" id="btn-join" data-target="#publishModal">
+                <button class="btn btn-primary" type="button" id="btn-join" data-target="#publishModal">
                     申请加入
                 </button>
                 <!--                加入-->
@@ -208,9 +208,13 @@
                 <div class="col-md-12">
 
                     <table class="table table-striped">
-                        <caption><h3 style="display: inline-block">协作文档</h3><input class="upload col-lg-offset-4"
-                                                                                   type="file" value="上传新文档"
-                                                                                   style="color: #0a0a0a; display: inline-block">
+                        <caption><h3 style="display: inline-block">协作文档</h3>
+                            <form method="post" id="files" enctype="multipart/form-data">
+                                <input type="hidden" name="token" th:value="${uploadToken}">
+                                <input type="hidden" name="key" th:value="${fileName}">
+                                <input type="hidden" name="gid" th:value="${gid}">
+                                <input class="upload col-lg-offset-4" type="file" value="上传新文档" style="color: #0a0a0a; display: inline-block" name="file" onchange="uploadFile()">
+                            </form>
                         </caption>
 
                         <thead>
@@ -230,14 +234,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="success">
-                            <td>
+                        <tr class="success" th:each="file,fileStat:${files}">
+                            <td th:text="${fileStat.count}">
                                 1
                             </td>
                             <td>
-                                <div class="group_detail_text_style">哎u发哈我i发哈我iu和哎u还发哈dhello.wordhello.wordhello.</div>
-
+                                <div class="group_detail_text_style" th:text="${file.fileName}">哎u发哈我i发哈我iu和哎u还发哈dhello.wordhello.wordhello.</div>
                             </td>
+                            <td th:text="${#dates.format(file.createTime,'yyyy-MM-dd HH:mm:ss')}">
                             <td>
                                 01/04/2012
                             </td>
@@ -290,81 +294,118 @@
                                 </form>
                             </td>
                         </tr>
-                        <tr class="warning">
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                <div class="group_detail_text_style">wordhello.</div>
-                            </td>
-                            <td>
-                                02/04/2012
-                            </td>
-                            <td>
-                                <form class="form-group">
-                                    <input class="uploadFile" type="file" style="display: inline; width: 180px;"
-                                           disabled="disabled">
-                                    <button class="update" type="submit">更新</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr class="warning">
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                <div class="group_detail_text_style">llo.wordhello.</div>
-                            </td>
-                            <td>
-                                02/04/2012
-                            </td>
-                            <td>
-                                <form class="form-group">
-                                    <input class="uploadFile" type="file" style="display: inline; width: 180px;"
-                                           disabled="disabled">
-                                    <button class="update" type="submit">更新</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr class="error">
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                <div class="group_detail_text_style">   dhello.wordhello.</div>
-                            </td>
-                            <td>
-                                03/04/2012
-                            </td>
-                            <td>
-                                <form class="form-group">
-                                    <input class="uploadFile" type="file"
-                                           style="display: inline; width: 180px;">
+<!--                        <tr class="success">-->
+<!--                            <td>-->
+<!--                                1-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                hello.word-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                01/04/2012-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <form class="form-group">-->
+<!--                                    <input class="uploadFile" type="file"-->
+<!--                                           style="display: inline; width: 180px;">-->
 
-                                    <button class="update" type="submit">更新</button>
-                                </form>
-                            </td>
+<!--                                    <button class="update" type="submit" disabled="disabled">更新</button>-->
+<!--                                </form>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr class="success">-->
+<!--                            <td>-->
+<!--                                1-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                hello.txt-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                01/04/2012-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <form class="form-group">-->
+<!--                                    <input class="uploadFile" type="file"-->
+<!--                                           style="display: inline; width: 180px;">-->
 
-                        </tr>
-                        <tr class="info">
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                <div class="group_detail_text_style">哎u发哈我i发哈我iu和哎u还发哈dhello.wordhello.wordhello.</div>
-                            </td>
-                            <td>
-                                04/04/2012
-                            </td>
-                            <td>
-                                <form class="form-group">
-                                    <input class="uploadFile" type="file"
-                                           style="display: inline; width: 180px;">
+<!--                                    <button class="update" type="submit" disabled="disabled">更新</button>-->
+<!--                                </form>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr class="warning">-->
+<!--                            <td>-->
+<!--                                2-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                TB - Monthly-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                02/04/2012-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <form class="form-group">-->
+<!--                                    <input class="uploadFile" type="file" style="display: inline; width: 180px;"-->
+<!--                                           disabled="disabled">-->
+<!--                                    <button class="update" type="submit">更新</button>-->
+<!--                                </form>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr class="warning">-->
+<!--                            <td>-->
+<!--                                2-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                TB - Monthly-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                02/04/2012-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <form class="form-group">-->
+<!--                                    <input class="uploadFile" type="file" style="display: inline; width: 180px;"-->
+<!--                                           disabled="disabled">-->
+<!--                                    <button class="update" type="submit">更新</button>-->
+<!--                                </form>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr class="error">-->
+<!--                            <td>-->
+<!--                                3-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                TB - Monthly-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                03/04/2012-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <form class="form-group">-->
+<!--                                    <input class="uploadFile" type="file"-->
+<!--                                           style="display: inline; width: 180px;">-->
 
-                                    <button class="update" type="submit">更新</button>
-                                </form>
-                            </td>
-                        </tr>
+<!--                                    <button class="update" type="submit">更新</button>-->
+<!--                                </form>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr class="info">-->
+<!--                            <td>-->
+<!--                                4-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                TB - Monthly-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                04/04/2012-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <form class="form-group">-->
+<!--                                    <input class="uploadFile" type="file"-->
+<!--                                           style="display: inline; width: 180px;">-->
+
+<!--                                    <button class="update" type="submit">更新</button>-->
+<!--                                </form>-->
+<!--                            </td>-->
+<!--                        </tr>-->
                         </tbody>
                     </table>
 
@@ -395,7 +436,7 @@
     </div>
 </div>
 
-
+<div style="height: 180px"></div>
 <!-- JavaScript -->
 <script th:src="@{/js/jquery-3.5.0.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
@@ -405,6 +446,33 @@
 <script th:src="@{/js/include.js}"></script>
 <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
 <script th:src="@{/js/countdown.js}"></script>
+<script>
+    function uploadFile(){
+        alert("happy")
+        $.ajax({
+            url: "http://up-z2.qiniup.com",
+            method: "post",
+            processData: false,
+            contentType: false,
+            data: new FormData($("#files")[0]),
+            success: function(data) {
+                $.post(
+                    CONTEXT_PATH+"/group/uploadFile",
+                    {"fileName":$("input[name='key']").val(),"gid":$("input[name='gid']").val()},
+                    function(data) {
+                        data = $.parseJSON(data);
+                        if(data.code == 0) {
+                            window.location.reload();
+                        } else {
+                            alert(data.msg);
+                        }
+                })
+            }
+        });
+        // 表示不要将表单提交
+        return false;
+    }
+</script>
 <script>
 
     $("#upload-circle-img").click(function () {

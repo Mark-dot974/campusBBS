@@ -77,8 +77,12 @@ public class IndexController {
     }
 
     @RequestMapping("/personalPage")
-    public String getPersonalPage(){
+    public String getPersonalPage(int userId){
         return "/site/personal_page";
+    }
+    @RequestMapping("/test")
+    public String gert(){
+        return "/site/testDownLoad";
     }
 
     // 首页不分页
@@ -131,7 +135,6 @@ public class IndexController {
                 }
             }
         }
-        System.out.println("posts = " + posts);
         // 封装用户信息
         List<Map<String,Object>> postsInfo = new ArrayList<>();
         for (Post post : posts) {
@@ -142,7 +145,8 @@ public class IndexController {
             String tag = post.getTag();
             if(tag!=null){
                 String[] split = tag.split(",");
-                postInfo.put("tags",tag);
+                if(split!=null && split.length!=0&&split[0].length()!=0)  postInfo.put("tags",split);
+                else postInfo.put("tags",null);
             }
             postsInfo.add(postInfo);
         }

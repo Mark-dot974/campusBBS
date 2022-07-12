@@ -11,6 +11,14 @@
     <select id="selectAll" resultType="Group">
         select <include refid="ref"/>
         from collaboration_group
+        <if test="leaderName!=null">
+            where group_leader = #{leaderName}
+        </if>
+        <if test="memberName!=null">
+            where members like "%"#{memberName}"%"
+        </if>
+        order by create_time
+        limit #{offset},#{limit}
     </select>
 
     <select id="selectGroupById" resultType="Group">

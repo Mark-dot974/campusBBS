@@ -1,5 +1,6 @@
 package com.zrgj519.campusBBS.controller;
 
+
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import com.zrgj519.campusBBS.entity.User;
@@ -51,7 +52,7 @@ public class UserController {
 //        // 生成上传凭证
 //        return "/site/profile_set";
 //    }
-
+//
 //    // 更新头像路径
 //    @RequestMapping(path = "/header/url", method = RequestMethod.POST)
 //    @ResponseBody

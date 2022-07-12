@@ -71,9 +71,9 @@
             <div class="row">
                 <div class="col-main col-sm-8 main-blog">
                     <ul class="nav nav-tabs">
-                        <li role="presentation" class="active"><a href="#main">推荐</a></li>
-                        <li role="presentation"><a href="#own">已加入</a></li>
-                        <li role="presentation"><a href="#">Messages</a></li>
+                        <li role="presentation" th:class="|${mode == 0?'active':''}|"><a th:href="@{/group/getAll(mode=0)}">推荐</a></li>
+                        <li role="presentation" th:class="|${mode == 1?'active':''}|" th:if="${loginUser!=null}"><a th:href="@{/group/getAll(mode=1)}">我加入的</a></li>
+                        <li role="presentation" th:class="|${mode == 2?'active':''}|" th:if="${loginUser!=null}"><a th:href="@{/group/getAll(mode=2)}">我创建的</a></li>
                     </ul>
                     <div id="main" class="blog-wrapper">
                         <div id="primary" class="site-content">
@@ -97,7 +97,7 @@
 <!--                                                            </div>-->
                                                         </div>
                                                     </div>
-                                                    <h2 class="blog_entry-title"><a rel="bookmark" th:text="${map.group.groupName}">全民制作人</a></h2>
+                                                    <h2 class="blog_entry-title"><a rel="bookmark" th:text="${map.group.groupName}" th:href="@{/group/groupDetail(gid=${map.group.gid})}">全民制作人</a></h2>
                                                 </div>
                                                 <!--blog_entry-header-inner-->
                                             </header>
