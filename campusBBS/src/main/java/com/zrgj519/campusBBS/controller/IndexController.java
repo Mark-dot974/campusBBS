@@ -77,12 +77,12 @@ public class IndexController {
     }
 
     @RequestMapping("/personalPage")
-    public String getPersonalPage(int userId){
+    public String getPersonalPage(){
         return "/site/personal_page";
     }
-    @RequestMapping("/test")
+    @RequestMapping("/groupList")
     public String gert(){
-        return "/site/testDownLoad";
+        return "/site/group_list";
     }
 
     // 首页不分页
