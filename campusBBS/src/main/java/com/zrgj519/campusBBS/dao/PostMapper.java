@@ -1,9 +1,14 @@
 package com.zrgj519.campusBBS.dao;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.zrgj519.campusBBS.entity.Post;
+import com.zrgj519.campusBBS.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface PostMapper {
 
@@ -29,4 +34,18 @@ public interface PostMapper {
     Post selectPostById(int id);
 
     int selectAllPostsCount();
+
+    List<Post> showPost();
+
+    /**
+    * 删除帖子
+    * */
+    int deletePost(int id);
+
+    Post find(int id);
+
+    void updatePost(Post post);
+
+    List<Post> findPost(Integer id,String title,String tag);
+
 }
