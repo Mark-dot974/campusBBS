@@ -70,10 +70,10 @@
                         <!--此处显示点赞数量-->
                         <li>
                             <button onclick="changecolor1()" style="background-color: transparent;border-color: transparent;">
-                                <div class="like">
+                                <span class="like">
                                     <i class="fa fa-heart"></i>
                                     <span>42</span>
-                                </div>
+                                </span>
                             </button>
                         </li>
                         <!--此处显示评论数量-->
@@ -97,10 +97,10 @@
                                         <!--此处显示点赞数量-->
                                         <li>
                                             <button onclick="changecolor1()" style="background-color: transparent;border-color: transparent;">
-                                                <div class="like">
+                                                <span class="like">
                                                     <i class="fa fa-heart"></i>
                                                     <span>42</span>
-                                                </div>
+                                                </span>
                                             </button>
                                         </li>
                                         <!--此处显示评论数量-->
@@ -140,50 +140,17 @@
                                                         <!--此处显示点赞数量-->
                                                         <li>
                                                             <button onclick="changecolor2()" style="background-color: transparent;border-color: transparent;">
-                                                                <div class="like">
+                                                                <span class="like">
                                                                     <i class="fa fa-heart"></i>
                                                                     <span>42</span>
-                                                                </div>
+                                                                </span>
                                                             </button>
                                                         </li>
                                                         <!--此处显示评论数量-->
                                                         <li><i class="fa fa-comments"></i><a style="cursor: pointer " onclick="showComments()"><span>42</span>条评论</a> </li>
-                                                        <li>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 15 15">
-                                                                <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
-                                                            </svg>
-                                                            <a onclick="showComment_reply()" style="cursor: pointer">
-                                                                <!--显示评论数量-->
-                                                                回复</a>
-                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
-                                                     <div id="Comment_reply">
-                                                         <ul>
-                                                        <li class="pb-3 pt-3" style="list-style-type: none">
-                                                            <!--form表单原（<form method="post" th:action="@{|/comment/add/${post.id}|}">）-->
-                                                            <form method="post">
-                                                                <div style="display: flex;width: 100px">
-                                                                    <div style="margin-left: 320px;display: flex">
-                                                                        <div style="margin-right: 10px">
-                                                                            <!--这里是用户头像-->
-                                                                            <img th:src="@{/images/member1.png}" style="height: 40px;width: 40px;border-radius: 50%">
-                                                                        </div>
-                                                                        <input type="text" class="input-text" name="content" placeholder="请输入你的观点" style="border-radius: 5px; width: 350px"/>
-                                                                        <input type="hidden" name="entityType" value="2">
-                                                                        <!--评论id？原（<input type="hidden" name="entityId" th:value="${cvo.comment.id}">）-->
-                                                                        <input type="hidden" name="entityId">
-                                                                    </div>
-                                                                    <div class="text-right mt-2" style="margin-left: 10px">
-                                                                        <button type="submit" style="height: 42.8px;border: #b2b2b2 solid 1px;border-radius: 5px" onclick="#">&nbsp;&nbsp;回&nbsp;&nbsp;复&nbsp;&nbsp;</button>
-                                                                    </div>
-                                                                </div>
-                                                                <div style="height: 10px"></div>
-                                                            </form>
-                                                        </li>
-                                                         </ul>
-                                                      </div>
                                         </div>
                                     </li><!-- #comment-## -->
                                     <!--显示回复框-->
@@ -211,25 +178,14 @@
                                                                 <!--此处显示点赞数量-->
                                                                 <li>
                                                                     <button onclick="changecolor3()" style="background-color: transparent;border-color: transparent;">
-                                                                        <div class="like">
+                                                                        <span class="like">
                                                                             <i class="fa fa-heart"></i>
                                                                             <span>42</span>
-                                                                        </div>
+                                                                        </span>
                                                                     </button>
                                                                 </li>
                                                                 <!--此处显示评论数量-->
-                                                                <li>
-                                                                    <i class="fa fa-comments"></i>
-                                                                    <a onclick="showReplyInput1()" style="cursor: pointer"><span>4</span>条评论</a>
-                                                                </li>
-                                                                <li>
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 15 15">
-                                                                        <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
-                                                                    </svg>
-                                                                    <a onclick="showReplyInput1()" style="cursor: pointer">
-                                                                        <!--显示评论数量-->
-                                                                        回复</a>
-                                                                </li>
+                                                                <li><i class="fa fa-comments"></i><a onclick="showReplyInput1()" style="cursor: pointer"><span>4</span>条评论</a> </li>
                                                             </ul>
                                                         </div>
                                                         <div style="height: 10px"></div>
@@ -280,10 +236,10 @@
                                                                     <!--此处显示点赞数量-->
                                                                     <li>
                                                                         <button onclick="changecolor4()" style="background-color: transparent;border-color: transparent;">
-                                                                            <div class="like">
+                                                                            <span class="like">
                                                                                 <i class="fa fa-heart"></i>
                                                                                 <span>42</span>
-                                                                            </div>
+                                                                            </span>
                                                                         </button>
                                                                     </li>
                                                                     <!--此处显示评论数量-->
@@ -292,14 +248,6 @@
                                                                         <a onclick="showReplyInput2()" style="cursor: pointer">
                                                                             <!--显示评论数量-->
                                                                             <span>4</span>条评论</a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 15 15">
-                                                                            <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
-                                                                        </svg>
-                                                                        <a onclick="showReplyInput2()" style="cursor: pointer">
-                                                                            <!--显示评论数量-->
-                                                                            回复</a>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -411,5 +359,81 @@
         color: red;
     }
 </style>
+
+<!--<script type="text/javascript">-->
+<!--    //点击评论图标或字事件-->
+<!--    function showComments(){-->
+<!--        var showCommentdiv = document.getElementById("reply_comments").style.display;-->
+<!--        if (showCommentdiv == "none"){-->
+<!--            document.getElementById("reply_comments").style.display="block";-->
+<!--        }else{-->
+<!--            document.getElementById("reply_comments").style.display="none";-->
+<!--        }-->
+<!--    }-->
+<!--    //点击评论收回或展开评论-->
+<!--    function showReplyInput1(){-->
+<!--        var showCommentdiv = document.getElementById("reply_input1").style.display;-->
+<!--        if (showCommentdiv == "none"){-->
+<!--            document.getElementById("reply_input1").style.display="block";-->
+<!--        }else{-->
+<!--            document.getElementById("reply_input1").style.display="none";-->
+<!--        }-->
+<!--    }-->
+<!--    function showReplyInput2(){-->
+<!--        var showCommentdiv = document.getElementById("reply_input2").style.display;-->
+<!--        if (showCommentdiv == "none"){-->
+<!--            document.getElementById("reply_input2").style.display="block";-->
+<!--        }else{-->
+<!--            document.getElementById("reply_input2").style.display="none";-->
+<!--        }-->
+<!--    }-->
+<!--    //点赞样式变换-->
+<!--    var i=0;-->
+<!--    var like = document.getElementsByClassName("like")[0];-->
+<!--    var like1 = document.getElementsByClassName("like")[1];-->
+<!--    var like2 = document.getElementsByClassName("like")[2];-->
+<!--    var like3 = document.getElementsByClassName("like")[3];-->
+<!--    var like4 = document.getElementsByClassName("like")[4];-->
+<!--    like.onclick=changecolor1();-->
+<!--    like1.onclick=changecolor1();-->
+<!--    like2.onclick=changecolor2();-->
+<!--    like3.onclick=changecolor3();-->
+<!--    like4.onclick=changecolor4();-->
+<!--    function changecolor1() {-->
+<!--        i++;-->
+<!--        if (i % 2 == 0) {-->
+<!--            document.getElementsByClassName("like")[0].setAttribute('class','like active');-->
+<!--            document.getElementsByClassName("like")[1].setAttribute('class','like active');-->
+<!--        } else {-->
+<!--            document.getElementsByClassName("like")[0].setAttribute('class','like');-->
+<!--            document.getElementsByClassName("like")[1].setAttribute('class','like');-->
+<!--        }-->
+<!--    }-->
+<!--    function changecolor2() {-->
+<!--        i++;-->
+<!--        if (i % 2 == 0) {-->
+<!--            document.getElementsByClassName("like")[2].setAttribute('class','like active');-->
+<!--        } else {-->
+<!--            document.getElementsByClassName("like")[2].setAttribute('class','like');-->
+<!--        }-->
+<!--    }-->
+<!--    function changecolor3() {-->
+<!--        i++;-->
+<!--        if (i % 2 == 0) {-->
+<!--            document.getElementsByClassName("like")[3].setAttribute('class','like active');-->
+<!--        } else {-->
+<!--            document.getElementsByClassName("like")[3].setAttribute('class','like');-->
+<!--        }-->
+<!--    }-->
+<!--    function changecolor4() {-->
+<!--        i++;-->
+<!--        if (i % 2 == 0) {-->
+<!--            document.getElementsByClassName("like")[4].setAttribute('class','like active');-->
+<!--        } else {-->
+<!--            document.getElementsByClassName("like")[4].setAttribute('class','like');-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
+    <!-- JavaScript -->
 </body>
 </html>

@@ -7,14 +7,6 @@ function showComments(){
         document.getElementById("reply_comments").style.display="none";
     }
 }
-function showComment_reply(){
-    var showCommentdiv = document.getElementById("Comment_reply").style.display;
-    if (showCommentdiv == "none"){
-        document.getElementById("Comment_reply").style.display="block";
-    }else{
-        document.getElementById("Comment_reply").style.display="none";
-    }
-}
 //点击评论收回或展开评论
 function showReplyInput1(){
     var showCommentdiv = document.getElementById("reply_input1").style.display;
