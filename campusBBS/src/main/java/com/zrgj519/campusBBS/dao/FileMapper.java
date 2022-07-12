@@ -8,6 +8,4 @@ import java.util.List;
 @Mapper
 public interface FileMapper {
     List<GroupFile> selectAllFilesById(int gid);
-
-    void insertFile(GroupFile file);
 }

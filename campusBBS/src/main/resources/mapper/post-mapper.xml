@@ -39,21 +39,5 @@
             </if>
         </where>
         order by id asc
-        limit #{offset},#{limit}
-    </select>
-    <select id="selectCountOfPost" resultType="int">
-        select count(*)
-        from post
-        <where>
-            <if test="id!=null and id!='' ">
-                and id = #{id}
-            </if>
-            <if test="title!=null and title!='' ">
-                and title like '%' #{title} '%'
-            </if>
-            <if test="tag!=null and tag!='' ">
-                and tag like '%' #{tag} '%'
-            </if>
-        </where>
     </select>
 </mapper>
