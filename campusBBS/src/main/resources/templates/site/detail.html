@@ -36,135 +36,6 @@
     }
 
 </style>
-<!--<div id="page">-->
-<!--	<div id="header"></div>-->
-<!--  &lt;!&ndash; BEGIN Main Container &ndash;&gt;-->
-<!--  <div class="main-container col2-right-layout">-->
-<!--        <div class="col-main main-blog">-->
-<!--        <div class="blog-image">-->
-<!--        <picture>-->
-<!--           <img th:src="@{/products-images/p1.jpg}" alt="blog-img3">-->
-<!--        </picture>-->
-
-<!--        <div class="blog-image-content container">-->
-<!--            &lt;!&ndash;标签样式&ndash;&gt;-->
-<!--            <div class="index_tag_style">-->
-<!--                <div style="display: flex">-->
-<!--                    <div style="margin-right: 10px">-->
-<!--                        <a class="tag " href="#" title="Fashion">Technology</a>-->
-<!--                    </div>-->
-<!--                    <div style="margin-right: 10px">-->
-<!--                        <a class="tag " href="#" title="Fashion">Technology</a>-->
-<!--                    </div>-->
-<!--                    <div style="margin-right: 10px">-->
-<!--                        <a class="tag " href="#" title="Fashion">Technology</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--           -->
-<!--            <h1 th:text="${post.title}">Icon internet world in the hands of a businessman network technology and communication</h1>-->
-<!--            <ul class="post-meta">-->
-<!--                        <li><img th:src="${user.headerUrl}"  alt="auther"> <a href="#" th:text="${user.username}"> Karla Anderson  </a> </li>-->
-<!--                &lt;!&ndash;点赞图标&ndash;&gt;-->
-<!--                <li >-->
-<!--                    <i class="fa fa-heart-o" id="like" onclick="changecolor()"></i>-->
-<!--                    <a href="#"  th:text="${post.commentCount}">13 comments</a>-->
-<!--                </li>-->
-<!--                <li><i class="fa fa-comments"></i><a href="#" th:text="${post.commentCount}">42 comments</a> </li>-->
-<!--                        <li th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}"><i class="fa fa-clock-o"></i>Feb 07, 2021</li>-->
-<!--                      </ul>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--        <div class="main container">-->
-<!--      <div class="row">-->
-<!--          <div id="main" class="blog-post blog-post-1">-->
-<!--            <article class="blog_entry clearfix">-->
-<!--                    -->
-<!--              <div class="entry-content">-->
-<!-- <div class="thm-post">-->
-<!--<p id="markdown-content">Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec, condimentum sed sapien. Nullam lobortis nunc semper ipsum luctus ut viverra ante eleifend. Nunc pretium velit sed augue luctus accumsan.</p>-->
-<!--</div>			-->
-<!--</div>-->
-
-
-<!--				</article>-->
-
-<!--              <div class="comment-content">-->
-<!--                  <div class="comments-wrapper">-->
-<!--                      <h3> Comments </h3>-->
-<!--                      <ol class="commentlist">-->
-<!--                          <li class="comment">-->
-<!--                              <div>-->
-<!--                                  <img alt="" src="https://pic1.zhimg.com/50/v2-26bcc4200d351c9939c6c4916d1fe0d4_720w.jpg?source=1940ef5c-->
-<!--" class="avatar avatar-60 photo">-->
-<!--                                  <div class="comment-text">-->
-<!--                                      <div class="ratings">-->
-<!--                                          <div class="rating-box">-->
-<!--                                              <div style="width:100%" class="rating"></div>-->
-<!--                                          </div>-->
-
-<!--                                      </div>-->
-<!--                                      <p class="meta">-->
-<!--                                          <strong>iKun</strong>-->
-<!--                                          <span>–</span> <span>2022/7/6</span>-->
-<!--                                      </p>-->
-<!--                                      <div class="description"><p>测试评论正常显示</p>-->
-<!--                                          <p>测试评论正常显示</p>-->
-<!--                                      </div>-->
-<!--                                  </div>-->
-<!--                              </div>-->
-<!--                          </li>&lt;!&ndash; #comment-## &ndash;&gt;-->
-<!--                          <li class="comment">-->
-<!--                              <div>-->
-<!--                                  <img alt="" src="https://pic1.zhimg.com/50/v2-26bcc4200d351c9939c6c4916d1fe0d4_720w.jpg?source=1940ef5c-->
-<!--" class="avatar avatar-60 photo">-->
-<!--                                  <div class="comment-text">-->
-<!--                                      <div class="ratings">-->
-<!--                                          <div class="rating-box">-->
-<!--                                              <div style="width:100%" class="rating"></div>-->
-<!--                                          </div>-->
-
-<!--                                      </div>-->
-<!--                                      <p class="meta">-->
-<!--                                          <strong>iKun</strong> <span>–</span> <span>2022/7/6</span>-->
-<!--                                      </p>-->
-<!--                                      <div class="description"><p>测试评论正常显示.</p>-->
-<!--                                      </div>-->
-<!--                                  </div>-->
-<!--                              </div>-->
-<!--                          </li>&lt;!&ndash; #comment-## &ndash;&gt;-->
-<!--                      </ol>-->
-<!--                      &lt;!&ndash;commentlist&ndash;&gt;-->
-<!--                  </div>-->
-<!--                  &lt;!&ndash;comments-wrapper&ndash;&gt;-->
-
-<!--                  <div class="comments-form-wrapper comment-respond">-->
-<!--                      <h3>评论</h3>-->
-<!--                      <p class="comment-notes"><span id="email-notes"></span> 在这里可以留下你的评论</p>-->
-<!--                      <form class="comment-form" method="post" id="postComment">-->
-<!--                          <div class="field aw-blog-comment-area">-->
-<!--                              <label for="comment">Comment<em class="required">*</em></label>-->
-<!--                              <textarea rows="5" cols="50" class="input-text" title="Comment" id="comment" name="comment" placeholder="Comment"></textarea>-->
-<!--                          </div>-->
-<!--                          <div class="button-set">-->
-<!--                              <input type="hidden" value="1" name="blog_id">-->
-<!--                              <button type="submit" class="bnt-comment"><span><span>添加评论</span></span></button>-->
-<!--                          </div>-->
-<!--                      </form>-->
-<!--                  </div>-->
-
-<!--              </div>-->
-<!--          </div>-->
-<!--          &lt;!&ndash;#main wrapper grid_8&ndash;&gt; -->
-<!--          -->
-<!--        </div>-->
-
-<!--      </div>-->
-<!--    </div>-->
-
-<!--    -->
-<!--  </div>-->
-<!--col2-layout-->
 <div id="page">
     <div id="header"></div>
     <!-- BEGIN Main Container -->
@@ -197,7 +68,14 @@
                             <a href="#" th:text="${user.username}"> Karla Anderson  </a>
                         </li>
                         <!--此处显示点赞数量-->
-                        <li><a onclick="changecolor()"><i class="fa fa-heart-o" id="like"></i><span>42</span></a> </li>
+                        <li>
+                            <button onclick="changecolor1()" style="background-color: transparent;border-color: transparent;">
+                                <span class="like">
+                                    <i class="fa fa-heart"></i>
+                                    <span>42</span>
+                                </span>
+                            </button>
+                        </li>
                         <!--此处显示评论数量-->
                         <li><i class="fa fa-comments"></i><a href="#detail_commmentarea"><span>42</span>条评论</a></li>
                         <!--此处显示发布时间-->
@@ -217,7 +95,14 @@
                                 <div style="float: right">
                                     <ul class="post-meta">
                                         <!--此处显示点赞数量-->
-                                        <li><i class="fa fa-heart-o"></i><a href="#"><span>42</span></a> </li>
+                                        <li>
+                                            <button onclick="changecolor1()" style="background-color: transparent;border-color: transparent;">
+                                                <span class="like">
+                                                    <i class="fa fa-heart"></i>
+                                                    <span>42</span>
+                                                </span>
+                                            </button>
+                                        </li>
                                         <!--此处显示评论数量-->
                                         <li><i class="fa fa-comments"></i><a href="#detail_commment"><span>42</span>条评论</a> </li>
                                     </ul>
@@ -253,7 +138,14 @@
                                                 <div style="float: right">
                                                     <ul class="post-meta">
                                                         <!--此处显示点赞数量-->
-                                                        <li><i class="fa fa-heart-o"></i><a href="#"><span>42</span></a> </li>
+                                                        <li>
+                                                            <button onclick="changecolor2()" style="background-color: transparent;border-color: transparent;">
+                                                                <span class="like">
+                                                                    <i class="fa fa-heart"></i>
+                                                                    <span>42</span>
+                                                                </span>
+                                                            </button>
+                                                        </li>
                                                         <!--此处显示评论数量-->
                                                         <li><i class="fa fa-comments"></i><a style="cursor: pointer " onclick="showComments()"><span>42</span>条评论</a> </li>
                                                     </ul>
@@ -284,7 +176,14 @@
                                                         <div style="float: right">
                                                             <ul class="post-meta">
                                                                 <!--此处显示点赞数量-->
-                                                                <li><i class="fa fa-heart-o"></i><a href="#"><span>0</span></a> </li>
+                                                                <li>
+                                                                    <button onclick="changecolor3()" style="background-color: transparent;border-color: transparent;">
+                                                                        <span class="like">
+                                                                            <i class="fa fa-heart"></i>
+                                                                            <span>42</span>
+                                                                        </span>
+                                                                    </button>
+                                                                </li>
                                                                 <!--此处显示评论数量-->
                                                                 <li><i class="fa fa-comments"></i><a onclick="showReplyInput1()" style="cursor: pointer"><span>4</span>条评论</a> </li>
                                                             </ul>
@@ -335,7 +234,14 @@
                                                             <div style="float: right">
                                                                 <ul class="post-meta">
                                                                     <!--此处显示点赞数量-->
-                                                                    <li><i class="fa fa-heart-o"></i><a href="#"><span>0</span></a> </li>
+                                                                    <li>
+                                                                        <button onclick="changecolor4()" style="background-color: transparent;border-color: transparent;">
+                                                                            <span class="like">
+                                                                                <i class="fa fa-heart"></i>
+                                                                                <span>42</span>
+                                                                            </span>
+                                                                        </button>
+                                                                    </li>
                                                                     <!--此处显示评论数量-->
                                                                     <li>
                                                                         <i class="fa fa-comments"></i>
@@ -421,6 +327,7 @@
     <script th:src="@{/js/include.js}"></script>
     <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
     <script th:src="@{/js/countdown.js}"></script>
+    <script th:src="@{/js/detail-style.js}"></script>
     <div id="footer"></div>
 
     <script src="https://cdn.bootcdn.net/ajax/libs/marked/4.0.17/marked.min.js"></script>
@@ -447,67 +354,86 @@
     );
 </script>
 <!-- JavaScript -->
+<style type="text/css">
+    .active{
+        color: red;
+    }
+</style>
 
-<script type="text/javascript">
-    //点击评论图标或字事件
-    function showComments(){
-        var showCommentdiv = document.getElementById("reply_comments").style.display;
-        if (showCommentdiv == "none"){
-            document.getElementById("reply_comments").style.display="block";
-        }else{
-            document.getElementById("reply_comments").style.display="none";
-        }
-    }
-    //点击评论收回或展开评论
-    function showReplyInput1(){
-        var showCommentdiv = document.getElementById("reply_input1").style.display;
-        if (showCommentdiv == "none"){
-            document.getElementById("reply_input1").style.display="block";
-        }else{
-            document.getElementById("reply_input1").style.display="none";
-        }
-    }
-    function showReplyInput2(){
-        var showCommentdiv = document.getElementById("reply_input2").style.display;
-        if (showCommentdiv == "none"){
-            document.getElementById("reply_input2").style.display="block";
-        }else{
-            document.getElementById("reply_input2").style.display="none";
-        }
-    }
-    //点赞样式变换
-
-    function changecolor(){
-        var like = document.getElementById("like");
-        <!--改变样式-->
-        like.className = 'fa fa-heart' ;
-        <!--改变颜色-->
-        like.style.color = 'red';
-        if(like.style.color == 'red' && like.className == 'fa fa-heart') {
-            like.className = 'fa fa-heart-o';
-            like.style.color == 'black';
-        }else {
-            like.className = 'fa fa-heart';
-            like.style.color = 'red';
-        }
-    }
-</script>
+<!--<script type="text/javascript">-->
+<!--    //点击评论图标或字事件-->
+<!--    function showComments(){-->
+<!--        var showCommentdiv = document.getElementById("reply_comments").style.display;-->
+<!--        if (showCommentdiv == "none"){-->
+<!--            document.getElementById("reply_comments").style.display="block";-->
+<!--        }else{-->
+<!--            document.getElementById("reply_comments").style.display="none";-->
+<!--        }-->
+<!--    }-->
+<!--    //点击评论收回或展开评论-->
+<!--    function showReplyInput1(){-->
+<!--        var showCommentdiv = document.getElementById("reply_input1").style.display;-->
+<!--        if (showCommentdiv == "none"){-->
+<!--            document.getElementById("reply_input1").style.display="block";-->
+<!--        }else{-->
+<!--            document.getElementById("reply_input1").style.display="none";-->
+<!--        }-->
+<!--    }-->
+<!--    function showReplyInput2(){-->
+<!--        var showCommentdiv = document.getElementById("reply_input2").style.display;-->
+<!--        if (showCommentdiv == "none"){-->
+<!--            document.getElementById("reply_input2").style.display="block";-->
+<!--        }else{-->
+<!--            document.getElementById("reply_input2").style.display="none";-->
+<!--        }-->
+<!--    }-->
+<!--    //点赞样式变换-->
+<!--    var i=0;-->
+<!--    var like = document.getElementsByClassName("like")[0];-->
+<!--    var like1 = document.getElementsByClassName("like")[1];-->
+<!--    var like2 = document.getElementsByClassName("like")[2];-->
+<!--    var like3 = document.getElementsByClassName("like")[3];-->
+<!--    var like4 = document.getElementsByClassName("like")[4];-->
+<!--    like.onclick=changecolor1();-->
+<!--    like1.onclick=changecolor1();-->
+<!--    like2.onclick=changecolor2();-->
+<!--    like3.onclick=changecolor3();-->
+<!--    like4.onclick=changecolor4();-->
+<!--    function changecolor1() {-->
+<!--        i++;-->
+<!--        if (i % 2 == 0) {-->
+<!--            document.getElementsByClassName("like")[0].setAttribute('class','like active');-->
+<!--            document.getElementsByClassName("like")[1].setAttribute('class','like active');-->
+<!--        } else {-->
+<!--            document.getElementsByClassName("like")[0].setAttribute('class','like');-->
+<!--            document.getElementsByClassName("like")[1].setAttribute('class','like');-->
+<!--        }-->
+<!--    }-->
+<!--    function changecolor2() {-->
+<!--        i++;-->
+<!--        if (i % 2 == 0) {-->
+<!--            document.getElementsByClassName("like")[2].setAttribute('class','like active');-->
+<!--        } else {-->
+<!--            document.getElementsByClassName("like")[2].setAttribute('class','like');-->
+<!--        }-->
+<!--    }-->
+<!--    function changecolor3() {-->
+<!--        i++;-->
+<!--        if (i % 2 == 0) {-->
+<!--            document.getElementsByClassName("like")[3].setAttribute('class','like active');-->
+<!--        } else {-->
+<!--            document.getElementsByClassName("like")[3].setAttribute('class','like');-->
+<!--        }-->
+<!--    }-->
+<!--    function changecolor4() {-->
+<!--        i++;-->
+<!--        if (i % 2 == 0) {-->
+<!--            document.getElementsByClassName("like")[4].setAttribute('class','like active');-->
+<!--        } else {-->
+<!--            document.getElementsByClassName("like")[4].setAttribute('class','like');-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
     <!-- JavaScript -->
-    <script>
-    var like = document.getElementById("like")
-    function changecolor(){
-        <!--改变样式-->
-        like.className = 'fa fa-heart' ;
-        <!--改变颜色-->
-        like.style.color = 'red' ;
-        //   if(color == 'red' && style == 'fa fa-heart'){
-        //     style = 'fa fa-heart-o';
-        //   }else {
-        //     style = 'fa fa-heart';
-        //     color = 'red';
-        //   }
-    }
-</script>
-
 </body>
 </html>
