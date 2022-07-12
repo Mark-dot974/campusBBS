@@ -1,9 +1,13 @@
 package com.zrgj519.campusBBS.dao;
 
+import com.github.pagehelper.PageInfo;
+import com.zrgj519.campusBBS.entity.Page;
 import com.zrgj519.campusBBS.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 // 使用springboot进行开发必须要使用Mapper表示该接口，因为Mapper注解表示Mybatis，而Repository表示Spring
 @Mapper
@@ -33,8 +37,8 @@ public interface UserMapper {
 //    修改用户信息
     void updateUser(User user);
 
-    List<User> findUser(Integer id,String username,String email,Integer offset,Integer limit);
+    List<User> findUser(Integer id,String username,String email);
 
-    Integer selectUsersCount(Integer id,String username,String email);
+
 
 }

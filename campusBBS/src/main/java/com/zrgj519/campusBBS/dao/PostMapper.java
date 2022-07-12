@@ -48,5 +48,4 @@ public interface PostMapper {
 
     List<Post> findPost(Integer id,String title,String tag);
 
-    void updateCommentCount(int entityId, int count);
 }

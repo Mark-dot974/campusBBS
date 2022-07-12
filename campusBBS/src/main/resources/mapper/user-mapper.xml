@@ -60,7 +60,7 @@
     </select>
     <!--更改用户信息-->
     <update id="updateUser" parameterType="User">
-        update user set username=#{username},type=#{type},status=#{status},email=#{email},signature=#{signature}
+        update user set username=#{username},type=#{type},status=#{status}
         where id = #{id}
     </update>
     <!--条件查询用户-->
@@ -78,23 +78,7 @@
             </if>
         </where>
         order by id asc
-        limit #{offset}, #{limit}
     </select>
-    <!--查询用户总数-->
-    <select id="selectUsersCount" resultType="int">
-        select count(*)
-        from user
-        <where>
-            <if test="id!=null and id!='' ">
-                and id = #{id}
-            </if>
-            <if test="username!=null and username!='' ">
-                and username like '%' #{username} '%'
-            </if>
-            <if test="email!=null and email!='' ">
-                and email like '%' #{email} '%'
-            </if>
-        </where>
-    </select>
+
 
 </mapper>
