@@ -3,8 +3,11 @@ package com.zrgj519.campusBBS.controller;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import com.zrgj519.campusBBS.entity.*;
+import com.zrgj519.campusBBS.entity.Event.Event;
+import com.zrgj519.campusBBS.entity.Event.Producer;
 import com.zrgj519.campusBBS.service.GroupService;
 import com.zrgj519.campusBBS.service.UserService;
+import com.zrgj519.campusBBS.util.CampusBBSConstant;
 import com.zrgj519.campusBBS.util.CampusBBSUtil;
 import com.zrgj519.campusBBS.util.UserContainer;
 import org.apache.commons.lang3.StringUtils;
@@ -41,6 +44,9 @@ public class GroupController {
 
     @Value("${qiniu.bukcet.file.url}")
     private String fileBucketUrl;
+
+    @Autowired
+    private Producer producer;
 
     @RequestMapping("/create")
     @ResponseBody
@@ -106,6 +112,8 @@ public class GroupController {
         model.addAttribute("fileName",fileName);
         model.addAttribute("gid",gid);
         Group group = groupService.getGroupById(gid);
+        model.addAttribute("group",group);
+        model.addAttribute("loginUser",userContainer.getUser());
         // 填充圈员信息
         List<User> members = new ArrayList<>();
         String m = group.getMembers();
@@ -136,6 +144,21 @@ public class GroupController {
         file.setUrl(url);
         System.out.println("file = " + file.toString());
         groupService.uploadFile(file);
+        return CampusBBSUtil.getJSONString(0);
+    }
+
+    @RequestMapping("/apply")
+    @ResponseBody
+    public String applyForGroup(String groupName,int gid,String leader,int userId){
+        User groupLeader = userService.findUserByName(leader);
+        // 触发申请事件
+        Event event = new Event();
+        event.setTopic(CampusBBSConstant.TOPIC_APPLY)
+                .setEntityId(gid)
+                .setUserId(userId)
+                .setEntityUserId(groupLeader.getId());
+
+        producer.fireEvent(event);
         return CampusBBSUtil.getJSONString(0);
     }
 }

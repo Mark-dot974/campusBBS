@@ -53,14 +53,24 @@ public class CampusBBSConstant {
      */
     public static final String TOPIC_LIKE = "like";
     /**
-     * 主题：关注
+     * 主题：邀请他人加入圈子
      */
-    public static final String TOPIC_FOLLOW = "follow";
+    public static final String TOPIC_INVITE = "invite";
 
     /**
-     * 主题：新增帖子或评论
+     * 主题：同意申请者加入圈子
      */
-    public static final String TOPIC_UPDATE_ENTITY = "updateEntity";
+    public static final String TOPIC_ACCEPT = "accept";
+
+    /**
+     * 主题：拒绝申请者加入圈子
+     */
+    public static final String TOPIC_DENIED = "denied";
+
+    /**
+     * 主题：申请加入圈子
+     */
+    public static final String TOPIC_APPLY = "apply";
 
     /**
      * 主题：删除实体
