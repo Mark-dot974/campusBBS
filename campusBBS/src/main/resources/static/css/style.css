@@ -14094,6 +14094,17 @@ select#shipping-address-select {
 	 color: red;
  }
 
+.group_detail_text_style{
+	width: 110px;
+	word-break: break-all;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp:1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+}
+
 .message_center_text_style{
 	width: 120px;
 	word-break: break-all;
