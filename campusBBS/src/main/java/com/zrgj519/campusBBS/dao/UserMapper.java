@@ -1,6 +1,5 @@
 package com.zrgj519.campusBBS.dao;
 
-import com.github.pagehelper.PageInfo;
 import com.zrgj519.campusBBS.entity.Page;
 import com.zrgj519.campusBBS.entity.User;
 import org.apache.ibatis.annotations.Mapper;
