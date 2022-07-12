@@ -27,7 +27,7 @@
         where gid = #{gid}
     </select>
 
-    
+
     <insert id="insertGroup" parameterType="Group" useGeneratedKeys="true" keyProperty="id">
         insert into collaboration_group (<include refid="ref"/>)
         values(#{gid},#{groupName},#{members},#{memberCount},#{createTime},#{tag},#{groupLeader})
@@ -42,6 +42,38 @@
     <select id="selectGroupCount" resultType="Integer">
         select count(*)
         from collaboration_group
+    </select>
+    <!--删除圈子-->
+    <delete id="deleteGroup">
+        delete from collaboration_group where gid = #{gid}
+    </delete>
+    <!--更改圈子信息-->
+    <update id="updateGroup" parameterType="Group">
+        update collaboration_group
+        set group_leader=#{groupLeader},group_name=#{groupName}
+        where gid = #{gid}
+    </update>
+    <!--根据gid查找圈子信息-->
+    <select id="find" resultType="Group">
+        select *
+        from collaboration_group
+        where gid = #{gid}
+    </select>
+    <!--条件查询圈子-->
+    <select id="findGroup" resultType="Group" parameterType="Group">
+        select * from collaboration_group
+        <where>
+            <if test="gid!=null and gid!='' ">
+                and gid = #{gid}
+            </if>
+            <if test="groupName!=null and groupName!='' ">
+                and group_name like '%' #{groupName} '%'
+            </if>
+            <if test="members!=null and members!='' ">
+                and members like '%' #{members} '%'
+            </if>
+        </where>
+        order by gid asc
     </select>
 
     <update id="updateGroupMember">
