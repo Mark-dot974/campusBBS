@@ -32,6 +32,3 @@ public interface GroupMapper {
     int selectCountOfGroup(Integer gid,String groupName,String members);
 
     List<Group> selectPersonalGroup(String members,Integer offset,Integer limit);
-
-    int selectCountOfPersonalGroup(String members);
-}
