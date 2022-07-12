@@ -12,4 +12,7 @@ $(function () {
     $.get(CONTEXT_PATH+"/aside_left",function (data) {
         $("#aside_left").html(data);
     });
+    $.get(CONTEXT_PATH+"/message_center_aside",function (data) {
+        $("#message_center_aside").html(data);
+    });
 });

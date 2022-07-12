@@ -26,14 +26,15 @@
                <img class="clicker" id="usertouxiang" th:src="${loginUser.headerUrl}" style="border-radius:50%;"></a>
                  <div class="fl-nav-links">
                     <ul class="links">
-                      <li><a th:href="@{/user/set}" title="My Account">个人中心</a></li>
-                                <li> <a th:href="@{/post/publish}">发布</a></li>
-                                      <li><a th:href="@{/logout}" title="Wishlist">退出账号</a></li>
-                                    </ul>
-                                  </div>
-                                </div>
+                        <li><a th:href="@{/user/set}" title="My Account">个人中心</a></li>
+                        <li> <a th:href="@{/post/publish}">发布</a></li>
+                        <li> <a>私信</a></li>
+                        <li><a th:href="@{/logout}" title="Wishlist">退出账号</a></li>
+                    </ul>
+                 </div>
+               </div>
 <!--                这里是未登录按钮div-->
-                <div class='tp-caption sfb tp-resizeme' th:if="${loginUser == null}"><a th:href='@{/login}' class="buy-btn">登陆/注册</a> </div>
+                <div class='tp-caption sfb tp-resizeme' th:if="${loginUser == null}"><a th:href='@{/login}' class="buy-btn">登录/注册</a> </div>
               </div>
               <!--mini-cart-->
               <div class="collapse navbar-collapse">

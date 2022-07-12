@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Category Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Default Description">
+    <meta name="keywords" content="fashion, store, E-commerce">
+    <meta name="robots" content="*">
+    <link rel="icon" href="#" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+
+    <!-- CSS Style -->
+    <link rel="stylesheet" type="text/css"  th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.bxslider.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/yellow.css}">
+
+
+
+
+</head>
+<body>
+    <div id="page">
+        <div id="header"></div>
+        <!--breadcrumbs-->
+        <!-- BEGIN Main Container col2-left -->
+        <section class="main-container col2-left-layout bounceInUp animated">
+            <!-- For version 1, 2, 3, 8 -->
+            <!-- For version 1, 2, 3 -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+                        <div class="pro-coloumn box-content box-category">
+                            <!--这里是个人页面具体信息-->
+                            <ul class="nav nav-pills nav-stacked">
+                                <div>
+                                    <div style="color: #898989;margin-left: 15px;">
+                                        <h3><i style="margin-right: 5px;">回复我的</i>:</h3>
+                                    </div>
+                                    <hr width="980px">
+                                    <!--展示一条回复我的start-->
+                                    <li class="section allow active">
+                                        <div>
+                                            <div class="step-title" style="display:flex;margin-left: 50px;border-bottom: 15px">
+                                                <!--此处显示头像-->
+                                                <div style=" margin-left: 20px">
+                                                    <a title="" class="">
+                                                        <img src="images/gdl.jpg" style="border-radius: 50%; height: 80px;height: 80px">
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <h3 class="one_page_heading" style="margin-left: 25px;display: flex">
+                                                        <!--昵称显示-->
+                                                        <div><b>iKun</b></div>
+                                                        <div style="margin-left: 10px"><b style="font-size: 6px">对我发表了评论</b></div>
+                                                    </h3>
+                                                    <!--评论内容显示-->
+                                                    <div style="margin-left: 25px;margin-top: 10px;width: 350px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;margin-top: 10px">
+                                                        <span style="width: 350px">测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文</span>
+                                                    </div>
+                                                    <!--发表时间、评论、点赞显示-->
+                                                    <div style="margin-left: 25px;margin-top: 10px;width: 400px;" class="">
+                                                        <div style="display: flex">
+                                                            <div  style="margin-right: 5px">
+                                                                <i class="fa fa-clock-o"></i>
+                                                                <!--发表评论时间-->
+                                                                <span>2022-07-05 18:08:55</span>
+                                                            </div>
+                                                            <div style="margin-right: 5px">
+                                                                <span onclick="showMessageInput()" style="cursor: pointer">
+                                                                <i class="fa fa-comment-o"></i>
+                                                                <!--评论-->
+                                                                <span>评论</span>
+                                                                </span>
+                                                            </div>
+                                                            <div style="margin-right: 5px">
+                                                                <i class="fa fa-heart-o"></i>
+                                                                <!--点赞-->
+                                                                <span>点赞</span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!--评论输入框-->
+                                                    <div id="message_input" style="margin-top: 5px">
+                                                        <ul>
+                                                        <li class="pb-3 pt-3">
+                                                            <!--表单action原（<form method="post" th:action="@{|/comment/add/${post.id}|}">）-->
+                                                            <form method="post">
+                                                                <div style="display: flex;width: 100px">
+                                                                    <div style="margin-left: 15px;display: flex">
+                                                                        <div style="margin-right: 10px">
+                                                                            <!--这里是用户头像-->
+                                                                            <img th:src="@{/images/member1.png}" style="height: 40px;width: 40px;border-radius: 50%">
+                                                                        </div>
+                                                                        <input type="text" class="input-text" name="content" placeholder="请输入你的观点" style="border-radius: 5px; width: 350px"/>
+                                                                        <input type="hidden" name="entityType" value="2">
+                                                                        <!--回复id？原（<input type="hidden" name="entityId" th:value="${cvo.comment.id}">）-->
+                                                                        <input type="hidden" name="entityId">
+                                                                    </div>
+                                                                    <div class="text-right mt-2" style="margin-left: 10px">
+                                                                        <button type="submit" style="height: 42.8px;border: #b2b2b2 solid 1px;border-radius: 5px" onclick="#">&nbsp;&nbsp;回&nbsp;&nbsp;复&nbsp;&nbsp;</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div style="text-align: center;vertical-align: middle;width: 300px;height: 104px;">
+                                                    <ul class="nav nav-pills nav-stacked" style="margin-top: 15px; width: 300px">
+                                                        <div class="message_center_text_style">
+                                                            <!--文章展示-->
+                                                            <p>中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test</p>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr width="980px">
+                                    </li>
+                                    <!--展示一条回复我的end-->
+                                    <!--展示一条回复我的start-->
+                                    <li class="section allow active">
+                                        <div>
+                                            <div class="step-title" style="display:flex;margin-left: 50px;border-bottom: 15px">
+                                                <!--此处显示头像-->
+                                                <div style=" margin-left: 20px">
+                                                    <a title="" class="">
+                                                        <img src="images/gdl.jpg" style="border-radius: 50%; height: 80px;height: 80px">
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <h3 class="one_page_heading" style="margin-left: 25px;display: flex">
+                                                        <!--昵称显示-->
+                                                        <div><b>iKun</b></div>
+                                                        <div style="margin-left: 10px"><b style="font-size: 6px">回复了我的评论</b></div>
+                                                    </h3>
+                                                    <!--回复内容显示-->
+                                                    <div style="margin-left: 25px;
+                                                    margin-top: 10px;width: 350px;
+                                                    text-overflow: ellipsis;
+                                                    overflow: hidden;
+                                                    white-space: nowrap;
+                                                    margin-top: 10px">
+                                                        <!--回复的用户昵称-->
+                                                        回复&nbsp;@<span>kaolengmianjiacu</span>:<span style="width: 350px">测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文</span>
+                                                    </div>
+                                                    <!--用户回复的内容-->
+                                                    <div style="color: #898989;margin-left: 25px">
+                                                        |<span>&nbsp;kaolengmianjiacu</span>:<span>gedonglinzhenshuai</span>
+                                                    </div>
+                                                    <!--发表时间、评论、点赞显示-->
+                                                    <div style="margin-left: 25px;margin-top: 10px;width: 400px;" class="">
+                                                        <div style="display: flex">
+                                                            <div  style="margin-right: 5px">
+                                                                <i class="fa fa-clock-o"></i>
+                                                                <!--发表评论时间-->
+                                                                <span>2022-07-05 18:08:55</span>
+                                                            </div>
+                                                            <div style="margin-right: 5px">
+                                                                <span onclick="showMessageInput()" style="cursor: pointer">
+                                                                <i class="fa fa-comment-o"></i>
+                                                                    <!--评论-->
+                                                                <span>评论</span>
+                                                                </span>
+                                                            </div>
+                                                            <div style="margin-right: 5px">
+                                                                <i class="fa fa-heart-o"></i>
+                                                                <!--点赞-->
+                                                                <span>点赞</span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!--评论输入框-->
+                                                    <div id="message_input" style="margin-top: 5px">
+                                                        <ul>
+                                                            <li class="pb-3 pt-3">
+                                                                <!--表单action原（<form method="post" th:action="@{|/comment/add/${post.id}|}">）-->
+                                                                <form method="post">
+                                                                    <div style="display: flex;width: 100px">
+                                                                        <div style="margin-left: 15px;display: flex">
+                                                                            <div style="margin-right: 10px">
+                                                                                <!--这里是用户头像-->
+                                                                                <img th:src="@{/images/member1.png}" style="height: 40px;width: 40px;border-radius: 50%">
+                                                                            </div>
+                                                                            <input type="text" class="input-text" name="content" placeholder="请输入你的观点" style="border-radius: 5px; width: 350px"/>
+                                                                            <input type="hidden" name="entityType" value="2">
+                                                                            <!--回复id？原（<input type="hidden" name="entityId" th:value="${cvo.comment.id}">）-->
+                                                                            <input type="hidden" name="entityId">
+                                                                        </div>
+                                                                        <div class="text-right mt-2" style="margin-left: 10px">
+                                                                            <button type="submit" style="height: 42.8px;border: #b2b2b2 solid 1px;border-radius: 5px" onclick="#">&nbsp;&nbsp;回&nbsp;&nbsp;复&nbsp;&nbsp;</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div style="text-align: center;vertical-align: middle;width: 300px;height: 104px;">
+                                                    <ul class="nav nav-pills nav-stacked" style="margin-top: 15px; width: 300px">
+                                                        <div class="message_center_text_style">
+                                                            <!--文章展示-->
+                                                            <p>中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test</p>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr width="980px">
+                                    </li>
+                                    <!--展示一条回复我的end-->
+                                </div>
+                                <!--分页-->
+                                <div class="pager">
+                                    <div class="pages">
+                                        <!--<strong></strong>-->
+                                        <ol class="pagination">
+                                            <li class="active"><a href="">1</a></li>
+                                            <li><a href="">2</a></li>
+                                            <li><a href="">3</a></li>
+                                            <li><a href="">4</a></li>
+                                            <li><a href="">5</a></li>
+                                            <li><a href="">6</a></li>
+                                            <li> <a class="next i-next" href="" title="Next"> » </a> </li>
+                                        </ol>
+                                    </div>
+                                </div>
+
+                            </ul>
+                        </div>
+                        <!--	///*///======    End article  ========= //*/// -->
+                    </div>
+                    <div id="message_center_aside"></div>
+                    <!--col-right sidebar-->
+                </div>
+                <!--row-->
+            </div>
+            <!--container-->
+        </section>
+    </div>
+    </div>
+    <div id="footer"></div>
+    <script type="text/javascript">
+        //点击评论图标或字事件
+        function showMessageInput(){
+            var showCommentdiv = document.getElementById("message_input").style.display;
+            if (showCommentdiv == "none"){
+                document.getElementById("message_input").style.display="block";
+            }else{
+                document.getElementById("message_input").style.display="none";
+            }
+        }
+    </script>
+    <script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/revslider.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+    <script th:src="@{/js/countdown.js}"></script>
+    <script th:src="@{/js/include.js}"></script>
+    <script th:src="@{/js/setting.js}"></script>
+    <script th:src="@{/js/jquery.icheck.js}"></script>
+</body>
+</html>
