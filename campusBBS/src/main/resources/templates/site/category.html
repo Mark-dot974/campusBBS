@@ -76,7 +76,7 @@
                     <div class="post-content">
                       <header class="blog_entry-header clearfix">
                         <!--显示标签-->
-                        <div class="blog_entry-header-inner">
+                        <div class="blog_entry-header-inner" th:if="${map.tags}!=null">
                           <div style="display: flex">
                             <div style="margin-right: 10px" th:each="tag:${map.tags}">
                               <a class="tag " href="#" title="Fashion" th:text="${tag}">Technology</a>

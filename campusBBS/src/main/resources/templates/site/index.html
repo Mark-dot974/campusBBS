@@ -116,12 +116,12 @@
 							 </figure>
                                <div class="content-info">
                                  <!--标签样式-->
-                                 <div class="index_tag_style">
-                                   <div style="display: flex" >
-<!--                                     th:if="${map.tags}!=null"
- th:each="tag:${map.tags}"-->
-                                     <div style="margin-right: 10px">
-                                       <a class="tag " href="#" title="Fashion" th:text="${map.tags}">Technology</a>
+                                 <div class="index_tag_style" th:if="${map.tags}!=null">
+                                   <div style="display: flex">
+
+                                     <div style="margin-right: 10px" th:each="tag:${map.tags}">
+                                       <a class="tag " href="#" title="Fashion" th:text="${tag}">Technology</a>
+                                       <p th:text="${map.tags[0]}"></p>
                                      </div>
                                    </div>
                                  </div>
