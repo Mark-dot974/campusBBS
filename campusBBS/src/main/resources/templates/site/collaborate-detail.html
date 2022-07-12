@@ -243,9 +243,6 @@
                             </td>
                             <td th:text="${#dates.format(file.createTime,'yyyy-MM-dd HH:mm:ss')}">
                             <td>
-                                01/04/2012
-                            </td>
-                            <td>
                                 <form class="form-group">
                                     <input class="uploadFile" type="file"
                                            style="display: inline; width: 180px;">
@@ -253,47 +250,47 @@
                                 </form>
                             </td>
                             <td>
-                                <a href="http://www.baidu.com"><button>下载</button></a>
+                                <a th:href="${file.url}"><button>下载</button></a>
                             </td>
                         </tr>
-                        <tr class="success">
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                <div class="group_detail_text_style">哎u发哈我i发哈我iu和</div>
-                            </td>
-                            <td>
-                                01/04/2012
-                            </td>
-                            <td>
-                                <form class="form-group">
-                                    <input class="uploadFile" type="file"
-                                           style="display: inline; width: 180px;">
+<!--                        <tr class="success">-->
+<!--                            <td>-->
+<!--                                1-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <div class="group_detail_text_style">哎u发哈我i发哈我iu和</div>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                01/04/2012-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <form class="form-group">-->
+<!--                                    <input class="uploadFile" type="file"-->
+<!--                                           style="display: inline; width: 180px;">-->
 
-                                    <button class="update" type="submit" disabled="disabled">更新</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr class="success">
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                <div class="group_detail_text_style">ordhello.wordhello.</div>
-                            </td>
-                            <td>
-                                01/04/2012
-                            </td>
-                            <td>
-                                <form class="form-group">
-                                    <input class="uploadFile" type="file"
-                                           style="display: inline; width: 180px;">
+<!--                                    <button class="update" type="submit" disabled="disabled">更新</button>-->
+<!--                                </form>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr class="success">-->
+<!--                            <td>-->
+<!--                                1-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <div class="group_detail_text_style">ordhello.wordhello.</div>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                01/04/2012-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <form class="form-group">-->
+<!--                                    <input class="uploadFile" type="file"-->
+<!--                                           style="display: inline; width: 180px;">-->
 
-                                    <button class="update" type="submit" disabled="disabled">更新</button>
-                                </form>
-                            </td>
-                        </tr>
+<!--                                    <button class="update" type="submit" disabled="disabled">更新</button>-->
+<!--                                </form>-->
+<!--                            </td>-->
+<!--                        </tr>-->
 <!--                        <tr class="success">-->
 <!--                            <td>-->
 <!--                                1-->
