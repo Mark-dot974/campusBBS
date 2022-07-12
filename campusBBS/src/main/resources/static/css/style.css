@@ -6934,6 +6934,36 @@ ul#magicat li .open-close, .block-layered-nav dt .toggleBtn {
 	background: url("/static/images/leftNav.png") no-repeat scroll 2px 3px;
 }
 
+.side-nav-categories .message-block-title:before {
+	content: '\f1d9';
+	font-family: FontAwesome;
+}
+.side-nav-categories .message-block-title {
+	color: #fff;
+	font-size: 20px;
+	font-weight: 500;
+	margin-bottom: 0px;
+	padding: 20px 25px 20px 25px;
+	position: relative;
+	display: inline-block;
+	font-family: 'Saira Condensed', sans-serif;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	background: #ed6663;
+	margin-top: 0px;
+	min-width: 230px;
+}
+.side-nav-categories .message-block-title:after {
+	content: '';
+	position: absolute;
+	width: 60px;
+	height: 100%;
+	transform: skew(-35deg);
+	right: -35px;
+	top: 0;
+	background-color: inherit;
+	z-index: 0;
+}
 .side-nav-categories .block-title:before {
 	content: '\f0c9';
 	font-family: FontAwesome;
@@ -14063,3 +14093,15 @@ select#shipping-address-select {
  em{
 	 color: red;
  }
+
+.message_center_text_style{
+	width: 120px;
+	word-break: break-all;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp:5;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	float: right;
+
+}

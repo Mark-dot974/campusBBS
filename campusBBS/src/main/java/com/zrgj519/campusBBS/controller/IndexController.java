@@ -46,6 +46,23 @@ public class IndexController {
         return "/site/profile_aside_left";
     }
 
+//    @RequestMapping(path="/message_center_aside")
+//    public String getMca(){
+//        return "/site/message_center_aside";
+//    }
+//
+//    @RequestMapping("/message_center_reply")
+//    public String getMessageReply(){ return "/site/message_center_reply";}
+//
+//    @RequestMapping("/message_center_like")
+//    public String getMessageLike(){ return "/site/message_center_like";}
+//
+//    @RequestMapping("/message_center_system")
+//    public String getMessageSystem(){ return "/site/message_center_system";}
+//
+//    @RequestMapping("/personal_page")
+//    public String getPersonalPage(){ return "/site/personal_page";}
+
     @RequestMapping(path="/aside")
     public String getAside(Model model){
         // 获取侧边栏内容（tag）
