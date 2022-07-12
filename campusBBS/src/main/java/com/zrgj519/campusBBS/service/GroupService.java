@@ -4,7 +4,6 @@ import com.zrgj519.campusBBS.dao.FileMapper;
 import com.zrgj519.campusBBS.dao.GroupMapper;
 import com.zrgj519.campusBBS.entity.Group;
 import com.zrgj519.campusBBS.entity.GroupFile;
-import com.zrgj519.campusBBS.util.UserContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +51,12 @@ public class GroupService {
         return fileMapper.selectAllFilesById(gid);
     }
 
+
+
+    public int deleteGroup(Integer gid) {
+        return groupMapper.deleteGroup(gid);
+    }
+
     public void uploadFile(GroupFile file){
         fileMapper.insertFile(file);
     }
@@ -73,4 +78,16 @@ public class GroupService {
         }
         return false;
     }
+}
+
+    public void updateGroup(Group group){ groupMapper.updateGroup(group); }
+
+    public Group find(Integer gid){
+        return groupMapper.find(gid);
+    }
+
+    public List<Group> findGroup(Integer gid,String groupName,String members){
+        return groupMapper.findGroup(gid,groupName,members);
+    }
+
 }
