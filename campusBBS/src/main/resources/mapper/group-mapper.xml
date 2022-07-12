@@ -91,6 +91,7 @@
             </if>
         </where>
     </select>
+
     <select id="selectPersonalGroup" resultType="Group">
         select *
         from collaboration_group
