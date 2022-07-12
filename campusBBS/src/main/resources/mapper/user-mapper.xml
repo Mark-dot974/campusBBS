@@ -4,11 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zrgj519.campusBBS.dao.UserMapper">
     <sql id="insertFields">
-        username, password, salt, email, type, status, activation_code, header_url, create_time , interest,sid,signature
+        username, password, salt, email, type, status, activation_code, header_url, create_time , interest,sid
     </sql>
 
     <sql id="selectFields">
-        id, username, password, salt, email, type, status, activation_code, header_url, create_time, interest,sid,signature
+        id, username, password, salt, email, type, status, activation_code, header_url, create_time, interest,sid
     </sql>
 
     <select id="selectById" resultType="User">
@@ -31,7 +31,7 @@
 
     <insert id="insertUser" parameterType="User" keyProperty="id">
         insert into user (<include refid="insertFields"></include>)
-        values(#{username}, #{password}, #{salt}, #{email}, #{type}, #{status}, #{activationCode}, #{headerUrl}, #{createTime},#{interest},#{sid},#{signature})
+        values(#{username}, #{password}, #{salt}, #{email}, #{type}, #{status}, #{activationCode}, #{headerUrl}, #{createTime},#{interest},#{sid})
     </insert>
 
     <update id="updateStatus" parameterType="User">
@@ -71,30 +71,14 @@
                  and id = #{id}
             </if>
             <if test="username!=null and username!='' ">
-                and username like '%#{username}%'
+                and username like '%' #{username} '%'
             </if>
             <if test="email!=null and email!='' ">
-                and email like '%#{email}%'
+                and email like '%' #{email} '%'
             </if>
         </where>
         order by id asc
-        limit #{offset}, #{limit}
     </select>
-    <!--查询用户总数-->
-    <select id="selectUsersCount" resultType="int">
-        select count(*)
-        from user
-        <where>
-            <if test="id!=null and id!='' ">
-                and id = #{id}
-            </if>
-            <if test="username!=null and username!='' ">
-                and username like '%#{username}%'
-            </if>
-            <if test="email!=null and email!='' ">
-                and email like '%#{email}%'
-            </if>
-        </where>
-    </select>
+
 
 </mapper>
