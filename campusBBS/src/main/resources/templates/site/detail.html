@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>campusBBS</title>
+<title>Post Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Default Description">
 <meta name="keywords" content="fashion, store, E-commerce">
@@ -60,72 +60,70 @@
 
 
 				</article>
-
-              <div class="comment-content">
-                  <div class="comments-wrapper">
+      
+            <div class="comment-content">
+                    <div class="comments-wrapper">
                       <h3> Comments </h3>
                       <ol class="commentlist">
-                          <li class="comment">
-                              <div>
-                                  <img alt="" src="https://pic1.zhimg.com/50/v2-26bcc4200d351c9939c6c4916d1fe0d4_720w.jpg?source=1940ef5c
-" class="avatar avatar-60 photo">
-                                  <div class="comment-text">
-                                      <div class="ratings">
-                                          <div class="rating-box">
-                                              <div style="width:100%" class="rating"></div>
-                                          </div>
-
-                                      </div>
-                                      <p class="meta">
-                                          <strong>iKun</strong>
-                                          <span>–</span> <span>2022/7/6</span>
-                                      </p>
-                                      <div class="description"><p>测试评论正常显示</p>
-                                          <p>测试评论正常显示</p>
-                                      </div>
-                                  </div>
-                              </div>
-                          </li><!-- #comment-## -->
-                          <li class="comment">
-                              <div>
-                                  <img alt="" src="https://pic1.zhimg.com/50/v2-26bcc4200d351c9939c6c4916d1fe0d4_720w.jpg?source=1940ef5c
-" class="avatar avatar-60 photo">
-                                  <div class="comment-text">
-                                      <div class="ratings">
-                                          <div class="rating-box">
-                                              <div style="width:100%" class="rating"></div>
-                                          </div>
-
-                                      </div>
-                                      <p class="meta">
-                                          <strong>iKun</strong> <span>–</span> <span>2022/7/6</span>
-                                      </p>
-                                      <div class="description"><p>测试评论正常显示.</p>
-                                      </div>
-                                  </div>
-                              </div>
-                          </li><!-- #comment-## -->
-                      </ol>
-                      <!--commentlist-->
-                  </div>
-                  <!--comments-wrapper-->
-
-                  <div class="comments-form-wrapper comment-respond">
-                      <h3>评论</h3>
-                      <p class="comment-notes"><span id="email-notes"></span> 在这里可以留下你的评论</p>
+<li class="comment">
+<div>
+<img alt="" th:src="@{/images/member1.png}" class="avatar avatar-60 photo">
+<div class="comment-text">
+<div class="ratings">
+                      <div class="rating-box">
+                        <div style="width:100%" class="rating"></div>
+                      </div>
+                      
+                    </div>
+<p class="meta">
+<strong>John Doe</strong> 
+<span>–</span> <span>April 19, 2018</span>
+</p>
+<div class="description"><p>Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla quis lorem ut libero malesuada feugiat. Proin eget tortor risus. Donec rutrum congue leo eget malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+<p>Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis lorem ut libero malesuada feugiat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.</p>
+</div>
+</div>
+</div>
+</li><!-- #comment-## -->
+<li class="comment">
+<div>
+<img alt="" th:src="@{images/member2.png}" class="avatar avatar-60 photo">
+<div class="comment-text">
+<div class="ratings">
+                      <div class="rating-box">
+                        <div style="width:100%" class="rating"></div>
+                      </div>
+                      
+                    </div>
+<p class="meta">
+<strong>Stephen Smith</strong> <span>–</span> <span>June 02, 2018</span>
+</p>
+<div class="description"><p>Donec rutrum congue leo eget malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+</div>
+</div>
+</div>
+</li><!-- #comment-## -->
+</ol>
+                      <!--commentlist--> 
+                    </div>
+                    <!--comments-wrapper-->
+                    
+                    <div class="comments-form-wrapper comment-respond">
+                      <h3>Leave A reply</h3>
+                      <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked</p>
                       <form class="comment-form" method="post" id="postComment">
-                          <div class="field aw-blog-comment-area">
-                              <label for="comment">Comment<em class="required">*</em></label>
-                              <textarea rows="5" cols="50" class="input-text" title="Comment" id="comment" name="comment" placeholder="Comment"></textarea>
-                          </div>
-                          <div class="button-set">
-                              <input type="hidden" value="1" name="blog_id">
-                              <button type="submit" class="bnt-comment"><span><span>添加评论</span></span></button>
-                          </div>
+			              <div class="field aw-blog-comment-area">
+                          <label for="comment">Comment<em class="required">*</em></label>
+                          <textarea rows="5" cols="50" class="input-text" title="Comment" id="comment" name="comment" placeholder="Comment"></textarea>
+                        </div>
+                        <div class="button-set">
+                          <input type="hidden" value="1" name="blog_id">
+                          <button type="submit" class="bnt-comment"><span><span>Add Comment</span></span></button>
+                        </div>
                       </form>
+                    </div>
+                                 
                   </div>
-
-              </div>
           </div>
           <!--#main wrapper grid_8--> 
           

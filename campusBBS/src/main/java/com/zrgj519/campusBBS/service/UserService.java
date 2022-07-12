@@ -1,5 +1,6 @@
 package com.zrgj519.campusBBS.service;
 
+
 import com.zrgj519.campusBBS.dao.LoginTicketMapper;
 import com.zrgj519.campusBBS.dao.UserMapper;
 import com.zrgj519.campusBBS.entity.LoginTicket;
@@ -39,6 +40,12 @@ public class UserService {
     public User findUserById(int id){
         return userMapper.selectById(id);
     }
+//    public User findUserByName(String name){
+//        return userMapper.selectByName(name);
+//    }
+//    public User findUserByEmail(String email){
+//        return userMapper.selectByEmail(email);
+//    }
 
     public Map<String,Object> register(User user){
         Map<String,Object> map = new HashMap<>();
@@ -77,8 +84,7 @@ public class UserService {
         user.setSalt(CommunityUtil.generateUUID().substring(0,5));
         user.setPassword(CommunityUtil.md5(user.getPassword()+user.getSalt()));
         user.setType(0);
-        // 默认为1
-        user.setStatus(1);
+        user.setStatus(0);
         user.setActivationCode(CommunityUtil.generateUUID());
         user.setHeaderUrl("http://rdivs98sy.hb-bkt.clouddn.com/72a246e5799249c19d4615a0d25f0b8f");
         user.setCreateTime(new Date());
@@ -163,7 +169,31 @@ public class UserService {
         return users;
     }
 
+    public User findUserByName(String userName) {
+        return userMapper.selectByName(userName);
+    }
+
+
+
     public void logout(String ticket) {
         loginTicketMapper.updateStatus(ticket,1);
     }
+
+    public int deleteUser(int id) {
+        return userMapper.deleteUser(id);
+    }
+
+    public User find(int id){
+        return userMapper.find(id);
+    }
+
+    public void updateUser(User user){
+        userMapper.updateUser(user);
+    }
+
+    public List<User> findUser(Integer id,String username,String email){
+        return userMapper.findUser(id,username,email);
+    }
+
 }
+

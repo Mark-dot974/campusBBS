@@ -25,9 +25,7 @@ public class PostController {
     private UserContainer userContainer;
 
     @RequestMapping(path="/publish",method = RequestMethod.GET)
-    public String getPostPage() throws IllegalAccessException {
-        User user = userContainer.getUser();
-        if(user == null) throw new IllegalAccessException("未登录用户！");
+    public String getPostPage(){
         return "/site/post";
     }
 
@@ -46,8 +44,7 @@ public class PostController {
     @RequestMapping(path = "/getPostsByCid" , method = RequestMethod.GET)
     public String getPosts(@RequestParam(value = "cid",defaultValue = "1") int cid , Model model, Page page){
         page.setRows(postService.getPostsCountByCid(cid));
-        if(page.getCurrent()> page.getTotal()) page.setCurrent(page.getTotal());
-        page.setPath("/post/getPostsByCid?cid="+cid);
+        page.setPath("/getPostsByCid?cid="+cid);
         String cname="";
         if(cid == 1) cname = "失物招领";
         if(cid == 2) cname = "社交";
@@ -89,4 +86,5 @@ public class PostController {
         model.addAttribute("user",user);
         return "/site/detail";
     }
+
 }
