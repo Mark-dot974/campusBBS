@@ -1,5 +1,6 @@
 package com.zrgj519.campusBBS.service;
 
+
 import com.zrgj519.campusBBS.dao.LoginTicketMapper;
 import com.zrgj519.campusBBS.dao.UserMapper;
 import com.zrgj519.campusBBS.entity.LoginTicket;
@@ -112,29 +113,29 @@ public class UserService {
             return CampusBBSConstant.ACTIVATION_FAILURE;
         }
     }
-
-    public Map<String, Object> login(String username, String password, long expiredSeconds) {
+    public Map<String, Object> login(String username, String password, long expiredSeconds){
         // 验证客户端传递的信息是否可用
-        Map<String, Object> map = new HashMap<>();
-        if (StringUtils.isBlank(username)) {
-            map.put("usernameMsg", "账号不能为空！");
+        Map<String,Object> map = new HashMap<>();
+        if(StringUtils.isBlank(username)){
+            map.put("usernameMsg","账号不能为空！");
             return map;
         }
-        if (StringUtils.isBlank(password)) {
-            map.put("passwordMsg", "密码不能为空！");
+        if(StringUtils.isBlank(password))
+        {
+            map.put("passwordMsg","密码不能为空！");
             return map;
         }
 
         // 验证账号
         User user = userMapper.selectByName(username);
-        if (user == null) {
-            map.put("usernameMsg", "该账号不存在！");
+        if(user==null){
+            map.put("usernameMsg","该账号不存在！");
             return map;
         }
 
         // 验证状态(激活 or 未激活)
-        if (user.getStatus() == 0) {
-            map.put("usernameMsg", "该账号未激活！");
+        if(user.getStatus()==0){
+            map.put("usernameMsg","该账号未激活！");
             return map;
         }
 
@@ -156,11 +157,11 @@ public class UserService {
         return map;
     }
 
-    public LoginTicket findLoginTicketByTicket(String ticket) {
+    public LoginTicket findLoginTicketByTicket(String ticket){
         return loginTicketMapper.selectByTicket(ticket);
     }
 
-    public List<User> showUser() {
+    public List<User> showUser(){
         List<User> users = userMapper.showUser();
         return users;
     }
@@ -191,6 +192,7 @@ public class UserService {
     }
 
 
+
     public void logout(String ticket) {
         SecurityContextHolder.clearContext();
         loginTicketMapper.updateStatus(ticket,1);
@@ -213,16 +215,15 @@ public class UserService {
         userMapper.updateUser(user);
     }
 
+
     public List<User> findUser(Integer id,String username,String email){
         return userMapper.findUser(id,username,email);
     }
 
-    public Integer getAllUsersCount(Integer id,String username,String email){
-        return userMapper.selectUsersCount(id,username,email);
+    public Integer getAllUsersCount(Integer id,String username,String email) {
+        return userMapper.selectUsersCount(id, username, email);
     }
-
-    public User selectByNameInGroup(String members){
-        return userMapper.selectByNameInGroup(members);
+        public User selectByNameInGroup (String members){
+            return userMapper.selectByNameInGroup(members);
+        }
     }
-
-}
