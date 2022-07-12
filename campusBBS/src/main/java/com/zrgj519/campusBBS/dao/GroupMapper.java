@@ -2,6 +2,7 @@ package com.zrgj519.campusBBS.dao;
 
 import com.zrgj519.campusBBS.entity.Group;
 import com.zrgj519.campusBBS.entity.GroupFile;
+import com.zrgj519.campusBBS.entity.Post;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -17,4 +18,13 @@ public interface GroupMapper {
     int selectGroupCount();
 
     Group selectGroupById(int gid);
+
+
+    int deleteGroup(Integer gid);
+
+    Group find(Integer gid);
+
+    void updateGroup(Group group);
+
+    List<Group> findGroup(Integer gid,String groupName,String members);
 }
