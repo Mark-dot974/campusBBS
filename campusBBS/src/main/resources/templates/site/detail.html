@@ -54,7 +54,7 @@
            
             <h1 th:text="${post.title}">Icon internet world in the hands of a businessman network technology and communication</h1>
             <ul class="post-meta">
-                        <li><img th:src="${user.headerUrl}"  alt="auther"> <a href="#" th:text="${user.username}"> Karla Anderson  </a> </li>
+                        <li><a th:href="@{/user/personalPage(id=${user.id})}"><img th:src="${user.headerUrl}"  alt="auther"> </a><a href="#" th:text="${user.username}" th:href="@{/user/personalPage(id=${user.id})}"> Karla Anderson  </a> </li>
                 <!--点赞图标-->
                 <li >
                     <i class="fa fa-heart-o" id="like" onclick="changecolor()"></i>

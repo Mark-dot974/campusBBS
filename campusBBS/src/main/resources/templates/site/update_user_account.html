@@ -82,6 +82,7 @@
             <li class="current"><a th:href="@{/admin/users}" class="tables">用户账号管理</a></li>
             <li><a th:href="@{/admin/posts}" class="buttons">帖子管理</a></li>
             <li><a th:href="@{/admin/groups}" class="buttons">圈子管理</a></li>
+            <li><a th:href="@{/admin/tags}" class="tables">标签管理</a></li>
         </ul>
         <br /><br />
     </div><!--leftmenu-->
@@ -105,55 +106,60 @@
                 <table class="form_table" style = "border-collapse:separate; border-spacing:10px;font-size: 15px">
                     <tr class="msg" style="margin-top: 15px">
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold">ID&nbsp;: &nbsp;</text>
+                            <text style="font-weight: bold">用户ID&nbsp;: &nbsp;</text>
                             <span th:text="${user.id}"/> </td>
                         <input type="hidden" name="id" th:value="${user.id}">
                     </tr>
                     <tr class="msg" >
                         <td valign="middle" >
-                            <text style="font-weight: bold">Username&nbsp;: &nbsp;</text>
+                            <text style="font-weight: bold">用户名&nbsp;: &nbsp;</text>
                             <span th:text="${user.username}"/> </td>
                         <input type="hidden" name="username" th:value="${user.username}">
                     </tr>
                     <tr class="msg">
                         <td valign="middle" style="margin-top: 15px">
-                            <text style="font-weight: bold">Password&nbsp;: &nbsp;</text>
+                            <text style="font-weight: bold">密码&nbsp;: &nbsp;</text>
                             <span th:text="${user.password}"/> </td>
                         <input type="hidden" name="password" th:value="${user.password}">
                     </tr>
                     <tr class="msg">
                         <td valign="middle" style="margin-top: 15px">
-                            <text style="font-weight: bold">E-mail&nbsp;: &nbsp;</text>
+                            <text style="font-weight: bold">电子邮箱&nbsp;: &nbsp;</text>
                             <span th:text="${user.email}"/> </td>
                         <input type="hidden" name="email" th:value="${user.email}">
                     </tr>
                     <tr class="msg"  style="border-spacing:10px;">
                         <td valign="middle" style="margin-top: 15px">
-                            <text style="font-weight: bold">Type&nbsp;: &nbsp;</text>
+                            <text style="font-weight: bold">类型&nbsp;: &nbsp;</text>
                             <input type="text" th:value="${user.type}" name="type" /> </td>
                     </tr>
                     <tr class="msg">
                         <td valign="middle" style="margin-top: 10px">
-                            <text style="font-weight: bold">Status&nbsp;: &nbsp;</text>
+                            <text style="font-weight: bold">状态&nbsp;: &nbsp;</text>
                             <input type="text" th:value="${user.status}" name="status"/> </td>
                     </tr>
 
                     <tr class="msg">
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold">Interest&nbsp;: &nbsp;</text>
+                            <text style="font-weight: bold">兴趣&nbsp;: &nbsp;</text>
                             <span th:text="${user.interest}" /> </td>
                         <input type="hidden" name="interest" th:value="${user.interest}">
                     </tr>
-
                     <tr class="msg">
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold">Create Time&nbsp;: &nbsp;</text>
-                            <span th:text="${user.createTime}"/> </td>
+                            <text style="font-weight: bold">个性签名&nbsp;: &nbsp;</text>
+                            <span th:text="${user.signature}" /> </td>
+                        <input type="hidden" name="interest" th:value="${user.signature}">
+                    </tr>
+                    <tr class="msg">
+                        <td valign="middle" align="left">
+                            <text style="font-weight: bold">创建时间&nbsp;: &nbsp;</text>
+                            <span th:text="${#dates.format(user.createTime,'yyyy-MM-dd HH:mm:ss')}"/> </td>
                         <input type="hidden" name="createtime" th:value="${user.createTime}">
                     </tr>
                     <tr class="msg">
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold">Student ID&nbsp;: &nbsp;</text>
+                            <text style="font-weight: bold">学号&nbsp;: &nbsp;</text>
                             <span th:text="${user.sid}" name="sid"/> </td>
                     </tr>
                 </table>

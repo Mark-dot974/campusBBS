@@ -1,6 +1,7 @@
 package com.zrgj519.campusBBS.service;
 
 import com.zrgj519.campusBBS.dao.TagMapper;
+import com.zrgj519.campusBBS.entity.Group;
 import com.zrgj519.campusBBS.entity.Post;
 import com.zrgj519.campusBBS.entity.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,21 @@ public class TagService {
             posts.add(post);
         }
         return posts;
+    }
+    public int deleteTag(Integer id) {
+        return tagMapper.deleteTag(id);
+    }
+
+    public void updateTag(Tag tag){ tagMapper.updateTag(tag); }
+
+    public Tag find(Integer id){
+        return tagMapper.find(id);
+    }
+
+    public List<Tag> findTag(Integer id,String tagName,String postId,Integer offset,Integer limit){
+        return tagMapper.findTag(id,tagName,postId,offset,limit);
+    }
+    public int getTagsCount(Integer id,String tagName,String postId){
+        return tagMapper.selectCountOfTag(id,tagName,postId);
     }
 }

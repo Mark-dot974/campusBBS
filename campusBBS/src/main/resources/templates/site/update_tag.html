@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>帖子管理页面</title>
+    <title>标签管理页面</title>
     <link rel="stylesheet" th:href="@{/css/style.default.css}" type="text/css" />
     <script type="text/javascript" th:src="@{js/plugins/jquery-1.7.min.js}"></script>
     <script type="text/javascript" th:src="@{js/plugins/jquery-ui-1.8.16.custom.min.js}"></script>
@@ -60,7 +60,7 @@
     
     <div class="header">
     	<ul class="headermenu">
-        	<li><a a th:href="@{/admin/posts}"><span class="icon icon-flatscreen"></span>表管理</a></li>
+        	<li><a a th:href="@{/admin/tags}"><span class="icon icon-flatscreen"></span>表管理</a></li>
 
         </ul>
         
@@ -71,9 +71,9 @@
     <div class="vernav2 iconmenu">
     	<ul>
             <li><a th:href="@{/admin/users}" class="tables">用户账号管理</a></li>
-            <li class="current"><a th:href="@{/admin/posts}" class="tables">帖子管理</a></li>
-            <li><a th:href="@{/admin/groups}" class="tables">圈子管理</a></li>
-            <li><a th:href="@{/admin/tags}" class="tables">标签管理</a></li>
+            <li><a th:href="@{/admin/posts}" class="tables">帖子管理</a></li>
+            <li ><a th:href="@{/admin/groups}" class="tables">圈子管理</a></li>
+            <li class="current"><a th:href="@{/admin/tags}" class="tables">标签管理</a></li>
         </ul>
         <br /><br />
     </div><!--leftmenu-->
@@ -81,70 +81,48 @@
     <div class="centercontent tables">
     
         <div class="pageheader notab">
-            <h1 class="pagetitle">帖子管理</h1>
-            <span class="pagedesc">Post Management</span>
+            <h1 class="pagetitle">标签管理</h1>
+            <span class="pagedesc">Tag Management</span>
             
         </div><!--pageheader-->
         
         <div id="contentwrapper" class="contentwrapper">
                         
           <div class="contenttitle2">
-            <h3 >修改帖子信息</h3>
+            <h3 >修改标签信息</h3>
           </div><!--contenttitle-->
 
-            <form th:action="@{/updatePost}" method="post" enctype="multipart/form-data">
+            <form th:action="@{/updateTag}" method="post" enctype="multipart/form-data">
                 <table class="form_table" style = "border-collapse:separate; border-spacing:10px;font-size: 15px">
                     <tr class="msg" style="margin-top: 15px">
                         <td valign="middle" align="left">
-                         <text style="font-weight: bold">帖子ID&nbsp;: &nbsp;</text>
-                            <span th:text="${post.id}" /> </td>
-                        <input type="hidden" name="id" th:value="${post.id}">
+                         <text style="font-weight: bold">标签ID&nbsp;: &nbsp;</text>
+                            <span th:text="${tag.id}" /> </td>
+                        <input type="hidden" name="id" th:value="${tag.id}">
                     </tr>
                     <tr class="msg">
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold">发帖用户ID&nbsp;: &nbsp;  </text>
-                            <span th:text="${post.userId}" /> </td>
-                        <input type="hidden" name="userId" th:value="${post.userId}">
+                            <text style="font-weight: bold">标签名称&nbsp;: &nbsp;  </text>
+                        <input type="text" name="tagName" th:value="${tag.tagName}">
+
                     </tr>
                     <tr class="msg">
                         <div >
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold">标题&nbsp;: &nbsp;</text>
-                            <span th:text="${post.title}" /> </td>
-                            <input type="hidden" name="title" th:value="${post.title}"/>  </td>
+                            <text style="font-weight: bold">标签下帖子ID&nbsp;: &nbsp;</text>
+                            <span th:text="${tag.postId}" /> </td>
+                            <input type="hidden" name="postId" th:value="${tag.postId}"/>  </td>
                         </div>
                     </tr>
                     <tr class="msg">
                         <td valign="middle" align="left" style="width: 650px">
-                           <text style="font-weight: bold">内容&nbsp;: &nbsp;</text>
-                            <span th:text="${post.content}"/> </td>
-                            <input type="hidden" th:value="${post.content}" name="content" />  </td>
+                           <text style="font-weight: bold">标签下帖子数&nbsp;: &nbsp;</text>
+                            <span th:text="${tag.postCount}"/> </td>
+                            <input type="hidden" th:value="${tag.postCount}" name="content" />  </td>
                     </tr>
-                    <tr class="msg">
-                        <td valign="middle" align="left">
-                            <text style="font-weight: bold"> 类型&nbsp;: &nbsp;<br></text>
-                        <input type="text" th:value="${post.type}" name="type"/>
-                    </tr>
-                    <tr class="msg">
-                        <td valign="middle" align="left">
-                         <text style="font-weight: bold">状态&nbsp;:&nbsp;<br></text>
-                            <input type="text" th:value="${post.status}" name="status"/>
-                    </tr>
-                    <tr class="msg">
-                        <td valign="middle" align="left">
-                           <text style="font-weight: bold"> 标签&nbsp;: &nbsp;&nbsp;</text>
-                            <span th:text="${post.tag}" /> </td>
-                        <input type="hidden" name="tag" th:value="${post.tag}">
-                    </tr>
-                    <tr class="msg">
-                        <td valign="middle" align="left">
-                            <text style="font-weight: bold">发布时间&nbsp;: &nbsp;</text>
-                            <span th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}" name="createtime"/> </td>
-                    </tr>
-
                 </table>
-                <button type="submit" onclick="updatepost()" style="background-color: rgb(251,225,34);width: 100px;height: 40px;border-color: #FFFFFF;border-radius: 10px;margin-left: 20px">提&nbsp;交</button>
-                <a th:href="@{/admin/posts}" class="tables" >
+                <button type="submit" onclick="updategroup()" style="background-color: rgb(251,225,34);width: 100px;height: 40px;border-color: #FFFFFF;border-radius: 10px;margin-left: 20px">提&nbsp;交</button>
+                <a th:href="@{/admin/tags}" class="tables">
                     <button style="background-color: rgb(251,225,34);width: 100px;height: 40px;border-color: #FFFFFF;border-radius: 10px;margin-left: 20px">返&nbsp;回</button></a>
             </form>
 
@@ -168,8 +146,8 @@
 </body>
 <script>
 
-    function updatepost(){
-        if(confirm("确实要更改帖子信息吗?")){
+    function updategroup(){
+        if(confirm("确实要更改圈子信息吗?")){
             alert("更改成功！");
         }else{
             event.preventDefault(); //取消默认应答

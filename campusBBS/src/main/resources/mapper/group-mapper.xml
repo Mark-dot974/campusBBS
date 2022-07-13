@@ -74,6 +74,21 @@
             </if>
         </where>
         order by gid asc
+        limit #{offset},#{limit}
     </select>
-
+    <select id="selectCountOfGroup" resultType="int">
+        select count(*)
+        from collaboration_group
+        <where>
+            <if test="gid!=null and gid!='' ">
+                and gid = #{gid}
+            </if>
+            <if test="groupName!=null and groupName!='' ">
+                and group_name like '%' #{groupName} '%'
+            </if>
+            <if test="members!=null and members!='' ">
+                and members like '%' #{members} '%'
+            </if>
+        </where>
+    </select>
 </mapper>
