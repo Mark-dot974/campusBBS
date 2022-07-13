@@ -37,8 +37,8 @@ public interface UserMapper {
 //    修改用户信息
     void updateUser(User user);
 
-    List<User> findUser(Integer id,String username,String email);
+    List<User> findUser(Integer id,String username,String email,Integer offset,Integer limit);
 
-
+    Integer selectUsersCount(Integer id,String username,String email);
 
 }
