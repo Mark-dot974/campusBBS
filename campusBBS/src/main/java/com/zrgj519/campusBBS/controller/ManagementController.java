@@ -1,7 +1,5 @@
 package com.zrgj519.campusBBS.controller;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.zrgj519.campusBBS.entity.*;
 import com.zrgj519.campusBBS.service.GroupService;
 import com.zrgj519.campusBBS.service.PostService;
