@@ -19,6 +19,7 @@ public interface GroupMapper {
 
     Group selectGroupById(int gid);
 
+    void updateGroupMember(String members,int gid,int membersCount);
 
     int deleteGroup(Integer gid);
 

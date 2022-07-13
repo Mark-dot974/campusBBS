@@ -115,7 +115,9 @@
         where status!=2
         and from_id = 1
         and to_id = #{userId}
+        <if test="topic!=null">
         and conversation_id = #{topic}
+        </if>
         order by create_time desc
         limit #{offset} , #{limit}
     </select>
