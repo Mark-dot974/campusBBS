@@ -3,8 +3,11 @@ package com.zrgj519.campusBBS.controller;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
 import com.zrgj519.campusBBS.entity.*;
+import com.zrgj519.campusBBS.entity.Event.Event;
+import com.zrgj519.campusBBS.entity.Event.Producer;
 import com.zrgj519.campusBBS.service.GroupService;
 import com.zrgj519.campusBBS.service.UserService;
+import com.zrgj519.campusBBS.util.CampusBBSConstant;
 import com.zrgj519.campusBBS.util.CampusBBSUtil;
 import com.zrgj519.campusBBS.util.UserContainer;
 import org.apache.commons.lang3.StringUtils;
@@ -42,16 +45,19 @@ public class GroupController {
     @Value("${qiniu.bukcet.file.url}")
     private String fileBucketUrl;
 
+    @Autowired
+    private Producer producer;
+
     @RequestMapping("/create")
     @ResponseBody
     public String createGroup(Group group){
-        System.out.println("create a group");
         Group groupByName = groupService.getGroupByName(group.getGroupName());
         if(groupByName!=null){
             return CampusBBSUtil.getJSONString(1,"协作圈名已存在~");
         }
         group.setMembers(userContainer.getUser().getUsername());
         group.setMembersCount(1);
+        group.setGroupHeader("http://repbhxlop.hb-bkt.clouddn.com/%E9%BB%98%E8%AE%A4%E7%BB%84%E5%A4%B4%E5%83%8F.jpg");
         group.setGroupLeader(userContainer.getUser().getUsername());
         group.setCreateTime(new Date());
         groupService.addGroup(group);
@@ -106,6 +112,8 @@ public class GroupController {
         model.addAttribute("fileName",fileName);
         model.addAttribute("gid",gid);
         Group group = groupService.getGroupById(gid);
+        model.addAttribute("group",group);
+        model.addAttribute("loginUser",userContainer.getUser());
         // 填充圈员信息
         List<User> members = new ArrayList<>();
         String m = group.getMembers();
@@ -136,6 +144,43 @@ public class GroupController {
         file.setUrl(url);
         System.out.println("file = " + file.toString());
         groupService.uploadFile(file);
+        return CampusBBSUtil.getJSONString(0);
+    }
+
+    @RequestMapping("/apply")
+    @ResponseBody
+    public String applyForGroup(String groupName,int gid,String leader,int userId){
+        User groupLeader = userService.findUserByName(leader);
+        // 触发申请事件
+        Event event = new Event();
+        event.setTopic(CampusBBSConstant.TOPIC_APPLY)
+                .setEntityId(gid)
+                .setUserId(userId)
+                .setEntityUserId(groupLeader.getId())
+                .setData("result",0);
+
+        producer.fireEvent(event);
+        return CampusBBSUtil.getJSONString(0);
+    }
+
+    // 同意：你已经成为了（）的一员啦~
+    // 很遗憾，你的申请被拒绝了
+    @RequestMapping("/operate")
+    @ResponseBody
+    public String accept(String operation,int userId,int gid){
+        Event event = new Event()
+                .setEntityId(gid)
+                .setEntityUserId(userId)
+                .setTopic(operation);
+          producer.fireEvent(event);
+          return CampusBBSUtil.getJSONString(0);
+    }
+
+    @RequestMapping("/invite")
+    @ResponseBody
+    public String invite(String username,int gid){
+        System.out.println("username = " + username);
+        groupService.addGroupMember(username,gid);
         return CampusBBSUtil.getJSONString(0);
     }
 }

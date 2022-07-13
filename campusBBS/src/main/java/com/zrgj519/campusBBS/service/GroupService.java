@@ -55,4 +55,10 @@ public class GroupService {
     public void uploadFile(GroupFile file){
         fileMapper.insertFile(file);
     }
+
+    public void addGroupMember(String username,int gid){
+        Group group = groupMapper.selectGroupById(gid);
+        String members = group.getMembers();
+        groupMapper.updateGroupMember(members+","+username,gid,group.getMembersCount()+1);
+    }
 }

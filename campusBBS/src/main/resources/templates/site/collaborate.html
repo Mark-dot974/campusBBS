@@ -101,8 +101,8 @@
                                                 </div>
                                                 <!--blog_entry-header-inner-->
                                             </header>
-                                            <ul class="post-meta" th:each="user:${map.members}">
-                                                <li style="margin: 0px"><img th:src="${user.headerUrl}"
+                                            <ul class="post-meta">
+                                                <li style="margin: 0px" th:each="user:${map.members}"><img th:src="${user.headerUrl}"
                                                                              alt="auther"></li>
 <!--                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"-->
 <!--                                                                             alt="auther"></li>-->

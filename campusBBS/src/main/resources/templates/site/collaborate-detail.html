@@ -54,43 +54,47 @@
             <div class="collaborate-title col-md-offset-2">
                 <img src="http://repbhxlop.hb-bkt.clouddn.com/%E9%BB%98%E8%AE%A4%E7%BB%84%E5%A4%B4%E5%83%8F.jpg"
                      alt="..." class="img-circle profile-pic " style="margin: 10px 20px 30px 0">
-                <h1 style="display: inline-block;">全民制作人</h1>
+                <h1 style="display: inline-block;" th:text="${group.groupName}">全民制作人</h1>
                 <button class="col-md-offset-1 btn btn-primary" type="button" id="btn-update"
                         data-target="#publishModal">修改协作圈信息
                 </button>
-                <button class="btn btn-primary" type="button" id="btn-join" data-target="#publishModal">
+                <button class="btn btn-primary" type="button" id="btn-join" data-target="#publishModal" th:if="${loginUser!=null}" onclick="apply()">
                     申请加入
                 </button>
+                <form id="applyForm">
+                    <input type="hidden" name="groupName" th:value="${group.groupName}">
+                    <input type="hidden" name="gid" th:value="${group.gid}">
+                    <input type="hidden" name="leader" th:value="${group.groupLeader}">
+                    <input type="hidden" name="userId" th:if="${loginUser!=null}" th:value="${loginUser.id}">
+                </form>
                 <!--                加入-->
-                <div class="modal fade" id="join" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <form>
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                            aria-hidden="true">×</span></button>
-                                    <h4 class="modal-title">加入协作圈</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="txt_departmentlevel">验证信息</label>
-                                        <input type="text" name="txt_departmentlevel" class="form-control"
-                                               placeholder="我是...我想...">
-                                    </div>
+<!--                <div class="modal fade" id="join" tabindex="-1" role="dialog">-->
+<!--                    <div class="modal-dialog" role="document">-->
+<!--                        <div class="modal-content">-->
+<!--                            <form>-->
+<!--                                <div class="modal-header">-->
+<!--                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span-->
+<!--                                            aria-hidden="true">×</span></button>-->
+<!--                                    <h4 class="modal-title">加入协作圈</h4>-->
+<!--                                </div>-->
+<!--                                <div class="modal-body">-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="txt_departmentlevel">验证信息</label>-->
+<!--                                    </div>-->
 
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span
-                                            class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
-                                    </button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal"><span
-                                            class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>发送
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+<!--                                </div>-->
+<!--                                <div class="modal-footer">-->
+<!--                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span-->
+<!--                                            class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭-->
+<!--                                    </button>-->
+<!--                                    <button type="button" class="btn btn-primary" data-dismiss="modal"><span-->
+<!--                                            class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>发送-->
+<!--                                    </button>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
                 <!--    修改协作圈        -->
 
@@ -160,8 +164,10 @@
             <div class="row-fluid">
                 <div class="col-md-12">
                     <div class="collaborators">
-                        <a href="#"><img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic"></a>
-                        <a href="#"><img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic"></a>
+                        <a href="#" th:each="member:${members}">
+                            <img th:src="${member.headerUrl}" alt="..." class="img-circle profile-pic">
+                        </a>
+<!--                        <a href="#"><img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic"></a>-->
 
                         <a href="#" id="btn-invite"><img th:src="@{/images/newProfile.png}" alt="..."
                                                          class="img-circle profile-pic"></a>
@@ -176,12 +182,13 @@
                                                 aria-hidden="true">×</span></button>
                                         <h4 class="modal-title">邀请其他用户</h4>
                                     </div>
-                                    <form>
+                                    <form id="inviteForm">
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <label for="txt_departmentlevel">邀请</label>
-                                                <input type="text" name="txt_departmentlevel" class="form-control"
+                                                <input type="text" name="username" class="form-control"
                                                        placeholder="用户名">
+                                                <input type="hidden" name="gid" th:value="${group.gid}">
                                             </div>
 
                                         </div>
@@ -190,7 +197,7 @@
                                                     class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
                                             </button>
                                             <button type="button" class="btn btn-primary" data-dismiss="modal"><span
-                                                    class="glyphicon glyphicon-plane" aria-hidden="true"></span>邀请
+                                                    class="glyphicon glyphicon-plane" aria-hidden="true" onclick="invite()"></span>邀请
                                             </button>
                                         </div>
                                     </form>
@@ -253,156 +260,6 @@
                                 <a th:href="${file.url}"><button>下载</button></a>
                             </td>
                         </tr>
-<!--                        <tr class="success">-->
-<!--                            <td>-->
-<!--                                1-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <div class="group_detail_text_style">哎u发哈我i发哈我iu和</div>-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                01/04/2012-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <form class="form-group">-->
-<!--                                    <input class="uploadFile" type="file"-->
-<!--                                           style="display: inline; width: 180px;">-->
-
-<!--                                    <button class="update" type="submit" disabled="disabled">更新</button>-->
-<!--                                </form>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr class="success">-->
-<!--                            <td>-->
-<!--                                1-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <div class="group_detail_text_style">ordhello.wordhello.</div>-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                01/04/2012-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <form class="form-group">-->
-<!--                                    <input class="uploadFile" type="file"-->
-<!--                                           style="display: inline; width: 180px;">-->
-
-<!--                                    <button class="update" type="submit" disabled="disabled">更新</button>-->
-<!--                                </form>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr class="success">-->
-<!--                            <td>-->
-<!--                                1-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                hello.word-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                01/04/2012-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <form class="form-group">-->
-<!--                                    <input class="uploadFile" type="file"-->
-<!--                                           style="display: inline; width: 180px;">-->
-
-<!--                                    <button class="update" type="submit" disabled="disabled">更新</button>-->
-<!--                                </form>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr class="success">-->
-<!--                            <td>-->
-<!--                                1-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                hello.txt-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                01/04/2012-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <form class="form-group">-->
-<!--                                    <input class="uploadFile" type="file"-->
-<!--                                           style="display: inline; width: 180px;">-->
-
-<!--                                    <button class="update" type="submit" disabled="disabled">更新</button>-->
-<!--                                </form>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr class="warning">-->
-<!--                            <td>-->
-<!--                                2-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                TB - Monthly-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                02/04/2012-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <form class="form-group">-->
-<!--                                    <input class="uploadFile" type="file" style="display: inline; width: 180px;"-->
-<!--                                           disabled="disabled">-->
-<!--                                    <button class="update" type="submit">更新</button>-->
-<!--                                </form>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr class="warning">-->
-<!--                            <td>-->
-<!--                                2-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                TB - Monthly-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                02/04/2012-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <form class="form-group">-->
-<!--                                    <input class="uploadFile" type="file" style="display: inline; width: 180px;"-->
-<!--                                           disabled="disabled">-->
-<!--                                    <button class="update" type="submit">更新</button>-->
-<!--                                </form>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr class="error">-->
-<!--                            <td>-->
-<!--                                3-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                TB - Monthly-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                03/04/2012-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <form class="form-group">-->
-<!--                                    <input class="uploadFile" type="file"-->
-<!--                                           style="display: inline; width: 180px;">-->
-
-<!--                                    <button class="update" type="submit">更新</button>-->
-<!--                                </form>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr class="info">-->
-<!--                            <td>-->
-<!--                                4-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                TB - Monthly-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                04/04/2012-->
-<!--                            </td>-->
-<!--                            <td>-->
-<!--                                <form class="form-group">-->
-<!--                                    <input class="uploadFile" type="file"-->
-<!--                                           style="display: inline; width: 180px;">-->
-
-<!--                                    <button class="update" type="submit">更新</button>-->
-<!--                                </form>-->
-<!--                            </td>-->
-<!--                        </tr>-->
                         </tbody>
                     </table>
 
@@ -443,6 +300,7 @@
 <script th:src="@{/js/include.js}"></script>
 <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
 <script th:src="@{/js/countdown.js}"></script>
+<script th:src="@{/js/group.js}"/>
 <script>
     function uploadFile(){
         alert("happy")

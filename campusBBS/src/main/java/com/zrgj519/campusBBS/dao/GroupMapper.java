@@ -17,4 +17,6 @@ public interface GroupMapper {
     int selectGroupCount();
 
     Group selectGroupById(int gid);
+
+    void updateGroupMember(String members,int gid,int membersCount);
 }
