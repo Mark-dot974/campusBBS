@@ -1,5 +1,6 @@
 package com.zrgj519.campusBBS.dao;
 
+import com.zrgj519.campusBBS.entity.Group;
 import com.zrgj519.campusBBS.entity.Tag;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,4 +21,14 @@ public interface TagMapper {
 
     // 返回根据postCount排序的前limit条数据
     List<Tag> selectHotTags(int limit);
+
+    int deleteTag(Integer id);
+
+    Tag find(Integer id);
+
+    void updateTag(Tag tag);
+
+    List<Tag> findTag(Integer id,String tagName,String postId,Integer offset,Integer limit);
+
+    int selectCountOfTag(Integer id,String tagName,String postId);
 }

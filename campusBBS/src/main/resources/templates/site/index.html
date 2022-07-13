@@ -112,16 +112,14 @@
               <ul class="posts-list unstyled clearfix">
                          <li th:each="map:${postsInfo}">
 						  <figure class="featured-thumb">
-<!--							  <a th:href="@{category.html}"></a>-->
+							  <a th:href="@{category.html}"></a>
 							 </figure>
                                <div class="content-info">
                                  <!--标签样式-->
-                                 <div class="index_tag_style" th:if="${map.tags}!=null">
+                                 <div class="index_tag_style">
                                    <div style="display: flex">
-
                                      <div style="margin-right: 10px" th:each="tag:${map.tags}">
-                                       <a class="tag " href="#" title="Fashion" th:text="${tag}">Technology</a>
-                                       <p th:text="${map.tags[0]}"></p>
+                                       <a class="tag " href="#" title="Fashion" th:text="tag">Technology</a>
                                      </div>
                                    </div>
                                  </div>
@@ -132,7 +130,7 @@
                                 <div class="post_meta" style="display: flex">
                                   <!--头像-->
                                   <div style="width: 120px">
-                                    <img th:src="${map.user.headerUrl}" alt="auther" style="width: 35px;height: 35px; border-radius: 50%"> <a href="#" style="color: #898989"><i th:text="${map.user.username}">Smith John</i> </a>
+                                    <img th:src="@{/images/gdl.jpg}" alt="auther" style="width: 35px;height: 35px; border-radius: 50%"> <a href="#" style="color: #898989">Smith John </a>
                                   </div>
                                   <div style="width: 120px; height: 35px;">
                                     <div style="margin-top: 4px">

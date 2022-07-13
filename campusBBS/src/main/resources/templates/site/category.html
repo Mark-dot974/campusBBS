@@ -89,10 +89,14 @@
                       <ul class="post-meta">
                         <!--发布用户头像-->
                         <li>
-                          <div style="width:80px">
+
+                          <div style="width:80px;display: flex;">
+                            <a th:href="@{/user/personalPage(id=${map.user.id})}">
                             <img th:src="${map.user.headerUrl}" alt="auther">
-                            <a href="#" th:utext="${map.user.username}">Smith John </a>
+                            <span href="#" th:utext="${map.user.username}">Smith John </span>
+                            </a>
                           </div>
+
                         </li>
                         <!--点赞图标-->
                         <li >

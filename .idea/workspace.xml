@@ -5,7 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ceb262d3-de3c-462d-b897-25a0ec356ba5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/center.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/center.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/controller/IndexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/controller/ManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/controller/ManagementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/GroupMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/GroupMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/PostMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/PostMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/TagMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/TagMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/GroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/GroupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/TagService.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/TagService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/group-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/group-mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/post-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/post-mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/tag-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/tag-mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/user-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/user-mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/static/css/style.default.css" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/static/css/style.default.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/aside.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/category.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/collaborate.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/collaborate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/group_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/group_management.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/personal_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/personal_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/post_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/post_management.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/update_group.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/update_group.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/update_post.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/update_post.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/update_user_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/update_user_account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/user_account_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/user_account_management.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,21 +71,49 @@
     </favorite-branches>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="2Bb3MKHAWkcURPLEIzsQKAMQjgO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/campusBBS" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\刘衍初\Desktop\campusBBS\campusBBS\src\main\resources\templates\site" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="CampusBbsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="campusBBS" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.zrgj519.campusBBS.CampusBbsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -69,6 +127,8 @@
       <workItem from="1657160987787" duration="33000" />
       <workItem from="1657186208505" duration="845000" />
       <workItem from="1657501659080" duration="21000" />
+      <workItem from="1657597518371" duration="29994000" />
+      <workItem from="1657674600704" duration="3717000" />
     </task>
     <servers />
   </component>
@@ -86,5 +146,8 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/campusBBS$CampusBbsApplication.ic" NAME="CampusBbsApplication 覆盖结果" MODIFIED="1657608954587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

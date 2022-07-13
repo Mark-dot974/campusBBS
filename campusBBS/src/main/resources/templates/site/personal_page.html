@@ -41,7 +41,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-main col-sm-9 col-sm-push-3 product-grid">
-                        <div class="pro-coloumn box-content box-category">
+                        <div class="pro-coloumn box-content box-category" style="text-align: center">
                             <!--这里是个人页面具体信息-->
                             <ul class="nav nav-pills nav-stacked">
                                 <div>
@@ -50,63 +50,35 @@
                                             <div class="step-title" style="display:flex;margin-left: 100px;border-bottom: 15px">
                                                 <!--此处显示头像-->
                                                 <div style=" margin-left: 20px">
-                                                    <a title="" class="">
-                                                        <img src="images/gdl.jpg" style="border-radius: 50%; height: 80px;height: 80px">
+                                                    <a th:href="@{/user/personalPage(id=${user.id})}">
+                                                        <img th:src="${user.headerUrl}" style="border-radius: 50%; height: 80px;height: 80px">
                                                     </a>
+
                                                 </div>
                                                 <div>
                                                     <h3 class="one_page_heading" style="margin-left: 25px">
                                                         <!--昵称显示-->
-                                                        <b>iKun</b>
+                                                        <span th:text="${user.username}"></span>
                                                     </h3>
                                                     <!--个性签名显示-->
-                                                    <div style="margin-left: 25px;margin-top: 10px;width: 350px;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;margin-top: 10px">
-                                                    <span style="width: 350px">测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文测试中文</span>
-                                                    </div>
+                                                    <p style="margin-left: 25px;width: 200px;text-overflow: ellipsis;overflow: hidden"><span th:text="${user.signature}"></span></p>
                                                     <!--标签显示-->
-                                                    <div style="margin-left: 25px;margin-top: 10px;width: 400px;" class="personal_page_span_style">
-                                                        <div style="display: flex">
-                                                            <div style="width: 100px">
-                                                            他感兴趣的：
-                                                            </div>
-                                                            <div style="width: 350px;">
-                                                                <span>#唱</span>
-                                                                <span>#跳</span>
-                                                                <span>#rap</span>
-                                                                <span>#唱</span>
-                                                                <span>#跳</span>
-                                                                <span>#rap</span>
-                                                                <span>#唱</span>
-                                                                <span>#跳</span>
-                                                                <span>#rap</span>
-                                                                <span>#唱</span>
-                                                                <span>#跳</span>
-                                                                <span>#rap</span>
-                                                            </div>
-                                                        </div>
+                                                    <div style="margin-left: 25px" class="personal_page_span_style">
 
-                                                    </div>
-                                                    <div style="margin-left: 25px;margin-top: 10px;display: flex">
-                                                        <!--赞图标-->
-                                                        <div>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16" style="margin-top: 2px;color: #cecece">
-                                                                <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
-                                                            </svg>
-                                                        </div>
-                                                        他获得的赞：<span>66</span>
+                                                        <span th:text="'#'+${user.interest}"></span>
                                                     </div>
 
                                                 </div>
                                                 <div style="text-align: center;vertical-align: middle;width: 300px;height: 104px;">
-                                                    <ul class="nav nav-pills nav-stacked" style="margin-top: 50px; width: 300px">
-                                                        <li style="width: 90px;border-radius: 10%;text-align: center;display: inline-block;border: #898989 1px solid">
+                                                    <ul class="nav nav-pills nav-stacked" style="margin-top: 35px; width: 600px">
+                                                        <li style="width: 90px;border-radius: 10%;text-align: center;display: inline-block">
                                                             <!--去set的链接-->
                                                             <a style="cursor: pointer;color:#7a7a7a" href="center.html">
                                                                 <i class="glyphicon glyphicon-cog"></i>
                                                                 修改信息
                                                             </a>
                                                         </li>
-                                                        <li style="width: 70px;border-radius: 10%;text-align: center;display: inline-block;border: #898989 1px solid">
+                                                        <li style="width: 70px;border-radius: 10%;text-align: center;display: inline-block">
                                                             <!--去私信的链接-->
                                                             <a style="cursor: pointer;color: #7a7a7a">
                                                                 <i class="fa fa-envelope"></i>
@@ -127,7 +99,6 @@
                     <div id="aside_left"></div>
                     <!--col-right sidebar-->
                 </div>
-                <div style="height: 180px"></div>
                 <!--row-->
             </div>
             <!--container-->

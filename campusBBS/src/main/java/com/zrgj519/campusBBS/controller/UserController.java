@@ -3,6 +3,7 @@ package com.zrgj519.campusBBS.controller;
 
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
+import com.zrgj519.campusBBS.entity.Post;
 import com.zrgj519.campusBBS.entity.User;
 import com.zrgj519.campusBBS.service.UserService;
 import com.zrgj519.campusBBS.util.CampusBBSUtil;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -99,5 +101,12 @@ public class UserController {
         System.out.println(user.toString());
         model.addAttribute("loginUser",userContainer.getUser());
         return "/site/profile_set";
+    }
+
+    @RequestMapping("/personalPage")
+    public String findUserById(int id,Model model){
+        User user = userService.findUserById(id);
+        model.addAttribute("user",user);
+        return "/site/personal_page";
     }
 }

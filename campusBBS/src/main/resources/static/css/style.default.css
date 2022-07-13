@@ -153,7 +153,7 @@ body.withmenucoll2 { background-position: 35px 0; } /* with menu style 2 in coll
 /********************************/
 
 
-.topheader { background: rgb(52,58,64); padding: 8px 10px; position: relative; border-bottom: 1px solid rgb(120,120,120); }
+.topheader { background: rgb(35,41,46); padding: 8px 10px; position: relative; border-bottom: 1px solid rgb(120,120,120); }
 .topheader .left h1.logo {
 	font-family: 'RobotoCondensed', Arial, Helvetica, sans-serif; font-weight: normal; text-transform: uppercase; color: rgb(251,225,34);
 	float: left; font-size: 30px; margin: 10px 0;
@@ -161,7 +161,7 @@ body.withmenucoll2 { background-position: 35px 0; } /* with menu style 2 in coll
 .topheader .left h1.logo span { color: #fff; }
 .topheader .left .slogan {
 	font-family: 'RobotoCondensed', Arial, Helvetica, sans-serif; float: left; padding: 8px 10px;
-	border-left: 1px solid #606d84; color: #6a778d; font-style: italic; margin: 2px 10px;
+	border-left: 1px solid #606d84; color: rgb(251,225,34);  margin: 2px 10px;font-size: 20px;letter-spacing:5px;
 }
 
 .search { float: left; margin: 2px 10px; }
@@ -274,11 +274,11 @@ body.withmenucoll2 { background-position: 35px 0; } /* with menu style 2 in coll
 
 
 .header {
-	background: rgb(52,58,64) ; min-height: 50px; overflow: hidden; border-bottom: 5px solid rgb(251,225,34);
+	background: rgb(35,41,46) ; min-height: 50px; overflow: hidden; border-bottom: 5px solid rgb(251,225,34);
 	-moz-box-shadow: inset 0 1px 0 #50627f; -webkit-box-shadow: inset 0 1px 0 #50627f; box-shadow: inset 0 1px 0 #50627f;
 	position: relative;
 }
-.headermenu { overflow: hidden; list-style: none; border-right: 1px solid rgb(120,120,120); display: inline-block; }
+.headermenu { background: rgb(35,41,46);overflow: hidden; list-style: none; border-right: 1px solid rgb(120,120,120); display: inline-block; }
 .headermenu li { float: left; display: inline-block; border-left: 1px solid rgb(120,120,120); border-right: 1px solid rgb(120,120,120); }
 .headermenu li:first-child { border-left: 0; }
 .headermenu li a {
@@ -326,7 +326,7 @@ body.withmenucoll2 { background-position: 35px 0; } /* with menu style 2 in coll
 
 .pageheader { padding-top: 20px; background: url(../images/default/noise.white.png); position: relative; }
 .pageheader .pagetitle {
-	margin: 0 10px; color: #485b79; font-weight: normal; font-size: 28px; font-family: 'RobotoBoldCondensed', Arial, Helvetica, sans-serif;
+	margin: 0 10px; color: black; font-weight: normal; font-size: 28px; font-family: 'RobotoBoldCondensed', Arial, Helvetica, sans-serif;
 }
 .pageheader .pagedesc { color: #666; margin: 0 10px; }
 .notab { border-bottom: 1px solid #ddd; padding-bottom: 20px; }
@@ -525,7 +525,7 @@ body.withmenucoll2 { background-position: 35px 0; } /* with menu style 2 in coll
 }
 .contenttitle h4 { padding: 12px 10px; font-size: 14px; }
 
-.contenttitle2 { margin: 20px 0; border-bottom: 2px solid rgb(251,225,34); padding-bottom: 5px; padding-right: 20px; display: inline-block; }
+.contenttitle2 { margin: 20px 0; border-bottom: 5px solid rgb(251,225,34); padding-bottom: 5px; padding-right: 20px; display: inline-block; }
 .contenttitle2 h3 { font-size: 16px; font-weight: normal; text-transform: uppercase; }
 
 
