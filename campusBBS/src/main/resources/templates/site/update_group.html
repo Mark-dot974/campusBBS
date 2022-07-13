@@ -73,6 +73,7 @@
             <li><a th:href="@{/admin/users}" class="tables">用户账号管理</a></li>
             <li><a th:href="@{/admin/posts}" class="tables">帖子管理</a></li>
             <li  class="current"><a th:href="@{/admin/groups}" class="tables">圈子管理</a></li>
+            <li><a th:href="@{/admin/tags}" class="tables">标签管理</a></li>
         </ul>
         <br /><br />
     </div><!--leftmenu-->
@@ -95,46 +96,46 @@
                 <table class="form_table" style = "border-collapse:separate; border-spacing:10px;font-size: 15px">
                     <tr class="msg" style="margin-top: 15px">
                         <td valign="middle" align="left">
-                         <text style="font-weight: bold">GID&nbsp;: &nbsp;</text>
+                         <text style="font-weight: bold">圈子ID&nbsp;: &nbsp;</text>
                             <span th:text="${group.gid}" /> </td>
                         <input type="hidden" name="gid" th:value="${group.gid}">
                     </tr>
                     <tr class="msg">
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold">Group Name&nbsp;: &nbsp;  </text>
+                            <text style="font-weight: bold">圈子名称&nbsp;: &nbsp;  </text>
                         <input type="text" name="groupName" th:value="${group.groupName}">
 
                     </tr>
                     <tr class="msg">
                         <div >
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold">Members&nbsp;: &nbsp;</text>
+                            <text style="font-weight: bold">成员&nbsp;: &nbsp;</text>
                             <span th:text="${group.members}" /> </td>
                             <input type="hidden" name="members" th:value="${group.members}"/>  </td>
                         </div>
                     </tr>
                     <tr class="msg">
                         <td valign="middle" align="left" style="width: 650px">
-                           <text style="font-weight: bold">Members Count&nbsp;: &nbsp;</text>
+                           <text style="font-weight: bold">成员人数&nbsp;: &nbsp;</text>
                             <span th:text="${group.membersCount}"/> </td>
                             <input type="hidden" th:value="${group.membersCount}" name="content" />  </td>
                     </tr>
                     <tr class="msg">
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold"> Tag&nbsp;: &nbsp;</text>
+                            <text style="font-weight: bold">标签&nbsp;: &nbsp;</text>
                             <span th:text="${group.tag}"/> </td>
                         <input type="hidden" th:value="${group.tag}" name="tag"/>
                     </tr>
                     <tr class="msg">
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold"> Group Leader&nbsp;: &nbsp;</text>
+                            <text style="font-weight: bold">圈主&nbsp;: &nbsp;</text>
                         <input type="text" th:value="${group.groupLeader}" name="groupLeader"/>
 
                     </tr>
                     <tr class="msg">
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold">Create Time&nbsp;: &nbsp;</text>
-                            <span th:text="${group.createTime}" name="createtime"/> </td>
+                            <text style="font-weight: bold">成立时间&nbsp;: &nbsp;</text>
+                            <span th:text="${#dates.format(group.createTime,'yyyy-MM-dd HH:mm:ss')}" name="createtime"/> </td>
                         <input type="hidden" th:value="${group.createTime}" name="type"/>
                     </tr>
 

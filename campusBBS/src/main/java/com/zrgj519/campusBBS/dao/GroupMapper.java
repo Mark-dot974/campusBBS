@@ -26,5 +26,7 @@ public interface GroupMapper {
 
     void updateGroup(Group group);
 
-    List<Group> findGroup(Integer gid,String groupName,String members);
+    List<Group> findGroup(Integer gid,String groupName,String members,Integer offset,Integer limit);
+
+    int selectCountOfGroup(Integer gid,String groupName,String members);
 }

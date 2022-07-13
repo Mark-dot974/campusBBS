@@ -4,12 +4,14 @@ import com.zrgj519.campusBBS.dao.LoginTicketMapper;
 import com.zrgj519.campusBBS.dao.UserMapper;
 import com.zrgj519.campusBBS.entity.LoginTicket;
 import com.zrgj519.campusBBS.entity.User;
-import com.zrgj519.campusBBS.util.CommunityConstant;
-import com.zrgj519.campusBBS.util.CommunityUtil;
+import com.zrgj519.campusBBS.util.CampusBBSConstant;
+import com.zrgj519.campusBBS.util.CampusBBSConstant;
+import com.zrgj519.campusBBS.util.CampusBBSUtil;
 import com.zrgj519.campusBBS.util.MailClient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -36,20 +38,18 @@ public class UserService {
     @Value("${server.servlet.context-path}")
     private String contextPath;
 
-    public User findUserById(int id){
+    public User findUserById(int id) {
         return userMapper.selectById(id);
     }
 
-    public Map<String,Object> register(User user){
-        Map<String,Object> map = new HashMap<>();
+    public Map<String, Object> register(User user) {
+        Map<String, Object> map = new HashMap<>();
         // 空值处理
-        if(user == null)
-        {
+        if (user == null) {
             throw new IllegalArgumentException("参数不能为空！");
         }
-        if(StringUtils.isBlank(user.getUsername()))
-        {
-            map.put("usernameMsg","账号不能为空");
+        if (StringUtils.isBlank(user.getUsername())) {
+            map.put("usernameMsg", "账号不能为空");
             return map;
         }
         if (StringUtils.isBlank(user.getPassword())) {
@@ -62,24 +62,23 @@ public class UserService {
         }
         // 验证账号，分别根据账号、邮箱查找当前账号是否已经存在
         User u = userMapper.selectByName(user.getUsername());
-        if(u!=null){
-            map.put("usernameMsg","该账号已经存在！");
+        if (u != null) {
+            map.put("usernameMsg", "该账号已经存在！");
             return map;
         }
         u = userMapper.selectByEmail(user.getEmail());
-        if(u!=null)
-        {
-            map.put("emailMsg","该邮箱已经被注册");
+        if (u != null) {
+            map.put("emailMsg", "该邮箱已经被注册");
             return map;
         }
 
         // 开始注册
-        user.setSalt(CommunityUtil.generateUUID().substring(0,5));
-        user.setPassword(CommunityUtil.md5(user.getPassword()+user.getSalt()));
+        user.setSalt(CampusBBSUtil.generateUUID().substring(0, 5));
+        user.setPassword(CampusBBSUtil.md5(user.getPassword() + user.getSalt()));
         user.setType(0);
         // 默认为1
         user.setStatus(1);
-        user.setActivationCode(CommunityUtil.generateUUID());
+        user.setActivationCode(CampusBBSUtil.generateUUID());
         user.setHeaderUrl("http://rdivs98sy.hb-bkt.clouddn.com/72a246e5799249c19d4615a0d25f0b8f");
         user.setCreateTime(new Date());
         userMapper.insertUser(user);
@@ -98,48 +97,48 @@ public class UserService {
     public int activation(int userId, String code) {
         // 先根据userId查找注册的用户信息
         User user = userMapper.selectById(userId);
-        if(user == null){
+        if (user == null) {
             return 0;
         }
         if (user.getStatus() == 1) {
-            return CommunityConstant.ACTIVATION_REPEAT;
+            return CampusBBSConstant.ACTIVATION_REPEAT;
         } else if (user.getActivationCode().equals(code)) {
             userMapper.updateStatus(userId, 1);
-            return CommunityConstant.ACTIVATION_SUCCESS;
+            return CampusBBSConstant.ACTIVATION_SUCCESS;
         } else {
-            return CommunityConstant.ACTIVATION_FAILURE;
+            return CampusBBSConstant.ACTIVATION_FAILURE;
         }
     }
-    public Map<String, Object> login(String username, String password, long expiredSeconds){
+
+    public Map<String, Object> login(String username, String password, long expiredSeconds) {
         // 验证客户端传递的信息是否可用
-        Map<String,Object> map = new HashMap<>();
-        if(StringUtils.isBlank(username)){
-            map.put("usernameMsg","账号不能为空！");
+        Map<String, Object> map = new HashMap<>();
+        if (StringUtils.isBlank(username)) {
+            map.put("usernameMsg", "账号不能为空！");
             return map;
         }
-        if(StringUtils.isBlank(password))
-        {
-            map.put("passwordMsg","密码不能为空！");
+        if (StringUtils.isBlank(password)) {
+            map.put("passwordMsg", "密码不能为空！");
             return map;
         }
 
         // 验证账号
         User user = userMapper.selectByName(username);
-        if(user==null){
-            map.put("usernameMsg","该账号不存在！");
+        if (user == null) {
+            map.put("usernameMsg", "该账号不存在！");
             return map;
         }
 
         // 验证状态(激活 or 未激活)
-        if(user.getStatus()==0){
-            map.put("usernameMsg","该账号未激活！");
+        if (user.getStatus() == 0) {
+            map.put("usernameMsg", "该账号未激活！");
             return map;
         }
 
         // 验证密码
-        String encodedPassword = CommunityUtil.md5(password+user.getSalt());
-        if(!encodedPassword.equals(user.getPassword())){
-            map.put("passwordMsg","密码不正确！");
+        String encodedPassword = CampusBBSUtil.md5(password + user.getSalt());
+        if (!encodedPassword.equals(user.getPassword())) {
+            map.put("passwordMsg", "密码不正确！");
             return map;
         }
 
@@ -147,31 +146,31 @@ public class UserService {
         LoginTicket loginTicket = new LoginTicket();
         loginTicket.setUserId(user.getId());
         loginTicket.setStatus(0);
-        loginTicket.setTicket(CommunityUtil.generateUUID());
-        loginTicket.setExpired(new Date(System.currentTimeMillis()+expiredSeconds*1000));
+        loginTicket.setTicket(CampusBBSUtil.generateUUID());
+        loginTicket.setExpired(new Date(System.currentTimeMillis() + expiredSeconds * 1000));
         loginTicketMapper.insertLoginTicket(loginTicket);
-        map.put("ticket",loginTicket.getTicket());
+        map.put("ticket", loginTicket.getTicket());
         return map;
     }
 
-    public LoginTicket findLoginTicketByTicket(String ticket){
+    public LoginTicket findLoginTicketByTicket(String ticket) {
         return loginTicketMapper.selectByTicket(ticket);
     }
 
-    public List<User> showUser(){
+    public List<User> showUser() {
         List<User> users = userMapper.showUser();
         return users;
     }
 
     // 获取用户的权限
-    public Collection<? extends GrantedAuthority> getAuthorities(int userId){
+    public Collection<? extends GrantedAuthority> getAuthorities(int userId) {
         User user = this.findUserById(userId);
 
         List<GrantedAuthority> list = new ArrayList<>();
         list.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                switch (user.getType()){
+                switch (user.getType()) {
                     case 1:
                         return CampusBBSConstant.AUTHORITY_ADMIN;
                     case 2:
@@ -189,32 +188,33 @@ public class UserService {
     }
 
 
-
     public void logout(String ticket) {
-        loginTicketMapper.updateStatus(ticket,1);
+        loginTicketMapper.updateStatus(ticket, 1);
     }
 
     public void updateHeader(int id, String url) {
-        userMapper.updateHeader(id,url);
+        userMapper.updateHeader(id, url);
     }
 
-    public User findUserByName(String userName) {
-        return userMapper.selectByName(userName);
-    }
-}
 
     public int deleteUser(int id) {
         return userMapper.deleteUser(id);
     }
 
-    public User find(int id){
+    public User find(int id) {
         return userMapper.find(id);
     }
 
-    public void updateUser(User user){
+    public void updateUser(User user) {
         userMapper.updateUser(user);
     }
 
-    public List<User> findUser(Integer id,String username,String email){
-        return userMapper.findUser(id,username,email);
+    public List<User> findUser(Integer id, String username, String email,Integer offset,Integer limit) {
+        return userMapper.findUser(id, username, email ,offset,limit);
     }
+
+    public Integer getAllUsersCount(){
+        return userMapper.selectUsersCount();
+    }
+
+}
