@@ -1,6 +1,5 @@
 package com.zrgj519.campusBBS.service;
 
-
 import com.zrgj519.campusBBS.dao.LoginTicketMapper;
 import com.zrgj519.campusBBS.dao.UserMapper;
 import com.zrgj519.campusBBS.entity.LoginTicket;
@@ -39,20 +38,18 @@ public class UserService {
     @Value("${server.servlet.context-path}")
     private String contextPath;
 
-    public User findUserById(int id){
+    public User findUserById(int id) {
         return userMapper.selectById(id);
     }
 
-    public Map<String,Object> register(User user){
-        Map<String,Object> map = new HashMap<>();
+    public Map<String, Object> register(User user) {
+        Map<String, Object> map = new HashMap<>();
         // 空值处理
-        if(user == null)
-        {
+        if (user == null) {
             throw new IllegalArgumentException("参数不能为空！");
         }
-        if(StringUtils.isBlank(user.getUsername()))
-        {
-            map.put("usernameMsg","账号不能为空");
+        if (StringUtils.isBlank(user.getUsername())) {
+            map.put("usernameMsg", "账号不能为空");
             return map;
         }
         if (StringUtils.isBlank(user.getPassword())) {
@@ -65,14 +62,13 @@ public class UserService {
         }
         // 验证账号，分别根据账号、邮箱查找当前账号是否已经存在
         User u = userMapper.selectByName(user.getUsername());
-        if(u!=null){
-            map.put("usernameMsg","该账号已经存在！");
+        if (u != null) {
+            map.put("usernameMsg", "该账号已经存在！");
             return map;
         }
         u = userMapper.selectByEmail(user.getEmail());
-        if(u!=null)
-        {
-            map.put("emailMsg","该邮箱已经被注册");
+        if (u != null) {
+            map.put("emailMsg", "该邮箱已经被注册");
             return map;
         }
 
@@ -101,7 +97,7 @@ public class UserService {
     public int activation(int userId, String code) {
         // 先根据userId查找注册的用户信息
         User user = userMapper.selectById(userId);
-        if(user == null){
+        if (user == null) {
             return 0;
         }
         if (user.getStatus() == 1) {
@@ -113,29 +109,29 @@ public class UserService {
             return CampusBBSConstant.ACTIVATION_FAILURE;
         }
     }
-    public Map<String, Object> login(String username, String password, long expiredSeconds){
+
+    public Map<String, Object> login(String username, String password, long expiredSeconds) {
         // 验证客户端传递的信息是否可用
-        Map<String,Object> map = new HashMap<>();
-        if(StringUtils.isBlank(username)){
-            map.put("usernameMsg","账号不能为空！");
+        Map<String, Object> map = new HashMap<>();
+        if (StringUtils.isBlank(username)) {
+            map.put("usernameMsg", "账号不能为空！");
             return map;
         }
-        if(StringUtils.isBlank(password))
-        {
-            map.put("passwordMsg","密码不能为空！");
+        if (StringUtils.isBlank(password)) {
+            map.put("passwordMsg", "密码不能为空！");
             return map;
         }
 
         // 验证账号
         User user = userMapper.selectByName(username);
-        if(user==null){
-            map.put("usernameMsg","该账号不存在！");
+        if (user == null) {
+            map.put("usernameMsg", "该账号不存在！");
             return map;
         }
 
         // 验证状态(激活 or 未激活)
-        if(user.getStatus()==0){
-            map.put("usernameMsg","该账号未激活！");
+        if (user.getStatus() == 0) {
+            map.put("usernameMsg", "该账号未激活！");
             return map;
         }
 
@@ -157,11 +153,11 @@ public class UserService {
         return map;
     }
 
-    public LoginTicket findLoginTicketByTicket(String ticket){
+    public LoginTicket findLoginTicketByTicket(String ticket) {
         return loginTicketMapper.selectByTicket(ticket);
     }
 
-    public List<User> showUser(){
+    public List<User> showUser() {
         List<User> users = userMapper.showUser();
         return users;
     }
@@ -192,7 +188,6 @@ public class UserService {
     }
 
 
-
     public void logout(String ticket) {
         SecurityContextHolder.clearContext();
         loginTicketMapper.updateStatus(ticket,1);
@@ -207,11 +202,11 @@ public class UserService {
         return userMapper.deleteUser(id);
     }
 
-    public User find(int id){
+    public User find(int id) {
         return userMapper.find(id);
     }
 
-    public void updateUser(User user){
+    public void updateUser(User user) {
         userMapper.updateUser(user);
     }
 
