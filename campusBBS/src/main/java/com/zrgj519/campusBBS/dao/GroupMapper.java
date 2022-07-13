@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface GroupMapper {
-    List<Group> selectAll();
+    List<Group> selectAll(int offset,int limit,String leaderName,String memberName);
 
     void insertGroup(Group group);
 

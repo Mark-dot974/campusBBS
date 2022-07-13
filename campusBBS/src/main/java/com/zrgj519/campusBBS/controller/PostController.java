@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.jws.WebParam;
 import java.util.*;
 
 @Controller
@@ -75,7 +74,11 @@ public class PostController {
             String tag = post.getTag();
             if(tag!=null){
                 String[] split = tag.split(",");
-                postInfo.put("tags",split);
+                if(split!=null && split.length!=0&&split[0].length()!=0)  {
+                    postInfo.put("tags",split);
+                }else{
+                    postInfo.put("tags",null);
+                }
             }
             postsInfo.add(postInfo);
         }

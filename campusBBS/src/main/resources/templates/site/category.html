@@ -76,16 +76,10 @@
                     <div class="post-content">
                       <header class="blog_entry-header clearfix">
                         <!--显示标签-->
-                        <div class="blog_entry-header-inner">
+                        <div class="blog_entry-header-inner" th:if="${map.tags}!=null">
                           <div style="display: flex">
-                            <div style="margin-right: 10px">
-                              <a class="tag " href="#" title="Fashion">Technology</a>
-                            </div>
-                            <div style="margin-right: 10px">
-                              <a class="tag " href="#" title="Fashion">Technology</a>
-                            </div>
-                            <div style="margin-right: 10px">
-                              <a class="tag " href="#" title="Fashion">Technology</a>
+                            <div style="margin-right: 10px" th:each="tag:${map.tags}">
+                              <a class="tag " href="#" title="Fashion" th:text="${tag}">Technology</a>
                             </div>
                           </div>
                           <h2 class="blog_entry-title"> <a th:href="@{/post/detail(id=${map.post.id})}" th:utext="${map.post.title}" rel="bookmark">Cheerful model sitting on the floor, wearing modern oversize black dresss</a> </h2>

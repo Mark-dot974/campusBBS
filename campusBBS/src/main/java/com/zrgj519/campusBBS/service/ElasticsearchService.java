@@ -67,7 +67,6 @@ public class ElasticsearchService {
                 List<Post> list = new ArrayList<>();
                 // 遍历根据keyword搜索出来的结果，构造成post对象 （hit  --- 》   post ）
                 for (SearchHit hit : hits) {
-                    System.out.println("===========");
                     Post post = new Post();
 
                     String id = hit.getSourceAsMap().get("id").toString();
@@ -110,11 +109,8 @@ public class ElasticsearchService {
                     if (tagField != null) {
                         post.setTag(tagField.getFragments()[0].toString());
                     }
-                    System.out.println("post = " + post);
                     list.add(post);
                 }
-
-                System.out.println("list.size() = " + list.size());
                 return new AggregatedPageImpl(list, pageable,
                         hits.getTotalHits(), response.getAggregations(), response.getScrollId(), hits.getMaxScore());
             }

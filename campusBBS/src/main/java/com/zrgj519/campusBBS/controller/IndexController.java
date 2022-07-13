@@ -76,6 +76,15 @@ public class IndexController {
         return "/site/404error";
     }
 
+    @RequestMapping("/personalPage")
+    public String getPersonalPage(){
+        return "/site/personal_page";
+    }
+    @RequestMapping("/groupList")
+    public String gert(){
+        return "/site/group_list";
+    }
+
     // 首页不分页
     @RequestMapping(path = "/index", method = RequestMethod.GET)
     public String getPosts(Model model, Page page) {
@@ -131,12 +140,13 @@ public class IndexController {
         for (Post post : posts) {
             Map<String,Object> postInfo = new HashMap<>();
             User userById = userService.findUserById(post.getUserId());
-            postInfo.put("publisher",userById);
+            postInfo.put("user",userById);
             postInfo.put("post",post);
             String tag = post.getTag();
             if(tag!=null){
                 String[] split = tag.split(",");
-                postInfo.put("tags",tag);
+                if(split!=null && split.length!=0&&split[0].length()!=0)  postInfo.put("tags",split);
+                else postInfo.put("tags",null);
             }
             postsInfo.add(postInfo);
         }
