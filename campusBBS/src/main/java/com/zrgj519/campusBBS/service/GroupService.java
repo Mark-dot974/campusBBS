@@ -4,6 +4,7 @@ import com.zrgj519.campusBBS.dao.FileMapper;
 import com.zrgj519.campusBBS.dao.GroupMapper;
 import com.zrgj519.campusBBS.entity.Group;
 import com.zrgj519.campusBBS.entity.GroupFile;
+import com.zrgj519.campusBBS.util.UserContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,24 +62,6 @@ public class GroupService {
         fileMapper.insertFile(file);
     }
 
-    public void addGroupMember(String username,int gid){
-        Group group = groupMapper.selectGroupById(gid);
-        String members = group.getMembers();
-        groupMapper.updateGroupMember(members+","+username,gid,group.getMembersCount()+1);
-    }
-
-    public boolean isGroupMember(int gid,String memberName){
-        Group group = groupMapper.selectGroupById(gid);
-        String m = group.getMembers();
-        String[] members = m.split(",");
-        for (String member : members) {
-            if(member.equals(memberName)){
-                return true;
-            }
-        }
-        return false;
-    }
-}
 
     public void updateGroup(Group group){ groupMapper.updateGroup(group); }
 
@@ -86,8 +69,12 @@ public class GroupService {
         return groupMapper.find(gid);
     }
 
-    public List<Group> findGroup(Integer gid,String groupName,String members){
-        return groupMapper.findGroup(gid,groupName,members);
+    public List<Group> findGroup(Integer gid,String groupName,String members,Integer offset,Integer limit){
+        return groupMapper.findGroup(gid,groupName,members,offset,limit);
+    }
+
+    public int getGroupsCount(Integer gid,String groupName,String members){
+        return groupMapper.selectCountOfGroup(gid,groupName,members);
     }
 
 }
