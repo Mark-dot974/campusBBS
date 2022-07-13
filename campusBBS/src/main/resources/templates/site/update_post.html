@@ -73,6 +73,7 @@
             <li><a th:href="@{/admin/users}" class="tables">用户账号管理</a></li>
             <li class="current"><a th:href="@{/admin/posts}" class="tables">帖子管理</a></li>
             <li><a th:href="@{/admin/groups}" class="tables">圈子管理</a></li>
+            <li><a th:href="@{/admin/tags}" class="tables">标签管理</a></li>
         </ul>
         <br /><br />
     </div><!--leftmenu-->
@@ -95,50 +96,50 @@
                 <table class="form_table" style = "border-collapse:separate; border-spacing:10px;font-size: 15px">
                     <tr class="msg" style="margin-top: 15px">
                         <td valign="middle" align="left">
-                         <text style="font-weight: bold">ID&nbsp;: &nbsp;</text>
+                         <text style="font-weight: bold">帖子ID&nbsp;: &nbsp;</text>
                             <span th:text="${post.id}" /> </td>
                         <input type="hidden" name="id" th:value="${post.id}">
                     </tr>
                     <tr class="msg">
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold">UserID&nbsp;: &nbsp;  </text>
+                            <text style="font-weight: bold">发帖用户ID&nbsp;: &nbsp;  </text>
                             <span th:text="${post.userId}" /> </td>
                         <input type="hidden" name="userId" th:value="${post.userId}">
                     </tr>
                     <tr class="msg">
                         <div >
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold">Title&nbsp;: &nbsp;</text>
+                            <text style="font-weight: bold">标题&nbsp;: &nbsp;</text>
                             <span th:text="${post.title}" /> </td>
                             <input type="hidden" name="title" th:value="${post.title}"/>  </td>
                         </div>
                     </tr>
                     <tr class="msg">
                         <td valign="middle" align="left" style="width: 650px">
-                           <text style="font-weight: bold">Content&nbsp;: &nbsp;</text>
+                           <text style="font-weight: bold">内容&nbsp;: &nbsp;</text>
                             <span th:text="${post.content}"/> </td>
                             <input type="hidden" th:value="${post.content}" name="content" />  </td>
                     </tr>
                     <tr class="msg">
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold"> Type&nbsp;: &nbsp;<br></text>
+                            <text style="font-weight: bold"> 类型&nbsp;: &nbsp;<br></text>
                         <input type="text" th:value="${post.type}" name="type"/>
                     </tr>
                     <tr class="msg">
                         <td valign="middle" align="left">
-                         <text style="font-weight: bold">Status&nbsp;:&nbsp;<br></text>
+                         <text style="font-weight: bold">状态&nbsp;:&nbsp;<br></text>
                             <input type="text" th:value="${post.status}" name="status"/>
                     </tr>
                     <tr class="msg">
                         <td valign="middle" align="left">
-                           <text style="font-weight: bold"> Tag&nbsp;: &nbsp;&nbsp;</text>
+                           <text style="font-weight: bold"> 标签&nbsp;: &nbsp;&nbsp;</text>
                             <span th:text="${post.tag}" /> </td>
                         <input type="hidden" name="tag" th:value="${post.tag}">
                     </tr>
                     <tr class="msg">
                         <td valign="middle" align="left">
-                            <text style="font-weight: bold">Create Time&nbsp;: &nbsp;</text>
-                            <span th:text="${post.createTime}" name="createtime"/> </td>
+                            <text style="font-weight: bold">发布时间&nbsp;: &nbsp;</text>
+                            <span th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}" name="createtime"/> </td>
                     </tr>
 
                 </table>

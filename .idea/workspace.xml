@@ -4,8 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ceb262d3-de3c-462d-b897-25a0ec356ba5" name="Changes" comment="修改用户管理bug">
+    <list default="true" id="ceb262d3-de3c-462d-b897-25a0ec356ba5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/controller/IndexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/controller/ManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/controller/ManagementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/GroupMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/GroupMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/PostMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/PostMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/TagMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/TagMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/dao/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/GroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/GroupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/TagService.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/TagService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/java/com/zrgj519/campusBBS/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/group-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/group-mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/post-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/post-mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/tag-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/tag-mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/user-mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/mapper/user-mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/static/css/style.default.css" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/static/css/style.default.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/aside.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/category.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/category.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/collaborate.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/collaborate.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/group_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/group_management.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/personal_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/personal_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/post_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/post_management.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/update_group.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/update_group.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/update_post.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/update_post.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/update_user_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/update_user_account.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/user_account_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/campusBBS/src/main/resources/templates/site/user_account_management.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,30 +128,8 @@
       <workItem from="1657186208505" duration="845000" />
       <workItem from="1657501659080" duration="21000" />
       <workItem from="1657597518371" duration="29994000" />
-      <workItem from="1657674600704" duration="8181000" />
+      <workItem from="1657674600704" duration="3717000" />
     </task>
-    <task id="LOCAL-00001" summary="后台管理全部功能">
-      <created>1657678596144</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1657678596144</updated>
-    </task>
-    <task id="LOCAL-00002" summary="后台管理全部功能">
-      <created>1657678743657</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1657678743657</updated>
-    </task>
-    <task id="LOCAL-00003" summary="修改用户管理bug">
-      <created>1657681338321</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1657681338321</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,11 +146,6 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="后台管理全部功能" />
-    <MESSAGE value="修改用户管理bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改用户管理bug" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/campusBBS$CampusBbsApplication.ic" NAME="CampusBbsApplication 覆盖结果" MODIFIED="1657608954587" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
