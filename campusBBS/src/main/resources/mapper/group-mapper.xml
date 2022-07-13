@@ -11,6 +11,14 @@
     <select id="selectAll" resultType="Group">
         select <include refid="ref"/>
         from collaboration_group
+        <if test="leaderName!=null">
+            where group_leader = #{leaderName}
+        </if>
+        <if test="memberName!=null">
+            where members like "%"#{memberName}"%"
+        </if>
+        order by create_time
+        limit #{offset},#{limit}
     </select>
 
     <select id="selectGroupById" resultType="Group">
@@ -19,7 +27,7 @@
         where gid = #{gid}
     </select>
 
-
+    
     <insert id="insertGroup" parameterType="Group" useGeneratedKeys="true" keyProperty="id">
         insert into collaboration_group (<include refid="ref"/>)
         values(#{gid},#{groupName},#{members},#{memberCount},#{createTime},#{tag},#{groupLeader})
@@ -35,37 +43,10 @@
         select count(*)
         from collaboration_group
     </select>
-    <!--删除圈子-->
-    <delete id="deleteGroup">
-        delete from collaboration_group where gid = #{gid}
-    </delete>
-    <!--更改圈子信息-->
-    <update id="updateGroup" parameterType="Group">
-        update collaboration_group
-        set group_leader=#{groupLeader},group_name=#{groupName}
+
+    <update id="updateGroupMember">
+        update collaboration_group set members = #{members},members_count=#{membersCount}
         where gid = #{gid}
     </update>
-    <!--根据gid查找圈子信息-->
-    <select id="find" resultType="Group">
-        select *
-        from collaboration_group
-        where gid = #{gid}
-    </select>
-    <!--条件查询圈子-->
-    <select id="findGroup" resultType="Group" parameterType="Group">
-        select * from collaboration_group
-        <where>
-            <if test="gid!=null and gid!='' ">
-                and gid = #{gid}
-            </if>
-            <if test="groupName!=null and groupName!='' ">
-                and group_name like '%' #{groupName} '%'
-            </if>
-            <if test="members!=null and members!='' ">
-                and members like '%' #{members} '%'
-            </if>
-        </where>
-        order by gid asc
-    </select>
 
 </mapper>
