@@ -50,4 +50,7 @@ public interface PostMapper {
 
     int selectCountOfPost(Integer id,String title,String tag);
 
+    List<Post> selectPersonalPost(int userId,Integer offset,Integer limit);
+
+    int selectCountOfPersonalPost(int userId);
 }

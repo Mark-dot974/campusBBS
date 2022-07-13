@@ -56,4 +56,17 @@
             </if>
         </where>
     </select>
+
+    <select id="selectPersonalPost" resultType="Post">
+        select *
+        from post
+        where user_id = #{userId}
+        limit #{offset},#{limit}
+    </select>
+
+    <select id="selectCountOfPersonalPost" resultType="int">
+        select count(*)
+        from post
+        where user_id = #{userId}
+    </select>
 </mapper>

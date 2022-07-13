@@ -138,4 +138,14 @@ public class GroupController {
         groupService.uploadFile(file);
         return CampusBBSUtil.getJSONString(0);
     }
+    @RequestMapping("/personalGroup")
+    public String findPersonalGroup(Model model,String members,Page page){
+        page.setRows(groupService.selectCountOfPersonalGroup(members));
+        page.setPath("/group/personalGroup?members="+members);
+        User user = userService.selectByNameInGroup(members);
+        model.addAttribute("user",user);
+        List<Group> group = groupService.selectPersonalGroup(members,page.getOffset(),page.getLimit());
+        model.addAttribute("group",group);
+        return "/site/group_list";
+    }
 }

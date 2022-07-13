@@ -4,6 +4,7 @@ import com.zrgj519.campusBBS.dao.FileMapper;
 import com.zrgj519.campusBBS.dao.GroupMapper;
 import com.zrgj519.campusBBS.entity.Group;
 import com.zrgj519.campusBBS.entity.GroupFile;
+import com.zrgj519.campusBBS.entity.Post;
 import com.zrgj519.campusBBS.util.UserContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,4 +78,11 @@ public class GroupService {
         return groupMapper.selectCountOfGroup(gid,groupName,members);
     }
 
+    public List<Group> selectPersonalGroup(String members, Integer offset, Integer limit){
+        return groupMapper.selectPersonalGroup(members,offset,limit);
+    }
+
+    public Integer selectCountOfPersonalGroup(String members){
+        return groupMapper.selectCountOfPersonalGroup(members);
+    }
 }

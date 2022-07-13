@@ -109,4 +109,11 @@ public class UserController {
         model.addAttribute("user",user);
         return "/site/personal_page";
     }
+//    @RequestMapping("/personalPost")
+//    public String findUserByIdInPost(int id,Model model){
+//        User user = userService.findUserById(id);
+//        model.addAttribute("user",user);
+//        return "/site/personal_post";
+//    }
+
 }

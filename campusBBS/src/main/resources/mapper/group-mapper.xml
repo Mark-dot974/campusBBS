@@ -91,4 +91,16 @@
             </if>
         </where>
     </select>
+    <select id="selectPersonalGroup" resultType="Group">
+        select *
+        from collaboration_group
+        where members like '%' #{members} '%'
+        limit #{offset},#{limit}
+    </select>
+
+    <select id="selectCountOfPersonalGroup" resultType="int">
+        select count(*)
+        from collaboration_group
+        where members like '%' #{members} '%'
+    </select>
 </mapper>

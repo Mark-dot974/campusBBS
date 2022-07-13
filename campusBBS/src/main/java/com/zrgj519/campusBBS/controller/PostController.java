@@ -151,4 +151,15 @@ public class PostController {
         model.addAttribute("searchName","搜索结果");
         return "/site/category";
     }
+
+    @RequestMapping("/personalPost")
+    public String findPersonalPost(Model model,int userId,Page page){
+        page.setRows(postService.selectCountOfPersonalPost(userId));
+        page.setPath("/post/personalPost?userId="+userId);
+        User user = userService.findUserById(userId);
+        model.addAttribute("user",user);
+        List<Post> post = postService.selectPersonalPost(userId,page.getOffset(),page.getLimit());
+        model.addAttribute("post",post);
+        return "/site/personal_post";
+    }
 }

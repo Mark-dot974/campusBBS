@@ -217,4 +217,8 @@ public class UserService {
         return userMapper.selectUsersCount(id,username,email);
     }
 
+    public User selectByNameInGroup(String members){
+        return userMapper.selectByNameInGroup(members);
+    }
+
 }

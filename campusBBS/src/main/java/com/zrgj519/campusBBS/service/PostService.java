@@ -16,9 +16,6 @@ public class PostService {
     private PostMapper postMapper;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private TagService tagService;
 
     @Autowired
@@ -90,4 +87,11 @@ public class PostService {
         return postMapper.selectCountOfPost(id,title,tag);
     }
 
+    public List<Post> selectPersonalPost(int userId,Integer offset,Integer limit){
+        return postMapper.selectPersonalPost(userId,offset,limit);
+    }
+
+    public int selectCountOfPersonalPost(Integer userId){
+        return postMapper.selectCountOfPersonalPost(userId);
+    }
 }
