@@ -153,4 +153,5 @@ public class IndexController {
         model.addAttribute("postsInfo", postsInfo);
         return "/site/index";
     }
+
 }

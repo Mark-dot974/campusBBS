@@ -79,7 +79,9 @@ public class ManagementController {
             }
         }
         List<User> users = userService.findUser(id,username,email,page.getOffset(), page.getLimit());
+
         model.addAttribute("users",users);
+
         return "/site/user_account_management";
     }
     //    帖子管理

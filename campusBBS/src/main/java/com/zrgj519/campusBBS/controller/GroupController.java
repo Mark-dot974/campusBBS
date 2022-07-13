@@ -1,17 +1,19 @@
 package com.zrgj519.campusBBS.controller;
 
-import com.zrgj519.campusBBS.entity.Group;
-import com.zrgj519.campusBBS.entity.GroupFile;
-import com.zrgj519.campusBBS.entity.Page;
-import com.zrgj519.campusBBS.entity.User;
+import com.qiniu.util.Auth;
+import com.qiniu.util.StringMap;
+import com.zrgj519.campusBBS.entity.*;
 import com.zrgj519.campusBBS.service.GroupService;
 import com.zrgj519.campusBBS.service.UserService;
 import com.zrgj519.campusBBS.util.CampusBBSUtil;
 import com.zrgj519.campusBBS.util.UserContainer;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
@@ -27,6 +29,19 @@ public class GroupController {
 
     @Autowired
     private UserContainer userContainer;
+
+    @Value("${qiniu.key.access}")
+    private String accessKey;
+
+    @Value("${qiniu.key.secret}")
+    private String secretKey;
+
+    @Value("${qiniu.bucket.file.name}")
+    private String fileBucketName;
+
+    @Value("${qiniu.bukcet.file.url}")
+    private String fileBucketUrl;
+
     @RequestMapping("/create")
     @ResponseBody
     public String createGroup(Group group){
@@ -44,11 +59,15 @@ public class GroupController {
     }
 
     @RequestMapping("/getAll")
-    public String getAllGroup(Model model, Page page){
+    // mode:  0 --- 全部   1 -- 我加入的   2 -- 我创建的
+    public String getAllGroup(Model model, Page page, @RequestParam(value = "mode",defaultValue = "0")int mode){
         page.setRows(groupService.getGroupTotalCount());
-        page.setPath("/group/getAll");
-        List<Group> allGroups = groupService.getAll();
-        System.out.println("allGroups = " + allGroups);
+        page.setPath("/group/getAll?mode="+mode);
+        User user1 = userContainer.getUser();
+        model.addAttribute("loginUser",user1);
+        model.addAttribute("mode",mode);
+
+        List<Group> allGroups = groupService.getAll(page.getOffset(),page.getLimit(),mode);
         List<Map<String,Object>> groupsInfo = new ArrayList<>();
         for (Group group : allGroups) {
             Map<String,Object> map = new HashMap<>();
@@ -74,6 +93,18 @@ public class GroupController {
 
     @RequestMapping("/groupDetail")
     public String getGroupDetail(Model model,int gid){
+
+        // 上传文件名称
+        String fileName = CampusBBSUtil.generateUUID();
+        // 设置响应信息
+        StringMap policy = new StringMap();
+        // 成功返回：code:0
+        policy.put("returnBody",CampusBBSUtil.getJSONString(0));
+        Auth auth = Auth.create(accessKey,secretKey);
+        String uploadToken = auth.uploadToken(fileBucketName,fileName,3600,policy);
+        model.addAttribute("uploadToken",uploadToken);
+        model.addAttribute("fileName",fileName);
+        model.addAttribute("gid",gid);
         Group group = groupService.getGroupById(gid);
         // 填充圈员信息
         List<User> members = new ArrayList<>();
@@ -89,5 +120,32 @@ public class GroupController {
         List<GroupFile> allFiles = groupService.getAllFiles(gid);
         model.addAttribute("files",allFiles);
         return "/site/collaborate-detail";
+    }
+
+    @RequestMapping("/uploadFile")
+    @ResponseBody
+    public String uploadFile(String fileName,int gid){
+        if (StringUtils.isBlank(fileName)) {
+            return CampusBBSUtil.getJSONString(1, "文件名不能为空!");
+        }
+        String url = fileBucketUrl + "/" + fileName;
+        GroupFile file = new GroupFile();
+        file.setFileName(fileName);
+        file.setCreateTime(new Date());
+        file.setGid(gid);
+        file.setUrl(url);
+        System.out.println("file = " + file.toString());
+        groupService.uploadFile(file);
+        return CampusBBSUtil.getJSONString(0);
+    }
+    @RequestMapping("/personalGroup")
+    public String findPersonalGroup(Model model,String members,Page page){
+        page.setRows(groupService.selectCountOfPersonalGroup(members));
+        page.setPath("/group/personalGroup?members="+members);
+        User user = userService.selectByNameInGroup(members);
+        model.addAttribute("user",user);
+        List<Group> group = groupService.selectPersonalGroup(members,page.getOffset(),page.getLimit());
+        model.addAttribute("group",group);
+        return "/site/group_list";
     }
 }

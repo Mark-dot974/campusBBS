@@ -11,6 +11,14 @@
     <select id="selectAll" resultType="Group">
         select <include refid="ref"/>
         from collaboration_group
+        <if test="leaderName!=null">
+            where group_leader = #{leaderName}
+        </if>
+        <if test="memberName!=null">
+            where members like "%"#{memberName}"%"
+        </if>
+        order by create_time
+        limit #{offset},#{limit}
     </select>
 
     <select id="selectGroupById" resultType="Group">
@@ -66,6 +74,33 @@
             </if>
         </where>
         order by gid asc
+        limit #{offset},#{limit}
+    </select>
+    <select id="selectCountOfGroup" resultType="int">
+        select count(*)
+        from collaboration_group
+        <where>
+            <if test="gid!=null and gid!='' ">
+                and gid = #{gid}
+            </if>
+            <if test="groupName!=null and groupName!='' ">
+                and group_name like '%' #{groupName} '%'
+            </if>
+            <if test="members!=null and members!='' ">
+                and members like '%' #{members} '%'
+            </if>
+        </where>
+    </select>
+    <select id="selectPersonalGroup" resultType="Group">
+        select *
+        from collaboration_group
+        where members like '%' #{members} '%'
+        limit #{offset},#{limit}
     </select>
 
+    <select id="selectCountOfPersonalGroup" resultType="int">
+        select count(*)
+        from collaboration_group
+        where members like '%' #{members} '%'
+    </select>
 </mapper>
