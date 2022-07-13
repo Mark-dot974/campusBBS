@@ -2,11 +2,10 @@ package com.zrgj519.campusBBS.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zrgj519.campusBBS.entity.Group;
-import com.zrgj519.campusBBS.entity.Post;
-import com.zrgj519.campusBBS.entity.User;
+import com.zrgj519.campusBBS.entity.*;
 import com.zrgj519.campusBBS.service.GroupService;
 import com.zrgj519.campusBBS.service.PostService;
+import com.zrgj519.campusBBS.service.TagService;
 import com.zrgj519.campusBBS.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +27,9 @@ public class ManagementController {
 
     @Autowired
     GroupService groupService;
+
+    @Autowired
+    TagService tagService;
 //    @RequestMapping("/showUsers")
 //    public String showUser(Model model){
 //        List<User> users = userService.showUser();
@@ -57,9 +59,26 @@ public class ManagementController {
     public String updateUser(User user){
         userService.updateUser(user);
         return "redirect:/admin/users";
-    }    @RequestMapping("/admin/users")
-    public String findUserByCondition(Model model,Integer id,String username,String email){
-        List<User> users = userService.findUser(id,username,email);
+    }
+    @RequestMapping("/admin/users")
+    public String findUserByCondition(Model model, Integer id, String username, String email,
+                                      Page page){
+        page.setRows(userService.getAllUsersCount(id,username,email));
+        if(username == null || username.length() == 0)
+        {
+            if(email == null || email.length() == 0){
+                page.setPath("/admin/users");
+            }else{
+                page.setPath("/admin/users?email="+email);
+            }
+        }else{
+            if(email == null || email.length() == 0){
+                page.setPath("/admin/users?username="+username);
+            }else{
+                page.setPath("/admin/users?email="+email+"&username="+username);
+            }
+        }
+        List<User> users = userService.findUser(id,username,email,page.getOffset(), page.getLimit());
         model.addAttribute("users",users);
         return "/site/user_account_management";
     }
@@ -82,8 +101,24 @@ public class ManagementController {
     }
 
     @RequestMapping("/admin/posts")
-    public String findPostByCondition(Model model,Integer id,String title,String tag){
-        List<Post> allPosts = postService.findPost(id,title,tag);
+    public String findPostByCondition(Model model,Integer id,String title,String tag,
+                                      Page page){
+        page.setRows(postService.getPostsCount(id,title,tag));
+        if(title == null || title.length() == 0)
+        {
+            if(tag == null || tag.length() == 0){
+                page.setPath("/admin/posts");
+            }else{
+                page.setPath("/admin/posts?tag="+tag);
+            }
+        }else{
+            if(tag == null || tag.length() == 0){
+                page.setPath("/admin/posts?title="+title);
+            }else{
+                page.setPath("/admin/posts?tag="+tag+"&title="+title);
+            }
+        }
+        List<Post> allPosts = postService.findPost(id,title,tag,page.getOffset(), page.getLimit());
         model.addAttribute("posts",allPosts);
         return "/site/post_management";
     }
@@ -106,10 +141,65 @@ public class ManagementController {
         return "/site/update_group";
     }
     @RequestMapping("/admin/groups")
-    public String findGroupByCondition(Model model,Integer gid,String groupName,String members){
-        List<Group> allGroups = groupService.findGroup(gid,groupName,members);
+    public String findGroupByCondition(Model model,Integer gid,String groupName,String members,Page page){
+        page.setRows(groupService.getGroupsCount(gid,groupName,members));
+        if(groupName == null || groupName.length() == 0)
+        {
+            if(members == null || members.length() == 0){
+                page.setPath("/admin/groups");
+            }else{
+                page.setPath("/admin/groups?members="+members);
+            }
+        }else{
+            if(members == null || members.length() == 0){
+                page.setPath("/admin/groups?groupName="+groupName);
+            }else{
+                page.setPath("/admin/groups?members="+members+"&groupName="+groupName);
+            }
+        }
+        List<Group> allGroups = groupService.findGroup(gid,groupName,members, page.getOffset(), page.getLimit());
+
         model.addAttribute("groups",allGroups);
         return "/site/group_management";
+    }
+    //    标签管理
+    @RequestMapping("/delTags")
+    public String deleteTag(Integer id){
+        tagService.deleteTag(id);
+        return "redirect:/admin/tags";
+    }
+    @PostMapping("/updateTag")
+    public String updateTag(Tag tag){
+        tagService.updateTag(tag);
+        return "redirect:/admin/tags";
+    }
+    @GetMapping("/findTags")
+    public String findtag(Integer gid,Model model){
+        Tag tag = tagService.find(gid);
+        model.addAttribute("tag",tag);
+        return "/site/update_tag";
+    }
+    @RequestMapping("/admin/tags")
+    public String findTagByCondition(Model model,Integer id,String tagName,String members,Page page){
+        page.setRows(tagService.getTagsCount(id,tagName,members));
+        if(tagName == null || tagName.length() == 0)
+        {
+            if(members == null || members.length() == 0){
+                page.setPath("/admin/tags");
+            }else{
+                page.setPath("/admin/tags?members="+members);
+            }
+        }else{
+            if(members == null || members.length() == 0){
+                page.setPath("/admin/tags?tagName="+tagName);
+            }else{
+                page.setPath("/admin/tags?members="+members+"&tagName="+tagName);
+            }
+        }
+        List<Tag> allTags = tagService.findTag(id,tagName,members, page.getOffset(), page.getLimit());
+
+        model.addAttribute("tags",allTags);
+        return "/site/tag_management";
     }
 
 }
