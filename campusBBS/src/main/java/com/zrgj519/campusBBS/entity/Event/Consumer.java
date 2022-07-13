@@ -3,7 +3,10 @@ package com.zrgj519.campusBBS.entity.Event;
 import com.alibaba.fastjson.JSONObject;
 import com.zrgj519.campusBBS.dao.MessageMapper;
 import com.zrgj519.campusBBS.entity.Message;
+import com.zrgj519.campusBBS.entity.User;
+import com.zrgj519.campusBBS.service.GroupService;
 import com.zrgj519.campusBBS.service.MessageService;
+import com.zrgj519.campusBBS.service.UserService;
 import com.zrgj519.campusBBS.util.CampusBBSConstant;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,10 @@ public class Consumer {
 
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private GroupService groupService;
+    @Autowired
+    private UserService userService;
 
     // 申请加入
     @KafkaListener(topics = {CampusBBSConstant.TOPIC_APPLY})
@@ -34,6 +41,35 @@ public class Consumer {
         // 构造内容，由前端拼接
         Map<String,Object> content = new HashMap<>();
         content.put("userId",event.getUserId());
+        content.put("entityId",event.getEntityId());
+        // 申请是否通过 0--未通过  1--通过  2 -- 拒绝
+        if(!event.getData().isEmpty()){
+            for (Map.Entry<String, Object> entry: event.getData().entrySet()
+            ){
+                content.put(entry.getKey(),entry.getValue());
+            }
+        }
+        message.setContent(JSONObject.toJSONString(content));
+        messageService.addMessage(message);
+    }
+
+    @KafkaListener(topics = {CampusBBSConstant.TOPIC_ACCEPT, CampusBBSConstant.TOPIC_DENIED})
+    public void handleOperation(ConsumerRecord record){
+        Event event = JSONObject.parseObject(record.value().toString(),Event.class);
+        // 同意加入
+        if (event.getTopic().equals(CampusBBSConstant.TOPIC_ACCEPT)){
+            User user = userService.findUserById(event.getEntityUserId());
+            groupService.addGroupMember(user.getUsername(),event.getEntityId());
+        }
+
+        Message message = new Message();
+        // 申请者id
+        message.setToId(event.getEntityUserId());
+        message.setFromId(1);
+        message.setStatus(0);
+        message.setCreateTime(new Date());
+        message.setConversationId(event.getTopic());
+        Map<String,Object> content = new HashMap<>();
         content.put("entityId",event.getEntityId());
         message.setContent(JSONObject.toJSONString(content));
         messageService.addMessage(message);

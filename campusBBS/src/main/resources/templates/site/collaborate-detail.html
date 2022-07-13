@@ -164,8 +164,10 @@
             <div class="row-fluid">
                 <div class="col-md-12">
                     <div class="collaborators">
-                        <a href="#"><img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic"></a>
-                        <a href="#"><img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic"></a>
+                        <a href="#" th:each="member:${members}">
+                            <img th:src="${member.headerUrl}" alt="..." class="img-circle profile-pic">
+                        </a>
+<!--                        <a href="#"><img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic"></a>-->
 
                         <a href="#" id="btn-invite"><img th:src="@{/images/newProfile.png}" alt="..."
                                                          class="img-circle profile-pic"></a>
@@ -180,12 +182,13 @@
                                                 aria-hidden="true">×</span></button>
                                         <h4 class="modal-title">邀请其他用户</h4>
                                     </div>
-                                    <form>
+                                    <form id="inviteForm">
                                         <div class="modal-body">
                                             <div class="form-group">
                                                 <label for="txt_departmentlevel">邀请</label>
-                                                <input type="text" name="txt_departmentlevel" class="form-control"
+                                                <input type="text" name="username" class="form-control"
                                                        placeholder="用户名">
+                                                <input type="hidden" name="gid" th:value="${group.gid}">
                                             </div>
 
                                         </div>
@@ -194,7 +197,7 @@
                                                     class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
                                             </button>
                                             <button type="button" class="btn btn-primary" data-dismiss="modal"><span
-                                                    class="glyphicon glyphicon-plane" aria-hidden="true"></span>邀请
+                                                    class="glyphicon glyphicon-plane" aria-hidden="true" onclick="invite()"></span>邀请
                                             </button>
                                         </div>
                                     </form>
