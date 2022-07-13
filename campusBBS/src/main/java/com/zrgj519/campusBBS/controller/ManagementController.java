@@ -63,7 +63,7 @@ public class ManagementController {
     @RequestMapping("/admin/users")
     public String findUserByCondition(Model model, Integer id, String username, String email,
                                       Page page){
-        page.setRows(userService.getAllUsersCount());
+        page.setRows(userService.getAllUsersCount(id,username,email));
         if(username == null || username.length() == 0)
         {
             if(email == null || email.length() == 0){
@@ -78,8 +78,6 @@ public class ManagementController {
                 page.setPath("/admin/users?email="+email+"&username="+username);
             }
         }
-
-
         List<User> users = userService.findUser(id,username,email,page.getOffset(), page.getLimit());
         model.addAttribute("users",users);
         return "/site/user_account_management";

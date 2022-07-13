@@ -213,8 +213,8 @@ public class UserService {
         return userMapper.findUser(id, username, email ,offset,limit);
     }
 
-    public Integer getAllUsersCount(){
-        return userMapper.selectUsersCount();
+    public Integer getAllUsersCount(Integer id,String username,String email){
+        return userMapper.selectUsersCount(id,username,email);
     }
 
 }

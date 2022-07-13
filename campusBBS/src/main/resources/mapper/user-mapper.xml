@@ -71,10 +71,10 @@
                  and id = #{id}
             </if>
             <if test="username!=null and username!='' ">
-                and username like '%#{username}%'
+                and username like '%' #{username} '%'
             </if>
             <if test="email!=null and email!='' ">
-                and email like '%#{email}%'
+                and email like '%' #{email} '%'
             </if>
         </where>
         order by id asc
@@ -89,10 +89,10 @@
                 and id = #{id}
             </if>
             <if test="username!=null and username!='' ">
-                and username like '%#{username}%'
+                and username like '%' #{username} '%'
             </if>
             <if test="email!=null and email!='' ">
-                and email like '%#{email}%'
+                and email like '%' #{email} '%'
             </if>
         </where>
     </select>

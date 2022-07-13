@@ -39,6 +39,6 @@ public interface UserMapper {
 
     List<User> findUser(Integer id,String username,String email,Integer offset,Integer limit);
 
-    Integer selectUsersCount();
+    Integer selectUsersCount(Integer id,String username,String email);
 
 }
