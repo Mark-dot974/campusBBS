@@ -76,8 +76,8 @@ public class UserService {
         }
 
         // 开始注册
-        user.setSalt(CampusBBSUtil.generateUUID().substring(0,5));
-        user.setPassword(CampusBBSUtil.md5(user.getPassword()+user.getSalt()));
+        user.setSalt(CampusBBSUtil.generateUUID().substring(0, 5));
+        user.setPassword(CampusBBSUtil.md5(user.getPassword() + user.getSalt()));
         user.setType(0);
         // 默认为1
         user.setStatus(1);
@@ -112,36 +112,36 @@ public class UserService {
             return CampusBBSConstant.ACTIVATION_FAILURE;
         }
     }
-    public Map<String, Object> login(String username, String password, long expiredSeconds){
+
+    public Map<String, Object> login(String username, String password, long expiredSeconds) {
         // 验证客户端传递的信息是否可用
-        Map<String,Object> map = new HashMap<>();
-        if(StringUtils.isBlank(username)){
-            map.put("usernameMsg","账号不能为空！");
+        Map<String, Object> map = new HashMap<>();
+        if (StringUtils.isBlank(username)) {
+            map.put("usernameMsg", "账号不能为空！");
             return map;
         }
-        if(StringUtils.isBlank(password))
-        {
-            map.put("passwordMsg","密码不能为空！");
+        if (StringUtils.isBlank(password)) {
+            map.put("passwordMsg", "密码不能为空！");
             return map;
         }
 
         // 验证账号
         User user = userMapper.selectByName(username);
-        if(user==null){
-            map.put("usernameMsg","该账号不存在！");
+        if (user == null) {
+            map.put("usernameMsg", "该账号不存在！");
             return map;
         }
 
         // 验证状态(激活 or 未激活)
-        if(user.getStatus()==0){
-            map.put("usernameMsg","该账号未激活！");
+        if (user.getStatus() == 0) {
+            map.put("usernameMsg", "该账号未激活！");
             return map;
         }
 
         // 验证密码
-        String encodedPassword = CampusBBSUtil.md5(password+user.getSalt());
-        if(!encodedPassword.equals(user.getPassword())){
-            map.put("passwordMsg","密码不正确！");
+        String encodedPassword = CampusBBSUtil.md5(password + user.getSalt());
+        if (!encodedPassword.equals(user.getPassword())) {
+            map.put("passwordMsg", "密码不正确！");
             return map;
         }
 
@@ -150,30 +150,30 @@ public class UserService {
         loginTicket.setUserId(user.getId());
         loginTicket.setStatus(0);
         loginTicket.setTicket(CampusBBSUtil.generateUUID());
-        loginTicket.setExpired(new Date(System.currentTimeMillis()+expiredSeconds*1000));
+        loginTicket.setExpired(new Date(System.currentTimeMillis() + expiredSeconds * 1000));
         loginTicketMapper.insertLoginTicket(loginTicket);
-        map.put("ticket",loginTicket.getTicket());
+        map.put("ticket", loginTicket.getTicket());
         return map;
     }
 
-    public LoginTicket findLoginTicketByTicket(String ticket){
+    public LoginTicket findLoginTicketByTicket(String ticket) {
         return loginTicketMapper.selectByTicket(ticket);
     }
 
-    public List<User> showUser(){
+    public List<User> showUser() {
         List<User> users = userMapper.showUser();
         return users;
     }
 
     // 获取用户的权限
-    public Collection<? extends GrantedAuthority> getAuthorities(int userId){
+    public Collection<? extends GrantedAuthority> getAuthorities(int userId) {
         User user = this.findUserById(userId);
 
         List<GrantedAuthority> list = new ArrayList<>();
         list.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                switch (user.getType()){
+                switch (user.getType()) {
                     case 1:
                         return CampusBBSConstant.AUTHORITY_ADMIN;
                     case 2:
@@ -197,7 +197,7 @@ public class UserService {
     }
 
     public void updateHeader(int id, String url) {
-        userMapper.updateHeader(id,url);
+        userMapper.updateHeader(id, url);
     }
 
 
@@ -205,16 +205,16 @@ public class UserService {
         return userMapper.deleteUser(id);
     }
 
-    public User find(int id) {
+    public User find(int id){
         return userMapper.find(id);
     }
 
-    public void updateUser(User user) {
+    public void updateUser(User user){
         userMapper.updateUser(user);
     }
 
-    public List<User> findUser(Integer id, String username, String email,Integer offset,Integer limit) {
-        return userMapper.findUser(id, username, email ,offset,limit);
+    public List<User> findUser(Integer id,String username,String email){
+        return userMapper.findUser(id,username,email);
     }
 
     public Integer getAllUsersCount(Integer id,String username,String email){

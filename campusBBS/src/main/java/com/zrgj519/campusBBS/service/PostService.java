@@ -1,8 +1,10 @@
 package com.zrgj519.campusBBS.service;
 
 import com.zrgj519.campusBBS.dao.PostMapper;
+import com.zrgj519.campusBBS.dao.TagMapper;
 import com.zrgj519.campusBBS.entity.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.HtmlUtils;
 
@@ -30,6 +32,7 @@ public class PostService {
         return postMapper.selectAllPostsCount();
     }
 
+    // 除了要添加帖子外，还要在数据库创建对应的tag
     public int addPost(Post post){
         if(post == null){
             throw new IllegalArgumentException("参数不能为空");
