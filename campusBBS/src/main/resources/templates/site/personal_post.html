@@ -31,113 +31,153 @@
 
 </head>
 <body>
-    <div id="page">
-        <div id="header"></div>
-        <!--breadcrumbs-->
-        <!-- BEGIN Main Container col2-left -->
-        <section class="main-container col2-left-layout bounceInUp animated">
-            <!-- For version 1, 2, 3, 8 -->
-            <!-- For version 1, 2, 3 -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-main col-sm-9 col-sm-push-3 product-grid">
-                        <!--这里是个人中心发布内容的信息(点赞信息)展示begin-->
-                        <div class="pro-coloumn box-content box-category grid-sidebar-block" style="text-align: center">
-                            <div class="main-block-1">
-                                <div class="cate-heading">
-                                    <h2 style="background-color: #ed6663">发布内容</h2>
-                                </div>
-                                <div class="grid-2">
-                                    <div class="grid-block">
-                                        <ul class="posts-list unstyled clearfix">
-                                            <li>
-                                                <figure class="featured-thumb">
-                                                    <a th:href="@{category.html}"></a>
-                                                </figure>
-                                                <div class="content-info">
-                                                    <!--标签样式-->
-                                                    <div class="index_tag_style">
-                                                        <div style="display: flex">
-                                                            <div style="margin-right: 10px">
-                                                                <a class="tag " href="#" title="Fashion">Technology</a>
-                                                            </div>
-                                                            <div style="margin-right: 10px">
-                                                                <a class="tag " href="#" title="Fashion">Technology</a>
-                                                            </div>
-                                                            <div style="margin-right: 10px">
-                                                                <a class="tag " href="#" title="Fashion">Technology</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <h4>
-                                                        <a th:href="@{/post/detail(id=${map.post.id})}" th:text="${map.post.title}" title="Lorem ipsum dolor sit amet">
-                                                        </a>
-                                                    </h4>
-                                                    <div class="post_meta" style="display: flex">
-                                                        <!--头像-->
-                                                        <div style="width: 120px">
-                                                            <img th:src="@{/images/gdl.jpg}" alt="auther" style="width: 35px;height: 35px; border-radius: 50%"> <a href="#" style="color: #898989">Smith John </a>
-                                                        </div>
-                                                        <div style="width: 120px; height: 35px;">
-                                                            <div style="margin-top: 4px">
-                                                                <i class="fa fa-heart-o"></i>
-                                                                <!--点赞数量-->
-                                                                <span class="chart_margin">qdiqubqiuqdq</span>
-                                                            </div>
-                                                        </div>
-                                                        <div style="width: 120px;height: 35px;">
-                                                            <div style="margin-top: 4px">
-                                                                <i class="fa fa-comment"></i>
-                                                                <!--评论数量-->
-                                                                <span class="chart_margin">12 May 2020</span>
-                                                            </div>
-                                                        </div>
-                                                        <div style="height: 35px;">
-                                                            <div style="margin-top: 4px;">
-                                                                <i class="fa fa-clock-o"></i>
-                                                                <!--发表时间-->
-                                                                <span class="chart_margin" th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}">12 May 2020</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--文章部分，超出两行多余使用省略号隐藏-->
-                                                    <div class="index_text_style">
-                                                        <p th:text="${map.post.content}"></p>
-                                                    </div>
-
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                            <div class="pager">
-                                <div class="pages">
-                                    <!--<strong></strong>-->
-                                    <ol class="pagination">
-                                        <li class="active"><a href="">1</a></li>
-                                        <li><a href="">2</a></li>
-                                        <li><a href="">3</a></li>
-                                        <li><a href="">4</a></li>
-                                        <li><a href="">5</a></li>
-                                        <li><a href="">6</a></li>
-                                        <li> <a class="next i-next" href="" title="Next"> » </a> </li>
-                                    </ol>
-                                </div>
-                            </div>
-
+<div id="header"></div>
+<!--breadcrumbs-->
+<!-- BEGIN Main Container col2-left -->
+<section class="main-container col2-left-layout bounceInUp animated">
+    <!-- For version 1, 2, 3, 8 -->
+    <!-- For version 1, 2, 3 -->
+    <div class="container">
+        <div class="row">
+            <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+                <!--这里是个人中心发布内容的信息(点赞信息)展示begin-->
+                <div class="pro-coloumn box-content box-category grid-sidebar-block">
+                    <div class="main-block-1">
+                        <div class="cate-heading">
+                            <h2 style="background-color: #ed6663">发布内容</h2>
                         </div>
-                        <!--这里是个人中心发布内容的信息展示end-->
+                        <div class="grid-2">
+                            <div class="grid-block">
+                                <ul class="posts-list unstyled clearfix">
+                                    <li th:each="post:${post}">
+                                        <figure class="featured-thumb">
+                                            <a th:href="@{category.html}"></a>
+                                        </figure>
+                                        <div class="content-info" >
+                                            <!--标签样式-->
+                                            <div class="index_tag_style">
+                                                <div style="display: flex">
+                                                    <div style="margin-right: 10px">
+                                                        <a class="tag " href="#" title="Fashion" th:text="${post.tag}">Technology</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <h4>
+                                                <a th:href="@{/post/detail(id=${post.id})}" th:text="${post.title}" title="Lorem ipsum dolor sit amet">
+                                                </a>
+                                            </h4>
+                                            <div class="post_meta" style="display: flex">
+                                                <!--头像-->
+                                                <div style="width: 120px;display: flex;">
+                                                    <div>
+                                                        <img th:src="${user.headerUrl}" style="width: 35px;height: 35px; border-radius: 50%">
+                                                    </div>
+                                                    <div style="margin-left: 5px">
+                                                        <a href="#" style="color: #898989" th:text="${user.username}">Smith John </a>
+                                                    </div>
+                                                </div>
+                                                <div style="width: 120px; height: 35px;margin-top: 5px">
+                                                    <div style="margin-top: 4px">
+                                                        <i class="fa fa-heart-o"></i>
+                                                        <!--点赞数量-->
+                                                        <span class="chart_margin">521</span>
+                                                    </div>
+                                                </div>
+                                                <div style="width: 120px;height: 35px;margin-top: 5px">
+                                                    <div style="margin-top: 4px">
+                                                        <i class="fa fa-comment"></i>
+                                                        <!--评论数量-->
+                                                        <span class="chart_margin">50</span>
+                                                    </div>
+                                                </div>
+                                                <div style="height: 35px;margin-top: 5px">
+                                                    <div style="margin-top: 4px;">
+                                                        <i class="fa fa-clock-o"></i>
+                                                        <!--发表时间-->
+                                                        <span class="chart_margin" th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}">12 May 2020</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--文章部分，超出两行多余使用省略号隐藏-->
+                                            <div class="index_text_style">
+                                                <p th:text="${post.content}"></p>
+                                            </div>
 
-                        <!--	///*///======    End article  ========= //*/// -->
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div id="aside_left"></div>
-                    <!--col-right sidebar-->
                 </div>
-                <!--row-->
+                <div class="pager">
+                    <div class="pages">
+                        <!--<strong></strong>-->
+                        <ol class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+                            </li>
+                            <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                                <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+                            <!--						page对象中的from和to决定了导航条的页面数量-->
+                            <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
+                                <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
+                            </li>
+                            <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                                <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
             </div>
-            <!--container-->
+            <aside_left class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9">
+                <!-- BEGIN SIDE-NAV-CATEGORY -->
+                <div class="side-nav-categories">
+                    <div class="block-title"> 个人中心 </div>
+                    <!--block-title-->
+                    <!-- BEGIN BOX-CATEGORY -->
+                    <div class="box-content box-category">
+                        <ul class="nav nav-pills nav-stacked" style="max-width: 320px;  ">
+                            <li class="">
+                                <a href="profile_set.html">
+                                    <span class="badge pull-right">42</span>
+                                    个人信息
+                                </a>
+                            </li>
+                            <li>
+                                <!--                    <i th:text="${user.id}"></i>-->
+                                <!--                    <a th:href="|@{/post/personalPost(userId=${user?.id})}|">-->
+                                <a th:href="@{/post/personalPost(userId=${user.id})}">
+                                    <!--                    <a href="personal_post.html">-->
+                                    <span class="badge pull-right">3</span>
+                                    发布内容
+                                </a>
+                            </li>
+                            <li>
+                                <a href="personal_publish.html">
+                                    <span class="badge pull-right">3</span>
+                                    点赞
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/group/personalGroup(members=${user.username})}">
+                                    <span class="badge pull-right">3</span>
+                                    圈子
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--box-content box-category-->
+                </div>
+            </aside_left>
+            </div>
+
+        </div>
+
         </section>
     </div>
     </div>

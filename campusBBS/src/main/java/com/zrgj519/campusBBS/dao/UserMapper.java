@@ -41,4 +41,5 @@ public interface UserMapper {
 
     Integer selectUsersCount(Integer id,String username,String email);
 
+    User selectByNameInGroup(String members);
 }

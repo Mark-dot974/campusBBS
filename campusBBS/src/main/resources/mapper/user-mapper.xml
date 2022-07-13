@@ -96,5 +96,9 @@
             </if>
         </where>
     </select>
-
+    <select id="selectByNameInGroup" resultType="User">
+        select <include refid="selectFields"></include>
+        from user
+        where username like  '%' #{username} '%'
+    </select>
 </mapper>

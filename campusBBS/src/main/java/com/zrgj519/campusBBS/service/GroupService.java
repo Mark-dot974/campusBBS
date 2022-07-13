@@ -5,6 +5,7 @@ import com.zrgj519.campusBBS.dao.GroupMapper;
 import com.zrgj519.campusBBS.entity.Group;
 import com.zrgj519.campusBBS.entity.GroupFile;
 import com.zrgj519.campusBBS.entity.Post;
+import com.zrgj519.campusBBS.util.UserContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,18 @@ public class GroupService {
     @Autowired
     private FileMapper fileMapper;
 
-    public List<Group> getAll(){
-        return groupMapper.selectAll();
+    @Autowired
+    private UserContainer userContainer;
+
+
+    public List<Group> getAll(int offset,int limit,int mode){
+        // 所有
+        if(mode == 0) return groupMapper.selectAll(offset, limit,null,null);
+        // 我创建的
+        if(mode == 2) return groupMapper.selectAll(offset, limit,userContainer.getUser().getUsername(),null);
+        // 我加入的
+        if(mode == 1) return groupMapper.selectAll(offset, limit,null,userContainer.getUser().getUsername());
+        else return null;
     }
 
     public void addGroup(Group group){
@@ -48,14 +59,30 @@ public class GroupService {
         return groupMapper.deleteGroup(gid);
     }
 
+    public void uploadFile(GroupFile file){
+        fileMapper.insertFile(file);
+    }
+
+
     public void updateGroup(Group group){ groupMapper.updateGroup(group); }
 
     public Group find(Integer gid){
         return groupMapper.find(gid);
     }
 
-    public List<Group> findGroup(Integer gid,String groupName,String members){
-        return groupMapper.findGroup(gid,groupName,members);
+    public List<Group> findGroup(Integer gid,String groupName,String members,Integer offset,Integer limit){
+        return groupMapper.findGroup(gid,groupName,members,offset,limit);
     }
 
+    public int getGroupsCount(Integer gid,String groupName,String members){
+        return groupMapper.selectCountOfGroup(gid,groupName,members);
+    }
+
+    public List<Group> selectPersonalGroup(String members, Integer offset, Integer limit){
+        return groupMapper.selectPersonalGroup(members,offset,limit);
+    }
+
+    public Integer selectCountOfPersonalGroup(String members){
+        return groupMapper.selectCountOfPersonalGroup(members);
+    }
 }
