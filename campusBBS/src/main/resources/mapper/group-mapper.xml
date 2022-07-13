@@ -98,6 +98,11 @@
         limit #{offset},#{limit}
     </select>
 
+    <update id="updateGroupMember">
+        update collaboration_group set members = #{members},members_count=#{membersCount}
+        where gid = #{gid}
+    </update>
+
     <select id="selectCountOfPersonalGroup" resultType="int">
         select count(*)
         from collaboration_group
