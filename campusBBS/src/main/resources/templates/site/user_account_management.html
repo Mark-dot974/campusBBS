@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>用户管理页面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用户管理页面</title>
     <link rel="stylesheet" th:href="@{/css/style.default.css}" type="text/css" />
     <script type="text/javascript" th:src="@{js/plugins/jquery-1.7.min.js}"></script>
     <script type="text/javascript" th:src="@{js/plugins/jquery-ui-1.8.16.custom.min.js}"></script>
@@ -22,14 +22,6 @@
         <div class="left">
             <h1 class="logo">Campus<span>.BBS</span></h1>
             <span class="slogan">后台管理系统</span>
-            
-            <div class="search">
-            	<form action="" method="post">
-                	<input type="text" name="keyword" id="keyword" value="Enter keyword(s)" />
-                    <button class="submitbutton"></button>
-                </form>
-            </div><!--search-->
-            
             <br clear="all" />
             
         </div><!--left-->
@@ -45,7 +37,7 @@
             </div><!--userinfo-->
             
             <div class="userinfodrop">            	<div class="avatar">
-                	<a href=""><img src="images/thumbs/avatarbig.png" alt="" /></a>
+                	<a href=""><img src="images/thumbs/avatarbig.png" style="width: 35px;height: 35px;" /></a>
                     <div class="changetheme">
                     	Change theme: <br />
                     	<a class="default"></a>
@@ -72,7 +64,7 @@
     
     <div class="header">
     	<ul class="headermenu">
-        	<li><a href="user_account_management.html"><span class="icon icon-flatscreen"></span>表管理</a></li>
+        	<li><a  th:href="@{/admin/users}"><span class="icon icon-flatscreen"></span>表管理</a></li>
             <!-- <li><a href="manageblog.html"><span class="icon icon-pencil"></span>Manage Blog</a></li>
             <li><a href="messages.html"><span class="icon icon-message"></span>Messages</a></li>
             <li><a href="reports.html"><span class="icon icon-chart"></span>Reports</a></li> -->
@@ -86,7 +78,9 @@
     	<ul>
             <li class="current"><a th:href="@{/admin/users}" class="tables">用户账号管理</a></li>
             <li><a th:href="@{/admin/posts}" class="buttons">帖子管理</a></li>
-            
+            <li><a th:href="@{/admin/groups}" class="tables">圈子管理</a></li>
+            <li><a th:href="@{/admin/tags}" class="tables">标签管理</a></li>
+        </ul>
         </ul>
         <br /><br />
     </div><!--leftmenu-->
@@ -102,19 +96,23 @@
         <div id="contentwrapper" class="contentwrapper">
                         
           <div class="contenttitle2">
-            <h3>用户表</h3>
+            <h3 >用户表</h3>
           </div><!--contenttitle-->
-          <div class="tableoptions">
-            <button class="deletebutton radius3" title="table2">按钮</button> &nbsp;
-              <select class="radius3">
-                <option value="">筛选条件</option>
-                  <option value="">username</option>
-                  <option value="">email</option>
-                  <option value="">type</option>
-              </select> &nbsp;
-              <input type="text" placeholder="字段匹配">
-              <button class="radius3">搜索</button>
-          </div><!--tableoptions-->	
+
+          <div >
+              <form  th:action="@{/admin/users}" method="post" class="tableoptions" style="position: center">
+              <input type="text" placeholder="请输入用户ID" name="id" id="id" style="width: 150px">
+              <input type="text" placeholder="请输入用户名" name="username" id="username" style="width: 150px; margin-left: 20px">
+              <input type="text" placeholder="请输入用户邮箱" name="email" id="email" style="width: 150px; margin-left: 20px">
+              <button id="findBtn" type="submit" style="margin-left: 10px; height: 30px; width: 70px;" onclick="searchuser()">查询</button>
+               <a th:href="@{/admin/users}">   <button id="showusers" type="submit" style="margin-left: 10px; height: 30px; width: 70px;">刷新</button></a>
+                  <a style="font-size: 15px;margin-left: 300px;margin-top: 40px;font-family: SimHei">当前位于第&nbsp;<span th:text="${page.current}" style="color: rgb(251,225,34);font-weight: bold"/>&nbsp;页,共
+                      <span th:text="${page.total}" style="color: rgb(251,225,34);font-weight: bold"/>&nbsp;页</a>
+
+              </form>
+          </div><!--tableoptions-->
+
+            <div id="userTable" th:fragment="userTable">
           <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
               <colgroup>
                   <col class="con0" style="width: 4%" />
@@ -127,43 +125,58 @@
               </colgroup>
               <thead>
                   <tr>
-                    <th class="head0"><input type="checkbox" class="checkall" /></th>
-                      <th class="head1">username</th>
-                      <th class="head0">password</th>
-                      <th class="head1">email</th>
-                      <th class="head0">type</th>
-                      <th class="head1">status</th>
-                      <th class="head0">&nbsp;</th>
+                 <!--<input type="checkbox" class="checkall" />-->  <th class="head0"></th>
+                      <th class="head0">用户ID</th>
+                      <th class="head1">用户名</th>
+                      <th class="head0">密码</th>
+                      <th class="head1">电子邮箱</th>
+                      <th class="head0">类型</th>
+                      <th class="head1">状态</th>
+                      <th class="head0">操作</th>
                   </tr>
               </thead>
-              <!-- <tfoot>
-                  <tr>
-                    <th class="head0"><input type="checkbox" class="checkall" /></th>
-                      <th class="head1">Rendering engine</th>
-                      <th class="head0">Browser</th>
-                      <th class="head1">Platform(s)</th>
-                      <th class="head0">Engine version</th>
-                      <th class="head1">CSS grade</th>
-                      <th class="head0">&nbsp;</th>
-                  </tr>
-              </tfoot> -->
+
               <tbody>
                 <tr th:each="user:${users}">
                   <td align="center"><input type="checkbox" /></td>
+                    <td th:text="${user.id}">mark</td>
                     <td th:text="${user.username}">mark</td>
                     <td th:text="${user.password}">******</td>
                     <td th:text="${user.email}">56785190@qq.com</td>
                     <td class="center" th:text="${user.type}">1</td>
                     <td class="center" th:text="${user.status}">X</td>
-                    <td class="center"><a href="" class="edit">Edit</a> &nbsp; <a href="" class="delete">Delete</a></td>
+                    <td class="center">
+                        <a th:href="@{/findUsers(id=${user.id})}" class="edit">编辑</a> &nbsp;|&nbsp;
+                        <a th:href="@{/delUsers(id=${user.id})}" class="delete" onclick="deluser()">删除</a></td>
                 </tr>
+
+
             </tbody>
           </table>
-          
+                <div class="pager" style="margin-top: 20px; margin-left: 800px;">
+                    <div class="pages" style="position:absolute;left: 40%">
+
+                        <ol class="pagination" >
+                            <li class="page-item" style="background-color: white;width: 50px;">
+                                <a class="page-link" th:href="@{${page.path}(current=1)}" style="background-color: rgb(251,225,34);border-radius: 10px;border-color: rgb(251,225,34);">首页</a>
+                            </li>
+                            <li th:class="|page-item ${page.current==1?'disabled':''}|" style="background-color: white;width: 60px">
+                                <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}" style="background-color: rgb(251,225,34);border-radius: 10px;border-color: rgb(251,225,34);">上一页</a></li>
+                            <!--						page对象中的from和to决定了导航条的页面数量-->
+                            <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}" style="background-color: white;width: 30px;margin-left: 5px;margin-right: 5px">
+                                <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}" style="background-color: white;border-radius: 10px;border-color: white">1</a>
+                            </li>
+                            <li th:class="|page-item ${page.current==page.total?'disabled':''}|" style="background-color: white;width: 60px;margin-left: 5px">
+                                <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}" style="background-color: rgb(251,225,34);border-radius: 10px;border-color: rgb(251,225,34);">下一页</a>
+                            </li>
+                            <li class="page-item" style="width: 50px;margin-left: 5px;">
+                        <a class="page-link" th:href="@{${page.path}(current=${page.total})}" style="background-color: rgb(251,225,34);border-radius: 10px;border-color: rgb(251,225,34);">末页</a>
+                            </li>
+                        </ol>
+
+                    </div>
+                </div>
           <br /><br />
-                
-                
-                
                 
         
         </div><!--contentwrapper-->
@@ -174,4 +187,22 @@
 </div><!--bodywrapper-->
 
 </body>
+
+<script>
+
+    function deluser(){
+        if(confirm("确实要删除该用户吗?")){
+            alert("删除成功！");
+        }else{
+            event.preventDefault(); //取消默认应答
+            alert("取消了删除操作");
+        }
+    }
+    function searchuser(){
+        alert("查询成功！");
+    }
+
+</script>
+
+
 </html>

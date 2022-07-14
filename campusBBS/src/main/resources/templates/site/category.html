@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>campusBBS</title>
+<title>Category Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Default Description">
 <meta name="keywords" content="fashion, store, E-commerce">
@@ -89,10 +89,14 @@
                       <ul class="post-meta">
                         <!--发布用户头像-->
                         <li>
-                          <div style="width:80px">
+
+                          <div style="width:80px;display: flex;">
+                            <a th:href="@{/user/personalPage(id=${map.user.id})}">
                             <img th:src="${map.user.headerUrl}" alt="auther">
-                            <a href="#" th:utext="${map.user.username}">Smith John </a>
+                            <span href="#" th:utext="${map.user.username}">Smith John </span>
+                            </a>
                           </div>
+
                         </li>
                         <!--点赞图标-->
                         <li >

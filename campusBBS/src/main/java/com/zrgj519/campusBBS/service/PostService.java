@@ -46,7 +46,7 @@ public class PostService {
         // 将帖子添加到对应的tag中
         // 一个tag的PostId在数据库中只能有255长度，后期使用redis优化
         for (String tag : tags) {
-           tagService.addPostToTag(tag,postId);
+            tagService.addPostToTag(tag,postId);
         }
         return result;
     }
@@ -65,6 +65,26 @@ public class PostService {
     }
 
     public Page<Post> findPostsByUserInterest(String userInterest, int offset, int limit) {
-        return elasticsearchService.searchDiscussPost(userInterest,offset,limit);
+        return elasticsearchService.searchDiscussPostByTag(userInterest,offset,limit);
     }
+
+    public List<Post> showPost(){
+        List<Post> posts = postMapper.showPost();
+        return posts;
+    }
+
+    public int deletePost(int id) {
+        return postMapper.deletePost(id);
+    }
+
+    public void updatePost(Post post){ postMapper.updatePost(post); }
+
+    public Post find(int id){
+        return postMapper.find(id);
+    }
+
+    public void updateCommentCount(int entityId, int count) {
+        postMapper.updateCommentCount(entityId,count);
+    }
+
 }

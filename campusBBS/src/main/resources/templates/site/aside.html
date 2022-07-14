@@ -11,7 +11,8 @@
                         </span>
                         <!--此处显示头像-->
                         <div style="display:flex; margin-left: 20px">
-                            <a title="" class="">
+                        <!--显示个人信息-->
+                            <a title="" class="" th:href="@{/user/personalPage(id=${loginUser.id})}">
                                 <img th:src="${loginUser.headerUrl}" style="border-radius: 50%; height: 30px;height: 30px">
                             </a>
                             <h3 class="one_page_heading">

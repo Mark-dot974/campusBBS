@@ -1,12 +1,11 @@
 package com.zrgj519.campusBBS.controller;
 
+import com.zrgj519.campusBBS.entity.Comment;
 import com.zrgj519.campusBBS.entity.Page;
 import com.zrgj519.campusBBS.entity.Post;
 import com.zrgj519.campusBBS.entity.User;
-import com.zrgj519.campusBBS.service.ElasticsearchService;
-import com.zrgj519.campusBBS.service.PostService;
-import com.zrgj519.campusBBS.service.TagService;
-import com.zrgj519.campusBBS.service.UserService;
+import com.zrgj519.campusBBS.service.*;
+import com.zrgj519.campusBBS.util.CampusBBSConstant;
 import com.zrgj519.campusBBS.util.UserContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +27,10 @@ public class PostController {
     private TagService tagService;
     @Autowired
     private ElasticsearchService elasticsearchService;
+    @Autowired
+    private LikeService likeService;
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping(path="/publish",method = RequestMethod.GET)
     public String getPostPage(){
@@ -116,11 +119,111 @@ public class PostController {
     }
 
     @RequestMapping(path = "/detail",method = RequestMethod.GET)
-    public String detail(@RequestParam("id") int id,Model model){
+    public String detail(@RequestParam("id") int id,Model model,Page page){
         Post post = postService.getPostById(id);
+        String tag = post.getTag();
+        if(tag!=null){
+            String[] split = tag.split(",");
+            model.addAttribute("tags",split);
+        }
         model.addAttribute("post",post);
         User user = userService.findUserById(post.getUserId());
         model.addAttribute("user",user);
+
+        /**
+         * 点赞相关
+         */
+
+        // 设置帖子的点赞数量
+        long likeCount = likeService.findEntityLikeCount(CampusBBSConstant.ENTITY_TYPE_POST, id);
+        model.addAttribute("likeCount",likeCount);
+        // 设置帖子的点赞状态
+        int likeStatus;
+        if(userContainer.getUser() == null)
+        {
+            likeStatus=0;
+        }
+        else{
+            likeStatus = likeService.findEntityLikeStatus(userContainer.getUser().getId(), CampusBBSConstant.ENTITY_TYPE_POST, id);
+        }
+        model.addAttribute("likeStatus",likeStatus);
+
+
+        /**
+         * 评论相关
+         */
+        // 评论的分页信息
+        page.setLimit(5);
+        page.setPath("/discuss/detail/"+ id);
+        page.setRows(post.getCommentCount());
+
+        // 获取评论列表信息
+        // 评论：给帖子的评论
+        // 回复：给评论的评论
+        // 评论列表
+        List<Comment> commentList = commentService.findCommentsByEntity(CampusBBSConstant.ENTITY_TYPE_POST, post.getId(), page.getOffset(), page.getLimit());
+        // 评论VO(View Object)列表
+        List<Map<String,Object>> commentVoList = new ArrayList<>();
+        if(commentList!=null){
+            for (Comment comment : commentList) {
+                // 评论VO
+                Map<String , Object> commentVo = new HashMap<>();
+                commentVo.put("comment",comment);
+                // 添加评论的评论者
+                commentVo.put("user",userService.findUserById(comment.getUserId()));
+                //添加评论的点赞数量
+                likeCount = likeService.findEntityLikeCount(CampusBBSConstant.ENTITY_TYPE_COMMENT, comment.getId());
+                commentVo.put("likeCount",likeCount);
+                // 未登录时
+                if(userContainer.getUser() == null)
+                {
+                    likeStatus=0;
+                }
+                else {
+                    likeStatus = likeService.findEntityLikeStatus(userContainer.getUser().getId(), CampusBBSConstant.ENTITY_TYPE_COMMENT, comment.getId());
+                }
+                commentVo.put("likeStatus",likeStatus);
+
+                // 获取帖子的回复列表,有多少显示多少
+                List<Comment> replyList = commentService.findCommentsByEntity(CampusBBSConstant.ENTITY_TYPE_COMMENT,comment.getId(),0,Integer.MAX_VALUE);
+                // 构造回复的VO列表
+                List<Map<String,Object>> replyVoList = new ArrayList<>();
+                if(replyVoList!=null){
+                    for (Comment reply : replyList) {
+                        Map<String,Object> replyVo = new HashMap<>();
+                        // 回复
+                        replyVo.put("reply",reply);
+                        // 作者，回复者
+                        replyVo.put("user",userService.findUserById(reply.getUserId()));
+                        // 回复对象
+                        // 有两种可能，在帖子的评论下评论（回复），但是这时是不显示回复对象的，所以target是0；
+                        // 第二种可能是楼主回复评论者，或评论者回复楼主，这时有target
+                        // 被回复者
+                        User target = reply.getTargetId() == 0 ? null : userService.findUserById(reply.getTargetId());
+                        replyVo.put("target",target);
+                        // 设置reply的点赞数量
+                        likeCount = likeService.findEntityLikeCount(CampusBBSConstant.ENTITY_TYPE_COMMENT,reply.getId());
+                        replyVo.put("likeCount",likeCount);
+                        if(userContainer.getUser() == null)
+                        {
+                            likeStatus=0;
+                        }
+                        else likeStatus = likeService.findEntityLikeStatus(userContainer.getUser().getId(),CampusBBSConstant.ENTITY_TYPE_COMMENT,reply.getId());
+                        replyVo.put("likeStatus",likeStatus);
+                        replyVoList.add(replyVo);
+                    }
+                }
+                commentVo.put("replys",replyVoList);
+                // 回复数量
+                int replyCount = commentService.findCommentCount(CampusBBSConstant.ENTITY_TYPE_COMMENT, comment.getId());
+                commentVo.put("replyCount",replyCount);
+                commentVoList.add(commentVo);
+            }
+        }
+        model.addAttribute("comments",commentVoList);
+
+
+
         return "/site/detail";
     }
 

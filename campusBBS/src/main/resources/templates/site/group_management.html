@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>帖子管理页面</title>
+    <title>圈子管理页面</title>
     <link rel="stylesheet" th:href="@{/css/style.default.css}" type="text/css" />
     <script type="text/javascript" th:src="@{js/plugins/jquery-1.7.min.js}"></script>
     <script type="text/javascript" th:src="@{js/plugins/jquery-ui-1.8.16.custom.min.js}"></script>
@@ -66,7 +66,7 @@
     
     <div class="header">
     	<ul class="headermenu">
-        	<li><a th:href="@{/admin/posts}"><span class="icon icon-flatscreen"></span>表管理</a></li>
+        	<li><a th:href="@{/admin/groups}"><span class="icon icon-flatscreen"></span>表管理</a></li>
 
         </ul>
         
@@ -77,8 +77,8 @@
     <div class="vernav2 iconmenu">
     	<ul>
             <li ><a th:href="@{/admin/users}" class="tables">用户账号管理</a></li>
-            <li class="current"><a th:href="@{/admin/posts}" class="buttons">帖子管理</a></li>
-            <li ><a th:href="@{/admin/groups}" class="tables">圈子管理</a></li>
+            <li><a th:href="@{/admin/posts}" class="buttons">帖子管理</a></li>
+            <li class="current"><a th:href="@{/admin/groups}" class="tables">圈子管理</a></li>
             <li><a th:href="@{/admin/tags}" class="tables">标签管理</a></li>
         </ul>
         <br /><br />
@@ -87,26 +87,27 @@
     <div class="centercontent tables">
     
         <div class="pageheader notab">
-            <h1 class="pagetitle">帖子管理</h1>
-            <span class="pagedesc">Post Management</span>
+            <h1 class="pagetitle">圈子管理</h1>
+            <span class="pagedesc">Group Management</span>
             
         </div><!--pageheader-->
         
         <div id="contentwrapper" class="contentwrapper">
                         
           <div class="contenttitle2">
-            <h3 >帖子表</h3>
+            <h3 >圈子表</h3>
           </div><!--contenttitle-->
 
           <div class="tableoptions">
-              <form th:action="@{/admin/posts}" method="post" style="position: center">
-              <input type="text" placeholder="请输入帖子ID" name="id" id="id" style="width: 150px">
-              <input type="text" placeholder="请输入帖子标题" name="title" id="title" style="width: 150px; margin-left: 20px">
-              <input type="text" placeholder="请输入帖子Tag" name="tag" id="tag" style="width: 150px; margin-left: 20px">
-              <button type="submit" value="查询" style="margin-left: 10px; height: 30px; width: 70px;" onclick="searchpost()">查询</button>
-                  <a th:href="@{/admin/posts}">   <button id="showusers" type="submit" style="margin-left: 10px; height: 30px; width: 70px;">刷新</button></a>
+              <form th:action="@{/admin/groups}" method="post" style="position: center">
+              <input type="text" placeholder="请输入圈子ID" name="gid" id="gid" style="width: 150px">
+              <input type="text" placeholder="请输入圈子名称" name="groupName" id="groupName" style="width: 150px; margin-left: 20px">
+              <input type="text" placeholder="请输入圈子成员" name="members" id="members" style="width: 150px; margin-left: 20px">
+              <button type="submit" value="查询" style="margin-left: 10px; height: 30px; width: 70px;" onclick="searchgroup()">查询</button>
+                  <a th:href="@{/admin/groups}">   <button id="showgroups" type="submit" style="margin-left: 10px; height: 30px; width: 70px;">刷新</button></a>
                   <a style="font-size: 15px;margin-left: 300px;margin-top: 40px;font-family: SimHei">当前位于第&nbsp;<span th:text="${page.current}" style="color: rgb(251,225,34);font-weight: bold"/>&nbsp;页,共
                       <span th:text="${page.total}" style="color: rgb(251,225,34);font-weight: bold"/>&nbsp;页</a>
+<!--              <span  style="margin-left: 80px; font-size: 10px;">共有数据：条</span>-->
               </form>
           </div><!--tableoptions-->
 
@@ -123,26 +124,26 @@
               <thead>
                   <tr>
                       <!--<input type="checkbox" class="checkall" />-->  <th class="head0"></th>
-                      <th class="head0">帖子ID</th>
-                      <th class="head0">发帖用户ID</th>
-                      <th class="head1">标题</th>
+                      <th class="head0">圈子ID</th>
+                      <th class="head0">圈子名称</th>
+                      <th class="head1">成员</th>
                       <th class="head0">标签</th>
-                      <th class="head1">内容</th>
+                      <th class="head1">圈主</th>
                       <th class="head0">操作</th>
                   </tr>
               </thead>
 
               <tbody>
-                  <tr th:each="post:${posts}">
+                  <tr th:each="group:${groups}">
                     <td align="center"><input type="checkbox" /></td>
-                      <td th:text="${post.id}"></td>
-                      <td th:text="${post.userId}"></td>
-                      <td th:text="${post.title}"></td>
-                      <td class="center" th:text="${post.tag}"></td>
-                      <td class="center" th:text="${post.content}">A</td>
+                      <td th:text="${group.gid}"></td>
+                      <td th:text="${group.groupName}"></td>
+                      <td th:text="${group.members}"></td>
+                      <td class="center" th:text="${group.tag}"></td>
+                      <td class="center" th:text="${group.groupLeader}">A</td>
                       <td class="center">
-                          <a th:href="@{/findPosts(id=${post.id})}" class="edit">编辑</a>&nbsp;|&nbsp;
-                          <a th:href="@{/delPosts(id=${post.id})}" class="delete" onclick="return delpost()">删除</a></td>
+                          <a th:href="@{/findGroups(gid=${group.gid})}" class="edit">编辑</a>&nbsp;|&nbsp;
+                          <a th:href="@{/delGroups(gid=${group.gid})}" class="delete" onclick="return delpost()">删除</a></td>
                   </tr>
               </tbody>
           </table>
@@ -191,7 +192,7 @@ function delpost(){
                  alert("取消了删除操作");
              }
          }
-function searchpost(){
+function searchgroup(){
     alert("查询成功！");
 }
 </script>

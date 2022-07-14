@@ -22,5 +22,19 @@ public interface UserMapper {
 
     int updatePassword(int id, String password);
 
+//   展示所有用户
     List<User> showUser();
+
+    int deleteUser(int id);
+
+//   根据id寻找用户信息
+    User find(int id);
+
+//    修改用户信息
+    void updateUser(User user);
+
+    List<User> findUser(Integer id,String username,String email,Integer offset,Integer limit);
+
+    Integer selectUsersCount(Integer id,String username,String email);
+
 }

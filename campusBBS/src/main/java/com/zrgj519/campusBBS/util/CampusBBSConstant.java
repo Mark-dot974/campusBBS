@@ -92,8 +92,17 @@ public class CampusBBSConstant {
     public static final String AUTHORITY_ADMIN = "admin";
 
     /**
-     * 权限：版主
+     * 权限：圈主
      */
     public static final String TEAM_LEADER = "teamLeader";
 
+    /**
+     * 权限：组员
+     */
+    public static final String TEAM_MEMBER = "teamMember";
+
+    /**
+     * 主题：新增帖子或评论
+     */
+    public static final String TOPIC_UPDATE_ENTITY = "updateEntity";
 }

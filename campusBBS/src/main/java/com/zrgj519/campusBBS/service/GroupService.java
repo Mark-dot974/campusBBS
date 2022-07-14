@@ -61,4 +61,16 @@ public class GroupService {
         String members = group.getMembers();
         groupMapper.updateGroupMember(members+","+username,gid,group.getMembersCount()+1);
     }
+
+    public boolean isGroupMember(int gid,String memberName){
+        Group group = groupMapper.selectGroupById(gid);
+        String m = group.getMembers();
+        String[] members = m.split(",");
+        for (String member : members) {
+            if(member.equals(memberName)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
