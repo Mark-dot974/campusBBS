@@ -3,10 +3,8 @@ package com.zrgj519.campusBBS.dao;
 import com.zrgj519.campusBBS.entity.Page;
 import com.zrgj519.campusBBS.entity.User;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 // 使用springboot进行开发必须要使用Mapper表示该接口，因为Mapper注解表示Mybatis，而Repository表示Spring
 @Mapper

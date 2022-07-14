@@ -51,4 +51,5 @@ public interface PostMapper {
     List<Post> selectPersonalPost(int userId,Integer offset,Integer limit);
 
     int selectCountOfPersonalPost(int userId);
+    void updateCommentCount(int entityId, int count);
 }

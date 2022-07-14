@@ -53,4 +53,8 @@
         from post
         where user_id = #{userId}
     </select>
+
+    <update id="updateCommentCount">
+        update post set comment_count = #{count} where id = #{entityId}
+    </update>
 </mapper>

@@ -80,6 +80,18 @@ public class GroupService {
         return groupMapper.findGroup(gid,groupName,members,offset,limit);
     }
 
+    public boolean isGroupMember(int gid,String memberName){
+        Group group = groupMapper.selectGroupById(gid);
+        String m = group.getMembers();
+        String[] members = m.split(",");
+        for (String member : members) {
+            if(member.equals(memberName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getGroupsCount(Integer gid,String groupName,String members){
         return groupMapper.selectCountOfGroup(gid,groupName,members);
     }
