@@ -6502,8 +6502,9 @@ blockquote {
 	color: #fff
 }
 .blog-image-content .post-meta img {
-	width: 35px;
+	width: 45px;
 	border-radius: 999px;
+	border:solid 3px #fbe122;
 	margin-right: 5px;
 }
 .blog-image-content a.tag {
@@ -11655,7 +11656,7 @@ button.button.login:before {
 	right: 10px;
 	text-decoration: none;
 	width: 45px;
-	background: url(/static/images/to-top-arrow.png) no-repeat center;
+	background: url(../images/to-top-arrow.png) no-repeat center;
 	background-color: #ed6663;
 	text-transform: uppercase;
 	z-index: 100;
@@ -13921,8 +13922,8 @@ select#shipping-address-select {
 	border-bottom: none;
 	text-align: center;
 	background-repeat: no-repeat;
-	background-image: url(../images/category-bg.jpg);
-	background-position: bottom
+	background-image: url(../images/cp-1.jpg);
+	background-position: bottom;
 }
 .page-heading .page-title h2 {
 	color: #fff;
