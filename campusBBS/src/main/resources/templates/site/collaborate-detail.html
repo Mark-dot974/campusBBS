@@ -56,9 +56,9 @@
                      alt="..." class="img-circle profile-pic " style="margin: 10px 20px 30px 0">
                 <h1 style="display: inline-block;" th:text="${group.groupName}">全民制作人</h1>
                 <button class="col-md-offset-1 btn btn-primary" type="button" id="btn-update"
-                        data-target="#publishModal">修改协作圈信息
+                        data-target="#publishModal" th:if="${loginUser!=null && loginUser.username==group.groupLeader}">修改协作圈信息
                 </button>
-                <button class="btn btn-primary" type="button" id="btn-join" data-target="#publishModal" th:if="${loginUser!=null}" onclick="apply()">
+                <button class="btn btn-primary col-md-offset-1" type="button" id="btn-join" data-target="#publishModal" th:if="${loginUser!=null && loginUser.username!=group.groupLeader && isMember!=true}" onclick="apply()">
                     申请加入
                 </button>
                 <form id="applyForm">
@@ -169,8 +169,8 @@
                         </a>
 <!--                        <a href="#"><img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic"></a>-->
 
-                        <a href="#" id="btn-invite"><img th:src="@{/images/newProfile.png}" alt="..."
-                                                         class="img-circle profile-pic"></a>
+                        <a><img th:src="@{/images/newProfile.png}" alt="..." id="btn-invite"
+                                class="img-circle profile-pic" onclick="memberForm()"></a>
 
                         <!--                        邀请                      -->
                         <div class="modal fade" id="invite" tabindex="-1" role="dialog">
@@ -196,8 +196,8 @@
                                             <button type="button" class="btn btn-default" data-dismiss="modal"><span
                                                     class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
                                             </button>
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal"><span
-                                                    class="glyphicon glyphicon-plane" aria-hidden="true" onclick="invite()"></span>邀请
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="inviteMember()"><span
+                                                    class="glyphicon glyphicon-plane" aria-hidden="true"></span>邀请
                                             </button>
                                         </div>
                                     </form>
@@ -302,42 +302,12 @@
 <script th:src="@{/js/countdown.js}"></script>
 <script th:src="@{/js/group.js}"/>
 <script>
-    function uploadFile(){
-        alert("happy")
-        $.ajax({
-            url: "http://up-z2.qiniup.com",
-            method: "post",
-            processData: false,
-            contentType: false,
-            data: new FormData($("#files")[0]),
-            success: function(data) {
-                $.post(
-                    CONTEXT_PATH+"/group/uploadFile",
-                    {"fileName":$("input[name='key']").val(),"gid":$("input[name='gid']").val()},
-                    function(data) {
-                        data = $.parseJSON(data);
-                        if(data.code == 0) {
-                            window.location.reload();
-                        } else {
-                            alert(data.msg);
-                        }
-                })
-            }
-        });
-        // 表示不要将表单提交
-        return false;
-    }
-</script>
-<script>
 
     $("#upload-circle-img").click(function () {
         document.getElementById("input-upload-circle-img").click();
     });
     $("#btn-update").click(function () {
         $('#myModal').modal();
-    });
-    $("#btn-invite").click(function () {
-        $('#invite').modal();
     });
     $("#btn-join").click(function () {
         $('#join').modal();

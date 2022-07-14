@@ -117,4 +117,59 @@ public class ElasticsearchService {
         });
 
     }
+
+
+    public Page<Post> searchDiscussPostByTag(String keyword, int current , int limit){
+        // 构造查询匹配的关键词以及关键词匹配的是那部分内容、排序规则，高亮设置（在关键词前后加上特定标签，然后自己在前端css进行设置）
+        SearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(QueryBuilders.multiMatchQuery(keyword,"tag"))
+                .withSort(SortBuilders.fieldSort("score").order(SortOrder.DESC))
+                .withSort(SortBuilders.fieldSort("createTime").order(SortOrder.DESC))
+                .withPageable(PageRequest.of(current,limit))
+                .build();
+
+        // 根据上面设置的查询条件，查询到相应内容，并对相应的内容放到page中
+        return elasticsearchTemplate.queryForPage(searchQuery, Post.class, new SearchResultMapper() {
+            @Override
+            public <T> AggregatedPage<T> mapResults(SearchResponse response, Class<T> aClass, Pageable pageable) {
+                SearchHits hits = response.getHits();
+                if (hits.getTotalHits() <= 0) {
+                    return null;
+                }
+                List<Post> list = new ArrayList<>();
+                // 遍历根据keyword搜索出来的结果，构造成post对象 （hit  --- 》   post ）
+                for (SearchHit hit : hits) {
+                    Post post = new Post();
+
+                    String id = hit.getSourceAsMap().get("id").toString();
+                    post.setId(Integer.valueOf(id));
+
+                    String userId = hit.getSourceAsMap().get("userId").toString();
+                    post.setUserId(Integer.valueOf(userId));
+
+                    String title = hit.getSourceAsMap().get("title").toString();
+                    post.setTitle(title);
+
+                    String content = hit.getSourceAsMap().get("content").toString();
+                    post.setContent(content);
+
+                    String tag = hit.getSourceAsMap().get("tag").toString();
+                    post.setTag(tag);
+
+                    String status = hit.getSourceAsMap().get("status").toString();
+                    post.setStatus(Integer.valueOf(status));
+
+                    String createTime = hit.getSourceAsMap().get("createTime").toString();
+                    post.setCreateTime(new Date(Long.valueOf(createTime)));
+
+                    String commentCount = hit.getSourceAsMap().get("commentCount").toString();
+                    post.setCommentCount(Integer.valueOf(commentCount));
+                    list.add(post);
+                }
+                return new AggregatedPageImpl(list, pageable,
+                        hits.getTotalHits(), response.getAggregations(), response.getScrollId(), hits.getMaxScore());
+            }
+        });
+
+    }
 }

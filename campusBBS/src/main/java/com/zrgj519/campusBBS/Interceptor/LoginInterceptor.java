@@ -31,9 +31,11 @@ public class LoginInterceptor implements HandlerInterceptor {
         String ticket="";
         if(request!=null){
             Cookie[] cookies = request.getCookies();
-            for (Cookie cookie : cookies) {
-                if(cookie.getName().equals("ticket")){
-                    ticket = cookie.getValue();
+            if(cookies!=null){
+                for (Cookie cookie : cookies) {
+                    if(cookie.getName().equals("ticket")){
+                        ticket = cookie.getValue();
+                    }
                 }
             }
         }

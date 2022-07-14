@@ -1,3 +1,30 @@
+function uploadFile(){
+    alert("happy")
+    $.ajax({
+        url: "http://up-z2.qiniup.com",
+        method: "post",
+        processData: false,
+        contentType: false,
+        data: new FormData($("#files")[0]),
+        success: function(data) {
+            $.post(
+                CONTEXT_PATH+"/group/uploadFile",
+                {"fileName":$("input[name='key']").val(),"gid":$("input[name='gid']").val()},
+                function(data) {
+                    data = $.parseJSON(data);
+                    if(data.code == 0) {
+                        window.location.reload();
+                    } else {
+                        alert(data.msg);
+                    }
+                })
+        }
+    });
+    // 表示不要将表单提交
+    return false;
+}
+
+
 function apply(){
     alert("apply")
     sessionStorage.setItem("apply","apply");
@@ -44,7 +71,8 @@ function denied(){
     )
 }
 
-function invite(){
+function inviteMember(){
+    alert("invite");
     $.post(
         CONTEXT_PATH+"/group/invite",
         $('#inviteForm').serialize(),
@@ -53,6 +81,8 @@ function invite(){
             if(data.code == 0)
             {
                 window.location.reload();
+            }else {
+                alert(data.msg);
             }
         }
     )
@@ -63,10 +93,16 @@ $(function(){
     if(sessionStorage.getItem("apply") == "agree") {
         $('#apply').text("已同意");
         $('#hi').html("");
+        sessionStorage.clear();
     }
     if(sessionStorage.getItem("apply") == "denied") {
-        $('#apply').text("已拒绝");
-        $('#hi').html("");
+        $('#denied_text').text("已拒绝");
+        $('#hid').html("<div style='width: 80px'></div>");
+        sessionStorage.clear();
     }
 
 })
+
+function memberForm(){
+    $('#invite').modal();
+}
