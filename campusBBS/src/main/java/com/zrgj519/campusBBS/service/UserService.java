@@ -211,8 +211,8 @@ public class UserService {
     }
 
 
-    public List<User> findUser(Integer id,String username,String email){
-        return userMapper.findUser(id,username,email);
+    public List<User> findUser(Integer id, String username, String email,Integer offset,Integer limit) {
+        return userMapper.findUser(id, username, email ,offset,limit);
     }
 
     public Integer getAllUsersCount(Integer id,String username,String email) {

@@ -22,11 +22,12 @@
             <div class="fl-header-right">
               <div class="fl-links">
 <!--			    这里是登录后显示的div-->
-               <div class="no-js"> <a title="" class="" th:if="${loginUser!=null}">
+               <div class="no-js" th:if="${loginUser!=null}"> <a title="" class="">
                <img class="clicker" id="usertouxiang" th:src="${loginUser.headerUrl}" style="border-radius:50%;"></a>
                  <div class="fl-nav-links">
                     <ul class="links">
-                        <li><a th:href="@{/user/set}" title="My Account">个人中心</a></li>
+                        <li><a th:href="|@{'/user/profile/'+${loginUser.id}}|">个人中心</a></li>
+                        <li><a th:href="|@{/admin/users(id=${loginUser.id})}|">管理中心</a></li>
                         <li> <a th:href="@{/post/publish}">发布</a></li>
                         <li> <a>私信</a></li>
                         <li><a th:href="@{/message/systemMessage}" title="Wishlist">消息通知</a></li>

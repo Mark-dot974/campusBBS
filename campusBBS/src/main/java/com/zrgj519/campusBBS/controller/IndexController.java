@@ -4,9 +4,7 @@ import com.zrgj519.campusBBS.entity.Page;
 import com.zrgj519.campusBBS.entity.Post;
 import com.zrgj519.campusBBS.entity.Tag;
 import com.zrgj519.campusBBS.entity.User;
-import com.zrgj519.campusBBS.service.PostService;
-import com.zrgj519.campusBBS.service.TagService;
-import com.zrgj519.campusBBS.service.UserService;
+import com.zrgj519.campusBBS.service.*;
 import com.zrgj519.campusBBS.util.CampusBBSConstant;
 import com.zrgj519.campusBBS.util.UserContainer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,10 @@ public class IndexController {
     private TagService tagService;
     @Autowired
     private UserContainer userContainer;
+    @Autowired
+    private LikeService likeService;
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping(path="/header")
     public String getHeader(){
@@ -142,6 +144,15 @@ public class IndexController {
             User userById = userService.findUserById(post.getUserId());
             postInfo.put("user",userById);
             postInfo.put("post",post);
+
+            /**
+             * 填充点赞评论数量
+             */
+            long likeCount = likeService.findEntityLikeCount(CampusBBSConstant.ENTITY_TYPE_POST, post.getId());
+            postInfo.put("likeCount",likeCount);
+            int commentCount = commentService.findCommentCount(CampusBBSConstant.ENTITY_TYPE_POST, post.getId());
+            postInfo.put("commentCount",commentCount);
+
             String tag = post.getTag();
             if(tag!=null){
                 String[] split = tag.split(",");

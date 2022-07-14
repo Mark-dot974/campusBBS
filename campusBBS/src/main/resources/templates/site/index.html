@@ -130,20 +130,22 @@
                                 <div class="post_meta" style="display: flex">
                                   <!--头像-->
                                   <div style="width: 120px">
-                                    <img th:src="${map.user.headerUrl}" alt="auther" style="width: 35px;height: 35px; border-radius: 50%"> <a href="#" style="color: #898989">Smith John </a>
+                                    <a th:href="|@{'/user/profile/'+${map.user.id}}|">
+                                    <img th:src="${map.user.headerUrl}" alt="auther" style="width: 35px;height: 35px; border-radius: 50%"> <a href="#" style="color: #898989" th:text="${map.user.username}">Smith John </a>
+                                    </a>
                                   </div>
                                   <div style="width: 120px; height: 35px;">
                                     <div style="margin-top: 4px">
                                       <i class="fa fa-heart-o"></i>
                                       <!--点赞数量-->
-                                      <span class="chart_margin">qdiqubqiuqdq</span>
+                                      <span class="chart_margin" th:text="${map.likeCount}">qdiqubqiuqdq</span>
                                     </div>
                                   </div>
                                   <div style="width: 120px;height: 35px;">
                                     <div style="margin-top: 4px">
                                       <i class="fa fa-comment"></i>
                                       <!--评论数量-->
-                                      <span class="chart_margin">12 May 2020</span>
+                                      <span class="chart_margin" th:text="${map.commentCount}">12 May 2020</span>
                                     </div>
                                   </div>
                                   <div style="height: 35px;">

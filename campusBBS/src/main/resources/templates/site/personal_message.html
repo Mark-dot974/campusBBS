@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Category Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Default Description">
+    <meta name="keywords" content="fashion, store, E-commerce">
+    <meta name="robots" content="*">
+    <link rel="icon" href="#" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+
+    <!-- CSS Style -->
+    <link rel="stylesheet" type="text/css"  th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.bxslider.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/yellow.css}">
+
+
+
+
+</head>
+<body>
+<div id="page">
+    <div id="header"></div>
+    <!--breadcrumbs-->
+    <!-- BEGIN Main Container col2-left -->
+    <section class="main-container col2-left-layout bounceInUp animated">
+        <!-- For version 1, 2, 3, 8 -->
+        <!-- For version 1, 2, 3 -->
+        <div class="container">
+            <div class="row">
+                <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+                    <iframe src="https://desolate-plains-03097.herokuapp.com" width="960" height="600" style="border-radius: 5px;border-color: #ffb74d"></iframe>
+                    <!--	///*///======    End article  ========= //*/// -->
+                </div>
+
+                <aside_left class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9">
+                    <!-- BEGIN SIDE-NAV-CATEGORY -->
+                    <div class="side-nav-categories">
+                        <div class="block-title"> 个人中心 </div>
+                        <!--block-title-->
+                        <!-- BEGIN BOX-CATEGORY -->
+                        <div class="box-content box-category">
+                            <ul class="nav nav-pills nav-stacked" style="max-width: 320px;  ">
+                                <li class="">
+                                    <a href="profile_set.html">
+                                        <span class="badge pull-right">42</span>
+                                        个人信息
+                                    </a>
+                                </li>
+                                <li>
+                                    <!--                    <i th:text="${user.id}"></i>-->
+                                    <!--                    <a th:href="|@{/post/personalPost(userId=${user?.id})}|">-->
+                                    <a th:href="@{/post/personalPost(userId=${userId})}">
+                                        <!--                    <a href="personal_post.html">-->
+                                        <span class="badge pull-right">3</span>
+                                        发布内容
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="personal_publish.html">
+                                        <span class="badge pull-right">3</span>
+                                        点赞
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="personal_publish.html">
+                                        <span class="badge pull-right">3</span>
+                                        圈子
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a th:href="@{/post/personalPost(userId=-1)}">
+                                        <span class="badge pull-right">13</span>
+                                        私信
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--box-content box-category-->
+                    </div>
+                </aside_left>
+
+
+                <!--col-right sidebar-->
+            </div>
+            <!--row-->
+        </div>
+        <!--container-->
+    </section>
+</div>
+</div>
+<div id="footer"></div>
+<script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/revslider.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+<script th:src="@{/js/countdown.js}"></script>
+<script th:src="@{/js/include.js}"></script>
+<script th:src="@{/js/setting.js}"></script>
+<script th:src="@{/js/jquery.icheck.js}"></script>
+</body>
+</html>

@@ -91,7 +91,7 @@
                         <li>
 
                           <div style="width:80px;display: flex;">
-                            <a th:href="@{/user/personalPage(id=${map.user.id})}">
+                            <a th:href="|@{'/user/profile/'+${map.user.id}}|">
                             <img th:src="${map.user.headerUrl}" alt="auther">
                             <span href="#" th:utext="${map.user.username}">Smith John </span>
                             </a>

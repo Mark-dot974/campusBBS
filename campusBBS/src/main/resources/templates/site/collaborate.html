@@ -84,7 +84,7 @@
                                             <header class="blog_entry-header clearfix">
                                                 <div class="blog_entry-header-inner">
                                                     <!--标签样式-->
-                                                    <div class="index_tag_style">
+                                                    <div class="index_tag_style" th:if="${map.tags!=null}">
                                                         <div style="display: flex" >
                                                             <div style="margin-right: 10px" th:each="tag:${map.tags}">
                                                                 <a class="tag " href="#" title="Fashion" th:text="${tag}">Technology</a>
@@ -101,8 +101,8 @@
                                                 </div>
                                                 <!--blog_entry-header-inner-->
                                             </header>
-                                            <ul class="post-meta" th:each="user:${map.members}">
-                                                <li style="margin: 0px"><a th:href="@{/user/personalPage(id=${user.id})}"><img th:src="${user.headerUrl}"
+                                            <ul class="post-meta">
+                                                <li style="margin: 0px" th:each="user:${map.members}"><a th:href="|@{/user/profile/${user.id}}|"><img th:src="${user.headerUrl}"
                                                                              alt="auther"></a></li>
 <!--                                                <li style="margin: 0px"><img th:src="@{/images/cutewy.webp}"-->
 <!--                                                                             alt="auther"></li>-->
