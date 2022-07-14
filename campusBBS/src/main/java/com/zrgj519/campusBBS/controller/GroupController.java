@@ -87,6 +87,11 @@ public class GroupController {
             }
             String tag = group.getTag();
             String[] tags = tag.split(",");
+            if(tag!=null){
+                String[] split = tag.split(",");
+                if(split!=null && split.length!=0&&split[0].length()!=0)  map.put("tags",split);
+                else map.put("tags",null);
+            }
 //            map.put("memberCount",length);
             map.put("tags",tags);
             map.put("members",members);

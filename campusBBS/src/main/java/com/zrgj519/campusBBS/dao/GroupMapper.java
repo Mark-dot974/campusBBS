@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface GroupMapper {
-    List<Group> selectAll(int offset,int limit,String leaderName,String memberName);
+    List<Group> selectAll(int offset, int limit, String leaderName, String memberName);
 
     void insertGroup(Group group);
 
@@ -19,7 +19,7 @@ public interface GroupMapper {
 
     Group selectGroupById(int gid);
 
-    void updateGroupMember(String members,int gid,int membersCount);
+    void updateGroupMember(String members, int gid, int membersCount);
 
     int deleteGroup(Integer gid);
 
@@ -27,8 +27,11 @@ public interface GroupMapper {
 
     void updateGroup(Group group);
 
-    List<Group> findGroup(Integer gid,String groupName,String members,Integer offset,Integer limit);
+    List<Group> findGroup(Integer gid, String groupName, String members, Integer offset, Integer limit);
 
-    int selectCountOfGroup(Integer gid,String groupName,String members);
+    int selectCountOfGroup(Integer gid, String groupName, String members);
 
-    List<Group> selectPersonalGroup(String members,Integer offset,Integer limit);
+    List<Group> selectPersonalGroup(String members, Integer offset, Integer limit);
+
+    int selectCountOfPersonalGroup(String members);
+}

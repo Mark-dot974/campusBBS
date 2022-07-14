@@ -49,21 +49,21 @@
                         <div class="grid-2">
                             <div class="grid-block">
                                 <ul class="posts-list unstyled clearfix">
-                                    <li th:each="post:${post}">
+                                    <li th:each="map:${posts}">
                                         <figure class="featured-thumb">
                                             <a th:href="@{category.html}"></a>
                                         </figure>
                                         <div class="content-info" >
                                             <!--标签样式-->
-                                            <div class="index_tag_style">
+                                            <div class="blog_entry-header-inner" th:if="${map.tags}!=null">
                                                 <div style="display: flex">
-                                                    <div style="margin-right: 10px">
-                                                        <a class="tag " href="#" title="Fashion" th:text="${post.tag}">Technology</a>
+                                                    <div style="margin-right: 10px" th:each="tag:${map.tags}">
+                                                        <a class="tag " href="#" title="Fashion" th:text="${tag}">Technology</a>
                                                     </div>
                                                 </div>
                                             </div>
                                             <h4>
-                                                <a th:href="@{/post/detail(id=${post.id})}" th:text="${post.title}" title="Lorem ipsum dolor sit amet">
+                                                <a th:href="@{/post/detail(id=${map.post.id})}" th:text="${map.post.title}" title="Lorem ipsum dolor sit amet">
                                                 </a>
                                             </h4>
                                             <div class="post_meta" style="display: flex">
@@ -80,27 +80,27 @@
                                                     <div style="margin-top: 4px">
                                                         <i class="fa fa-heart-o"></i>
                                                         <!--点赞数量-->
-                                                        <span class="chart_margin">521</span>
+                                                        <span class="chart_margin" th:text="${map.likeCount}">521</span>
                                                     </div>
                                                 </div>
                                                 <div style="width: 120px;height: 35px;margin-top: 5px">
                                                     <div style="margin-top: 4px">
                                                         <i class="fa fa-comment"></i>
                                                         <!--评论数量-->
-                                                        <span class="chart_margin">50</span>
+                                                        <span class="chart_margin" th:text="${map.commentCount}">50</span>
                                                     </div>
                                                 </div>
                                                 <div style="height: 35px;margin-top: 5px">
                                                     <div style="margin-top: 4px;">
                                                         <i class="fa fa-clock-o"></i>
                                                         <!--发表时间-->
-                                                        <span class="chart_margin" th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}">12 May 2020</span>
+                                                        <span class="chart_margin" th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}">12 May 2020</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!--文章部分，超出两行多余使用省略号隐藏-->
                                             <div class="index_text_style">
-                                                <p th:text="${post.content}"></p>
+                                                <p th:text="${map.post.content}"></p>
                                             </div>
 
                                         </div>

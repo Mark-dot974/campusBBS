@@ -32,8 +32,10 @@
         	</div>
 			-->
             <div class="userinfo">
-            	<img src="images/thumbs/avatar.png" alt="" />
-                <span>Juan Dela Cruz</span>
+                <span th:text="${user.username}">Juan Dela Cruz</span>
+            </div><!--userinfo-->
+            <div class="userinfo" style="margin-left: 10px">
+                <a th:href="@{/index}"> <span>返回</span></a>
             </div><!--userinfo-->
             
             <div class="userinfodrop">            	<div class="avatar">
@@ -79,6 +81,7 @@
             <li class="current"><a th:href="@{/admin/users}" class="tables">用户账号管理</a></li>
             <li><a th:href="@{/admin/posts}" class="buttons">帖子管理</a></li>
             <li><a th:href="@{/admin/groups}" class="tables">圈子管理</a></li>
+            <li ><a th:href="@{/admin/tags}" class="tables">标签管理</a></li>
         </ul>
         </ul>
         <br /><br />

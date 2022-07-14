@@ -5,6 +5,7 @@ import com.zrgj519.campusBBS.service.GroupService;
 import com.zrgj519.campusBBS.service.PostService;
 import com.zrgj519.campusBBS.service.TagService;
 import com.zrgj519.campusBBS.service.UserService;
+import com.zrgj519.campusBBS.util.UserContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,9 @@ public class ManagementController {
 
     @Autowired
     TagService tagService;
+
+    @Autowired
+    UserContainer userContainer;
 //    @RequestMapping("/showUsers")
 //    public String showUser(Model model){
 //        List<User> users = userService.showUser();
@@ -79,7 +83,7 @@ public class ManagementController {
         List<User> users = userService.findUser(id,username,email,page.getOffset(), page.getLimit());
 
         model.addAttribute("users",users);
-
+        model.addAttribute("user",userContainer.getUser());
         return "/site/user_account_management";
     }
     //    帖子管理
@@ -120,6 +124,7 @@ public class ManagementController {
         }
         List<Post> allPosts = postService.findPost(id,title,tag,page.getOffset(), page.getLimit());
         model.addAttribute("posts",allPosts);
+        model.addAttribute("user",userContainer.getUser());
         return "/site/post_management";
     }
 
@@ -158,7 +163,7 @@ public class ManagementController {
             }
         }
         List<Group> allGroups = groupService.findGroup(gid,groupName,members, page.getOffset(), page.getLimit());
-
+        model.addAttribute("user",userContainer.getUser());
         model.addAttribute("groups",allGroups);
         return "/site/group_management";
     }
@@ -197,7 +202,7 @@ public class ManagementController {
             }
         }
         List<Tag> allTags = tagService.findTag(id,tagName,members, page.getOffset(), page.getLimit());
-
+        model.addAttribute("user",userContainer.getUser());
         model.addAttribute("tags",allTags);
         return "/site/tag_management";
     }

@@ -1,9 +1,11 @@
 package com.zrgj519.campusBBS.controller;
 
+import com.zrgj519.campusBBS.entity.Comment;
 import com.zrgj519.campusBBS.entity.Page;
 import com.zrgj519.campusBBS.entity.Post;
 import com.zrgj519.campusBBS.entity.User;
 import com.zrgj519.campusBBS.service.*;
+import com.zrgj519.campusBBS.util.CampusBBSConstant;
 import com.zrgj519.campusBBS.util.UserContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,6 +92,7 @@ public class PostController {
     @RequestMapping(path = "/getPostsByTag" , method = RequestMethod.GET)
     public String getPostsByTag(Model model,Page page,@RequestParam("tagName")String tagName){
         page.setRows(tagService.getTagPostCount(tagName));
+        page.setPath("/post/getPostsByTag?tagName="+tagName);
         List<Post> postsByTag = tagService.getPostsByTag(tagName);
         List<Map<String,Object>> postsInfo = new ArrayList<>();
         // 封装用户信息
@@ -122,7 +125,11 @@ public class PostController {
         String tag = post.getTag();
         if(tag!=null){
             String[] split = tag.split(",");
-            model.addAttribute("tags",split);
+            if(split!=null && split.length!=0&&split[0].length()!=0)  {
+                model.addAttribute("tags",split);
+            }else{
+                model.addAttribute("tags",null);
+            }
         }
         model.addAttribute("post",post);
         User user = userService.findUserById(post.getUserId());
@@ -219,21 +226,16 @@ public class PostController {
             }
         }
         model.addAttribute("comments",commentVoList);
-
-
-
         return "/site/detail";
-    }}
+    }
 
 
     @RequestMapping("/search")
     public String search(Model model,String keyword,Page page){
-        System.out.println("keyword = " + keyword);
         // es的分页是从0开始的
         org.springframework.data.domain.Page<Post> result
-                = elasticsearchService.searchDiscussPost("高数", page.getCurrent() - 1, page.getLimit());
+                = elasticsearchService.searchDiscussPost(keyword, page.getCurrent() - 1, page.getLimit());
         // 聚合数据
-        System.out.println("result = " + result);
         List<Map<String,Object>> posts = new ArrayList<>();
         if(result!=null){
             for (Post post : result) {
@@ -243,8 +245,12 @@ public class PostController {
                 p.put("post",post);
                 String tag = post.getTag();
                 if(tag!=null){
-                    String[] tags = tag.split(",");
-                    p.put("tags",tags);
+                    String[] split = tag.split(",");
+                    if(split!=null && split.length!=0&&split[0].length()!=0)  {
+                        p.put("tags",split);
+                    }else{
+                        p.put("tags",null);
+                    }
                 }
                 posts.add(p);
             }
@@ -261,7 +267,26 @@ public class PostController {
         User user = userService.findUserById(userId);
         model.addAttribute("user",user);
         List<Post> post = postService.selectPersonalPost(userId,page.getOffset(),page.getLimit());
-        model.addAttribute("post",post);
+        List<Map<String,Object>> posts = new ArrayList<>();
+        for (Post post1 : post) {
+            Map<String,Object> map = new HashMap<>();
+            long likeCount = likeService.findEntityLikeCount(CampusBBSConstant.ENTITY_TYPE_POST, post1.getId());
+            map.put("post",post1);
+            map.put("likeCount",likeCount);
+            int commentCount = commentService.findCommentCount(CampusBBSConstant.ENTITY_TYPE_POST, post1.getId());
+            map.put("commentCount",commentCount);
+            String tag = post1.getTag();
+            if(tag!=null){
+                String[] split = tag.split(",");
+                if(split!=null && split.length!=0&&split[0].length()!=0)  {
+                    map.put("tags",split);
+                }else{
+                    map.put("tags",null);
+                }
+            }
+            posts.add(map);
+        }
+        model.addAttribute("posts",posts);
         return "/site/personal_post";
     }
 }

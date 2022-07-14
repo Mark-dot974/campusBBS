@@ -154,8 +154,8 @@
 
             <div class="group-chat-box group-chat-box">
                 <h2 class="text-center">小组聊天框</h2>
-
             </div>
+            <iframe src="https://desolate-plains-03097.herokuapp.com" width="960" height="600" style="border-radius: 5px;border-color: #ffb74d"></iframe>
 
 
         </div>
@@ -165,7 +165,7 @@
                 <div class="col-md-12">
                     <div class="collaborators">
                         <a href="#" th:each="member:${members}">
-                            <img th:src="${member.headerUrl}" alt="..." class="img-circle profile-pic">
+                            <a th:href="|@{/user/profile/${member.id}}|"><img th:src="${member.headerUrl}" alt="..." class="img-circle profile-pic"></a>
                         </a>
 <!--                        <a href="#"><img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic"></a>-->
 

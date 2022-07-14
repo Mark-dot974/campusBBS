@@ -61,7 +61,7 @@
                     <ul class="post-meta">
                         <!--此处显示头像-->
                         <li>
-                            <img th:src="${user.headerUrl}" alt="auther">
+                            <a th:href="|@{'/user/profile/'+${user.id}}|"><img th:src="${user.headerUrl}" alt="auther"></a>
                             <!--此处显示用户名-->
                             <a href="#" th:text="${user.username}"> Karla Anderson  </a>
                         </li>

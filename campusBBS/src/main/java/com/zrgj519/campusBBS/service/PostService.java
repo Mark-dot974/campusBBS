@@ -60,6 +60,11 @@ public class PostService {
         return postMapper.selectPostsCount(cid);
     }
 
+    public int getPostsCount(Integer id,String title,String tag){
+        return postMapper.selectCountOfPost(id,title,tag);
+    }
+
+
     public Post getPostById(int id){
         return postMapper.selectPostById(id);
     }
@@ -90,6 +95,11 @@ public class PostService {
     public List<Post> selectPersonalPost(int userId,Integer offset,Integer limit){
         return postMapper.selectPersonalPost(userId,offset,limit);
     }
+
+    public List<Post> findPost(Integer id,String title,String tag,Integer offset,Integer limit){
+        return postMapper.findPost(id,title,tag,offset,limit);
+    }
+
 
     public int selectCountOfPersonalPost(Integer userId){
         return postMapper.selectCountOfPersonalPost(userId);
