@@ -12,7 +12,7 @@
         select <include refid="ref"/>
         from group_files
         where gid = #{gid}
-        order by create_time
+        order by create_time desc
     </select>
 
     <insert id="insertFile" parameterType="GroupFile">

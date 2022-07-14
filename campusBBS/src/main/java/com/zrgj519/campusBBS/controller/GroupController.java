@@ -110,6 +110,7 @@ public class GroupController {
         String uploadToken = auth.uploadToken(fileBucketName,fileName,3600,policy);
         model.addAttribute("uploadToken",uploadToken);
         model.addAttribute("fileName",fileName);
+
         model.addAttribute("gid",gid);
         Group group = groupService.getGroupById(gid);
         model.addAttribute("group",group);
@@ -118,10 +119,15 @@ public class GroupController {
         List<User> members = new ArrayList<>();
         String m = group.getMembers();
         String[] users = m.split(",");
+        boolean isMember=false;
         for (String userName : users) {
+            if(userName.equals(userContainer.getUser().getUsername())){
+                isMember=true;
+            }
             User user = userService.findUserByName(userName);
             members.add(user);
         }
+        model.addAttribute("isMember",isMember);
         model.addAttribute("members",members);
 
         // 填充文件信息
@@ -179,7 +185,10 @@ public class GroupController {
     @RequestMapping("/invite")
     @ResponseBody
     public String invite(String username,int gid){
-        System.out.println("username = " + username);
+        boolean isMember = groupService.isGroupMember(gid, username);
+        if(isMember){
+            return CampusBBSUtil.getJSONString(1,"你邀请的用户已经加入了该圈子~");
+        }
         groupService.addGroupMember(username,gid);
         return CampusBBSUtil.getJSONString(0);
     }

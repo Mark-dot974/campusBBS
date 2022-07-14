@@ -49,44 +49,17 @@
                                         <h3><i style="margin-right: 5px;">系统通知</i>:</h3>
                                     </div>
                                     <hr width="980px">
-                                    <!--展示一条系统通知start-->
-<!--                                    <li class="section allow active">-->
-<!--                                        <div>-->
-<!--                                            <div class="step-title" style="display:flex;margin-left: 50px;border-bottom: 15px">-->
-<!--                                                <div style="display: flex;">-->
-<!--                                                    <div style="margin-left: 25px;width: auto;">-->
-<!--                                                        &lt;!&ndash;显示通知标题&ndash;&gt;-->
-<!--                                                        <b>这里是通知的标题这里是通知的标题这里是通知的标题</b>-->
-<!--                                                    </div>-->
-<!--                                                    &lt;!&ndash;发表时间、评论、点赞显示&ndash;&gt;-->
-<!--                                                    <div style="margin-left: 25px;">-->
-<!--                                                        <div style="display: flex">-->
-<!--                                                            <div style="margin-right: 5px;margin-right: 5px;">-->
-<!--                                                                <i class="fa fa-clock-o"></i>-->
-<!--                                                                &lt;!&ndash;发表评论时间&ndash;&gt;-->
-<!--                                                                <span>2022-07-05 18:08:55</span>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-
-
-<!--                                            </div>-->
-<!--                                            &lt;!&ndash;文章的内容通知&ndash;&gt;-->
-<!--                                            <div style="width: 800px;height: auto;margin-left: 70px">-->
-<!--                                                <span>testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试testtest测试</span>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <hr width="980px">-->
-<!--                                    </li>-->
-                                    <!--展示一条系统通知end-->
-                                    <!--展示一条系统通知（圈主）start-->
                                     <li class="section allow active" style="display: flex"  th:each="map:${messages}">
+                                        <div style="display: flex">
+                                            <!--喇叭图标-->
+                                            <div>
+                                                <img  style="height: 80px;width: 80px;margin-left: 20px;" src="http://rewbppxct.hn-bkt.clouddn.com/src%3Dhttp___bpic.588ku.com_art_origin_min_pic_19_03_18_58498d65e5ed982f41e77fff54e8283f.jpg%26refer%3Dhttp___bpic.588ku.webp">
+                                            </div>
 
                                         <div th:if="${map.message.conversationId=='apply'}">
-                                            <div class="step-title" style="display:flex;margin-left: 50px;border-bottom: 15px">
+                                            <div class="step-title" style="display:flex;margin-left: 20px;border-bottom: 15px">
                                                 <div style="display: flex;">
-                                                    <div style="margin-left: 25px;width: auto;">
+                                                    <div style="margin-left: 25px;width: 170px;">
                                                         <!--显示通知标题-->
                                                         <b>圈子加入申请</b>
                                                     </div>
@@ -106,53 +79,63 @@
                                             </div>
                                             <!--文章的内容通知-->
                                             <div style="display:flex;">
-                                                <div style="width: 500px;height: auto;margin-left: 70px;margin-top: 15px;">
+                                                <div style="width: 500px;height: auto;margin-left: 35px;margin-top: 15px;">
                                                    <span style="color: #2e6da4" th:text="${'@'+map.user.username}">Devin</span>申请加入你创建的圈子<b style="color: #2e6da4" th:text="${map.group.groupName}"/>
                                                 </div>
                                                 <div style="text-align: center;vertical-align: middle;width: 300px;height: 104px;">
                                                     <ul class="nav nav-pills nav-stacked" style="margin-top: 5px; width: 300px;display: flex;">
-                                                        <div>
-                                                        <li style="width: 70px;border-radius: 10%;text-align: center;display: inline-block;border: #898989 1px solid" >
+                                                        <div style="display: flex;">
+                                                        <div id="hid" style="float: left">
+                                                        <li style="width: 70px;border-radius: 10%;text-align: center;display: inline-block;border: #898989 1px solid;margin-right: 10px;" >
                                                             <!--同意加入的链接-->
                                                             <a style="cursor: pointer;color:#7a7a7a" onclick="agree()">
-                                                                <div style="display: flex;margin-left: 10px;">
-                                                                    <div><i class="glyphicon glyphicon-ok"></i></div>
+                                                                <div style="display: flex;margin-left: 15px;">
+                                                                    <div>
+                                                                        <i class="glyphicon glyphicon-ok"></i>
+                                                                    </div>
                                                                     <div id="apply">同意</div>
                                                                     <form id="accept">
                                                                         <input type="hidden" name="operation" value="accept">
                                                                         <input type="hidden" name="userId" th:value="${map.user.id}">
                                                                         <input type="hidden" name="messageId" th:value="${map.message.id}">
                                                                         <input type="hidden" name="gid" th:value="${map.group.gid}">
-                                                                    </form></div>
+                                                                    </form>
+                                                                </div>
                                                             </a>
                                                         </li>
                                                         </div>
-                                                        <div id="hi">
+                                                        <div id="hi" style="float: right">
                                                         <li style="width: 70px;border-radius: 10%;text-align: center;display: inline-block;border: #898989 1px solid">
                                                             <!--拒绝加入的链接-->
                                                             <a style="cursor: pointer;color: #7a7a7a" onclick="denied()">
-                                                                <i class="glyphicon glyphicon-remove"></i>
-                                                                拒绝
+                                                                <div style="display: flex;margin-left: 15px;">
+                                                                <div>
+                                                                    <i class="glyphicon glyphicon-remove"></i>
+                                                                </div>
+                                                                <div id="denied_text">拒绝</div>
                                                                 <form id="denied">
                                                                     <input type="hidden" name="operation" value="denied">
                                                                     <input type="hidden" name="userId" th:value="${map.user.id}">
                                                                     <input type="hidden" name="messageId" th:value="${map.message.id}">
                                                                     <input type="hidden" name="gid" th:value="${map.group.gid}">
                                                                 </form>
+                                                                </div>
                                                             </a>
                                                         </li>
+                                                        </div>
                                                         </div>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <hr width="980px" style="margin-top: 0px">
                                         </div>
+                                        </div>
 
                                         <!--申请同意或拒绝-->
                                         <div th:if="${map.message.conversationId=='accept' || map.message.conversationId=='denied'}">
                                             <div class="step-title" style="display:flex;margin-left: 50px;border-bottom: 15px">
                                                 <div style="display: flex;">
-                                                    <div style="margin-left: 25px;width: auto;">
+                                                    <div style="margin-left: 20px;width: 170px;">
                                                         <!--显示通知标题-->
                                                         <b th:if="${map.message.conversationId=='accept'}">圈子加入申请通过</b>
                                                         <b th:if="${map.message.conversationId=='denied'}">圈子加入申请被拒绝</b>
@@ -173,7 +156,7 @@
                                             </div>
                                             <!--文章的内容通知-->
                                             <div style="display:flex;">
-                                                <div style="width: 500px;height: auto;margin-left: 70px;margin-top: 15px;">
+                                                <div style="width: 500px;height: auto;margin-left: 35px;margin-top: 15px;">
                                                     <span  th:if="${map.message.conversationId=='accept'}">你已经成为 <b style="color: #2e6da4" th:text="${map.group.groupName}"/> 的一员啦~</span>
                                                     <span  th:if="${map.message.conversationId=='denied'}">很遗憾，你加入 <b style="color: #2e6da4" th:text="${map.group.groupName}"/>的申请被拒绝了</span>
                                                 </div>

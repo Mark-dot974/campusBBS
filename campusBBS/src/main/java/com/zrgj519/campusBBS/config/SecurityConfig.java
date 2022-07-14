@@ -32,19 +32,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(
-                        "/post/publish"
+                        "/post/publish",
+                        "/group/create",
+                        "/group/apply",
+                        "/user/*"
                 )
                 .hasAnyAuthority(
                         CampusBBSConstant.AUTHORITY_USER,
-                        CampusBBSConstant.AUTHORITY_ADMIN,
-                        CampusBBSConstant.TEAM_LEADER
+                        CampusBBSConstant.AUTHORITY_ADMIN
                 )
 //                .antMatchers(
-//                        "/discuss/top",
-//                        "/discuss/wonderful"
+//                        "/group/operate"
 //                )
 //                .hasAnyAuthority(
-//                        CampusBBSConstant.AUTHORITY_MODERATOR
+//                        CampusBBSConstant.TEAM_LEADER
+//                )
+//                .antMatchers(
+//                        "/group/uploadFile",
+//                        "/group/invite"
+//                )
+//                .hasAnyAuthority(
+//                        CampusBBSConstant.TEAM_MEMBER
 //                )
                 .antMatchers(
                         "/admin/**"
