@@ -35,7 +35,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/post/publish",
                         "/group/create",
                         "/group/apply",
-                        "/user/*"
+                        "/group/operate",
+                        "/group/invite",
+                        "/group/uploadFile",
+                        "/group/personalGroup",
+                        "/user/*",
+                        "/like",
+                        "/comment/**",
+                        "/message/**",
+                        "/"
                 )
                 .hasAnyAuthority(
                         CampusBBSConstant.AUTHORITY_USER,

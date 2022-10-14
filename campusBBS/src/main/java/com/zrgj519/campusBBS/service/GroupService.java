@@ -49,19 +49,11 @@ public class GroupService {
         return groupMapper.selectGroupById(gid);
     }
 
-    public List<GroupFile> getAllFiles(int gid){
-        return fileMapper.selectAllFilesById(gid);
-    }
-
-
 
     public int deleteGroup(Integer gid) {
         return groupMapper.deleteGroup(gid);
     }
 
-    public void uploadFile(GroupFile file){
-        fileMapper.insertFile(file);
-    }
 
     public void addGroupMember(String username,int gid){
         Group group = groupMapper.selectGroupById(gid);
@@ -90,6 +82,11 @@ public class GroupService {
             }
         }
         return false;
+    }
+
+    public boolean isGroupLeader(int gid,String userName){
+        Group group = groupMapper.selectGroupById(gid);
+        return group.getGroupLeader().equals(userName);
     }
 
     public int getGroupsCount(Integer gid,String groupName,String members){

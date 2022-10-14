@@ -17,7 +17,7 @@
         <if test="memberName!=null">
             where members like "%"#{memberName}"%"
         </if>
-        order by create_time
+        order by create_time DESC
         limit #{offset},#{limit}
     </select>
 

@@ -19,4 +19,16 @@
         insert into group_files (<include refid="ref"/>)
         values(#{fid}, #{fileName}, #{createTime}, #{downloadTimes}, #{gid}, #{url})
     </insert>
+
+    <select id="selectFileByFileName" resultType="GroupFile">
+        select <include refid="ref"/>
+        from group_files
+        where file_name = #{fileName}
+    </select>
+
+    <update id="updateFile">
+        update group_files
+        set url = #{url}
+        where fid = #{fid}
+    </update>
 </mapper>

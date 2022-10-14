@@ -45,7 +45,7 @@
                     <!--	///*///======    End article  ========= //*/// -->
                 </div>
 
-                <aside_left class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9">
+                <aside_left class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9" th:replace="~{/site/personal_page::aside}">
                     <!-- BEGIN SIDE-NAV-CATEGORY -->
                     <div class="side-nav-categories">
                         <div class="block-title"> 个人中心 </div>
@@ -54,8 +54,8 @@
                         <div class="box-content box-category">
                             <ul class="nav nav-pills nav-stacked" style="max-width: 320px;  ">
                                 <li class="">
-                                    <a href="profile_set.html">
-                                        <span class="badge pull-right">42</span>
+                                    <a th:href="|@{'/user/profile/'+${user.id}}|">
+                                        <!--                                    <span class="badge pull-right">42</span>-->
                                         个人信息
                                     </a>
                                 </li>
@@ -64,26 +64,26 @@
                                     <!--                    <a th:href="|@{/post/personalPost(userId=${user?.id})}|">-->
                                     <a th:href="@{/post/personalPost(userId=${userId})}">
                                         <!--                    <a href="personal_post.html">-->
-                                        <span class="badge pull-right">3</span>
+                                        <!--                                    <span class="badge pull-right">3</span>-->
                                         发布内容
                                     </a>
                                 </li>
                                 <li>
                                     <a href="personal_publish.html">
-                                        <span class="badge pull-right">3</span>
+                                        <!--                                    <span class="badge pull-right">3</span>-->
                                         点赞
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="personal_publish.html">
-                                        <span class="badge pull-right">3</span>
+                                    <a th:href="@{/group/personalGroup(members=${user.username})}">
+                                        <!--                                    <span class="badge pull-right">3</span>-->
                                         圈子
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a th:href="@{/post/personalPost(userId=-1)}">
-                                        <span class="badge pull-right">13</span>
+                                    <a th:href="@{/user/message}">
+                                        <!--                                    <span class="badge pull-right">13</span>-->
                                         私信
                                     </a>
                                 </li>

@@ -49,14 +49,14 @@
                                         <h3><i style="margin-right: 5px;">系统通知</i>:</h3>
                                     </div>
                                     <hr width="980px">
-                                    <li class="section allow active" style="display: flex"  th:each="map:${messages}">
+                                    <li class="section allow active" style="display: flex"  th:each="map:${messages}" th:if="${map.message.conversationId != 'like' && map.message.conversationId ne 'comment'}">
                                         <div style="display: flex">
                                             <!--喇叭图标-->
                                             <div>
-                                                <img  style="height: 80px;width: 80px;margin-left: 20px;" src="http://rewbppxct.hn-bkt.clouddn.com/src%3Dhttp___bpic.588ku.com_art_origin_min_pic_19_03_18_58498d65e5ed982f41e77fff54e8283f.jpg%26refer%3Dhttp___bpic.588ku.webp">
+                                                <img  style="height: 80px;width: 80px;margin-left: 20px;" src="https://ts1.cn.mm.bing.net/th/id/R-C.68aa9806805baeda85c4d255a2a36bc0?rik=dtoJ6DfZDt4omg&riu=http%3a%2f%2fimg2.3png.com%2f68aa9806805baeda85c4d255a2a36bc08263.png&ehk=nfOvFxH4Osv8PzITfKWZoXQi9Zcxsu96mnygi85ittA%3d&risl=&pid=ImgRaw&r=0">
                                             </div>
 
-                                        <div th:if="${map.message.conversationId=='apply'}">
+                                            <div th:if="${map.message.conversationId=='apply'}">
                                             <div class="step-title" style="display:flex;margin-left: 20px;border-bottom: 15px">
                                                 <div style="display: flex;">
                                                     <div style="margin-left: 25px;width: 170px;">
@@ -177,7 +177,7 @@
                                 <div class="pager">
                                     <div class="pages">
                                         <!--<strong></strong>-->
-                                        <ol class="pagination">
+                                        <ol class="pagination" th:if="${page.from<=page.to}">
                                             <li class="page-item">
                                                 <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
                                             </li>
@@ -200,7 +200,43 @@
                         </div>
                         <!--	///*///======    End article  ========= //*/// -->
                     </div>
-                    <div id="message_center_aside"></div>
+                    <message_center_aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9" th:fragment="aside">
+                        <!-- BEGIN SIDE-NAV-CATEGORY -->
+                        <div class="side-nav-categories">
+                            <div class="message-block-title"> 消息中心 </div>
+                            <!--block-title-->
+                            <!-- BEGIN BOX-CATEGORY -->
+                            <div class="box-content box-category">
+                                <ul class="nav nav-pills nav-stacked" style="max-width: 320px;  ">
+                                    <li class="">
+                                        <a th:href="@{/message/systemMessage(topic='comment')}">
+                                            <span class="badge pull-right" th:if="${commentUnreadCount!=0}" th:text="${commentUnreadCount}">42</span>
+                                            回复我的
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/message/systemMessage(topic='like')}">
+                                            <span class="badge pull-right" th:if="${likeUnreadCount!=0}" th:text="${likeUnreadCount}">3</span>
+                                            收到的赞
+                                        </a>
+                                    </li>
+<!--                                    <li>-->
+<!--                                        <a th:href="@{/message/systemMessage}">-->
+<!--                                            <span class="badge pull-right" th:text="${unreadCount}">3</span>-->
+<!--                                            我的消息-->
+<!--                                        </a>-->
+<!--                                    </li>-->
+                                    <li>
+                                        <a th:href="@{/message/systemMessage}">
+                                            <span class="badge pull-right" th:if="${groupUnreadCount!=0}" th:text="${groupUnreadCount}">3</span>
+                                            系统通知
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--box-content box-category-->
+                        </div>
+                    </message_center_aside>
                     <!--col-right sidebar-->
                 </div>
                 <!--row-->

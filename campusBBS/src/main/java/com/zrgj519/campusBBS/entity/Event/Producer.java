@@ -1,6 +1,9 @@
 package com.zrgj519.campusBBS.entity.Event;
 
 import com.alibaba.fastjson.JSONObject;
+import org.apache.kafka.clients.producer.Callback;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;

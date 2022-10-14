@@ -3,126 +3,47 @@
         <div class="widget widget_categories block" style="visibility: visible;">
             <h2 class="widget-title">热门排行</h2>
             <ul class="one-page-checkout">
-                <li class="section allow active">
+                <li class="section allow active" th:each="map,mapStat:${hotPosts}" th:if="${map.user!=null}">
                     <div class="step-title">
-
-                        <span class="">
+                        <span class="" th:text="${map.count}">
                             1
                         </span>
                         <!--此处显示头像-->
                         <div style="display:flex; margin-left: 20px">
                         <!--显示个人信息-->
-                            <a title="" class="" th:href="@{/user/personalPage(id=${loginUser.id})}">
-                                <img th:src="${loginUser.headerUrl}" style="border-radius: 50%; height: 30px;height: 30px">
+                            <a title="" class="" th:href="@{'/user/profile/'+${map.user.id}}">
+                                <img th:src="${map.user.headerUrl}" style="border-radius: 50%; height: 30px;height: 30px">
                             </a>
-                            <h3 class="one_page_heading">
+                           <a th:href="@{'/post/detail?id='+${map.post.id}}">
+                               <h3 class="one_page_heading aside_text_style"  th:text="${map.post.title}">
                                 abbbbbbbbbbbbbbbbbbbwqdiqobwffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                             </h3>
                         </div>
 
 
                     </div>
-                    <p style="">khnef;ouqjhfouqhfuoqbfgyuq9ibfqiyfvqyifbqiyvbqifyqviyqb</p>
+                    <span class="aside_text_style" style="margin-left: 30px;color: #868686" th:text="${map.post.content}">khnef;ouqjhfouqhfuoqbfgyuq9ibfqiyfvqyifbqiyvbqifyqviyqb</span>
                 </li>
-                <li class="section allow active">
+
+                <li class="section allow" th:each="map:${secondPosts}">
                     <div class="step-title">
 
-                        <span>
-                            2
-                        </span>
-                        <!--此处显示头像-->
-                        <div style="display:flex; margin-left: 20px">
-                            <a title="" class="">
-                                <img th:src="${loginUser.headerUrl}" style="border-radius: 50%; height: 30px;height: 30px">
-                            </a>
-                            <h3 class="one_page_heading">
-                                abbbbbbbbbbbbbbbbbbbwqdiqobwffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                            </h3>
-                        </div>
-
-
-                    </div>
-                    <p style="margin-left: 30px;margin-bottom: 1px">khnef;ouqjhfouqhfuoqbfgyuq9ibfqiyfvqyifbqiyvbqifyqviyqb</p>
-                </li>
-                <li class="section allow active">
-                    <div class="step-title">
-
-                        <span>
-                            3
-                        </span>
-                        <!--此处显示头像-->
-                        <div style="display:flex; margin-left: 20px">
-                            <a title="" class="">
-                                <img th:src="${loginUser.headerUrl}" style="border-radius: 50%; height: 30px;height: 30px">
-                            </a>
-                            <h3 class="one_page_heading">
-                                abbbbbbbbbbbbbbbbbbbwqdiqobwffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                            </h3>
-                        </div>
-
-
-                    </div>
-                    <p style="margin-left: 30px;margin-bottom: 1px">khnef;ouqjhfouqhfuoqbfgyuq9ibfqiyfvqyifbqiyvbqifyqviyqb</p>
-                </li>
-                <li class="section allow">
-                    <div class="step-title">
-
-                        <span>
+                        <span th:text="${map.count}">
                             4
                         </span>
                         <!--此处显示头像-->
                         <div style="display:flex; margin-left: 20px">
-                            <a title="" class="">
-                                <img th:src="${loginUser.headerUrl}" style="border-radius: 50%; height: 30px;height: 30px">
+                            <a title="" class="" th:href="@{'/user/profile/'+${map.user.id}}" th:if="${map.user!=null}">
+                                <img th:src="${map.user.headerUrl}" style="border-radius: 50%; height: 30px;height: 30px">
                             </a>
-                            <h3 class="one_page_heading">
+                            <h3 class="one_page_heading aside_text_style"  th:text="${map.post.title}">
                                 abbbbbbbbbbbbbbbbbbbwqdiqobwffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
                             </h3>
                         </div>
 
 
                     </div>
-                    <p style="margin-left: 30px;margin-bottom: 1px">khnef;ouqjhfouqhfuoqbfgyuq9ibfqiyfvqyifbqiyvbqifyqviyqb</p>
-                </li>
-                <li class="section allow">
-                    <div class="step-title">
-
-                        <span>
-                            5
-                        </span>
-                        <!--此处显示头像-->
-                        <div style="display:flex; margin-left: 20px">
-                            <a title="" class="">
-                                <img th:src="${loginUser.headerUrl}" style="border-radius: 50%; height: 30px;height: 30px">
-                            </a>
-                            <h3 class="one_page_heading">
-                                abbbbbbbbbbbbbbbbbbbwqdiqobwffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                            </h3>
-                        </div>
-
-
-                    </div>
-                    <p style="margin-left: 30px;margin-bottom: 1px">khnef;ouqjhfouqhfuoqbfgyuq9ibfqiyfvqyifbqiyvbqifyqviyqb</p>
-                </li>
-                <li class="section allow">
-                    <div class="step-title">
-
-                        <span>
-                            6
-                        </span>
-                        <!--此处显示头像-->
-                        <div style="display:flex; margin-left: 20px">
-                            <a title="" class="">
-                                <img th:src="${loginUser.headerUrl}" style="border-radius: 50%; height: 30px;height: 30px">
-                            </a>
-                            <h3 class="one_page_heading">
-                                abbbbbbbbbbbbbbbbbbbwqdiqobwffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-                            </h3>
-                        </div>
-
-
-                    </div>
-                    <p style="margin-left: 30px;margin-bottom: 1px">khnef;ouqjhfouqhfuoqbfgyuq9ibfqiyfvqyifbqiyvbqifyqviyqb</p>
+                    <span class="aside_text_style"  style="margin-left: 30px;color: #868686" th:text="${map.post.content}">khnef;ouqjhfouqhfuoqbfgyuq9ibfqiyfvqyifbqiyvbqifyqviyqb</span>
                 </li>
             </ul>
 
@@ -149,14 +70,11 @@
     </div>
     <!-- Banner Text Block -->
 
-    <div class="block widget_recent_entries">
-        <h2 class="widget-title">最新发布</h2>
-        <ul>
-            <li> <a href="post-1.html">最近发布1</a> </li>
-            <li> <a href="post-1.html">最近发布2</a> </li>
-            <li> <a href="post-1.html">最近发布3</a> </li>
-            <li> <a href="post-1.html">最近发布4</a> </li>
-            <li> <a href="post-1.html">最近发布5</a> </li>
-        </ul>
+    <div class="text-widget widget widget__sidebar block">
+        <div>
+            <a href="#">
+                <img th:src="@{/images/ad-banner-1.jpg}" >
+            </a>
+        </div>
     </div>
 </aside>

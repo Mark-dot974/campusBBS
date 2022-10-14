@@ -25,7 +25,6 @@ public class RegisterController {
     @RequestMapping(path="/register",method=RequestMethod.POST)
     // 方法调用前，SpringMVC会自动实例化Model和Page，并将Page注入到Model中
     public String register(Model model, User user){
-        System.out.println(user.toString());
         Map<String, Object> map = userService.register(user);
         if(map==null || map.isEmpty()){
             model.addAttribute("msg","注册成功,我们已经向您的邮箱发送了一封激活邮件,请尽快激活!");

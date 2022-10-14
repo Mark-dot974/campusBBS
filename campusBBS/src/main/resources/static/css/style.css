@@ -14117,3 +14117,25 @@ select#shipping-address-select {
 	float: right;
 
 }
+
+.aside_text_style{
+	width: 200px;
+	word-break: break-all;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp:1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+}
+
+.index_tag_text_style{
+	width: 900px;
+	word-break: break-all;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp:1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+}

@@ -83,6 +83,8 @@ public class PostController {
                     postInfo.put("tags",null);
                 }
             }
+            long likeCount = likeService.findEntityLikeCount(CampusBBSConstant.ENTITY_TYPE_POST, post.getId());
+            postInfo.put("likeCount",likeCount);
             postsInfo.add(postInfo);
         }
         model.addAttribute("postsInfo",postsInfo);
@@ -101,6 +103,10 @@ public class PostController {
             User userById = userService.findUserById(post.getUserId());
             postInfo.put("user",userById);
             postInfo.put("post",post);
+            long likeCount = likeService.findEntityLikeCount(CampusBBSConstant.ENTITY_TYPE_POST, post.getId());
+            postInfo.put("likeCount",likeCount);
+            int commentCount = commentService.findCommentCount(CampusBBSConstant.ENTITY_TYPE_POST, post.getId());
+            postInfo.put("commentCount",commentCount);
             String tag = post.getTag();
             if(tag!=null){
                 String[] split = tag.split(",");
@@ -252,6 +258,8 @@ public class PostController {
                         p.put("tags",null);
                     }
                 }
+                long likeCount = likeService.findEntityLikeCount(CampusBBSConstant.ENTITY_TYPE_POST, post.getId());
+                p.put("likeCount",likeCount);
                 posts.add(p);
             }
         }

@@ -3,6 +3,7 @@ package com.zrgj519.campusBBS.service;
 import com.zrgj519.campusBBS.dao.PostMapper;
 import com.zrgj519.campusBBS.dao.TagMapper;
 import com.zrgj519.campusBBS.entity.Post;
+import com.zrgj519.campusBBS.util.SensitiveFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class PostService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private SensitiveFilter sensitiveFilter;
 
     @Autowired
     private TagService tagService;
@@ -38,7 +42,9 @@ public class PostService {
             throw new IllegalArgumentException("参数不能为空");
         }
         post.setTitle(HtmlUtils.htmlEscape(post.getTitle()));
+        post.setTitle(sensitiveFilter.filter(post.getTitle()));
         post.setContent(HtmlUtils.htmlEscape(post.getContent()));
+        post.setContent(sensitiveFilter.filter(post.getContent()));
         int result = postMapper.insertPost(post);
         int postId = post.getId();
         String tagArr = post.getTag();
@@ -103,5 +109,13 @@ public class PostService {
 
     public int selectCountOfPersonalPost(Integer userId){
         return postMapper.selectCountOfPersonalPost(userId);
+    }
+
+    public void updateScore(int id, double score) {
+        postMapper.updateScore(id,score);
+    }
+
+    public List<Post> getHotPosts(int hotPostCount) {
+        return postMapper.selectHotPosts(hotPostCount);
     }
 }

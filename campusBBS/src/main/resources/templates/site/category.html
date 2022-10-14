@@ -71,7 +71,7 @@
           <div id="main" class="blog-wrapper">
             <div id="primary" class="site-content">
               <div id="content" role="main">
-                <article class="blog_entry clearfix" th:each="map:${postsInfo}">
+                <article class="blog_entry clearfix" th:each="map:${postsInfo}" th:if="${map.user!=null}">
                   <div class="entry-content">
                     <div class="post-content">
                       <header class="blog_entry-header clearfix">
@@ -102,7 +102,7 @@
                         <li >
                           <div style="width: 80px">
                           <i class="fa fa-heart-o" id="like" onclick="changecolor()"></i>
-                          <a href="#"  th:text="${map.post.commentCount}">13 comments</a>
+                          <a href="#"  th:text="${map.likeCount}">13 comments</a>
                           </div>
                         </li>
                         <!--评论图标-->
@@ -128,7 +128,7 @@
             <div class="pager">
               <div class="pages">
                 <!--<strong></strong>-->
-                <ol class="pagination">
+                <ol class="pagination" th:if="${page.from<=page.to}">
                   <li class="page-item">
                     <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
                   </li>

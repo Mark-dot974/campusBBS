@@ -50,19 +50,19 @@
                                     </div>
                                     <hr width="980px">
                                     <!--展示一条收到的赞start-->
-                                    <li class="section allow active">
+                                    <li class="section allow active" th:each="map:${messages}">
                                         <div>
                                             <div class="step-title" style="display:flex;margin-left: 50px;border-bottom: 15px">
                                                 <!--此处显示头像-->
                                                 <div style=" margin-left: 20px">
-                                                    <a title="" class="">
-                                                        <img src="images/gdl.jpg" style="border-radius: 50%; height: 80px;height: 80px">
+                                                    <a th:href="|@{'/user/profile/'+${map.user.id}}|">
+                                                        <img th:src="${map.user.headerUrl}" style="border-radius: 50%; height: 80px;height: 80px">
                                                     </a>
                                                 </div>
                                                 <div>
                                                     <h3 class="one_page_heading" style="margin-left: 25px;display: flex">
                                                         <!--昵称显示-->
-                                                        <div><b>iKun</b></div>
+                                                        <div><b th:text="${map.user.username}">iKun</b></div>
                                                         <div style="margin-left: 10px"><b style="font-size: 6px">赞了我</b></div>
                                                     </h3>
                                                     <!--发表时间、评论、点赞显示-->
@@ -71,7 +71,7 @@
                                                             <div  style="margin-right: 5px">
                                                                 <i class="fa fa-clock-o"></i>
                                                                 <!--发表评论时间-->
-                                                                <span>2022-07-05 18:08:55</span>
+                                                                <span th:text="${#dates.format(map.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2022-07-05 18:08:55</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -80,47 +80,9 @@
                                                     <ul class="nav nav-pills nav-stacked" style="margin-top: 10px; width: 300px">
                                                         <div class="message_center_text_style">
                                                             <!--文章展示-->
-                                                            <p>中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test</p>
-                                                        </div>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr width="980px">
-                                    </li>
-                                    <!--展示一条收到的赞end-->
-                                    <!--展示一条收到的赞start-->
-                                    <li class="section allow active">
-                                        <div>
-                                            <div class="step-title" style="display:flex;margin-left: 50px;border-bottom: 15px">
-                                                <!--此处显示头像-->
-                                                <div style=" margin-left: 20px">
-                                                    <a title="" class="">
-                                                        <img src="images/gdl.jpg" style="border-radius: 50%; height: 80px;height: 80px">
-                                                    </a>
-                                                </div>
-                                                <div>
-                                                    <h3 class="one_page_heading" style="margin-left: 25px;display: flex">
-                                                        <!--昵称显示-->
-                                                        <div><b>iKun</b></div>
-                                                        <div style="margin-left: 10px"><b style="font-size: 6px">赞了我</b></div>
-                                                    </h3>
-                                                    <!--发表时间、评论、点赞显示-->
-                                                    <div style="margin-left: 25px;margin-top: 10px;width: 400px;" class="">
-                                                        <div style="display: flex">
-                                                            <div  style="margin-right: 5px">
-                                                                <i class="fa fa-clock-o"></i>
-                                                                <!--发表评论时间-->
-                                                                <span>2022-07-05 18:08:55</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div style="text-align: center;vertical-align: middle;width: 300px;height: 104px;">
-                                                    <ul class="nav nav-pills nav-stacked" style="margin-top: 15px; width: 300px">
-                                                        <div class="message_center_text_style">
-                                                            <!--文章展示-->
-                                                            <p>中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test</p>
+                                                            <a th:href="@{/post/detail(id=${map.post.id})}">
+                                                                <p th:text="${map.post.content}">中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test</p>
+                                                            </a>
                                                         </div>
                                                     </ul>
                                                 </div>
@@ -135,13 +97,21 @@
                                     <div class="pages">
                                         <!--<strong></strong>-->
                                         <ol class="pagination">
-                                            <li class="active"><a href="">1</a></li>
-                                            <li><a href="">2</a></li>
-                                            <li><a href="">3</a></li>
-                                            <li><a href="">4</a></li>
-                                            <li><a href="">5</a></li>
-                                            <li><a href="">6</a></li>
-                                            <li> <a class="next i-next" href="" title="Next"> » </a> </li>
+                                            <li class="page-item">
+                                                <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+                                            </li>
+                                            <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                                                <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+                                            <!--						page对象中的from和to决定了导航条的页面数量-->
+                                            <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
+                                                <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
+                                            </li>
+                                            <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                                                <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+                                            </li>
                                         </ol>
                                     </div>
                                 </div>
@@ -149,7 +119,7 @@
                         </div>
                         <!--	///*///======    End article  ========= //*/// -->
                     </div>
-                    <div id="message_center_aside"></div>
+                    <div id="message_center_aside" th:replace="~{/site/message_center_system::aside}"></div>
                     <!--col-right sidebar-->
                 </div>
                 <!--row-->

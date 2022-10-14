@@ -1,8 +1,11 @@
 package com.zrgj519.campusBBS.entity.Event;
 
+import lombok.Data;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Data
 // 考虑属性时，可以想象用户触发该事件时可以携带那些数据
 public class Event {
     // 点赞？评论？关注？

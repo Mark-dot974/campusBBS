@@ -25,6 +25,8 @@
           rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+    <!-- 引入 layui.css -->
+    <link href="//unpkg.com/layui@2.7.4/dist/css/layui.css" rel="stylesheet">
     <style>
         .profile-pic {
             width: 70px;
@@ -162,11 +164,11 @@
                                         aria-hidden="true">×</span></button>
                                 <h4 class="modal-title">创建协作圈</h4>
                             </div>
-                            <form th:action="@{/group/create}" id="createGroup">
+                            <form id="createGroup">
                                 <div class="modal-body">
                                     <form>
                                     <div class="form-group">
-                                        <img src="http://repbhxlop.hb-bkt.clouddn.com/%E9%BB%98%E8%AE%A4%E7%BB%84%E5%A4%B4%E5%83%8F.jpg"
+                                        <img src="http://rib3987wa.hn-bkt.clouddn.com/%E9%BB%98%E8%AE%A4%E7%BB%84%E5%A4%B4%E5%83%8F.jpg"
                                              alt="..." class="img-circle profile-pic" id="upload-circle-img">
                                         <label for="input-upload-circle-img">点击修改默认头像</label>
                                         <input type="file" accept="image/*" style="display: none"
@@ -176,7 +178,7 @@
                                     </form>
                                     <div class="form-group">
                                         <label for="txt_departmentname">协作圈名称</label>
-                                        <span class="col-md-offset-1" style="color: red" id="msg">该协作圈已存在</span>
+                                        <span class="col-md-offset-1" style="color: red" id="msg"></span>
                                         <input type="text" name="groupName" class="form-control"
                                                id="txt_departmentname" value="">
                                     </div>
@@ -199,6 +201,23 @@
                                             data-dismiss="modal" onclick="createGroup()">
                                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>创建
                                     </button>
+                                    <script>
+                                        function createGroup(){
+                                            alert(1);
+                                            $.post(
+                                                CONTEXT_PATH + "/group/create",
+                                                $('#createGroup').serialize(),
+                                                function (data){
+                                                    if(data.code == 0){
+                                                        window.location.reload();
+                                                    }else{
+                                                        data = $.parseJSON(data);
+                                                        alert(data.msg);
+                                                    }
+                                                }
+                                            )
+                                        }
+                                    </script>
                                 </div>
                             </form>
                         </div>
@@ -239,24 +258,6 @@
     <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
     <script th:src="@{/js/countdown.js}"></script>
     <script th:src="@{/js/include.js}"></script>
-
-    <script>
-
-       function createGroup(){
-           alert("create")
-           $.post(
-               CONTEXT_PATH + "/group/create",
-               $('#createGroup').serialize(),
-               function (data){
-                   if(data.code == 0){
-                       window.location.reload();
-                   }else{
-                       $("#createGroup").text(data.msg);
-                   }
-               }
-           )
-       }
-    </script>
 
     <script>
         $("#upload-circle-img").click(function () {

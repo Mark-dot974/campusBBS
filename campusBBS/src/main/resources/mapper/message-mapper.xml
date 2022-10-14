@@ -59,7 +59,7 @@
         where status = 0
         and from_id != 1
         and to_id = #{userId}
-        <if test="conversationId!=null">
+        <if test="conversationId=='like' or conversationId=='comment'">
             and conversation_id = #{conversationId}
         </if>
     </select>
@@ -85,7 +85,7 @@
         where status != 2
         and from_id = 1
         and to_id = #{userId}
-        and conversation_id = #{topic}
+        and conversation_id = #{conversationId}
         )
     </select>
 
@@ -95,7 +95,7 @@
         where status != 2
         and from_id =1
         and to_id = #{userId}
-          and conversation_id = #{topic}
+          and conversation_id = #{conversationId}
     </select>
 
     <select id="selectTopicNoticeUnreadCount" resultType="int">
@@ -104,8 +104,8 @@
         where status = 0
         and from_id = 1
         and to_id = #{userId}
-        <if test="topic!=null">
-            and conversation_id = #{topic}
+        <if test="conversationId=='like' or conversationId=='comment'">
+            and conversation_id = #{conversationId}
         </if>
     </select>
 
@@ -115,8 +115,8 @@
         where status!=2
         and from_id = 1
         and to_id = #{userId}
-        <if test="topic!=null">
-            and conversation_id = #{topic}
+        <if test="conversationId=='like' or conversationId=='comment'">
+            and conversation_id = #{conversationId}
         </if>
         order by create_time desc
         limit #{offset} , #{limit}

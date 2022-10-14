@@ -35,6 +35,7 @@ public class LikeService {
                 operations.multi();
                 if(isMember){
                     operations.opsForSet().remove(entityLikeKey,userId);
+                    // 因为redis是单线程的，所以单个命令也是原子的
                     operations.opsForValue().decrement(userLikeKey);
                 }else{
                     operations.opsForSet().add(entityLikeKey,userId);
