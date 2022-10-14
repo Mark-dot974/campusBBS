@@ -32,4 +32,53 @@
         ORDER BY post_count DESC
         limit 0,#{limit}
     </select>
+
+    <!--删除-->
+    <delete id="deleteTag">
+        delete from tag where id = #{id}
+    </delete>
+    <!--更改-->
+    <update id="updateTag" parameterType="Group">
+        update tag
+        set tag_name=#{tagName}
+        where id = #{id}
+    </update>
+    <!--根据id查找信息-->
+    <select id="find" resultType="Tag">
+        select *
+        from tag
+        where id = #{id}
+    </select>
+    <!--条件查询-->
+    <select id="findTag" resultType="Tag" parameterType="Tag">
+        select * from tag
+        <where>
+            <if test="id!=null and id!='' ">
+                and id = #{id}
+            </if>
+            <if test="tagName!=null and tagName!='' ">
+                and tag_name like '%' #{tagName} '%'
+            </if>
+            <if test="postId!=null and postId!='' ">
+                and post_id like '%' #{postId} '%'
+            </if>
+        </where>
+        order by id asc
+        limit #{offset},#{limit}
+    </select>
+    <select id="selectCountOfTag" resultType="int">
+        select count(*)
+        from tag
+        <where>
+            <if test="id!=null and id!='' ">
+                and id = #{id}
+            </if>
+            <if test="tagName!=null and tagName!='' ">
+                and tag_name like '%' #{tagName} '%'
+            </if>
+            <if test="postId!=null and postId!='' ">
+                and post_id like '%' #{postId} '%'
+            </if>
+        </where>
+    </select>
 </mapper>

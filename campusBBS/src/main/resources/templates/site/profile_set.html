@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Category Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Default Description">
+    <meta name="keywords" content="fashion, store, E-commerce">
+    <meta name="robots" content="*">
+    <link rel="icon" href="#" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+
+    <!-- CSS Style -->
+    <link rel="stylesheet" type="text/css"  th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.bxslider.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-table.css}">
+
+
+
+
+</head>
+<div id="page">
+    <div id="header"></div>
+    <!--breadcrumbs-->
+    <!-- BEGIN Main Container col2-left -->
+    <section class="main-container col2-left-layout bounceInUp animated">
+        <!-- For version 1, 2, 3, 8 -->
+        <!-- For version 1, 2, 3 -->
+        <div class="container">
+            <div class="row">
+                <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+                    <div class="pro-coloumn box-content box-category" style="text-align: center">
+                        <!--这里是个人页面具体信息-->
+                        <ul class="nav nav-pills nav-stacked">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-2"></div>
+                                    <!--用户的头像信息可以进行修改-->
+                                    <div class="col-md-8">
+                                        <table class="table table-hover table-striped ">
+                                            <caption><h2>编辑修改信息</h2></caption>
+                                            <li>
+                                                <form id="uploadForm">
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <div style="height: 20px">
+                                                            </div>
+                                                            <img class="clicker" id="usertouxiang" th:src="${loginUser.headerUrl}" style="border-radius: 50%; height: 120px;width: 120px">
+                                                            <div style=" display:flex; justify-content:center; align-items:center;">
+                                                                <div style="width: 100px">
+                                                                    <a style="text-decoration: underline; color:#898989;cursor: pointer" onclick="addImage()">点击此处修改
+                                                                        <span class="glyphicon glyphicon-pencil" style="color: #b2b2b2"></span>
+                                                                    </a>
+                                                                    <input type="hidden" name="token" th:value="${uploadToken}">
+                                                                    <input type="hidden" name="key" th:value="${fileName}">
+                                                                    <input type="file" id="image" style="display: none" name="file" onchange="upload()">
+                                                                    <!--                                                                    <input type="submit" onclick="upload()">立即上传</input>-->
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </form>
+                                                <!--                                                    <form class="mt-5" id="uploadForm">-->
+                                                <!--                                                        <div class="form-group row mt-4">-->
+                                                <!--                                                            <label for="head-image" class="col-sm-2 col-form-label text-right">选择头像:</label>-->
+                                                <!--                                                            <div class="col-sm-10">-->
+                                                <!--                                                                <div class="custom-file">-->
+                                                <!--                                                                    <input type="hidden" name="token" th:value="${uploadToken}">-->
+                                                <!--                                                                    <input type="hidden" name="key" th:value="${fileName}">-->
+                                                <!--                                                                    <input type="file" class="custom-file-input" id="head-image" name="file" lang="es" required="">-->
+                                                <!--                                                                    <label class="custom-file-label" for="head-image" data-browse="文件">选择一张图片</label>-->
+                                                <!--                                                                    <div class="invalid-feedback">-->
+                                                <!--                                                                        该账号不存在!-->
+                                                <!--                                                                    </div>-->
+                                                <!--                                                                </div>-->
+                                                <!--                                                            </div>-->
+                                                <!--                                                        </div>-->
+                                                <!--                                                        <div class="form-group row mt-4">-->
+                                                <!--                                                            <div class="col-sm-2"></div>-->
+                                                <!--                                                            <div class="col-sm-10 text-center">-->
+                                                <!--                                                                <button type="submit" class="btn btn-info text-white form-control">立即上传</button>-->
+                                                <!--                                                            </div>-->
+                                                <!--                                                        </div>-->
+                                                <!--                                                    </form>-->
+                                            </li>
+
+                                            <form th:action="@{/user/updateInfo}">
+                                                <tr>
+                                                    <p>
+                                                    <th style="text-align: right; vertical-align: middle;width: 40%"><label>用户名：</label></th>
+
+                                                    <td style="text-align: left; width: 60%"><span class="field"><input  style="width: 200px; border-radius: 5px" type="text" name="username"  class="input-text"  th:value="${loginUser.username}"/></span></td>
+                                                    </p>
+                                                </tr>
+
+                                                <tr>
+                                                    <p>
+                                                    <th style="text-align: right; vertical-align: middle;width: 40%"><label>密码：</label></th>
+
+                                                    <td style="text-align: left; width: 60%"><span class="field"><input  style="width: 200px; border-radius: 5px" type="password" name="password"  class="input-text"  th:value="${loginUser.password}"/></span></td>
+                                                    </p>
+                                                </tr>
+                                                <tr>
+                                                    <p>
+                                                    <th style="text-align: right; vertical-align: middle;width: 40%"><label>邮箱：</label></th>
+
+                                                    <td style="text-align: left; width: 60%"><span class="field"><input  style="width: 200px; border-radius: 5px" type="email" name="email"  class="input-text" th:value="${loginUser.email}"/></span></td>
+                                                    </p>
+                                                </tr>
+                                                <tr>
+                                                    <p>
+                                                    <th style="text-align: right; vertical-align: middle;width: 40%"><label>个性签名：</label></th>
+                                                    <td style="text-align: left; width: 60%"><span class="field"><input  style="width: 200px; border-radius: 5px" type="text" name="signature"  class="input-text"  th:value="${loginUser.signature}"/></span></td>
+                                                    </p>
+                                                    <input type="hidden" th:value="${loginUser.id}" name="id">
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+
+                                        </table>
+                                        <li>
+
+                                            <div class="buttons-set">
+                                                <button type="submit" title="Create an Account" class="button create-account" onClick=""><span><span>保存并修改</span></span></button>
+                                            </div>
+
+                                            <!--                                <div class="collapse navbar-collapse">-->
+                                            <!--                                    <form class="navbar-form" role="search">-->
+                                            <!--                                        <div class="input-group">-->
+                                            <!--                                            <input type="text" class="form-control" placeholder="Search">-->
+                                            <!--                                            <span class="input-group-btn">-->
+                                            <!--                    <button type="submit" class="search-btn"> <span class="glyphicon glyphicon-search"> <span class="sr-only">Search</span> </span> </button>-->
+                                            <!--                    </span> </div>-->
+                                            <!--                                    </form>-->
+                                            <!--                                </div>-->
+                                            <div style="height: 10px"></div>
+
+                                        </li>
+
+                                    </div>
+<!--                                    <div class="col-md-2">-->
+<!--                                        <div class="buttons-set">-->
+<!--                                            <button type="submit" title="Create an Account" class="button" onClick=""><i class="fa fa-envelope"></i><span>&nbsp;<span>私信</span></span></button>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+                                </div>
+                            </div>
+                        </ul>
+
+                    </div>
+                    <!--	///*///======    End article  ========= //*/// -->
+                </div>
+                <div id="aside_left"></div>
+                <!--col-right sidebar-->
+            </div>
+            <!--row-->
+        </div>
+        <!--container-->
+    </section>
+    <!--main-container col2-left-layout-->
+
+
+</div>
+<!--col2-layout-->
+
+<!-- JavaScript -->
+
+</div>
+
+<div id="footer"></div>
+<!--<style>-->
+<!--    a:hover{-->
+<!--        color: #fbe122;-->
+<!--    }-->
+<!--    .nav-stacked>ul{-->
+<!--        padding: 5px;-->
+<!--    }-->
+
+
+
+<!--</style>-->
+<script>
+    // new Vue( {
+    //     el:'#vue_element',
+    //     data(){
+    //         return{
+    //
+    //         }
+    //     },
+    //     methods: {
+    //         handleOpen(key, keyPath) {
+    //             console.log(key, keyPath);
+    //         },
+    //         handleClose(key, keyPath) {
+    //             console.log(key, keyPath);
+    //         }
+    //     }
+    // })
+
+</script>
+
+<script>
+    function addImage(){
+        document.getElementById("image").click();
+
+        return false;
+
+    }
+    function editName(){
+        document.getElementById("editName").style.display = 'block'
+    }
+</script>
+<script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/revslider.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+<script th:src="@{/js/countdown.js}"></script>
+<script th:src="@{/js/include.js}"></script>
+<script th:src="@{/js/bootstrap-table.js}"></script>
+<script th:src="@{/js/bootstrap-table-zh-CN.js}"></script>
+<script th:src="@{/js/setting.js}"></script>
+</html>

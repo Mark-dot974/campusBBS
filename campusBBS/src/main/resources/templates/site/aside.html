@@ -1,57 +1,62 @@
 <aside class="col-sm-3 sidebar">
     <div class="blog-side">
+        <div class="widget widget_categories block" style="visibility: visible;">
+            <h2 class="widget-title">热门排行</h2>
+            <ul class="one-page-checkout">
+                <li class="section allow active" th:each="map,mapStat:${hotPosts}" th:if="${map.user!=null}">
+                    <div class="step-title">
+                        <span class="" th:text="${map.count}">
+                            1
+                        </span>
+                        <!--此处显示头像-->
+                        <div style="display:flex; margin-left: 20px">
+                        <!--显示个人信息-->
+                            <a title="" class="" th:href="@{'/user/profile/'+${map.user.id}}">
+                                <img th:src="${map.user.headerUrl}" style="border-radius: 50%; height: 30px;height: 30px">
+                            </a>
+                           <a th:href="@{'/post/detail?id='+${map.post.id}}">
+                               <h3 class="one_page_heading aside_text_style"  th:text="${map.post.title}">
+                                abbbbbbbbbbbbbbbbbbbwqdiqobwffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+                            </h3>
+                        </div>
 
-        <div class="popular-posts widget block">
-            <h2 class="widget-title">热门文章</h2>
-            <ul class="posts-list unstyled clearfix">
-                <li>
-                    <figure class="featured-thumb"> <a href="post-1.html"> <img th:src="@{/products-images/new1.jpg}"> </a> </figure>
-                    <!--featured-thumb-->
-                    <div class="content-info">
-                        <h4><a href="post-1.html" title="Lorem ipsum dolor sit amet">热门文章的具体内容</a></h4>
-                        <p class="post-meta">
-                            <span class="entry-date">2022/7/6</span>
-                        </p>
+
                     </div>
+                    <span class="aside_text_style" style="margin-left: 30px;color: #868686" th:text="${map.post.content}">khnef;ouqjhfouqhfuoqbfgyuq9ibfqiyfvqyifbqiyvbqifyqviyqb</span>
                 </li>
-                <li>
-                    <figure class="featured-thumb"> <a href="post-1.html"> <img th:src="@{/products-images/new2.jpg}"> </a> </figure>
-                    <!--featured-thumb-->
-                    <div class="content-info">
-                        <h4><a href="post-1.html" title="Lorem ipsum dolor sit amet">热门文章的具体内容</a></h4>
-                        <p class="post-meta">
-                            <span class="entry-date">2022/7/6</span>
-                        </p>
+
+                <li class="section allow" th:each="map:${secondPosts}">
+                    <div class="step-title">
+
+                        <span th:text="${map.count}">
+                            4
+                        </span>
+                        <!--此处显示头像-->
+                        <div style="display:flex; margin-left: 20px">
+                            <a title="" class="" th:href="@{'/user/profile/'+${map.user.id}}" th:if="${map.user!=null}">
+                                <img th:src="${map.user.headerUrl}" style="border-radius: 50%; height: 30px;height: 30px">
+                            </a>
+                            <h3 class="one_page_heading aside_text_style"  th:text="${map.post.title}">
+                                abbbbbbbbbbbbbbbbbbbwqdiqobwffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+                            </h3>
+                        </div>
+
+
                     </div>
-                </li>
-                <li>
-                    <figure class="featured-thumb"> <a href="post-1.html"> <img th:src="@{/products-images/new3.jpg}"> </a> </figure>
-                    <!--featured-thumb-->
-                    <div class="content-info">
-                        <h4><a href="post-1.html" title="Lorem ipsum dolor sit amet">热门文章的具体内容</a></h4>
-                        <p class="post-meta">
-                            <span class="entry-date">2022/7/6</span>
-                        </p>
-                    </div>
-                </li>
-                <li>
-                    <figure class="featured-thumb"> <a href="post-1.html"> <img  th:src="@{/products-images/new4.jpg}"> </a> </figure>
-                    <!--featured-thumb-->
-                    <div class="content-info">
-                        <h4><a href="post-1.html" title="Lorem ipsum dolor sit amet">热门文章的具体内容</a></h4>
-                        <p class="post-meta">
-                            <span class="entry-date">2022/7/6</span>
-                        </p>
-                    </div>
+                    <span class="aside_text_style"  style="margin-left: 30px;color: #868686" th:text="${map.post.content}">khnef;ouqjhfouqhfuoqbfgyuq9ibfqiyfvqyifbqiyvbqifyqviyqb</span>
                 </li>
             </ul>
 
             <!--widget-content-->
         </div>
-        <div id="categories-2" class="widget widget_categories block" style="visibility: visible;" th:if="${hotTags!=null}">
+        <!--热门话题-->
+        <div id="categories-2" class="widget widget_categories block hottopic" style="visibility: visible;" th:if="${hotTags!=null}">
             <h2 class="widget-title">热门话题</h2>
-            <ul th:each="tag:${hotTags}">
-                <li><a th:text="${tag.tagName}" th:href="@{/post/getPostsByTag(tagName=${tag.tagName})}">唱</a> <span class="count" th:text="${tag.postCount}">2</span></li>
+            <ul>
+                <li th:each="tag:${hotTags}">
+                    <a th:text="${'#'+tag.tagName}" th:href="@{/post/getPostsByTag(tagName=${tag.tagName})}">唱</a>
+                    <span class="count" th:text="${tag.postCount}">2</span>
+                </li>
             </ul>
         </div>
         <!-- Banner Ad Block -->
@@ -65,14 +70,11 @@
     </div>
     <!-- Banner Text Block -->
 
-    <div class="block widget_recent_entries">
-        <h2 class="widget-title">最新发布</h2>
-        <ul>
-            <li> <a href="post-1.html">最近发布1</a> </li>
-            <li> <a href="post-1.html">最近发布2</a> </li>
-            <li> <a href="post-1.html">最近发布3</a> </li>
-            <li> <a href="post-1.html">最近发布4</a> </li>
-            <li> <a href="post-1.html">最近发布5</a> </li>
-        </ul>
+    <div class="text-widget widget widget__sidebar block">
+        <div>
+            <a href="#">
+                <img th:src="@{/images/ad-banner-1.jpg}" >
+            </a>
+        </div>
     </div>
 </aside>

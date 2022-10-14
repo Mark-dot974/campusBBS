@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Category Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Default Description">
+    <meta name="keywords" content="fashion, store, E-commerce">
+    <meta name="robots" content="*">
+    <link rel="icon" href="#" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+
+    <!-- CSS Style -->
+    <link rel="stylesheet" type="text/css"  th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.bxslider.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/yellow.css}">
+
+
+
+
+</head>
+<body>
+    <div id="page">
+        <div id="header"></div>
+        <!--breadcrumbs-->
+        <!-- BEGIN Main Container col2-left -->
+        <section class="main-container col2-left-layout bounceInUp animated">
+            <!-- For version 1, 2, 3, 8 -->
+            <!-- For version 1, 2, 3 -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+                        <div class="pro-coloumn box-content box-category">
+                            <!--这里是个人页面具体信息-->
+                            <ul class="nav nav-pills nav-stacked">
+                                <div>
+                                    <div style="color: #898989;margin-left: 15px;">
+                                        <h3><i style="margin-right: 5px;">系统通知</i>:</h3>
+                                    </div>
+                                    <hr width="980px">
+                                    <li class="section allow active" style="display: flex"  th:each="map:${messages}" th:if="${map.message.conversationId != 'like' && map.message.conversationId ne 'comment'}">
+                                        <div style="display: flex">
+                                            <!--喇叭图标-->
+                                            <div>
+                                                <img  style="height: 80px;width: 80px;margin-left: 20px;" src="https://ts1.cn.mm.bing.net/th/id/R-C.68aa9806805baeda85c4d255a2a36bc0?rik=dtoJ6DfZDt4omg&riu=http%3a%2f%2fimg2.3png.com%2f68aa9806805baeda85c4d255a2a36bc08263.png&ehk=nfOvFxH4Osv8PzITfKWZoXQi9Zcxsu96mnygi85ittA%3d&risl=&pid=ImgRaw&r=0">
+                                            </div>
+
+                                            <div th:if="${map.message.conversationId=='apply'}">
+                                            <div class="step-title" style="display:flex;margin-left: 20px;border-bottom: 15px">
+                                                <div style="display: flex;">
+                                                    <div style="margin-left: 25px;width: 170px;">
+                                                        <!--显示通知标题-->
+                                                        <b>圈子加入申请</b>
+                                                    </div>
+                                                    <!--发表时间、评论、点赞显示-->
+                                                    <div style="margin-left: 25px;">
+                                                        <div style="display: flex">
+                                                            <div style="margin-right: 5px;margin-right: 5px;">
+                                                                <i class="fa fa-clock-o"></i>
+                                                                <!--发表评论时间-->
+                                                                <span th:text="${#dates.format(map.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2022-07-05 18:08:55</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <!--文章的内容通知-->
+                                            <div style="display:flex;">
+                                                <div style="width: 500px;height: auto;margin-left: 35px;margin-top: 15px;">
+                                                   <span style="color: #2e6da4" th:text="${'@'+map.user.username}">Devin</span>申请加入你创建的圈子<b style="color: #2e6da4" th:text="${map.group.groupName}"/>
+                                                </div>
+                                                <div style="text-align: center;vertical-align: middle;width: 300px;height: 104px;">
+                                                    <ul class="nav nav-pills nav-stacked" style="margin-top: 5px; width: 300px;display: flex;">
+                                                        <div style="display: flex;">
+                                                        <div id="hid" style="float: left">
+                                                        <li style="width: 80px;border-radius: 10%;text-align: center;display: inline-block;border: #898989 1px solid;margin-right: 10px;" >
+                                                            <!--同意加入的链接-->
+                                                            <a style="cursor: pointer;color:#7a7a7a" onclick="agree()">
+                                                                <div style="display: flex;margin-left: 15px;">
+                                                                    <div>
+                                                                        <i class="glyphicon glyphicon-ok"></i>
+                                                                    </div>
+                                                                    <div id="apply">同意</div>
+                                                                    <form id="accept">
+                                                                        <input type="hidden" name="operation" value="accept">
+                                                                        <input type="hidden" name="userId" th:value="${map.user.id}">
+                                                                        <input type="hidden" name="messageId" th:value="${map.message.id}">
+                                                                        <input type="hidden" name="gid" th:value="${map.group.gid}">
+                                                                    </form>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        </div>
+                                                        <div id="hi" style="float: right">
+                                                        <li style="width: 80px;border-radius: 10%;text-align: center;display: inline-block;border: #898989 1px solid">
+                                                            <!--拒绝加入的链接-->
+                                                            <a style="cursor: pointer;color: #7a7a7a" onclick="denied()">
+                                                                <div style="display: flex;margin-left: 15px;">
+                                                                <div>
+                                                                    <i class="glyphicon glyphicon-remove"></i>
+                                                                </div>
+                                                                <div id="denied_text">拒绝</div>
+                                                                <form id="denied">
+                                                                    <input type="hidden" name="operation" value="denied">
+                                                                    <input type="hidden" name="userId" th:value="${map.user.id}">
+                                                                    <input type="hidden" name="messageId" th:value="${map.message.id}">
+                                                                    <input type="hidden" name="gid" th:value="${map.group.gid}">
+                                                                </form>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        </div>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <hr width="980px" style="margin-top: 0px">
+                                        </div>
+                                        </div>
+
+                                        <!--申请同意或拒绝-->
+                                        <div th:if="${map.message.conversationId=='accept' || map.message.conversationId=='denied'}">
+                                            <div class="step-title" style="display:flex;margin-left: 50px;border-bottom: 15px">
+                                                <div style="display: flex;">
+                                                    <div style="margin-left: 20px;width: 170px;">
+                                                        <!--显示通知标题-->
+                                                        <b th:if="${map.message.conversationId=='accept'}">圈子加入申请通过</b>
+                                                        <b th:if="${map.message.conversationId=='denied'}">圈子加入申请被拒绝</b>
+                                                    </div>
+                                                    <!--发表时间、评论、点赞显示-->
+                                                    <div style="margin-left: 25px;">
+                                                        <div style="display: flex">
+                                                            <div style="margin-right: 5px;margin-right: 5px;">
+                                                                <i class="fa fa-clock-o"></i>
+                                                                <!--发表评论时间-->
+                                                                <span th:text="${#dates.format(map.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2022-07-05 18:08:55</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <!--文章的内容通知-->
+                                            <div style="display:flex;">
+                                                <div style="width: 500px;height: auto;margin-left: 35px;margin-top: 15px;">
+                                                    <span  th:if="${map.message.conversationId=='accept'}">你已经成为 <b style="color: #2e6da4" th:text="${map.group.groupName}"/> 的一员啦~</span>
+                                                    <span  th:if="${map.message.conversationId=='denied'}">很遗憾，你加入 <b style="color: #2e6da4" th:text="${map.group.groupName}"/>的申请被拒绝了</span>
+                                                </div>
+
+                                            </div>
+                                            <hr width="980px" style="margin-top: 0px">
+                                        </div>
+
+
+                                    </li>
+
+<!--                                     同意-->
+                                    <li class="section allow active" style="display: flex" th:each="map:${messages}">
+
+                                    </li>
+
+                                </div>
+                                <div class="pager">
+                                    <div class="pages">
+                                        <!--<strong></strong>-->
+                                        <ol class="pagination" th:if="${page.from<=page.to}">
+                                            <li class="page-item">
+                                                <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+                                            </li>
+                                            <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                                                <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+                                            <!--						page对象中的from和to决定了导航条的页面数量-->
+                                            <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
+                                                <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
+                                            </li>
+                                            <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                                                <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                        <!--	///*///======    End article  ========= //*/// -->
+                    </div>
+                    <message_center_aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9" th:fragment="aside">
+                        <!-- BEGIN SIDE-NAV-CATEGORY -->
+                        <div class="side-nav-categories">
+                            <div class="message-block-title"> 消息中心 </div>
+                            <!--block-title-->
+                            <!-- BEGIN BOX-CATEGORY -->
+                            <div class="box-content box-category">
+                                <ul class="nav nav-pills nav-stacked" style="max-width: 320px;  ">
+                                    <li class="">
+                                        <a th:href="@{/message/systemMessage(topic='comment')}">
+                                            <span class="badge pull-right" th:if="${commentUnreadCount!=0}" th:text="${commentUnreadCount}">42</span>
+                                            回复我的
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/message/systemMessage(topic='like')}">
+                                            <span class="badge pull-right" th:if="${likeUnreadCount!=0}" th:text="${likeUnreadCount}">3</span>
+                                            收到的赞
+                                        </a>
+                                    </li>
+<!--                                    <li>-->
+<!--                                        <a th:href="@{/message/systemMessage}">-->
+<!--                                            <span class="badge pull-right" th:text="${unreadCount}">3</span>-->
+<!--                                            我的消息-->
+<!--                                        </a>-->
+<!--                                    </li>-->
+                                    <li>
+                                        <a th:href="@{/message/systemMessage}">
+                                            <span class="badge pull-right" th:if="${groupUnreadCount!=0}" th:text="${groupUnreadCount}">3</span>
+                                            系统通知
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--box-content box-category-->
+                        </div>
+                    </message_center_aside>
+                    <!--col-right sidebar-->
+                </div>
+                <!--row-->
+            </div>
+            <!--container-->
+        </section>
+    </div>
+    </div>
+    <div id="footer"></div>
+    <script type="text/javascript">
+        //点击评论图标或字事件
+        function showMessageInput(){
+            var showCommentdiv = document.getElementById("message_input").style.display;
+            if (showCommentdiv == "none"){
+                document.getElementById("message_input").style.display="block";
+            }else{
+                document.getElementById("message_input").style.display="none";
+            }
+        }
+    </script>
+    <script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/revslider.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+    <script th:src="@{/js/countdown.js}"></script>
+    <script th:src="@{/js/include.js}"></script>
+    <script th:src="@{/js/setting.js}"></script>
+    <script th:src="@{/js/jquery.icheck.js}"></script>
+    <script th:src="@{/js/group.js}"></script>
+</body>
+</html>

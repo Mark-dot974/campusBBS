@@ -1,5 +1,6 @@
 package com.zrgj519.campusBBS.config;
 
+import com.zrgj519.campusBBS.Interceptor.GroupInterceptor;
 import com.zrgj519.campusBBS.Interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -13,11 +14,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
     // 权限控制
     @Autowired
     private LoginInterceptor loginInterceptor;
+    @Autowired
+    private GroupInterceptor groupInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 静态资源不拦截，其他所有请求都拦截
         registry.addInterceptor(loginInterceptor)
                 .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg");
+
+        registry.addInterceptor(groupInterceptor)
+                .excludePathPatterns("/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg")
+                .addPathPatterns("/group/**");
     }
 }

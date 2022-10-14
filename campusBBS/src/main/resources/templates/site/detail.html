@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>campusBBS</title>
@@ -25,132 +25,340 @@
 <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
 </head>
+<style>
+    .appear_ct{
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        transition: box-shadow 0.2s;
+    }
+    .appear_ct:focus-within{
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+</style>
 <body>
 <div id="page">
-	<div id="header"></div>
-  <!-- BEGIN Main Container -->
-  <div class="main-container col2-right-layout">
+    <div id="header"></div>
+    <!-- BEGIN Main Container -->
+    <div class="main-container col2-right-layout">
         <div class="col-main main-blog">
-        <div class="blog-image">
-        <picture>
-           <img th:src="@{/products-images/p1.jpg}" alt="blog-img3">
-        </picture>
+            <div class="blog-image">
+                <picture>
+                    <img th:src="@{/images/detail-bg.jpg}" alt="blog-img3">
+                </picture>
 
-        <div class="blog-image-content container">
-        <a class="tag " href="#" title="Fashion">Technology</a>
-           
-            <h1 th:text="${post.title}">Icon internet world in the hands of a businessman network technology and communication</h1>
-            <ul class="post-meta">
-                        <li><img th:src="${user.headerUrl}"  alt="auther"> <a href="#" th:text="${user.username}"> Karla Anderson  </a> </li>
-                        <li><i class="fa fa-comments"></i><a href="#" th:text="${post.commentCount}">42 comments</a> </li>
-                        <li th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}"><i class="fa fa-clock-o"></i>Feb 07, 2021</li>
-                      </ul>
+                <div class="blog-image-content container">
+                    <!--此处显示标签-->
+                    <div style="display:flex;">
+                    <div style="margin-right: 13px;" th:each="tag:${tags}">
+                        <a class="tag " href="#" title="Fashion" th:text="${tag}">Technology</a>
+                    </div>
+                    </div>
+
+
+                    <!--此处显示标题-->
+                    <h1 th:text="${post.title}">测试显示</h1>
+                    <ul class="post-meta">
+                        <!--此处显示头像-->
+                        <li>
+                            <a th:href="|@{'/user/profile/'+${user.id}}|"><img th:src="${user.headerUrl}" alt="auther"></a>
+                            <!--此处显示用户名-->
+                            <a href="#" th:text="${user.username}"> Karla Anderson  </a>
+                        </li>
+                        <!--此处显示点赞数量-->
+<!--                        <li>-->
+<!--                            <button onclick="changecolor1()" style="background-color: transparent;border-color: transparent;">-->
+<!--                                <div class="like">-->
+<!--                                    <i class="fa fa-heart"></i>-->
+<!--                                    <span>42</span>-->
+<!--                                </div>-->
+<!--                            </button>-->
+<!--                        </li>-->
+<!--                        &lt;!&ndash;此处显示评论数量&ndash;&gt;-->
+<!--                        <li><i class="fa fa-comments"></i><a href="#detail_commmentarea"><span>42</span>条评论</a></li>-->
+                        <!--此处显示发布时间-->
+                        <li><i class="fa fa-clock-o"><span style="margin-left: 5px" th:text="${#dates.format(post.createTime,'yyyy-MM-dd HH:mm:ss')}"></span></i></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="main container">
+                <div class="row">
+                    <div id="main" class="blog-post blog-post-1">
+                        <article class="blog_entry clearfix">
+
+                            <div class="entry-content">
+                                <div class="thm-post">
+                                    <p id="markdown-content">测试多行是否覆盖点赞评论图标测试多行是否覆盖点赞评论图标测试多行是否覆盖点赞评论图标测试多行是否覆盖点赞评论图标测试多行是否覆盖点赞评论图标测试多行是否覆盖点赞评论图标测试多行是否覆盖点赞评论图标测试多行是否覆盖点赞评论图标测试多行是否覆盖点赞评论图标测试多行是否覆盖点赞评论图标</p>
+                                </div>
+                                <div style="float: right">
+                                    <ul class="post-meta">
+                                        <!--此处显示点赞数量-->
+                                        <li>
+                                            <button th:onclick="like(this,1,${post.id},${post.userId},${post.id});|" style="background-color: transparent;border-color: transparent;">
+                                                <div style="display: flex">
+                                                    <div th:class="|like ${likeStatus==1?'active':''} |">
+                                                            <i class="fa fa-heart"></i>
+                                                        </div>
+                                                        <span th:text="${likeCount}">42</span>
+                                                </div>
+                                            </button>
+                                        </li>
+                                        <!--此处显示评论数量-->
+                                        <li><i class="fa fa-comments"></i><a href="#detail_commmentarea"><span th:text="${post.commentCount}">42</span>条评论</a> </li>
+                                        <li><i class="glyphicon glyphicon-plus"></i><a href="#detail_commment">添加评论</a> </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+
+                        </article>
+
+                        <div class="comment-content">
+                            <div class="comments-wrapper">
+                                <a name="detail_commmentarea"></a>
+                                <h3> 评论区 </h3>
+                                <!--评论列表-->
+                                <ul class="commentlist">
+                                    <li class="comment" th:each="cvo:${comments}">
+
+                                                <!--评论区头像-->
+                                                <a th:href="@{|/user/profile/${cvo.user.id}|}">
+                                                <img alt="" th:src="${cvo.user.headerUrl}" class="avatar avatar-60 photo">
+                                                </a>
+                                                <!--评论内容及时间点赞按钮-->
+                                                <div class="comment-text">
+                                                <!--用户头像及发布时间-->
+                                                <p class="meta">
+                                                    <!--用户头像-->
+                                                    <strong th:text="${cvo.user.username}">Devin</strong>
+                                                    <!--评论日期-->
+                                                    <span>–</span> <span th:text="${#dates.format(cvo.comment.createTime,'yyyy-MM-dd HH:mm:ss')}">April 19, 2018</span>
+                                                </p>
+                                                <!--评论内容-->
+                                                <div class="description" th:utext="${cvo.comment.content}">
+                                                    <p>评论内容显示评论内容显示评论内容显示评论内容显示评论内容显示评论内容显示评论内容显示评论内容显示评论内容显示评论内容显示
+                                                        评论内容显示评论内容显示评论内容显示评论内容显示评论内容显示评论内容显示评论内容显示评论内容显示评论内容显示评论内容显示</p>
+                                                </div>
+                                                <!--点赞评论回复-->
+                                                <div style="float: right">
+                                                    <ul class="post-meta">
+                                                        <!--此处显示点赞数量-->
+                                                        <li>
+                                                            <div>
+                                                            <button th:onclick="|like(this,2,${cvo.comment.id},${cvo.comment.userId},${post.id});|" style="background-color: transparent;border-color: transparent;">
+                                                                <div th:class="|like ${cvo.likeStatus==1?'active':''} |">
+                                                                    <i class="fa fa-heart"></i>
+                                                                </div>
+                                                            </button>
+                                                                <span th:text="${cvo.likeCount}">42</span>
+                                                            </div>
+                                                        </li>
+                                                        <!--此处显示评论数量-->
+                                                        <li><i class="fa fa-comments"></i><a style="cursor: pointer " onclick="showComments()"><span th:text="${cvo.replyCount}">42</span>条回复</a> </li>
+                                                        <li>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 15 15">
+                                                                <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
+                                                            </svg>
+                                                            <a onclick="showComment_reply()" style="cursor: pointer">
+                                                                <!--显示评论数量-->
+                                                                回复</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                </div>
+                                                <!--回复评论输入框-->
+                                                <div id="Comment_reply">
+                                                         <ul>
+                                                        <li class="pb-3 pt-3" style="list-style-type: none">
+<!--                                                            form表单原（<form method="post" th:action="@{|/comment/add/${post.id}|}">）-->
+<!--                                                            回复评论-->
+                                                            <form method="post" th:action="@{|/comment/add/${post.id}|}">
+                                                                <div style="display: flex;width: 100px">
+                                                                    <div style="margin-left: 320px;display: flex">
+                                                                        <div style="margin-right: 10px">
+                                                                            <!--这里是用户头像-->
+                                                                            <img th:src="${user.headerUrl}" style="height: 40px;width: 40px;border-radius: 50%">
+                                                                        </div>
+                                                                        <input type="text" class="input-text" name="content" placeholder="请输入你的观点" style="border-radius: 5px; width: 350px"/>
+                                                                        <input type="hidden" name="entityType" value="2">
+                                                                        <!--评论id？原（<input type="hidden" name="entityId" th:value="${cvo.comment.id}">）-->
+                                                                        <input type="hidden" name="entityId" th:value="${cvo.comment.id}">
+                                                                    </div>
+                                                                    <div class="text-right mt-2" style="margin-left: 10px">
+                                                                        <button type="submit" style="height: 42.8px;border: #b2b2b2 solid 1px;border-radius: 5px" onclick="#">&nbsp;&nbsp;回&nbsp;&nbsp;复&nbsp;&nbsp;</button>
+                                                                    </div>
+                                                                </div>
+                                                                <div style="height: 10px"></div>
+                                                            </form>
+                                                        </li>
+                                                         </ul>
+                                                      </div>
+
+
+                                                <!--回复列表-->
+                                                <div id="reply_comments" class="appear_ct">
+                                                    <ul class="list-unstyled mt-4 bg-gray p-3 font-size-12 text-muted" style="border:#cecece 1px solid;border-radius: 5px">
+                                                        <li th:each="rvo:${cvo.replys}">
+                                                        <div style="display: flex;" >
+                                                            <div style="width: 50px;height: 40px;"></div>
+                                                            <div style="width: auto">
+                                                                <!--用户头像及回复内容div-->
+                                                                <div style="margin-top: 10px">
+                                                                    <!--进行判断原（<span th:if="${rvo.target!=null}">）-->
+                                                                    <span th:if="${rvo.target==null}">
+                                                                        <img th:src="${user.headerUrl}" style="height: 40px;width: 40px;border-radius: 50%">
+                                                                            <a th:href="@{|/user/profile/${rvo.user.id}|}" class="text-info" th:text="${rvo.user.username}">寒江雪</a>:&nbsp;&nbsp;
+                                                                        </span>
+                                                                    <span th:if="${rvo.target!=null}">
+                                                                        <img th:src="${user.headerUrl}" style="height: 40px;width: 40px;border-radius: 50%">
+                                                                            <a th:href="@{|/user/profile/${rvo.user.id}|}"
+                                                                               class="text-info" th:text="${rvo.user.username}">Sissi</a>
+                                                                        回复
+                                                                            <a th:href="@{|/user/profile/${rvo.target.id}|}"
+                                                                               class="text-info" th:text="${rvo.target.username}">寒江雪</a>:&nbsp;&nbsp;
+                                                                    </span>
+                                                                    <span th:utext="${rvo.reply.content}">这个是直播时间哈，觉得晚的话可以直接看之前的完整录播的~</span>
+                                                                </div>
+                                                                <!--发布评论的时间点赞div-->
+                                                                <div class="mt-3" style="display: flex">
+                                                                    <!--发表情评论时间原（<span th:text="${#dates.format(rvo.reply.createTime,'yyyy-MM-dd HH:mm:ss')}">2019-04-15 15:32:18</span>）-->
+                                                                    <span th:text="${#dates.format(rvo.reply.createTime,'yyyy-MM-dd HH:mm:ss')}">2019-04-15 15:32:18</span>
+                                                                    <!--点赞回复按钮-->
+                                                                    <div style="width: 650px">
+                                                                    <div style="float: right">
+                                                                        <ul class="post-meta">
+                                                                            <!--此处显示点赞数量-->
+                                                                            <li>
+                                                                                <div>
+                                                                                <button th:onclick="|like(this,2,${rvo.reply.id},${rvo.reply.userId},${post.id});|" style="background-color: transparent;border-color: transparent;">
+                                                                                    <div th:class="|like ${rvo.likeStatus==1?'active':''} |">
+                                                                                        <i class="fa fa-heart"></i>
+                                                                                        <span th:text="${rvo.likeCount}">42</span>
+                                                                                    </div>
+                                                                                </button>
+                                                                                </div>
+                                                                            </li>
+                                                                            <li>
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 15 15">
+                                                                                    <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z"/>
+                                                                                </svg>
+                                                                                <a th:href="|#huifu-${rvoStat.count}|" style="cursor: pointer">回复</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    </div>
+                                                                    <div style="height: 10px"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                                <!--回复 回复的输入框-->
+                                                        <div th:id="|huifu-${rvoStat.count}|">
+                                                            <ul>
+                                                                <li class="pb-3 pt-3" style="list-style-type: none">
+                                                                    <!--表单action原（<form method="post" th:action="@{|/comment/add/${post.id}|}">）-->
+                                                                    <!--                                                               回复回复-->
+                                                                    <form method="post" th:action="@{|/comment/add/${post.id}|}">
+
+                                                                            <div style="margin-left: 320px;display: flex">
+                                                                                <div style="margin-right: 10px">
+                                                                                    <!--这里是用户头像-->
+                                                                                    <img th:src="${user.headerUrl}" style="height: 40px;width: 40px;border-radius: 50%">
+                                                                                </div>
+                                                                                <input type="text" class="input-text" name="content" placeholder="请输入你的观点" style="border-radius: 5px; width: 350px"/>
+                                                                                <input type="hidden" name="entityType" value="2">
+                                                                                <!--回复id？原（<input type="hidden" name="entityId" th:value="${cvo.comment.id}">）-->
+                                                                                <input type="hidden" name="entityId" th:value="${cvo.comment.id}">
+                                                                                <input type="hidden" name="targetId" th:value="${rvo.user.id}">
+                                                                                <div class="text-right mt-2" style="margin-left: 10px">
+                                                                                    <button type="submit" style="height: 42.8px;border: #b2b2b2 solid 1px;border-radius: 5px" onclick="#">&nbsp;&nbsp;回&nbsp;&nbsp;复&nbsp;&nbsp;</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        <div style="height: 10px"></div>
+                                                                    </form>
+                                                                </li>
+                                                                <hr>
+                                                            </ul>
+                                                        </div>
+                                                        </li>
+                                                    </ul>
+
+
+                                                </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pager" style="margin-top: 20px;">
+                            <div class="pages">
+                                <!--<strong></strong>-->
+                                <ol class="pagination" th:if="${page.from<=page.to}">
+                                    <li class="page-item">
+                                        <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+                                    </li>
+                                    <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                                        <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+                                    <!--						page对象中的from和to决定了导航条的页面数量-->
+                                    <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
+                                        <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
+                                    </li>
+                                    <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                                        <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="comments-form-wrapper comment-respond appear_ct">
+                            <a name="detail_commment"></a>
+                            <h3>留下您的观点</h3>
+                            <p class="comment-notes">
+                                <span id="email-notes">请遵守社区条约，文明发言噢！</span>
+                            </p>
+                            <form class="comment-form" method="post" id="postComment" th:action="@{|/comment/add/${post.id}|}">
+                                <div class="field aw-blog-comment-area">
+                                    <label for="comment">Comment<em class="required">*</em></label>
+                                    <textarea rows="5" cols="50" class="input-text" title="Comment" id="comment" name="content" placeholder="评论"></textarea>
+                                </div>
+                                <div class="button-set">
+                                    <input type="hidden" name="entityType" value="1">
+                                    <input type="hidden" name="entityId" th:value="${post.id}">
+                                    <button type="submit" class="bnt-comment" onclick="like()"><span><span>发表评论</span></span></button>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+
+                </div>
+                    <!--#main wrapper grid_8-->
+
+                </div>
+
+            </div>
         </div>
+
+
     </div>
-        <div class="main container">
-      <div class="row">
-          <div id="main" class="blog-post blog-post-1">
-            <article class="blog_entry clearfix">
-                    
-              <div class="entry-content">
- <div class="thm-post">
-<p id="markdown-content">Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec, condimentum sed sapien. Nullam lobortis nunc semper ipsum luctus ut viverra ante eleifend. Nunc pretium velit sed augue luctus accumsan.</p>
-</div>			
+    <!--col2-layout-->
 </div>
-
-
-				</article>
-
-              <div class="comment-content">
-                  <div class="comments-wrapper">
-                      <h3> Comments </h3>
-                      <ol class="commentlist">
-                          <li class="comment">
-                              <div>
-                                  <img alt="" src="https://pic1.zhimg.com/50/v2-26bcc4200d351c9939c6c4916d1fe0d4_720w.jpg?source=1940ef5c
-" class="avatar avatar-60 photo">
-                                  <div class="comment-text">
-                                      <div class="ratings">
-                                          <div class="rating-box">
-                                              <div style="width:100%" class="rating"></div>
-                                          </div>
-
-                                      </div>
-                                      <p class="meta">
-                                          <strong>iKun</strong>
-                                          <span>–</span> <span>2022/7/6</span>
-                                      </p>
-                                      <div class="description"><p>测试评论正常显示</p>
-                                          <p>测试评论正常显示</p>
-                                      </div>
-                                  </div>
-                              </div>
-                          </li><!-- #comment-## -->
-                          <li class="comment">
-                              <div>
-                                  <img alt="" src="https://pic1.zhimg.com/50/v2-26bcc4200d351c9939c6c4916d1fe0d4_720w.jpg?source=1940ef5c
-" class="avatar avatar-60 photo">
-                                  <div class="comment-text">
-                                      <div class="ratings">
-                                          <div class="rating-box">
-                                              <div style="width:100%" class="rating"></div>
-                                          </div>
-
-                                      </div>
-                                      <p class="meta">
-                                          <strong>iKun</strong> <span>–</span> <span>2022/7/6</span>
-                                      </p>
-                                      <div class="description"><p>测试评论正常显示.</p>
-                                      </div>
-                                  </div>
-                              </div>
-                          </li><!-- #comment-## -->
-                      </ol>
-                      <!--commentlist-->
-                  </div>
-                  <!--comments-wrapper-->
-
-                  <div class="comments-form-wrapper comment-respond">
-                      <h3>评论</h3>
-                      <p class="comment-notes"><span id="email-notes"></span> 在这里可以留下你的评论</p>
-                      <form class="comment-form" method="post" id="postComment">
-                          <div class="field aw-blog-comment-area">
-                              <label for="comment">Comment<em class="required">*</em></label>
-                              <textarea rows="5" cols="50" class="input-text" title="Comment" id="comment" name="comment" placeholder="Comment"></textarea>
-                          </div>
-                          <div class="button-set">
-                              <input type="hidden" value="1" name="blog_id">
-                              <button type="submit" class="bnt-comment"><span><span>添加评论</span></span></button>
-                          </div>
-                      </form>
-                  </div>
-
-              </div>
-          </div>
-          <!--#main wrapper grid_8--> 
-          
-        </div>
-
-      </div>
-    </div>
-
-    
-  </div>
-  <!--col2-layout--> 
-
-<!-- JavaScript --> 
-<script th:src="@{/js/jquery-3.5.0.min.js}"></script>
-<script th:src="@{/js/bootstrap.min.js}"></script>
-<script th:src="@{/js/revslider.js}"></script>
-<script th:src="@{/js/common.js}"></script>
-<script th:src="@{/js/owl.carousel.min.js}"></script>
-    <script th:src="@{/js/include.js}"></script>
-<script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
-<script th:src="@{/js/countdown.js}"></script>
+</div>
     <div id="footer"></div>
-</body>
 
-<script src="https://cdn.bootcdn.net/ajax/libs/marked/4.0.17/marked.min.js"></script>
+
+
+    <script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/revslider.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/include.js}"></script>
+    <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+    <script th:src="@{/js/countdown.js}"></script>
+    <script th:src="@{/js/detail-style.js}"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/marked/4.0.17/marked.min.js"></script>
 <script>
   
     $(function(){
@@ -173,4 +381,11 @@
         }
     );
 </script>
+<!-- JavaScript -->
+<style type="text/css">
+    .active{
+        color: red;
+    }
+</style>
+</body>
 </html>

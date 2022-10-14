@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,51 +15,46 @@
     <script type="text/javascript" th:src="@{js/custom/tables.js}"></script>
 
 </head>
-
 <body class="withvernav">
 <div class="bodywrapper">
     <div class="topheader">
         <div class="left">
             <h1 class="logo">Campus<span>.BBS</span></h1>
             <span class="slogan">后台管理系统</span>
+            
 
-            <div class="search">
-                <form action="" method="post">
-                    <input type="text" name="keyword" id="keyword" value="Enter keyword(s)" />
-                    <button class="submitbutton"></button>
-                </form>
-            </div><!--search-->
-
+            
             <br clear="all" />
-
+            
         </div><!--left-->
-
+        
         <div class="right">
-            <!--<div class="notification">
+        	<!--<div class="notification">
                 <a class="count" href="notifications.html"><span>9</span></a>
-            </div>
-            -->
+        	</div>
+			-->
             <div class="userinfo">
-                <img src="images/thumbs/avatar.png" alt="" />
-                <span>Juan Dela Cruz</span>
+                <span th:text="${user.username}">Juan Dela Cruz</span>
             </div><!--userinfo-->
-
+            <div class="userinfo" style="margin-left: 10px">
+                <a th:href="@{/index}"> <span>返回</span></a>
+            </div><!--userinfo-->
             <div class="userinfodrop">            	<div class="avatar">
-                <a href=""><img src="images/thumbs/avatarbig.png" alt="" /></a>
-                <div class="changetheme">
-                    Change theme: <br />
-                    <a class="default"></a>
-                    <a class="blueline"></a>
-                    <a class="greenline"></a>
-                    <a class="contrast"></a>
-                    <a class="custombg"></a>
-                </div>
-            </div><!--avatar-->
-                <div class="userdata">
-                    <h4>Juan Dela Cruz</h4>
+                	<a href=""><img src="images/thumbs/avatarbig.png" alt="" /></a>
+                    <div class="changetheme">
+                    	Change theme: <br />
+                    	<a class="default"></a>
+                        <a class="blueline"></a>
+                        <a class="greenline"></a>
+                        <a class="contrast"></a>
+                        <a class="custombg"></a>
+                    </div>
+                </div><!--avatar-->
+<div class="userdata">
+                	<h4>Juan Dela Cruz</h4>
                     <span class="email">youremail@yourdomain.com</span>
                     <ul>
-                        <li><a href="editprofile.html">Edit Profile</a></li>
+                    	<li><a href="editprofile.html">Edit Profile</a></li>
                         <li><a href="accountsettings.html">Account Settings</a></li>
                         <li><a href="help.html">Help</a></li>
                         <li><a href="index.html">Sign Out</a></li>
@@ -67,94 +63,142 @@
             </div><!--userinfodrop-->
         </div><!--right-->
     </div><!--topheader-->
-
-
+    
+    
     <div class="header">
-        <ul class="headermenu">
-            <li><a href="user_account_management.html"><span class="icon icon-flatscreen"></span>表管理</a></li>
-            <!-- <li><a href="manageblog.html"><span class="icon icon-pencil"></span>Manage Blog</a></li>
-            <li><a href="messages.html"><span class="icon icon-message"></span>Messages</a></li>
-            <li><a href="reports.html"><span class="icon icon-chart"></span>Reports</a></li> -->
+    	<ul class="headermenu">
+        	<li><a th:href="@{/admin/posts}"><span class="icon icon-flatscreen"></span>表管理</a></li>
+
         </ul>
+        
 
-
-
+        
     </div><!--header-->
-
+    
     <div class="vernav2 iconmenu">
-        <ul>
-            <li class="current"><a th:href="@{/admin/users}" class="tables">用户账号管理</a></li>
-            <li><a th:href="@{/admin/posts}" class="buttons">帖子管理</a></li>
-
+    	<ul>
+            <li ><a th:href="@{/admin/users}" class="tables">用户账号管理</a></li>
+            <li class="current"><a th:href="@{/admin/posts}" class="buttons">帖子管理</a></li>
+            <li ><a th:href="@{/admin/groups}" class="tables">圈子管理</a></li>
+            <li ><a th:href="@{/admin/tags}" class="tables">标签管理</a></li>
         </ul>
         <br /><br />
     </div><!--leftmenu-->
-
+        
     <div class="centercontent tables">
-
+    
         <div class="pageheader notab">
             <h1 class="pagetitle">帖子管理</h1>
             <span class="pagedesc">post Management</span>
-
+            
         </div><!--pageheader-->
-
+        
         <div id="contentwrapper" class="contentwrapper">
+                        
+          <div class="contenttitle2">
+            <h3 >帖子表</h3>
+          </div><!--contenttitle-->
 
-            <div class="contenttitle2">
-                <h3>帖子表</h3>
-            </div><!--contenttitle-->
-            <div class="tableoptions">
-                <button class="deletebutton radius3" title="table2">按钮</button> &nbsp;
-                <select class="radius3">
-                    <option value="">筛选条件</option>
-                    <option value=""></option>
-                    <option value=""></option>
-                    <option value=""></option>
-                </select> &nbsp;
-                <input type="text" placeholder="字段匹配">
-                <button class="radius3">搜索</button>
-            </div><!--tableoptions-->
-            <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
-                <colgroup>
-                    <col class="con0" style="width: 4%" />
-                    <col class="con1" />
-                    <col class="con0" />
-                    <col class="con1" />
-                    <col class="con0" />
-                    <col class="con1" />
-                    <col class="con0" />
-                </colgroup>
-                <thead>
-                <tr>
-                    <th class="head0"><input type="checkbox" class="checkall" /></th>
-                    <th class="head1">id</th>
-                    <th class="head0">user_id</th>
-                    <th class="head1">title</th>
-                    <th class="head0">content</th>
-                    <th class="head1">tag</th>
-                    <th class="head0">&nbsp;</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="post:${posts}">
+          <div class="tableoptions">
+              <form th:action="@{/admin/posts}" method="post" style="position: center">
+              <input type="text" placeholder="请输入帖子ID" name="id" id="id" style="width: 150px">
+              <input type="text" placeholder="请输入帖子标题" name="title" id="title" style="width: 150px; margin-left: 20px">
+              <input type="text" placeholder="请输入帖子Tag" name="tag" id="tag" style="width: 150px; margin-left: 20px">
+              <button type="submit" value="查询" style="margin-left: 10px; height: 30px; width: 70px;" onclick="searchpost()">查询</button>
+                  <a th:href="@{/admin/posts}">   <button id="showusers" type="submit" style="margin-left: 10px; height: 30px; width: 70px;">刷新</button></a>
+                  <a style="font-size: 15px;margin-left: 300px;margin-top: 40px;font-family: SimHei">当前位于第&nbsp;<span th:text="${page.current}" style="color: rgb(251,225,34);font-weight: bold"/>&nbsp;页,共
+                      <span th:text="${page.total}" style="color: rgb(251,225,34);font-weight: bold"/>&nbsp;页</a>
+<!--              <span  style="margin-left: 80px; font-size: 10px;">共有数据：条</span>-->
+              </form>
+          </div><!--tableoptions-->
+
+          <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
+              <colgroup>
+                  <col class="con0" style="width: 4%" />
+                  <col class="con1" />
+                  <col class="con0" />
+                  <col class="con1" />
+                  <col class="con0" />
+                  <col class="con1" />
+                  <col class="con0" />
+              </colgroup>
+              <thead>
+                  <tr>
+                      <!--<input type="checkbox" class="checkall" />-->  <th class="head0"></th>
+                      <th class="head0">ID</th>
+                      <th class="head0">UserID</th>
+                      <th class="head1">Title</th>
+                      <th class="head0">Tag</th>
+                      <th class="head1">Content</th>
+                      <th class="head0">操作</th>
+                  </tr>
+              </thead>
+
+              <tbody>
+                  <tr th:each="post:${posts}">
                     <td align="center"><input type="checkbox" /></td>
-                    <td th:text="${post.id}"></td>
-                    <td th:text="${post.userId}"></td>
-                    <td th:text="${post.title}"></td>
-                    <td class="center" th:text="${post.content}"></td>
-                    <td class="center" th:text="${post.tag}">A</td>
-                    <td class="center"><a href="" class="edit">Edit</a> &nbsp; <a href="" class="delete">Delete</a></td>
-                </tr>
-                </tbody>
-            </table>
-            <br /><br />
+                      <td th:text="${post.id}"></td>
+                      <td th:text="${post.userId}"></td>
+                      <td th:text="${post.title}"></td>
+                      <td class="center" th:text="${post.tag}"></td>
+                      <td class="center" th:text="${post.content}">A</td>
+                      <td class="center">
+                          <a th:href="@{/findPosts(id=${post.id})}" class="edit">编辑</a>&nbsp;|&nbsp;
+                          <a th:href="@{/delPosts(id=${post.id})}" class="delete" onclick="return delpost()">删除</a></td>
+                  </tr>
+              </tbody>
+          </table>
+            <div class="pager" style="margin-top: 20px; margin-left: 800px;">
+                <div class="pages" style="position:absolute;left: 40%">
 
+                    <ol class="pagination" >
+                        <li class="page-item" style="background-color: white;width: 50px;">
+                            <a class="page-link" th:href="@{${page.path}(current=1)}" style="background-color: rgb(251,225,34);border-radius: 10px;border-color: rgb(251,225,34);">首页</a>
+                        </li>
+                        <li th:class="|page-item ${page.current==1?'disabled':''}|" style="background-color: white;width: 60px">
+                            <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}" style="background-color: rgb(251,225,34);border-radius: 10px;border-color: rgb(251,225,34);">上一页</a></li>
+                        <!--						page对象中的from和to决定了导航条的页面数量-->
+                        <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}" style="background-color: white;width: 30px;margin-left: 5px;margin-right: 5px">
+                            <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}" style="background-color: white;border-radius: 10px;border-color: white">1</a>
+                        </li>
+                        <li th:class="|page-item ${page.current==page.total?'disabled':''}|" style="background-color: white;width: 60px;margin-left: 5px">
+                            <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}" style="background-color: rgb(251,225,34);border-radius: 10px;border-color: rgb(251,225,34);">下一页</a>
+                        </li>
+                        <li class="page-item" style="width: 50px;margin-left: 5px;">
+                            <a class="page-link" th:href="@{${page.path}(current=${page.total})}" style="background-color: rgb(251,225,34);border-radius: 10px;border-color: rgb(251,225,34);">末页</a>
+                        </li>
+                    </ol>
+
+
+                </div>
+            </div>
+          <br /><br />
+                
+                
+                
+                
+        
         </div><!--contentwrapper-->
-
-    </div><!-- centercontent -->
-
-
+        
+	</div><!-- centercontent -->
+    
+    
 </div><!--bodywrapper-->
+<script>
+
+function delpost(){
+    if(confirm("确实要删除该帖吗?")){
+            alert("删除成功！");
+            }else{
+        event.preventDefault(); //取消默认应答
+                 alert("取消了删除操作");
+             }
+         }
+function searchpost(){
+    alert("查询成功！");
+}
+</script>
 
 </body>
+
 </html>

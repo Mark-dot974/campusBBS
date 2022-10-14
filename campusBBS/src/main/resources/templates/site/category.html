@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>campusBBS</title>
+<title>Category Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Default Description">
 <meta name="keywords" content="fashion, store, E-commerce">
@@ -24,6 +24,12 @@
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
 <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+  <style>
+    em {
+      font-style: normal;
+      color: red;
+    }
+  </style>
 </head>
 <div id="page">
   <div id="header"></div>
@@ -37,9 +43,14 @@
               <li class="category1601"> <strong th:text="${cname}">#失物招领</strong> </li>
             </ul>
           </div>
-          <div class="col-xs-12" th:if="${tagName!=null}">
+          <div class="col-xs-12" >
             <ul>
-              <li class="category1601"> <strong th:text="${tagName}">#失物招领</strong> </li>
+              <li class="category1601" th:if="${tagName!=null}"> <h1 th:text="${'#'+tagName}">#失物招领</h1> </li>
+            </ul>
+          </div>
+          <div class="col-xs-12" >
+            <ul>
+              <li class="category1601" th:if="${searchName!=null}"> <h1 th:text="${searchName}">#失物招领</h1> </li>
             </ul>
           </div>
           <!--col-xs-12-->
@@ -60,22 +71,56 @@
           <div id="main" class="blog-wrapper">
             <div id="primary" class="site-content">
               <div id="content" role="main">
-                <article class="blog_entry clearfix" th:each="map:${postsInfo}">
+                <article class="blog_entry clearfix" th:each="map:${postsInfo}" th:if="${map.user!=null}">
                   <div class="entry-content">
                     <div class="post-content">
                       <header class="blog_entry-header clearfix">
-                        <div class="blog_entry-header-inner"> <a class="tag " href="#" title="Fashion">Technology</a>
+                        <!--显示标签-->
+                        <div class="blog_entry-header-inner" th:if="${map.tags}!=null">
+                          <div style="display: flex">
+                            <div style="margin-right: 10px" th:each="tag:${map.tags}">
+                              <a class="tag " href="#" title="Fashion" th:text="${tag}">Technology</a>
+                            </div>
+                          </div>
                           <h2 class="blog_entry-title"> <a th:href="@{/post/detail(id=${map.post.id})}" th:utext="${map.post.title}" rel="bookmark">Cheerful model sitting on the floor, wearing modern oversize black dresss</a> </h2>
                         </div>
                         <!--blog_entry-header-inner-->
                       </header>
                       <ul class="post-meta">
-                        <li><img th:src="${map.user.headerUrl}" alt="auther"> <a href="#" th:utext="${map.user.username}">Smith John </a> </li>
-                        <li><i class="fa fa-comments"></i><a href="#"  th:text="${map.post.commentCount}">13 comments</a> </li>
-                        <li th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}"><i class="fa fa-clock-o"></i>Jan 12, 2021</li>
+                        <!--发布用户头像-->
+                        <li>
+
+                          <div style="width:80px;display: flex;">
+                            <a th:href="|@{'/user/profile/'+${map.user.id}}|">
+                            <img th:src="${map.user.headerUrl}" alt="auther">
+                            <span href="#" th:utext="${map.user.username}">Smith John </span>
+                            </a>
+                          </div>
+
+                        </li>
+                        <!--点赞图标-->
+                        <li >
+                          <div style="width: 80px">
+                          <i class="fa fa-heart-o" id="like" onclick="changecolor()"></i>
+                          <a href="#"  th:text="${map.likeCount}">13 comments</a>
+                          </div>
+                        </li>
+                        <!--评论图标-->
+                        <li>
+                          <div style="width: 80px">
+                          <i class="fa fa-comments"></i>
+                          <a href="#"  th:text="${map.post.commentCount}">13 comments</a>
+                          </div>
+                        </li>
+                        <!--发布日期-->
+                        <li>
+                          <i class="fa fa-clock-o"></i>
+                          <span th:text="${#dates.format(map.post.createTime,'yyyy-MM-dd HH:mm:ss')}">Jan 12, 2021</span>
+                        </li>
                       </ul>
-                      <p th:utext="${map.post.content}">Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec, condimentum sed sapien. </p>
-                    </div>
+                      <div class="index_text_style">
+                      <p th:utext="${map.post.content}"></p>
+                      </div>
                   </div>
                 </article>
               </div>
@@ -83,7 +128,7 @@
             <div class="pager">
               <div class="pages">
                 <!--<strong></strong>-->
-                <ol class="pagination">
+                <ol class="pagination" th:if="${page.from<=page.to}">
                   <li class="page-item">
                     <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
                   </li>
@@ -124,6 +169,22 @@
   <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
   <script th:src="@{/js/countdown.js}"></script>
   <script th:src="@{/js/include.js}"></script>
+  <script>
+    var like = document.getElementById("like")
+    function changecolor(){
+      <!--改变样式-->
+      like.className = 'fa fa-heart' ;
+      <!--改变颜色-->
+      like.style.color = 'red' ;
+    //   if(color == 'red' && style == 'fa fa-heart'){
+    //     style = 'fa fa-heart-o';
+    //   }else {
+    //     style = 'fa fa-heart';
+    //     color = 'red';
+    //   }
+    }
+  </script>
+
   <div id="footer"></div>
 </div>
 </html>

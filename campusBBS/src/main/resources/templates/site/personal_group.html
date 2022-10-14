@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Category Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Default Description">
+    <meta name="keywords" content="fashion, store, E-commerce">
+    <meta name="robots" content="*">
+    <link rel="icon" href="#" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+
+    <!-- CSS Style -->
+    <link rel="stylesheet" type="text/css"  th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}" >
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.bxslider.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/yellow.css}">
+
+
+
+
+</head>
+<body>
+    <div id="page">
+        <div id="header"></div>
+        <!--breadcrumbs-->
+        <!-- BEGIN Main Container col2-left -->
+        <section class="main-container col2-left-layout bounceInUp animated">
+            <!-- For version 1, 2, 3, 8 -->
+            <!-- For version 1, 2, 3 -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+                        <!--这里是个人中心加入圈子的列表展示start-->
+                        <div class="pro-coloumn box-content box-category grid-sidebar-block" style="">
+                            <ul class="nav nav-pills nav-stacked">
+                                <div>
+                                    <!--group样式start-->
+                                    <li class="section allow active" th:each="group:${group}">
+                                        <div>
+                                            <div class="step-title" style="display:flex;margin-left: 100px;border-bottom: 15px">
+                                                <!--此处显示圈子头像-->
+                                                <div style=" margin-left: 20px">
+                                                    <a title="" class="">
+                                                        <img th:src="${group.groupHeader}" style="border-radius: 50%; height: 80px;height: 80px">
+                                                    </a>
+                                                </div>
+                                                <div>
+                                                    <h3 class="one_page_heading" style="margin-left: 25px">
+                                                        <!--圈子显示-->
+                                                        <b th:text="${group.groupName}">圈子名称1</b>
+                                                    </h3>
+                                                    <!--个性签名显示-->
+                                                    <p style="margin-left: 25px;width: 200px;text-overflow: ellipsis;overflow: hidden" th:text="${group.groupIntro}">（可以是圈子的简介）</p>
+                                                    <!--圈子标签显示-->
+                                                    <div style="margin-left: 25px" class="personal_page_span_style">
+                                                        <span th:text="${group.tag}">#唱</span>
+
+                                                    </div>
+
+                                                </div>
+                                                <div style="text-align: center;vertical-align: middle;width: 300px;height: 104px;">
+                                                    <ul class="nav nav-pills nav-stacked" style="margin-top: 35px; width: 600px">
+                                                        <li style="width: 90px;border-radius: 10%;text-align: center;display: inline-block;border: #898989 1px solid">
+                                                            <div style="display: flex;margin-left: 7px">
+                                                                <div>
+                                                                    <a style="cursor: pointer;color:#7a7a7a" th:href="@{/group/groupDetail(gid=${group.gid})}">
+                                                                        查看圈子
+                                                                    </a>
+                                                                </div>
+                                                                <div style="margin-top: 15px">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-right" viewBox="0 0 16 16">
+                                                                        <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <hr style="width: 600px;margin-top: 10px">
+                                        </div>
+                                    </li>
+                                    <!--group样式end-->
+                                    <!--测试多group样式-->
+                                </div>
+                            </ul>
+                            <div class="pager">
+                                <div class="pages">
+                                    <!--<strong></strong>-->
+                                    <ol class="pagination" th:if="${page.from<=page.to}">
+                                        <li class="page-item">
+                                            <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+                                        </li>
+                                        <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                                            <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+                                        <!--						page对象中的from和to决定了导航条的页面数量-->
+                                        <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
+                                            <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
+                                        </li>
+                                        <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                                            <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <!--这里是个人中心加入圈子的信息展示end-->
+
+                    </div>
+                    <aside_left class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9" th:replace="~{/site/personal_page::aside}">
+                        <!-- BEGIN SIDE-NAV-CATEGORY -->
+                        <div class="side-nav-categories">
+                            <div class="block-title"> 个人中心 </div>
+                            <!--block-title-->
+                            <!-- BEGIN BOX-CATEGORY -->
+                            <div class="box-content box-category">
+                                <ul class="nav nav-pills nav-stacked" style="max-width: 320px;  ">
+                                    <li class="">
+                                        <a th:href="|@{'/user/profile/'+${user.id}}|">
+                                            <span class="badge pull-right">42</span>
+                                            个人信息
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <!--                    <i th:text="${user.id}"></i>-->
+                                        <!--                    <a th:href="|@{/post/personalPost(userId=${user?.id})}|">-->
+                                        <a th:href="@{/post/personalPost(userId=${userId})}">
+                                            <!--                    <a href="personal_post.html">-->
+                                            <span class="badge pull-right">3</span>
+                                            发布内容
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="personal_publish.html">
+                                            <span class="badge pull-right">3</span>
+                                            点赞
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/group/personalGroup(members=${user.username})}">
+                                            <span class="badge pull-right">3</span>
+                                            圈子
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a th:href="@{/user/message}">
+                                            <span class="badge pull-right">13</span>
+                                            私信
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--box-content box-category-->
+                        </div>
+                    </aside_left>
+                    <!--col-right sidebar-->
+                </div>
+                <!--row-->
+            </div>
+            <!--container-->
+        </section>
+    </div>
+    </div>
+    <div id="footer"></div>
+    <script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/revslider.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+    <script th:src="@{/js/countdown.js}"></script>
+    <script th:src="@{/js/include.js}"></script>
+    <script th:src="@{/js/setting.js}"></script>
+    <script th:src="@{/js/jquery.icheck.js}"></script>
+</body>
+</html>

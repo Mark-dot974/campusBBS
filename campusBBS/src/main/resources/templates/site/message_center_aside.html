@@ -1,0 +1,79 @@
+<message_center_aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9">
+    <!-- BEGIN SIDE-NAV-CATEGORY -->
+    <div class="side-nav-categories">
+        <div class="message-block-title"> 消息中心 </div>
+        <!--block-title-->
+        <!-- BEGIN BOX-CATEGORY -->
+        <div class="box-content box-category">
+            <ul class="nav nav-pills nav-stacked" style="max-width: 320px;  ">
+                <li class="">
+                    <a href="profile_set.html">
+                        <span class="badge pull-right">42</span>
+                        回复我的
+                    </a>
+                </li>
+                <li>
+                    <a href="personal_publish.html">
+                        <span class="badge pull-right">3</span>
+                        收到的赞
+                    </a>
+                </li>
+                <li>
+                    <a href="personal_publish.html">
+                        <span class="badge pull-right">3</span>
+                        我的消息
+                    </a>
+                </li>
+                <li>
+                    <a href="personal_publish.html">
+                        <span class="badge pull-right">3</span>
+                        系统通知
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--box-content box-category-->
+    </div>
+</message_center_aside>
+
+
+
+
+<li class="section allow active" th:each="map:${messages}">
+    <div>
+        <div class="step-title" style="display:flex;margin-left: 50px;border-bottom: 15px">
+            <!--此处显示头像-->
+            <div style=" margin-left: 20px">
+                <a title="" class="">
+                    <img th:src="@{map.user.headerUrl}" style="border-radius: 50%; height: 80px;height: 80px">
+                </a>
+            </div>
+            <div>
+                <h3 class="one_page_heading" style="margin-left: 25px;display: flex">
+                    <!--昵称显示-->
+                    <div><b th:text="${map.user.username}">iKun</b></div>
+                    <div style="margin-left: 10px"><b style="font-size: 6px">对我发表了评论</b></div>
+                </h3>
+                <!--发表时间、评论、点赞显示-->
+                <div style="margin-left: 25px;margin-top: 10px;width: 400px;" class="">
+                    <div style="display: flex">
+                        <div  style="margin-right: 5px">
+                            <i class="fa fa-clock-o"></i>
+                            <!--发表评论时间-->
+                            <span th:text="${#dates.format(map.message.createTime,'yyyy-MM-dd HH:mm:ss')}">2022-07-05 18:08:55</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;vertical-align: middle;width: 300px;height: 104px;">
+                <ul class="nav nav-pills nav-stacked" style="margin-top: 10px; width: 300px">
+                    <div class="message_center_text_style">
+                        <!--文章展示-->
+                        <p th:text="${map.post.content}">中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test中文测试test</p>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr width="980px">
+</li>

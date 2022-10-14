@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>campusBBS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Default Description">
+    <meta name="keywords" content="fashion, store, E-commerce">
+    <meta name="robots" content="*">
+    <link rel="icon" href="#" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+
+    <!-- CSS Style -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-select.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/revslider.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.carousel.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/owl.theme.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.bxslider.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/jquery.mobile-menu.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" media="all">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}" media="all">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700,800'
+          rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Teko:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Saira+Condensed:300,400,500,600,700,800" rel="stylesheet">
+    <style>
+        .profile-pic {
+            width: 70px;
+            cursor: pointer;
+        }
+
+        .collaborators {
+            margin: 20px 0 20px 0;
+        }
+
+        .collaborate-title {
+        }
+    </style>
+
+</head>
+
+<body>
+<div id="header"></div>
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="col-md-8">
+
+            <!--       圈子title -->
+            <div class="collaborate-title col-md-offset-2">
+                <img th:src="${group.groupHeader}"
+                     alt="..." class="img-circle profile-pic " style="margin: 10px 20px 30px 0">
+                <h1 style="display: inline-block;" th:text="${group.groupName}">全民制作人</h1>
+                <button class="col-md-offset-1 btn btn-primary" type="button" id="btn-update"
+                        data-target="#publishModal" onclick="updateGroup()" th:if="${loginUser!=null && loginUser.username==group.groupLeader}">修改协作圈信息
+                </button>
+                <button class="btn btn-primary col-md-offset-1" type="button" id="btn-join" data-target="#publishModal" th:if="${loginUser!=null && loginUser.username!=group.groupLeader && isMember!=true}" onclick="apply()">
+                    申请加入
+                </button>
+                <form id="applyForm">
+                    <input type="hidden" name="groupName" th:value="${group.groupName}">
+                    <input type="hidden" name="gid" th:value="${group.gid}">
+                    <input type="hidden" name="leader" th:value="${group.groupLeader}">
+                    <input type="hidden" name="userId" th:if="${loginUser!=null}" th:value="${loginUser.id}">
+                </form>
+                <!--                加入-->
+<!--                <div class="modal fade" id="join" tabindex="-1" role="dialog">-->
+<!--                    <div class="modal-dialog" role="document">-->
+<!--                        <div class="modal-content">-->
+<!--                            <form>-->
+<!--                                <div class="modal-header">-->
+<!--                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span-->
+<!--                                            aria-hidden="true">×</span></button>-->
+<!--                                    <h4 class="modal-title">加入协作圈</h4>-->
+<!--                                </div>-->
+<!--                                <div class="modal-body">-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="txt_departmentlevel">验证信息</label>-->
+<!--                                    </div>-->
+
+<!--                                </div>-->
+<!--                                <div class="modal-footer">-->
+<!--                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span-->
+<!--                                            class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭-->
+<!--                                    </button>-->
+<!--                                    <button type="button" class="btn btn-primary" data-dismiss="modal"><span-->
+<!--                                            class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>发送-->
+<!--                                    </button>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <!--    修改协作圈        -->
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">×</span></button>
+                                <h4 class="modal-title">修改协作圈信息</h4>
+                            </div>
+                            <form>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <img src="http://repbhxlop.hb-bkt.clouddn.com/%E9%BB%98%E8%AE%A4%E7%BB%84%E5%A4%B4%E5%83%8F.jpg"
+                                             alt="..." class="img-circle profile-pic" id="upload-circle-img">
+                                        <label for="input-upload-circle-img">点击修改默认头像</label>
+                                        <input type="file" accept="image/*" style="display: none"
+                                               id="input-upload-circle-img">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txt_parentdepartment">协作圈名称</label>
+<!--                                        <label for="txt_departmentname">协作圈名称</label><span class="col-md-offset-1"-->
+<!--                                                                                           style="color: red">该协作圈已存在</span>-->
+                                        <input type="text" name="txt_departmentname" class="form-control"
+                                               id="txt_departmentname" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txt_parentdepartment">简介</label>
+                                        <input type="text" name="txt_parentdepartment" class="form-control"
+                                               id="txt_parentdepartment" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txt_departmentlevel">tags</label>
+                                        <input type="text" name="txt_departmentlevel" class="form-control"
+                                               id="txt_departmentlevel" value="">
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                            class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
+                                    </button>
+                                    <button type="button" id="btn_submit" class="btn btn-primary"
+                                            data-dismiss="modal"><span
+                                            class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr style="border-width: 2px; margin: 0 0 20px 0">
+
+
+            <div class="group-chat-box group-chat-box">
+                <h2 class="text-center">小组聊天框</h2>
+            </div>
+            <iframe src="https://desolate-plains-03097.herokuapp.com" width="960" height="600" style="border-radius: 5px;border-color: #ffb74d"></iframe>
+
+
+        </div>
+
+        <div class="col-md-4">
+            <div class="row-fluid">
+                <div class="col-md-12">
+                    <div class="collaborators">
+                        <a href="#" th:each="member:${members}">
+                            <a th:href="|@{'/user/profile/'+${member.id}}|"><img th:src="${member.headerUrl}" alt="..." class="img-circle profile-pic"></a>
+                        </a>
+<!--                        <a href="#"><img th:src="@{/images/cutewy.webp}" alt="..." class="img-circle profile-pic"></a>-->
+
+                        <a><img th:src="@{/images/newProfile.png}" alt="..." id="btn-invite"
+                                class="img-circle profile-pic" onclick="memberForm()" th:if="${isMember}"></a>
+
+                        <!--                        邀请                      -->
+                        <div class="modal fade" id="invite" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close"><span
+                                                aria-hidden="true">×</span></button>
+                                        <h4 class="modal-title">邀请其他用户</h4>
+                                    </div>
+                                    <form id="inviteForm">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="txt_departmentlevel">邀请</label>
+                                                <input type="text" name="username" class="form-control"
+                                                       placeholder="用户名">
+                                                <input type="hidden" name="gid" th:value="${group.gid}">
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                                    class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
+                                            </button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="inviteMember()"><span
+                                                    class="glyphicon glyphicon-plane" aria-hidden="true"></span>邀请
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <!-- 表格 -->
+            <div class="row-fluid">
+                <div class="col-md-12">
+
+                    <table class="table table-striped">
+                        <caption><h3 style="display: inline-block">协作文档</h3>
+                            <form method="post" id="files" enctype="multipart/form-data">
+                                <input type="hidden" name="token" th:value="${uploadToken}">
+                                <input type="hidden" name="key" th:value="${fileName}">
+                                <input type="hidden" name="gid" th:value="${gid}">
+                                <input class="upload col-lg-offset-4" th:if="${isMember}" type="file" value="上传新文档" style="color: #0a0a0a; display: inline-block" name="file" onchange="uploadFile()">
+                            </form>
+                        </caption>
+
+                        <thead>
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                文件名
+                            </th>
+                            <th>
+                                上传时间
+                            </th>
+                            <th>
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="success" th:each="file,fileStat:${files}">
+                            <td th:text="${fileStat.count}">
+                                1
+                            </td>
+                            <td>
+                                <div class="group_detail_text_style" th:text="${file.fileName}">哎u发哈我i发哈我iu和哎u还发哈dhello.wordhello.wordhello.</div>
+                            </td>
+                            <td th:text="${#dates.format(file.createTime,'yyyy-MM-dd HH:mm:ss')}">
+<!--                            <td>-->
+<!--                                <form class="form-group" id="updateFileForm">-->
+<!--                                    <input type="hidden" name="token" th:value="${uploadToken}">-->
+<!--                                    <input type="hidden" name="key" th:value="${file.fileName+#dates.createNow()}">-->
+<!--                                    <input class="uploadFile" type="file"-->
+<!--                                           style="display: inline; width: 180px;" th:if="${isMember}" name="file">-->
+<!--                                    <input type="hidden" name="gid" th:value="${gid}">-->
+<!--                                    <input name="fid" type="hidden" th:value="${file.fid}">-->
+<!--                                    <button class="update" type="submit" onclick="updateFile()" th:if="${isMember}">更新</button>-->
+<!--                                </form>-->
+<!--                            </td>-->
+                            <td>
+                                <a th:href="${file.url}" th:if="${isMember}"><button>下载</button></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- 翻页 -->
+                    <div class="pager">
+                        <div class="pages">
+                            <!--<strong></strong>-->
+                            <ol class="pagination" th:if="${page.from<=page.to}">
+                                <li class="page-item">
+                                    <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+                                </li>
+                                <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                                    <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+                                <!--						page对象中的from和to决定了导航条的页面数量-->
+                                <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
+                                    <a class="page-link" th:href="@{${page.path}(current=${i})}" th:text="${i}">1</a>
+                                </li>
+                                <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                                    <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+                                </li>
+                            </ol>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div style="height: 180px"></div>
+<!-- JavaScript -->
+<script th:src="@{/js/jquery-3.5.0.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/revslider.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/include.js}"></script>
+<script th:src="@{/js/jquery.mobile-menu.min.js}"></script>
+<script th:src="@{/js/countdown.js}"></script>
+<script th:src="@{/js/group.js}"/>
+<script>
+
+    $("#upload-circle-img").click(function () {
+        document.getElementById("input-upload-circle-img").click();
+    });
+
+    $("#btn-join").click(function () {
+        $('#join').modal();
+    });
+</script>
+<div id="footer"></div>
+</body>
+
+</html>

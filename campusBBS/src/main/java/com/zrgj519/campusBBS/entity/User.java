@@ -1,8 +1,11 @@
 package com.zrgj519.campusBBS.entity;
 
+import lombok.Data;
+
 import java.util.Date;
 import java.util.Objects;
 
+@Data
 public class User {
     // 因为设置，id由springboot和mybaits自动生成
     private int id;
@@ -14,7 +17,6 @@ public class User {
     public void setSid(String sid) {
         this.sid = sid;
     }
-
     private String username;
     private String password;
     private String salt;
@@ -25,6 +27,7 @@ public class User {
     private String headerUrl;
     private Date createTime;
     private String interest;
+    private String signature;
 
     public int getId() {
         return id;
@@ -117,22 +120,5 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, username, password, salt, email, type, status, activationCode, headerUrl, createTime, interest);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", salt='" + salt + '\'' +
-                ", email='" + email + '\'' +
-                ", type=" + type +
-                ", status=" + status +
-                ", activationCode='" + activationCode + '\'' +
-                ", headerUrl='" + headerUrl + '\'' +
-                ", createTime=" + createTime +
-                ", interest='" + interest + '\'' +
-                '}';
     }
 }

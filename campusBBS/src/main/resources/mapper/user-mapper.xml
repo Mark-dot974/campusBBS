@@ -4,34 +4,34 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zrgj519.campusBBS.dao.UserMapper">
     <sql id="insertFields">
-        username, password, salt, email, type, status, activation_code, header_url, create_time , interest,sid
+        username, password, salt, email, type, status, activation_code, header_url, create_time , interest,sid,signature
     </sql>
 
     <sql id="selectFields">
-        id, username, password, salt, email, type, status, activation_code, header_url, create_time, interest,sid
+        id, username, password, salt, email, type, status, activation_code, header_url, create_time, interest,sid,signature
     </sql>
 
     <select id="selectById" resultType="User">
-        select <include refid="selectFields"></include>
+        select *
         from user
         where id = #{id}
     </select>
 
     <select id="selectByName" resultType="User">
-        select <include refid="selectFields"></include>
+        select *
         from user
         where username = #{username}
     </select>
 
     <select id="selectByEmail" resultType="User">
-        select <include refid="selectFields"></include>
+        select *
         from user
         where email = #{email}
     </select>
 
     <insert id="insertUser" parameterType="User" keyProperty="id">
         insert into user (<include refid="insertFields"></include>)
-        values(#{username}, #{password}, #{salt}, #{email}, #{type}, #{status}, #{activationCode}, #{headerUrl}, #{createTime},#{interest},#{sid})
+        values(#{username}, #{password}, #{salt}, #{email}, #{type}, #{status}, #{activationCode}, #{headerUrl}, #{createTime},#{interest},#{sid},#{signature})
     </insert>
 
     <update id="updateStatus" parameterType="User">
@@ -48,5 +48,57 @@
 
     <select id="showUser" resultType="User">
         select * from user
+    </select>
+    <delete id="deleteUser">
+        delete from user where id = #{id}
+    </delete>
+    <!--根据id查找用户-->
+    <select id="find" resultType="User">
+        select *
+        from user
+        where id = #{id}
+    </select>
+    <!--更改用户信息-->
+    <update id="updateUser" parameterType="User">
+        update user set username=#{username},email=#{email},signature=#{signature},password=#{password}
+        where id = #{id}
+    </update>
+    <!--条件查询用户-->
+    <select id="findUser" resultType="User" parameterType="User">
+        select * from user
+        <where>
+            <if test="id!=null and id!='' ">
+                 and id = #{id}
+            </if>
+            <if test="username!=null and username!='' ">
+                and username like '%' #{username} '%'
+            </if>
+            <if test="email!=null and email!='' ">
+                and email like '%' #{email} '%'
+            </if>
+        </where>
+        order by id asc
+        limit #{offset}, #{limit}
+    </select>
+    <!--查询用户总数-->
+    <select id="selectUsersCount" resultType="int">
+        select count(*)
+        from user
+        <where>
+            <if test="id!=null and id!='' ">
+                and id = #{id}
+            </if>
+            <if test="username!=null and username!='' ">
+                and username like '%' #{username} '%'
+            </if>
+            <if test="email!=null and email!='' ">
+                and email like '%' #{email} '%'
+            </if>
+        </where>
+    </select>
+    <select id="selectByNameInGroup" resultType="User">
+        select <include refid="selectFields"></include>
+        from user
+        where username like  '%' #{username} '%'
     </select>
 </mapper>

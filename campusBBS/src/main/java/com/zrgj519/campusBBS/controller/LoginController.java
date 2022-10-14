@@ -1,6 +1,7 @@
 package com.zrgj519.campusBBS.controller;
 
 import com.google.code.kaptcha.Producer;
+import com.zrgj519.campusBBS.entity.User;
 import com.zrgj519.campusBBS.service.UserService;
 import com.zrgj519.campusBBS.util.CampusBBSConstant;
 import com.zrgj519.campusBBS.util.UserContainer;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.OutputStream;
+import java.util.LinkedList;
 import java.util.Map;
 
 @Controller
@@ -84,7 +86,9 @@ public class LoginController {
             cookie.setPath(contextPath);
             cookie.setMaxAge((int) expiredSeconds);
             response.addCookie(cookie);
-            return "redirect:/index";
+            User user = userService.findUserByName(username);
+            if(user.getType() == 1) return "redirect:/admin/users";
+            else return "redirect:/index";
         }
         // 登录不成功
         else{
