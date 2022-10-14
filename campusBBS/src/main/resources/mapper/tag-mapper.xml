@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zrgj519.campusBBS.dao.TagMapper">
+    <select id="tagCount" resultType="Integer">
+        select count(*)
+        from tag
+        where tag_name = #{tagName}
+    </select>
+
+    <insert id="insertTag">
+        insert into tag (tag_name,post_id,post_count)
+        values (#{tagName},#{postId},#{tagPostCount})
+    </insert>
+
+    <select id="selectPostsByTag" resultType="String">
+        select post_id
+        from tag
+        where tag_name = #{tagName}
+    </select>
+
+    <update id="updateTagPost">
+        update tag
+        set post_id = #{postId}, post_count=#{tagPostCount}
+        where tag_name = #{tagName};
+    </update>
+
+    <select id="selectHotTags" resultType="Tag">
+        select *
+        from tag
+        ORDER BY post_count DESC
+        limit 0,#{limit}
+    </select>
+</mapper>

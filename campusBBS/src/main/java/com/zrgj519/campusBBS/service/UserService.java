@@ -4,8 +4,8 @@ import com.zrgj519.campusBBS.dao.LoginTicketMapper;
 import com.zrgj519.campusBBS.dao.UserMapper;
 import com.zrgj519.campusBBS.entity.LoginTicket;
 import com.zrgj519.campusBBS.entity.User;
-import com.zrgj519.campusBBS.util.CommunityConstant;
-import com.zrgj519.campusBBS.util.CommunityUtil;
+import com.zrgj519.campusBBS.util.CampusBBSConstant;
+import com.zrgj519.campusBBS.util.CampusBBSUtil;
 import com.zrgj519.campusBBS.util.MailClient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,12 +74,12 @@ public class UserService {
         }
 
         // 开始注册
-        user.setSalt(CommunityUtil.generateUUID().substring(0,5));
-        user.setPassword(CommunityUtil.md5(user.getPassword()+user.getSalt()));
+        user.setSalt(CampusBBSUtil.generateUUID().substring(0,5));
+        user.setPassword(CampusBBSUtil.md5(user.getPassword()+user.getSalt()));
         user.setType(0);
         // 默认为1
         user.setStatus(1);
-        user.setActivationCode(CommunityUtil.generateUUID());
+        user.setActivationCode(CampusBBSUtil.generateUUID());
         user.setHeaderUrl("http://rdivs98sy.hb-bkt.clouddn.com/72a246e5799249c19d4615a0d25f0b8f");
         user.setCreateTime(new Date());
         userMapper.insertUser(user);
@@ -102,12 +102,12 @@ public class UserService {
             return 0;
         }
         if (user.getStatus() == 1) {
-            return CommunityConstant.ACTIVATION_REPEAT;
+            return CampusBBSConstant.ACTIVATION_REPEAT;
         } else if (user.getActivationCode().equals(code)) {
             userMapper.updateStatus(userId, 1);
-            return CommunityConstant.ACTIVATION_SUCCESS;
+            return CampusBBSConstant.ACTIVATION_SUCCESS;
         } else {
-            return CommunityConstant.ACTIVATION_FAILURE;
+            return CampusBBSConstant.ACTIVATION_FAILURE;
         }
     }
     public Map<String, Object> login(String username, String password, long expiredSeconds){
@@ -137,7 +137,7 @@ public class UserService {
         }
 
         // 验证密码
-        String encodedPassword = CommunityUtil.md5(password+user.getSalt());
+        String encodedPassword = CampusBBSUtil.md5(password+user.getSalt());
         if(!encodedPassword.equals(user.getPassword())){
             map.put("passwordMsg","密码不正确！");
             return map;
@@ -147,7 +147,7 @@ public class UserService {
         LoginTicket loginTicket = new LoginTicket();
         loginTicket.setUserId(user.getId());
         loginTicket.setStatus(0);
-        loginTicket.setTicket(CommunityUtil.generateUUID());
+        loginTicket.setTicket(CampusBBSUtil.generateUUID());
         loginTicket.setExpired(new Date(System.currentTimeMillis()+expiredSeconds*1000));
         loginTicketMapper.insertLoginTicket(loginTicket);
         map.put("ticket",loginTicket.getTicket());

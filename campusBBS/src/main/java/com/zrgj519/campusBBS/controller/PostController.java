@@ -4,6 +4,7 @@ import com.zrgj519.campusBBS.entity.Page;
 import com.zrgj519.campusBBS.entity.Post;
 import com.zrgj519.campusBBS.entity.User;
 import com.zrgj519.campusBBS.service.PostService;
+import com.zrgj519.campusBBS.service.TagService;
 import com.zrgj519.campusBBS.service.UserService;
 import com.zrgj519.campusBBS.util.UserContainer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class PostController {
     private UserService userService;
     @Autowired
     private UserContainer userContainer;
+    @Autowired
+    private TagService tagService;
 
     @RequestMapping(path="/publish",method = RequestMethod.GET)
     public String getPostPage() throws IllegalAccessException {
@@ -32,7 +35,7 @@ public class PostController {
     }
 
     // 权限拦截
-    // 前端使用ajax请求发布帖子，发布成功之后，先在发布页面提示发布成功，然后跳转到首页
+    // 发布帖子时，除了将帖子添加到数据库，还要将帖子添加到对应的tag表中
     @RequestMapping(path = "/publish" , method = RequestMethod.POST)
     public String publish(Post post) throws IllegalAccessException {
         User user = userContainer.getUser();
@@ -71,6 +74,29 @@ public class PostController {
             }
             postsInfo.add(postInfo);
         }
+        model.addAttribute("postsInfo",postsInfo);
+        return "/site/category";
+    }
+
+    @RequestMapping(path = "/getPostsByTag" , method = RequestMethod.GET)
+    public String getPostsByTag(Model model,Page page,@RequestParam("tagName")String tagName){
+        page.setRows(tagService.getTagPostCount(tagName));
+        List<Post> postsByTag = tagService.getPostsByTag(tagName);
+        List<Map<String,Object>> postsInfo = new ArrayList<>();
+        // 封装用户信息
+        for (Post post : postsByTag) {
+            Map<String,Object> postInfo = new HashMap<>();
+            User userById = userService.findUserById(post.getUserId());
+            postInfo.put("user",userById);
+            postInfo.put("post",post);
+            String tag = post.getTag();
+            if(tag!=null){
+                String[] split = tag.split(",");
+                postInfo.put("tags",split);
+            }
+            postsInfo.add(postInfo);
+        }
+        model.addAttribute("tagName",tagName);
         model.addAttribute("postsInfo",postsInfo);
         return "/site/category";
     }

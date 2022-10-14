@@ -1,10 +1,8 @@
 package com.zrgj519.campusBBS.controller;
 
 import com.google.code.kaptcha.Producer;
-import com.zrgj519.campusBBS.entity.User;
 import com.zrgj519.campusBBS.service.UserService;
-import com.zrgj519.campusBBS.util.CommunityConstant;
-import com.zrgj519.campusBBS.util.CommunityUtil;
+import com.zrgj519.campusBBS.util.CampusBBSConstant;
 import com.zrgj519.campusBBS.util.UserContainer;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -25,7 +23,6 @@ import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.OutputStream;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 @Controller
 public class LoginController {
@@ -78,7 +75,7 @@ public class LoginController {
             return "/site/login";
         }
         // 检查账号，密码
-        long expiredSeconds = rememberme? CommunityConstant.REMEMBER_EXPIRED_SECONDS:CommunityConstant.DEFAULT_EXPIRED_SECONDS;
+        long expiredSeconds = rememberme? CampusBBSConstant.REMEMBER_EXPIRED_SECONDS: CampusBBSConstant.DEFAULT_EXPIRED_SECONDS;
         Map<String, Object> map = userService.login(username, password, expiredSeconds);
         // 如果map包含ticket，说明用户登录成功了。
         if(map.containsKey("ticket")){

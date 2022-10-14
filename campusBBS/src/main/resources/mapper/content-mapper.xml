@@ -13,6 +13,7 @@
         from post
         where  status!=2
         and cid = #{cid}
+        order by create_time
         limit #{offset} , #{limit}
     </select>
 
@@ -26,9 +27,10 @@
         select <include refid="ref"/>
         from post
         where  status!=2
+        order by create_time
     </select>
     
-    <insert id="insertPost" parameterType="Post">
+    <insert id="insertPost" parameterType="Post" useGeneratedKeys="true" keyProperty="id">
         insert into post (user_id, title, content, type, status, create_time, comment_count, score , tag , cid)
         values(#{userId},#{title},#{content},#{type},#{status},#{createTime},#{commentCount},#{score},#{tag},#{cid})
     </insert>
