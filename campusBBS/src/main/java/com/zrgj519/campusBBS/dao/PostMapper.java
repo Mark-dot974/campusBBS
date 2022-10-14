@@ -56,4 +56,9 @@ public interface PostMapper {
 
     int selectCountOfPost(Integer id,String title,String tag);
 
+    int updateScore(int id, double score);
+
+    List<Post> selectHotPosts(int hotPostCount);
+
+    void deleteByName(String name);
 }

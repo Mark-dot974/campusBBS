@@ -28,11 +28,11 @@ public interface MessageMapper {
     // 修改消息的状态
     int updateStatus(List<Integer> ids,int status);
 
-    Message selectLatestNotice(int userId, String topic);
+    Message selectLatestNotice(int userId, String conversationId);
 
-    int selectTopicNoticeCount(int userId, String topic);
+    int selectTopicNoticeCount(int userId, String conversationId);
 
-    int selectTopicNoticeUnreadCount(int userId, String topic);
+    int selectTopicNoticeUnreadCount(int userId, String conversationId);
 
-    List<Message> selectTopicNotices(int userId, String topic, int offset, int limit);
+    List<Message> selectTopicNotices(int userId, String conversationId, int offset, int limit);
 }

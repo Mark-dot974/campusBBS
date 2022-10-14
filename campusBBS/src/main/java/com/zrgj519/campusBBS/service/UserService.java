@@ -79,7 +79,7 @@ public class UserService {
         // 默认为1
         user.setStatus(1);
         user.setActivationCode(CampusBBSUtil.generateUUID());
-        user.setHeaderUrl("http://rdivs98sy.hb-bkt.clouddn.com/72a246e5799249c19d4615a0d25f0b8f");
+        user.setHeaderUrl("http://rib3987wa.hn-bkt.clouddn.com/v2-09c64e0c2e577032bda49d934b761b61_720w.jpg");
         user.setCreateTime(new Date());
         userMapper.insertUser(user);
 

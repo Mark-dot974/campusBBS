@@ -5,6 +5,7 @@ import com.zrgj519.campusBBS.entity.User;
 import com.zrgj519.campusBBS.service.UserService;
 import com.zrgj519.campusBBS.util.UserContainer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +25,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Autowired
     UserContainer userContainer;
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

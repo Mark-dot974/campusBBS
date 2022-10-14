@@ -10,4 +10,8 @@ public interface FileMapper {
     List<GroupFile> selectAllFilesById(int gid);
 
     void insertFile(GroupFile file);
+
+    GroupFile selectFileByFileName(String fileName);
+
+    void updateFile(int fid,String url);
 }

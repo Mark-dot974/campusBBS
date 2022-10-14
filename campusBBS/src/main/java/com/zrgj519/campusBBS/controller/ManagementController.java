@@ -32,18 +32,6 @@ public class ManagementController {
 
     @Autowired
     UserContainer userContainer;
-//    @RequestMapping("/showUsers")
-//    public String showUser(Model model){
-//        List<User> users = userService.showUser();
-//        model.addAttribute("users",users);
-//        return "/site/user_account_management";
-//    }
-//    @RequestMapping("/showPosts")
-//    public String showPosts(Model model){
-//        List<Post> allPosts = postService.showPost();
-//        model.addAttribute("posts",allPosts);
-//        return "/site/post_management";
-//    }
 //    用户管理
     @RequestMapping("/delUsers")
     public String deleteUser(int id){

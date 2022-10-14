@@ -69,7 +69,7 @@ public class UserController {
 
     @RequestMapping("/updateInfo")
     public String updateInfo(Model model,User user){
-        System.out.println(user.toString());
+        user.setPassword(CampusBBSUtil.md5(user.getPassword()+userContainer.getUser().getSalt()));
         userService.updateUser(user);
         model.addAttribute("loginUser",userContainer.getUser());
         return "/site/profile_set";
@@ -79,11 +79,12 @@ public class UserController {
     public String findUserById(@PathVariable("id") int id, Model model){
         User user = userService.findUserById(id);
         model.addAttribute("user",user);
-        model.addAttribute("userId",user.getId());
         model.addAttribute("loginUser",userContainer.getUser());
         boolean self =false;
-        if(user.getUsername().equals(userContainer.getUser().getUsername())){
-            self = true;
+        if(userContainer.getUser()!=null){
+            if(user.getUsername().equals(userContainer.getUser().getUsername())){
+                self = true;
+            }
         }
         model.addAttribute("self",self);
         String tag = user.getInterest();
@@ -98,8 +99,9 @@ public class UserController {
     }
 
     @RequestMapping("/message")
-    public String getMessage()
+    public String getMessage(Model model)
     {
+        model.addAttribute("user",userContainer.getUser());
         return "/site/personal_message";
     }
 

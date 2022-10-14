@@ -1,5 +1,25 @@
+// function createGroup(){
+//     alert(1);
+//     $.post(
+//         CONTEXT_PATH + "/group/create",
+//         $('#createGroup').serialize(),
+//         function (data){
+//             if(data.code == 0){
+//                 window.location.reload();
+//             }else{
+//                 layer.msg("该协作圈已存在!")
+//             }
+//         }
+//     )
+// }
+
+function updateGroup() {
+    $('#myModal').modal();
+}
+
 function uploadFile(){
-    alert("happy")
+    // alert("happy")
+    var form = new FormData($("#files")[0]);
     $.ajax({
         url: "http://up-z2.qiniup.com",
         method: "post",
@@ -7,16 +27,20 @@ function uploadFile(){
         contentType: false,
         data: new FormData($("#files")[0]),
         success: function(data) {
-            $.post(
-                CONTEXT_PATH+"/group/uploadFile",
-                {"fileName":$("input[name='key']").val(),"gid":$("input[name='gid']").val()},
-                function(data) {
+            $.ajax({
+                url:CONTEXT_PATH+"/group/uploadFile",
+                method: "post",
+                processData: false,
+                contentType: false,
+                data: form,
+                success:function(data) {
                     data = $.parseJSON(data);
                     if(data.code == 0) {
                         window.location.reload();
                     } else {
                         alert(data.msg);
                     }
+                }
                 })
         }
     });
@@ -25,8 +49,39 @@ function uploadFile(){
 }
 
 
+function updateFile(){
+    $.ajax({
+        url: "http://up-z2.qiniup.com",
+        method: "post",
+        processData: false,
+        contentType: false,
+        data: new FormData($("#updateFileForm")[0]),
+        success: function(data) {
+            alert("上传成功！")
+            $.ajax({
+                url:CONTEXT_PATH+"/group/updateFile",
+                method: "post",
+                processData: false,
+                contentType: false,
+                data: new FormData($("#updateFileForm")[0]),
+                success:function(data) {
+                    data = $.parseJSON(data);
+                    if(data.code == 0) {
+                        window.location.reload();
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            })
+        }
+    });
+    // 表示不要将表单提交
+    return false;
+}
+
+
 function apply(){
-    alert("apply")
+    // alert("apply")
     sessionStorage.setItem("apply","apply");
     $.post(
         CONTEXT_PATH+"/group/apply",

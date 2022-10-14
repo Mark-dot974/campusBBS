@@ -70,6 +70,27 @@ public class IndexController {
         // 获取侧边栏内容（tag）
         List<Tag> hotTags = tagService.getHotTags(CampusBBSConstant.HOT_TAG_COUNT);
         model.addAttribute("hotTags",hotTags);
+
+        // 获取热帖内容 10
+        List<Post> posts = postService.getHotPosts(CampusBBSConstant.HOT_POST_COUNT);
+        List<Map<String,Object>> hotPosts = new ArrayList<>();
+        List<Map<String,Object>> secondPosts = new ArrayList<>();
+        int count = 1;
+        for (Post post : posts) {
+            Map<String,Object> map = new HashMap<>();
+            User user = userService.findUserById(post.getUserId());
+            map.put("count",count);
+            map.put("user",user);
+            map.put("post",post);
+            if(count<=3){
+                hotPosts.add(map);
+            }else{
+                secondPosts.add(map);
+            }
+            count++;
+        }
+        model.addAttribute("hotPosts",hotPosts);
+        model.addAttribute("secondPosts",secondPosts);
         return "/site/aside";
     }
 
@@ -84,7 +105,7 @@ public class IndexController {
     }
     @RequestMapping("/groupList")
     public String gert(){
-        return "/site/group_list";
+        return "personal_group";
     }
 
     // 首页不分页
@@ -144,7 +165,10 @@ public class IndexController {
             User userById = userService.findUserById(post.getUserId());
             postInfo.put("user",userById);
             postInfo.put("post",post);
-
+            if(post.getId() == 472)
+            {
+                System.out.println("post = " + post);
+            }
             /**
              * 填充点赞评论数量
              */

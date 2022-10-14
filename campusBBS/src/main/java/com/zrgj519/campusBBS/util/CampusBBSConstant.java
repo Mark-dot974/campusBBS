@@ -43,7 +43,7 @@ public class CampusBBSConstant {
     /**
      * 实体类型: 用户
      */
-    public static final int ENTITY_TYPE_USER = 3;
+    public static final int ENTITY_TYPE_GROUP = 3;
     /**
      * 主题：评论
      */
@@ -105,4 +105,5 @@ public class CampusBBSConstant {
      * 主题：新增帖子或评论
      */
     public static final String TOPIC_UPDATE_ENTITY = "updateEntity";
+    public static final int HOT_POST_COUNT = 10;
 }
